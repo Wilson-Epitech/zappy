@@ -20,19 +20,19 @@ jobs:
     - uses: actions/checkout@v4
 
     - name: check compilation
-  run: |
-      echo "## 🚀 Compilation result" >> $GITHUB_STEP_SUMMARY
-      {
-        set +e
-        binaries=("zappy_server" "zappy_ai" "zappy_gui")
-        for binary in "${binaries[@]}"; do
-          make $binary ADDITIONAL_FLAGS="-Werror"
-          if [ $? -ne 0 ]; then
-            echo "- ### Compilation of $binary failed ❌" >> $GITHUB_STEP_SUMMARY
-            echo "Compilation of $binary failed."
-            exit 1
-          fi
-        done
-        echo "- ### Compilation succeed ✅" >> $GITHUB_STEP_SUMMARY
-        exit 0
-      }
+      run: |
+          echo "## 🚀 Compilation result" >> $GITHUB_STEP_SUMMARY
+          {
+            set +e
+            binaries=("zappy_server" "zappy_ai" "zappy_gui")
+            for binary in "${binaries[@]}"; do
+              make $binary ADDITIONAL_FLAGS="-Werror"
+              if [ $? -ne 0 ]; then
+                echo "- ### Compilation of $binary failed ❌" >> $GITHUB_STEP_SUMMARY
+                echo "Compilation of $binary failed."
+                exit 1
+              fi
+            done
+            echo "- ### Compilation succeed ✅" >> $GITHUB_STEP_SUMMARY
+            exit 0
+          }
