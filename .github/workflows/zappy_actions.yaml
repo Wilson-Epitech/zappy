@@ -26,7 +26,7 @@ jobs:
             set +e
             binaries=("zappy_server" "zappy_ai" "zappy_gui")
             for binary in "${binaries[@]}"; do
-              make $binary ADDITIONAL_FLAGS="-Werror"
+              make ADDITIONAL_FLAGS="-Werror"
               if [ $? -ne 0 ]; then
                 echo "- ### Compilation of $binary failed ❌" >> $GITHUB_STEP_SUMMARY
                 echo "Compilation of $binary failed."
