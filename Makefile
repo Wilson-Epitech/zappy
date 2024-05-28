@@ -7,8 +7,6 @@
 
 CD	=	cd
 
-RM	=	rm -f
-
 all:
 	$(CD) server && $(MAKE)
 	$(CD) ia && $(MAKE)
