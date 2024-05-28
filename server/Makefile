@@ -23,17 +23,17 @@ all: $(NAME)
 
 $(NAME): $(OBJ)
 	@printf "\033[33mCompiling Server...\033[0m\n"
-	@$(CC) -o $(NAME) $(OBJ) > /dev/null
-	@$(MV) $(NAME) ../ > /dev/null
+	@$(CC) -o $(NAME) $(OBJ)
+	@$(MV) $(NAME) ../
 	@printf "\033[32mServer compiled and mooved succesfully !\033[0m\n"
 
 clean:
 	@printf "\033[33mCleaning object files for server...\033[0m\n"
-	@$(RM) $(OBJ) > /dev/null
+	@$(RM) $(OBJ)
 
 fclean: clean
 	@printf "\033[33mCleaning server binary...\033[0m\n"
-	@$(CD) ../ && $(RM) $(NAME) > /dev/null
+	@$(CD) ../ && $(RM) $(NAME)
 
 re: fclean all
 

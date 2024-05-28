@@ -5,6 +5,11 @@
 ** main
 */
 
+/**
+ * @brief This is the main function for the server.....
+ *
+ * @return int
+ */
 int main(int, char *[])
 {
     return 0;
