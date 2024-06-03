@@ -1,4 +1,4 @@
-name: zappy_actions
+name: check_compilation
 
 on:
   push:
@@ -19,7 +19,7 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
-    - name: check compilation
+    - name: Check compilation
       run: |
           echo "## 🚀 Compilation result" >> $GITHUB_STEP_SUMMARY
           {
