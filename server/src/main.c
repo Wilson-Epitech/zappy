@@ -6,11 +6,12 @@
 */
 
 /**
- * @brief This is the main function for the server.....
+ * @brief This is the main function for the server
  *
  * @return int
  */
-int main(int argc, char *const *argv)
+
+int main(int, char *const *)
 {
     return 0;
 }
