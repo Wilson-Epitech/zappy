@@ -5,8 +5,4 @@
 ** server
 */
 
-#ifndef SERVER_H_
-#define SERVER_H_
-
-
-#endif /* !SERVER_H_ */
+#pragma once

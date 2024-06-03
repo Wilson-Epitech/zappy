@@ -10,7 +10,7 @@
  *
  * @return int
  */
-int main(int, char *[])
+int main(int argc, char *const *argv)
 {
     return 0;
 }

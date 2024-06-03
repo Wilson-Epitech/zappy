@@ -11,7 +11,7 @@ CD	=	cd
 
 DOXYGEN = doxygen
 DOC_DIR = ./documentation/
-DOXYFILE = $(DOC_DIR)Doxygen_conf
+DOXYFILE = $(DOC_DIR)Doxyfile
 
 # ----------------------------------------------------------------------- #
 
@@ -31,10 +31,8 @@ fclean:
 	@$(CD) graphical && $(MAKE) fclean
 
 doc:
-	@$(RM) -rf $(DOC_DIR)html
 	@$(DOXYGEN) $(DOXYFILE) > /dev/null
 	@printf "[\033[0;36mdoc built\033[0m]\n"
-	@mv html $(DOC_DIR)
 
 re:	fclean all
 
