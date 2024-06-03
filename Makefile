@@ -7,6 +7,8 @@
 
 CD	=	cd
 
+RMDIR	=	rm -rf
+
 # ---------------------- DOCUMENTATION ---------------------------------- #
 
 DOXYGEN = doxygen
@@ -29,6 +31,7 @@ fclean:
 	@$(CD) server && $(MAKE) fclean
 	@$(CD) ia && $(MAKE) fclean
 	@$(CD) graphical && $(MAKE) fclean
+	@$(CD) $(DOC_DIR) && $(RMDIR) docs/html
 
 doc:
 	@$(DOXYGEN) $(DOXYFILE) > /dev/null
