@@ -21,7 +21,7 @@ int Ia::Args::getPort() const
 
 /**
  * @brief Sets the port
- *
+ * @param port The port to enter when compiling
  * @return void
 */
 
@@ -43,7 +43,7 @@ std::string Ia::Args::getTeamName() const
 
 /**
  * @brief Sets the team name
- *
+ * @param teamName The team name to enter when compiling
  * @return void
 */
 
@@ -65,7 +65,7 @@ std::string Ia::Args::getMachineName() const
 
 /**
  * @brief Sets the machine name
- *
+ * @param machineName The machine name to enter when compiling
  * @return void
 */
 
@@ -75,8 +75,9 @@ void Ia::Args::setMachineName(std::string machineName)
 }
 
 /**
- * @brief Stores arguments
- *
+ * @brief Stores arguments. Should be called in the first place in the main function
+ * @param argc The number of arguments same as main
+ * @param argv An array of those arguments same as main
  * @return void
 */
 
