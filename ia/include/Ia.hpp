@@ -7,11 +7,23 @@
 
 #ifndef IA_HPP_
 #define IA_HPP_
+    #include <iostream>
 
-class Ia {
-    public:
-        Ia() = default;
-        ~Ia() = default;
+namespace Ia {
+    class Args {
+        public:
+            int getPort() const;
+            void setPort(int port);
+            std::string getTeamName() const;
+            void setTeamName(std::string teamName);
+            std::string getMachineName() const;
+            void setMachineName(std::string machineName);
+            void store(int argc, const char *argv[]);
+        private:
+            int _port;
+            std::string _teamName;
+            std::string _machineName;
+    };
 };
 
 #endif /* !IA_HPP_ */
