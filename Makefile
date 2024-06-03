@@ -7,8 +7,6 @@
 
 CD	=	cd
 
-RM	=	rm -f
-
 # ---------------------- DOCUMENTATION ---------------------------------- #
 
 DOXYGEN = doxygen
