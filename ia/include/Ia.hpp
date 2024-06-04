@@ -13,7 +13,7 @@ namespace Ia {
     class Args {
         public:
             int getPort() const;
-            void setPort(int port);
+            void setPort(std::string port);
             std::string getTeamName() const;
             void setTeamName(std::string teamName);
             std::string getMachineName() const;
