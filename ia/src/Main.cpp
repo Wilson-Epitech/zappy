@@ -26,5 +26,8 @@ int main(int argc, const char *argv[])
     } catch(const Ia::Error::InvalidArguments &e) {
         std::cerr << e.what() << std::endl;
         return 84;
+    } catch(const Ia::Error::StringPort &e) {
+        std::cerr << e.what() << std::endl;
+        return 84;
     }
 }

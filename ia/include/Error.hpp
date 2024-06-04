@@ -17,6 +17,12 @@ namespace Ia {
                 const char *what() const noexcept override;
                 ~InvalidArguments() = default;
         };
+        class StringPort: public std::exception {
+            public:
+                StringPort() = default;
+                const char *what() const noexcept override;
+                ~StringPort() = default;
+        };
     };
 };
 
