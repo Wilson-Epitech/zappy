@@ -11,7 +11,7 @@ ZAPPY est un jeu en réseau où plusieurs équipes s'affrontent sur une carte à
 - **Langages utilisés**: 
   - Serveur: C
   - Interface graphique: C++
-  - IA: Libre choix
+  - IA: C++
 
 ## Compilation
 
