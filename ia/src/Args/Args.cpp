@@ -25,9 +25,10 @@ int Ia::Args::getPort() const
  * @return void
 */
 
-void Ia::Args::setPort(int port)
+void Ia::Args::setPort(std::string port)
 {
-    this->_port = port;
+    //faut faire des verifs sur le port
+    this->_port = std::stoi(port);
 }
 
 /**
@@ -83,12 +84,18 @@ void Ia::Args::setMachineName(std::string machineName)
 
 void Ia::Args::store(int argc, const char *argv[])
 {
-    if (argc != 4) {
+    if (argc != 7) {
         throw Ia::Error::InvalidArguments();
     }
-    this->setPort(std::stoi(argv[1]));
-    this->setTeamName(argv[2]);
-    this->setMachineName(argv[3]);
+    if (argv[1] == "-p") {
+        this->setPort(argv[2]);
+    }
+    if (argv[3] == "-n") {
+        this->setTeamName(argv[4]);
+    }
+    if (argv[5] == "-h") {
+        this->setMachineName(argv[6]);
+    }
     std::cout << "port: " << this->getPort() << "\nTeam Name: " << this->getTeamName()
     << "\nMachine Name: " << this->getMachineName() << '\n';
 }
