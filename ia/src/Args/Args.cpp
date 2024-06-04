@@ -7,6 +7,7 @@
 
 #include "Ia.hpp"
 #include "Error.hpp"
+#include <cstring>
 
 /**
  * @brief Returns the port
@@ -87,13 +88,13 @@ void Ia::Args::store(int argc, const char *argv[])
     if (argc != 7) {
         throw Ia::Error::InvalidArguments();
     }
-    if (argv[1] == "-p") {
+    if (strcmp(argv[1], "-p") == 0) {
         this->setPort(argv[2]);
     }
-    if (argv[3] == "-n") {
+    if (strcmp(argv[3], "-n") == 0) {
         this->setTeamName(argv[4]);
     }
-    if (argv[5] == "-h") {
+    if (strcmp(argv[5], "-h") == 0) {
         this->setMachineName(argv[6]);
     }
     std::cout << "port: " << this->getPort() << "\nTeam Name: " << this->getTeamName()
