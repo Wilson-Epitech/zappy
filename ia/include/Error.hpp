@@ -29,6 +29,12 @@ namespace Ia {
                 const char *what() const noexcept override;
                 ~WrongServerConnection() = default;
         };
+        class TeamAlreadyConnected: public std::exception {
+            public:
+                TeamAlreadyConnected() = default;
+                const char *what() const noexcept override;
+                ~TeamAlreadyConnected() = default;
+        };
     };
 };
 
