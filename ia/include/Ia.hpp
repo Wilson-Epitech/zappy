@@ -2,28 +2,19 @@
 ** ZAPPY PROJECT, 2024
 ** zappy
 ** File description:
-** Ia
+** IA
 */
 
 #ifndef IA_HPP_
 #define IA_HPP_
-    #include <iostream>
+#include <string>
 
 namespace Ia {
-    class Args {
+    class IA {
         public:
-            int getPort() const;
-            void setPort(std::string port);
-            std::string getTeamName() const;
-            void setTeamName(std::string teamName);
-            std::string getMachineName() const;
-            void setMachineName(std::string machineName);
-            void store(int argc, const char *argv[]);
-        private:
-            int _port;
-            std::string _teamName;
-            std::string _machineName;
+            virtual ~IA() = default;
+            virtual void ServerConnection(const std::string &ip, int port, const std::string &teamName) = 0;
     };
-};
+}
 
 #endif /* !IA_HPP_ */
