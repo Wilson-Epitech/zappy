@@ -8,6 +8,10 @@
 #ifndef BOT_HPP_
 #define BOT_HPP_
 #include "Ia.hpp"
+#include <iostream>
+#include <sys/socket.h>
+#include <arpa/inet.h>
+#include <unistd.h>
 
 namespace Ia {
     class Bot : public IA {
@@ -18,6 +22,7 @@ namespace Ia {
 
         protected:
         private:
+            int sock = 0;
     };
 }
 
