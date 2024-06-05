@@ -23,6 +23,11 @@ namespace Ia {
                 const char *what() const noexcept override;
                 ~StringPort() = default;
         };
+        class WrongServerConnection: public std::exception {
+            WrongServerConnection() = default
+            const char *what() const noexcept override;
+            ~WrongServerConnection() = default
+        }
     };
 };
 
