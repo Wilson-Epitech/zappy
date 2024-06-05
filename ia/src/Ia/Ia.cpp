@@ -28,7 +28,7 @@ void Ia::Bot::ServerConnection(const std::string &ip, int port, const std::strin
         throw Ia::Error::WrongServerConnection();
         return;
     }
-    if (connect(sock, (struct sockaddr *)&serv_addr, sizeof(serv_addr)) < 0) { //changer en dinamyque cast
+    if (connect(sock, reinterpret_cast<struct sockaddr*>(&serv_addr), sizeof(serv_addr)) < 0) {
         throw Ia::Error::WrongServerConnection();
         return;
     }
