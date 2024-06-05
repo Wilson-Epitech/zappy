@@ -5,8 +5,9 @@
 ** Main
 */
 
-#include "Ia.hpp"
+#include "Args.hpp"
 #include "Error.hpp"
+#include "Bot.hpp"
 
 
 /**
@@ -20,8 +21,10 @@ int main(int argc, const char *argv[])
 {
     try {
         Ia::Args args;
+        Ia::Bot ia;
 
         args.store(argc, argv);
+        ia.ServerConnection(args.getMachineName(), args.getPort(), args.getTeamName());
         return 0;
     } catch(const Ia::Error::InvalidArguments &e) {
         std::cerr << e.what() << std::endl;
