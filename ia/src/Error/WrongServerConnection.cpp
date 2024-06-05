@@ -13,7 +13,7 @@
  * @return char *
 */
 
-char *Ia::Error::WrongServerConnection::what() const noexcept
+const char *Ia::Error::WrongServerConnection::what() const noexcept
 {
     return "Connection Failed";
 }
