@@ -49,7 +49,7 @@ void handle_client(server_t *server, int client_fd)
             perror("read");
         clear_client(server, client_fd);
     } else {
-        buffer[bytes_read - 1] = '\0';
+        buffer[bytes_read - 2] = '\0';
         read_client_data(server, client_fd, bytes_read, buffer);
     }
 }
