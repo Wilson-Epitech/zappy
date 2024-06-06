@@ -27,12 +27,10 @@ static int error_handling(server_t *server, int ac, char *const *av)
  *
  * @return int
  */
-// server_loop(server, cli);
-//free_loop();
+// + free_loop();
 int main(int argc, char *const *argv)
 {
     server_t *server = malloc(sizeof(server_t));
-    cli_t *cli = malloc(sizeof(cli_t) * (30));
     const char *usage = "USAGE: ./zappy_server -p port "
         "-x width -y height -n name1 name2 ... -c clientsNb -f freq\n";
 
