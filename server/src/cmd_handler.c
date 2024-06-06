@@ -11,7 +11,7 @@
 #include <stdbool.h>
 
 command_handler_t command_handlers[] = {
-    {"test\n", example_command_handler},
+    {"test", example_command_handler},
     {NULL, NULL}
 };
 
@@ -23,7 +23,7 @@ void example_command_handler(server_t *server,
 
 void process_command(server_t *server, player_t *player, const char *cmd)
 {
-    const char *params = {0};
+    char *params = {0};
     bool is_passed = false;
 
     printf("Processing command: `%s`\n", cmd);
