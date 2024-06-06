@@ -32,6 +32,7 @@ fclean:
 	@$(CD) ia && $(MAKE) fclean
 	@$(CD) graphical && $(MAKE) fclean
 	@$(CD) $(DOC_DIR) && $(RMDIR) docs/html
+	@printf "\033[33mCleaningc DOC files...\033[0m\n"
 
 doc:
 	@$(DOXYGEN) $(DOXYFILE) > /dev/null
