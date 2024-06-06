@@ -18,15 +18,8 @@
  * @param str
  * @return true
  * @return false
- */
+*/
 
-/**
- * @brief
- *
- * @param str
- * @return true
- * @return false
- */
 static bool is_number(char const *str)
 {
     for (int i = 0; str[i] != '\0'; i++) {
@@ -42,17 +35,17 @@ static int fill_args1(server_t *server, char *const *argv, int i)
     if (strcmp(argv[i], "-p") == 0) {
         if (!is_number(argv[i + 1]))
             return FAILURE;
-        server->port = atoi(argv[i + 1]);
+        server->opt->port = atoi(argv[i + 1]);
     }
     if (strcmp(argv[i], "-x") == 0) {
         if (!is_number(argv[i + 1]))
             return FAILURE;
-        server->map_width = atoi(argv[i + 1]);
+        server->opt->map_width = atoi(argv[i + 1]);
     }
     if (strcmp(argv[i], "-y") == 0) {
         if (!is_number(argv[i + 1]))
             return FAILURE;
-        server->map_height = atoi(argv[i + 1]);
+        server->opt->map_height = atoi(argv[i + 1]);
     }
     return SUCCESS;
 }
@@ -66,10 +59,11 @@ static int get_teams_names(server_t *server, char *const *argv, int i)
         return FAILURE;
     i += 1;
     while (strcmp(argv[i], "-c") != 0) {
-        server->names = realloc(server->names, sizeof(char *) * size);
-        if (server->names == NULL)
+        server->opt->names =
+            realloc(server->opt->names, sizeof(char *) * size);
+        if (server->opt->names == NULL)
             return FAILURE;
-        server->names[count] = strdup(argv[i]);
+        server->opt->names[count] = strdup(argv[i]);
         count += 1;
         size += 1;
         i += 1;
@@ -82,12 +76,12 @@ static int fill_args2(server_t *server, char *const *argv, int i)
     if (strcmp(argv[i], "-c") == 0) {
         if (!is_number(argv[i + 1]))
             return FAILURE;
-        server->clients_number = atoi(argv[i + 1]);
+        server->opt->clients_number = atoi(argv[i + 1]);
     }
     if (strcmp(argv[i], "-f") == 0) {
         if (!is_number(argv[i + 1]))
             return FAILURE;
-        server->freq = atoi(argv[i + 1]);
+        server->opt->freq = atoi(argv[i + 1]);
     }
     if (strcmp(argv[i], "-n") == 0) {
         if (get_teams_names(server, argv, i) == FAILURE)
@@ -106,7 +100,7 @@ static int fill_args2(server_t *server, char *const *argv, int i)
  */
 int get_args(server_t *server, char *const *argv)
 {
-    server->names = NULL;
+    server->opt->names = NULL;
     for (int i = 0; argv[i] != NULL; i += 1) {
         if (fill_args1(server, argv, i) == FAILURE)
             return FAILURE;
@@ -114,12 +108,12 @@ int get_args(server_t *server, char *const *argv)
             return FAILURE;
     }
     printf("port: %d\n", server->port);
-    printf("map_width: %zu\n", server->map_width);
-    printf("map_height: %zu\n", server->map_height);
-    for (int i = 0; server->names[i]; i += 1) {
-        printf("%s\n", server->names[i]);
+    printf("map_width: %zu\n", server->opt->map_width);
+    printf("map_height: %zu\n", server->opt->map_height);
+    for (int i = 0; server->opt->names[i]; i += 1) {
+        printf("%s\n", server->opt->names[i]);
     }
-    printf("clients nb: %zu\n", server->clients_number);
-    printf("freq: %zu\n", server->freq);
+    printf("clients nb: %zu\n", server->opt->clients_number);
+    printf("freq: %zu\n", server->opt->freq);
     return SUCCESS;
 }
