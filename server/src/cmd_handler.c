@@ -18,6 +18,9 @@
  */
 command_handler_t command_handlers[] = {
     {"pnw", command_pnw},
+    {"msz", command_msz},
+    {"sgt", command_sgt},
+    {"sst", command_sst},
     {NULL, NULL}
 };
 

@@ -10,6 +10,7 @@
 #include <stdbool.h>
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
 #include "server.h"
 
 /**
@@ -111,5 +112,6 @@ int get_args(server_t *server, char *const *argv)
     printf("map_height: %zu\n", server->opt->map_height);
     printf("clients nb: %zu\n", server->opt->clients_number);
     printf("freq: %zu\n", server->opt->freq);
+    server->opt->start_time = time(NULL);
     return SUCCESS;
 }

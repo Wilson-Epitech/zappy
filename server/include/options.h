@@ -16,6 +16,7 @@ typedef struct options_s {
     char **names;
     size_t clients_number;
     size_t freq;
+    time_t start_time;
 } options_t;
 
 #endif /* !OPTIONS_H_ */
