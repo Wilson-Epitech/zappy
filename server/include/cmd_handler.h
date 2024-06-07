@@ -15,5 +15,6 @@ typedef struct command_handler_s {
 } command_handler_t;
 
 void example_command_handler(server_t *, player_t *, const char *);
+void command_pnw(server_t *, player_t *, const char *);
 
 #endif /* !CMD_HANDLER_H_ */
