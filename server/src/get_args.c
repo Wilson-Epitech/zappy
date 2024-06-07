@@ -97,7 +97,6 @@ static int fill_args2(server_t *server, char *const *argv, int i)
  * @param argv
  * @return int
 */
-
 int get_args(server_t *server, char *const *argv)
 {
     server->opt->names = NULL;
@@ -110,9 +109,6 @@ int get_args(server_t *server, char *const *argv)
     printf("port: %d\n", server->opt->port);
     printf("map_width: %zu\n", server->opt->map_width);
     printf("map_height: %zu\n", server->opt->map_height);
-    // for (int i = 0; server->opt->names[i]; ++i ) {
-    //     printf("%s\n", server->opt->names[i]);
-    // }
     printf("clients nb: %zu\n", server->opt->clients_number);
     printf("freq: %zu\n", server->opt->freq);
     return SUCCESS;
