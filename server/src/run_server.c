@@ -67,7 +67,6 @@ void run_server(server_t *server)
     printf("Server running on port %d\n", server->port);
     while (1) {
         read_fds = server->read_fd;
-        FD_SET(STDIN_FILENO, &read_fds);
         check_sockets(server, &read_fds);
         handle_read_fds(server, &read_fds);
     }
