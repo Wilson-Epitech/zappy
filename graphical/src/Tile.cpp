@@ -10,9 +10,9 @@
 const float squareSize = 100.0f;
 
 Tile::Tile(int x, int y, sf::Texture& texture) : x(x), y(y) {
-    sprite.setTexture(texture);
     sprite.setPosition(x * squareSize, y * squareSize);
     sprite.setScale(squareSize / texture.getSize().x, squareSize / texture.getSize().y);
+    sprite.setTexture(texture);
 }
 
 Tile::~Tile() {

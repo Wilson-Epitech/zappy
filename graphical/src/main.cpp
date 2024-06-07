@@ -27,13 +27,15 @@ int main() {
     sf::View view = window.getDefaultView();
     std::vector<std::vector<Tile>> tiles;
 
-    sf::Texture tileTexture;
-    tileTexture.loadFromFile("assets/tile.jpeg");
+    sf::Texture tileLight;
+    tileLight.loadFromFile("assets/tile.jpeg");
+    sf::Texture tileDark;
+    tileDark.loadFromFile("assets/yard.jpeg");
 
     for (int row = 0; row < boardHeight; ++row) {
         std::vector<Tile> rowTiles;
         for (int col = 0; col < boardWidth; ++col) {
-            Tile tile(col, row, tileTexture);
+            Tile tile(col, row, (row + col) % 2 ? tileLight : tileDark);
             tile.getResources(1, 1, 1, 1, 1, 1 ,1);
             rowTiles.push_back(tile);
         }
