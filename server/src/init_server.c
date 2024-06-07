@@ -10,6 +10,11 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+/**
+ * @brief Sets up the server socket.
+ * 
+ * @param server The server instance.
+ */
 static void setup_socket(server_t *server)
 {
     int opt = 1;
@@ -29,6 +34,11 @@ static void setup_socket(server_t *server)
     server->addr.sin_port = htons(server->port);
 }
 
+/**
+ * @brief Binds the server socket to an address.
+ * 
+ * @param server The server instance.
+ */
 static void bind_socket(server_t *server)
 {
     if (bind(server->fd, (struct sockaddr*)&server->addr,
@@ -39,6 +49,11 @@ static void bind_socket(server_t *server)
     }
 }
 
+/**
+ * @brief Starts listening on the server socket.
+ * 
+ * @param server The server instance.
+ */
 static void listen_socket(server_t *server)
 {
     if (listen(server->fd, MAX_CLIENTS) == -1) {
@@ -48,6 +63,12 @@ static void listen_socket(server_t *server)
     }
 }
 
+/**
+ * @brief Initializes the server.
+ * 
+ * @param server The server instance.
+ * @param opt The server options.
+ */
 void init_server(server_t *server, options_t *opt)
 {
     server->port = opt->port;
