@@ -49,7 +49,7 @@ void init_server(server_t *server, options_t *opt);
 void run_server(server_t *server);
 void accept_client(server_t *server);
 void handle_client(server_t *server, int client_fd);
-void process_command(server_t *server, player_t *player, const char *cmd);
+void process_command(server_t *server, player_t *player, char *cmd);
 void cleanup_server(server_t *server);
 
 #endif /* !SERVER_H_ */
