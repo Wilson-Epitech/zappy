@@ -19,7 +19,8 @@ static void setup_socket(server_t *server)
         perror("socket");
         exit(FAILURE);
     }
-    if (setsockopt(server->fd, SOL_SOCKET, SO_REUSEADDR, &opt, sizeof(int)) == -1) {
+    if (setsockopt(server->fd, SOL_SOCKET, SO_REUSEADDR,
+        &opt, sizeof(int)) == -1) {
         perror("setsockopt");
         exit(FAILURE);
     }
