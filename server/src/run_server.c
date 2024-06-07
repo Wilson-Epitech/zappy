@@ -12,7 +12,7 @@
 
 /**
  * @brief Checks the sockets for any activity.
- * 
+ *
  * @param server The server instance.
  * @param read_fds The set of file descriptors to check.
  */
@@ -27,7 +27,7 @@ static void check_sockets(server_t *server, fd_set *read_fds)
 
 /**
  * @brief Chooses the client to handle based on the file descriptor.
- * 
+ *
  * @param server The server instance.
  * @param i The file descriptor.
  */
@@ -42,7 +42,7 @@ void chose_client(server_t *server, int i)
 
 /**
  * @brief Handles the ready file descriptors.
- * 
+ *
  * @param server The server instance.
  * @param read_fds The set of ready file descriptors.
  */
@@ -57,7 +57,7 @@ static void handle_read_fds(server_t *server, fd_set *read_fds)
 
 /**
  * @brief Runs the server.
- * 
+ *
  * @param server The server instance.
  */
 void run_server(server_t *server)
