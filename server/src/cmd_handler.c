@@ -12,8 +12,9 @@
 
 /**
  * @brief Array of command handlers.
- * 
- * Each element is a struct with a command name and a function pointer to the handler for that command.
+ *
+ * Each element is a struct with a command name
+ * and a function pointer to the handler for that command.
  */
 command_handler_t command_handlers[] = {
     {"test", example_command_handler},
@@ -28,7 +29,7 @@ void example_command_handler(server_t *server,
 
 /**
  * @brief Processes a command.
- * 
+ *
  * @param server The server instance.
  * @param player The player instance.
  * @param cmd The command to process.
