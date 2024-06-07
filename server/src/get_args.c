@@ -10,6 +10,7 @@
 #include <stdbool.h>
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
 #include "server.h"
 
 /**
@@ -106,5 +107,6 @@ int get_args(server_t *server, char *const *argv)
         if (fill_args2(server, argv, i) == FAILURE)
             return FAILURE;
     }
+    server->opt->start_time = time(NULL);
     return SUCCESS;
 }
