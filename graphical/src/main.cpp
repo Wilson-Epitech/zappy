@@ -8,12 +8,13 @@
 #include <SFML/Graphics.hpp>
 
 const float squareSize = 100.0f;
-const int boardSize = 10;
+const int boardWidht = 10;
+const int boardHeight = 10;
 const float moveSpeed = 1.0f;
 
 void drawBoard(sf::RenderWindow& window) {
-    for (int row = 0; row < boardSize; ++row) {
-        for (int col = 0; col < boardSize; ++col) {
+    for (int row = 0; row < boardHeight; ++row) {
+        for (int col = 0; col < boardWidht; ++col) {
             sf::RectangleShape square(sf::Vector2f(squareSize, squareSize));
             square.setPosition(col * squareSize, row * squareSize);
             if ((row + col) % 2 == 0) {
