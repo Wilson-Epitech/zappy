@@ -10,6 +10,15 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+/**
+ * @brief Accepts a new client connection.
+ * 
+ * If a client is trying to connect, this function accepts the connection,
+ * assigns the client to an available slot in the server's players array,
+ * and adds the client's file descriptor to the server's read file descriptor set.
+ * 
+ * @param server The server instance.
+ */
 void accept_client(server_t *server)
 {
     struct sockaddr_in client_addr;
