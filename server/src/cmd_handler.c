@@ -18,6 +18,7 @@
  */
 command_handler_t command_handlers[] = {
     {"test", example_command_handler},
+    {"pnw", command_pnw},
     {NULL, NULL}
 };
 
