@@ -28,8 +28,10 @@ void process_command(server_t *server, player_t *player, const char *cmd)
 
     printf("Processing command: `%s`\n", cmd);
     for (int i = 0; command_handlers[i].func != NULL; ++i) {
-        if (strcmp(command_handlers[i].name, cmd) == 0) {
+        if (strncmp(command_handlers[i].name, cmd, strlen(command_handlers[i].name)) == 0) {
             is_passed = true;
+            params = cmd + strlen(command_handlers[i].name) + 1;
+            printf("Params: `%s`\n", params);
             command_handlers[i].func(server, player, params);
             break;
         }
