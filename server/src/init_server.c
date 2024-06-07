@@ -12,9 +12,15 @@
 
 static void setup_socket(server_t *server)
 {
+    int opt = 1;
+
     server->fd = socket(AF_INET, SOCK_STREAM, 0);
     if (server->fd == -1) {
         perror("socket");
+        exit(FAILURE);
+    }
+    if (setsockopt(server->fd, SOL_SOCKET, SO_REUSEADDR, &opt, sizeof(int)) == -1) {
+        perror("setsockopt");
         exit(FAILURE);
     }
     server->addr.sin_family = AF_INET;
