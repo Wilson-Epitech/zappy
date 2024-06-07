@@ -6,6 +6,8 @@
 */
 
 #include <SFML/Graphics.hpp>
+#include "../include/Tile.h"
+#include <vector>
 
 const float squareSize = 100.0f;
 const int boardWidth = 10;
@@ -13,17 +15,10 @@ const int boardHeight = 10;
 const float moveSpeed = 1.0f;
 const float zoomCam = 1.1f;
 
-void drawBoard(sf::RenderWindow& window) {
-    for (int row = 0; row < boardHeight; ++row) {
-        for (int col = 0; col < boardWidth; ++col) {
-            sf::RectangleShape square(sf::Vector2f(squareSize, squareSize));
-            square.setPosition(col * squareSize, row * squareSize);
-            if ((row + col) % 2 == 0) {
-                square.setFillColor(sf::Color::White);
-            } else {
-                square.setFillColor(sf::Color::Black);
-            }
-            window.draw(square);
+void drawBoard(sf::RenderWindow& window, const std::vector<std::vector<Tile>>& tiles) {
+    for (const auto& row : tiles) {
+        for (const auto& tile : row) {
+            tile.drawTile(window);
         }
     }
 }
@@ -31,6 +26,17 @@ void drawBoard(sf::RenderWindow& window) {
 int main() {
     sf::RenderWindow window(sf::VideoMode(800, 800), "ZAPPY");
     sf::View view = window.getDefaultView();
+    std::vector<std::vector<Tile>> tiles;
+
+    for (int row = 0; row < boardHeight; ++row) {
+        std::vector<Tile> rowTiles;
+        for (int col = 0; col < boardWidth; ++col) {
+            Tile tile(col, row);
+            tile.getResources(1, 1, 1, 1, 1, 1 ,1);
+            rowTiles.push_back(tile);
+        }
+        tiles.push_back(rowTiles);
+    }
 
     while (window.isOpen()) {
         sf::Event event;
@@ -59,7 +65,7 @@ int main() {
         }
         window.clear();
         window.setView(view);
-        drawBoard(window);
+        drawBoard(window, tiles);
         window.display();
     }
     return 0;
