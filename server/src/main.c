@@ -28,7 +28,6 @@ static int error_handling(server_t *server, int ac, char *const *av)
  *
  * @return int
 */
-
 int main(int argc, char *const *argv)
 {
     server_t *server = malloc(sizeof(server_t));

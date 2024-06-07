@@ -19,7 +19,6 @@
  * @return true
  * @return false
 */
-
 static bool is_number(char const *str)
 {
     for (int i = 0; str[i] != '\0'; i++) {
@@ -107,7 +106,7 @@ int get_args(server_t *server, char *const *argv)
         if (fill_args2(server, argv, i) == FAILURE)
             return FAILURE;
     }
-    printf("port: %d\n", server->port);
+    printf("port: %d\n", server->opt->port);
     printf("map_width: %zu\n", server->opt->map_width);
     printf("map_height: %zu\n", server->opt->map_height);
     for (int i = 0; server->opt->names[i]; i += 1) {
