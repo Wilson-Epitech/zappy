@@ -10,6 +10,12 @@
 #include <unistd.h>
 #include <stdio.h>
 
+/**
+ * @brief Checks the sockets for any activity.
+ * 
+ * @param server The server instance.
+ * @param read_fds The set of file descriptors to check.
+ */
 static void check_sockets(server_t *server, fd_set *read_fds)
 {
     if (select(FD_SETSIZE, read_fds, NULL, NULL, NULL) == -1) {
@@ -19,6 +25,12 @@ static void check_sockets(server_t *server, fd_set *read_fds)
     }
 }
 
+/**
+ * @brief Chooses the client to handle based on the file descriptor.
+ * 
+ * @param server The server instance.
+ * @param i The file descriptor.
+ */
 void chose_client(server_t *server, int i)
 {
     if (i == server->fd) {
@@ -28,6 +40,12 @@ void chose_client(server_t *server, int i)
     }
 }
 
+/**
+ * @brief Handles the ready file descriptors.
+ * 
+ * @param server The server instance.
+ * @param read_fds The set of ready file descriptors.
+ */
 static void handle_read_fds(server_t *server, fd_set *read_fds)
 {
     for (int i = 0; i < FD_SETSIZE; i++) {
@@ -37,6 +55,11 @@ static void handle_read_fds(server_t *server, fd_set *read_fds)
     }
 }
 
+/**
+ * @brief Runs the server.
+ * 
+ * @param server The server instance.
+ */
 void run_server(server_t *server)
 {
     fd_set read_fds = {0};
@@ -44,6 +67,7 @@ void run_server(server_t *server)
     printf("Server running on port %d\n", server->port);
     while (1) {
         read_fds = server->read_fd;
+        FD_SET(STDIN_FILENO, &read_fds);
         check_sockets(server, &read_fds);
         handle_read_fds(server, &read_fds);
     }
