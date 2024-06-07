@@ -59,7 +59,7 @@ static int get_teams_names(server_t *server, char *const *argv, int i)
     i += 1;
     while (strcmp(argv[i], "-c") != 0) {
         server->opt->names =
-            realloc(server->opt->names, sizeof(char *) * size);
+            realloc(server->opt->names, sizeof(char *) * (size + 1));
         if (server->opt->names == NULL)
             return FAILURE;
         server->opt->names[count] = strdup(argv[i]);
@@ -96,11 +96,12 @@ static int fill_args2(server_t *server, char *const *argv, int i)
  * @param server
  * @param argv
  * @return int
- */
+*/
+
 int get_args(server_t *server, char *const *argv)
 {
     server->opt->names = NULL;
-    for (int i = 0; argv[i] != NULL; i += 1) {
+    for (int i = 0; argv[i] != NULL; ++i) {
         if (fill_args1(server, argv, i) == FAILURE)
             return FAILURE;
         if (fill_args2(server, argv, i) == FAILURE)
@@ -109,9 +110,9 @@ int get_args(server_t *server, char *const *argv)
     printf("port: %d\n", server->opt->port);
     printf("map_width: %zu\n", server->opt->map_width);
     printf("map_height: %zu\n", server->opt->map_height);
-    for (int i = 0; server->opt->names[i]; i += 1) {
-        printf("%s\n", server->opt->names[i]);
-    }
+    // for (int i = 0; server->opt->names[i]; ++i ) {
+    //     printf("%s\n", server->opt->names[i]);
+    // }
     printf("clients nb: %zu\n", server->opt->clients_number);
     printf("freq: %zu\n", server->opt->freq);
     return SUCCESS;
