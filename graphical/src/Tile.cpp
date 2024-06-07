@@ -9,14 +9,10 @@
 
 const float squareSize = 100.0f;
 
-Tile::Tile(int x, int y) : x(x), y(y) {
-    square.setSize(sf::Vector2f(squareSize, squareSize));
-    square.setPosition(x * squareSize, y * squareSize);
-    if ((x + y) % 2 == 0) {
-        square.setFillColor(sf::Color::White);
-    } else {
-        square.setFillColor(sf::Color::Black);
-    }
+Tile::Tile(int x, int y, sf::Texture& texture) : x(x), y(y) {
+    sprite.setTexture(texture);
+    sprite.setPosition(x * squareSize, y * squareSize);
+    sprite.setScale(squareSize / texture.getSize().x, squareSize / texture.getSize().y);
 }
 
 Tile::~Tile() {
@@ -24,7 +20,7 @@ Tile::~Tile() {
 }
 
 void Tile::drawTile(sf::RenderWindow &window) const{
-    window.draw(square);
+    window.draw(sprite);
 }
 
 void Tile::getResources(int food, int linemate, int deraumere, int sibur, int mendiane, int phiras, int thystame) {

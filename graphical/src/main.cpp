@@ -9,7 +9,6 @@
 #include "../include/Tile.h"
 #include <vector>
 
-const float squareSize = 100.0f;
 const int boardWidth = 10;
 const int boardHeight = 10;
 const float moveSpeed = 1.0f;
@@ -28,10 +27,13 @@ int main() {
     sf::View view = window.getDefaultView();
     std::vector<std::vector<Tile>> tiles;
 
+    sf::Texture tileTexture;
+    tileTexture.loadFromFile("assets/tile.jpeg");
+
     for (int row = 0; row < boardHeight; ++row) {
         std::vector<Tile> rowTiles;
         for (int col = 0; col < boardWidth; ++col) {
-            Tile tile(col, row);
+            Tile tile(col, row, tileTexture);
             tile.getResources(1, 1, 1, 1, 1, 1 ,1);
             rowTiles.push_back(tile);
         }
