@@ -14,10 +14,10 @@
 
 /**
  * @brief Clears a client from the server.
- * 
- * Closes the client's file descriptor, removes it from the server's read file descriptor set,
- * and clears it from the server's players array.
- * 
+ *
+ * Closes the client's file descriptor, removes it from the server's
+ * read file descriptor set, and clears it from the server's players array.
+ *
  * @param server The server instance.
  * @param client_fd The file descriptor of the client to clear.
  */
@@ -35,10 +35,10 @@ static void clear_client(server_t *server, int client_fd)
 
 /**
  * @brief Reads data from a client and processes it.
- * 
+ *
  * Prints the received data, finds the player associated with the client,
  * and processes the received data as a command from that player.
- * 
+ *
  * @param server The server instance.
  * @param client_fd The file descriptor of the client.
  * @param bytes_read The number of bytes read from the client.
@@ -58,10 +58,10 @@ static void read_client_data(server_t *server,
 
 /**
  * @brief Handles a client.
- * 
+ *
  * Reads data from the client. If an error occurs or the client disconnects,
  * clears the client from the server. Otherwise, processes the received data.
- * 
+ *
  * @param server The server instance.
  * @param client_fd The file descriptor of the client.
  */
@@ -85,10 +85,11 @@ void handle_client(server_t *server, int client_fd)
 
 /**
  * @brief Cleans up the server.
- * 
- * Closes the server's file descriptor and the file descriptors of all connected clients,
- * and prints a message indicating that the server has been cleaned up.
- * 
+ *
+ * Closes the server's file descriptor and the file descriptors
+ * of all connected clients, and prints a message indicating that
+ * the server has been cleaned up.
+ *
  * @param server The server instance.
  */
 void cleanup_server(server_t *server)
