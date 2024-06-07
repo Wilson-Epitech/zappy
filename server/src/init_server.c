@@ -12,7 +12,7 @@
 
 /**
  * @brief Sets up the server socket.
- * 
+ *
  * @param server The server instance.
  */
 static void setup_socket(server_t *server)
@@ -36,7 +36,7 @@ static void setup_socket(server_t *server)
 
 /**
  * @brief Binds the server socket to an address.
- * 
+ *
  * @param server The server instance.
  */
 static void bind_socket(server_t *server)
@@ -51,7 +51,7 @@ static void bind_socket(server_t *server)
 
 /**
  * @brief Starts listening on the server socket.
- * 
+ *
  * @param server The server instance.
  */
 static void listen_socket(server_t *server)
@@ -65,7 +65,7 @@ static void listen_socket(server_t *server)
 
 /**
  * @brief Initializes the server.
- * 
+ *
  * @param server The server instance.
  * @param opt The server options.
  */
