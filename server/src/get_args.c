@@ -101,7 +101,7 @@ static int fill_args2(server_t *server, char *const *argv, int i)
 int get_args(server_t *server, char *const *argv)
 {
     server->opt->names = NULL;
-    for (int i = 0; argv[i] != NULL; ++i) {
+    for (int i = 0; argv[i] != NULL; i += 1) {
         if (fill_args1(server, argv, i) == FAILURE)
             return FAILURE;
         if (fill_args2(server, argv, i) == FAILURE)
@@ -112,6 +112,5 @@ int get_args(server_t *server, char *const *argv)
     printf("map_height: %zu\n", server->opt->map_height);
     printf("clients nb: %zu\n", server->opt->clients_number);
     printf("freq: %zu\n", server->opt->freq);
-    server->opt->start_time = time(NULL);
     return SUCCESS;
 }
