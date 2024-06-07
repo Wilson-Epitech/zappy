@@ -8,13 +8,14 @@
 #include <SFML/Graphics.hpp>
 
 const float squareSize = 100.0f;
-const int boardWidht = 10;
+const int boardWidth = 10;
 const int boardHeight = 10;
 const float moveSpeed = 1.0f;
+const float zoomCam = 1.1f;
 
 void drawBoard(sf::RenderWindow& window) {
     for (int row = 0; row < boardHeight; ++row) {
-        for (int col = 0; col < boardWidht; ++col) {
+        for (int col = 0; col < boardWidth; ++col) {
             sf::RectangleShape square(sf::Vector2f(squareSize, squareSize));
             square.setPosition(col * squareSize, row * squareSize);
             if ((row + col) % 2 == 0) {
@@ -36,8 +37,14 @@ int main() {
         while (window.pollEvent(event)) {
             if (event.type == sf::Event::Closed)
                 window.close();
+            else if (event.type == sf::Event::MouseWheelScrolled) {
+                if (event.mouseWheelScroll.delta > 0) {
+                    view.zoom(1.0f / zoomCam);
+                } else if (event.mouseWheelScroll.delta < 0) {
+                    view.zoom(zoomCam);
+                }
+            }
         }
-
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Z)) {
             view.move(0, -moveSpeed);
         }
