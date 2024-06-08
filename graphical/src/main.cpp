@@ -8,10 +8,12 @@
 #include <SFML/Graphics.hpp>
 #include "../include/Tile.h"
 #include <vector>
+#include <cstdlib>
+#include <ctime>
 
 const int boardWidth = 10;
 const int boardHeight = 10;
-const float moveSpeed = 1.0f;
+const float moveSpeed = 10.0f;
 const float zoomCam = 1.1f;
 
 void drawBoard(sf::RenderWindow& window, const std::vector<std::vector<Tile>>& tiles) {
@@ -24,6 +26,8 @@ void drawBoard(sf::RenderWindow& window, const std::vector<std::vector<Tile>>& t
 
 int main() {
     sf::RenderWindow window(sf::VideoMode(800, 800), "ZAPPY");
+    std::srand(static_cast<unsigned>(std::time(0)));
+    window.setFramerateLimit(30);
     sf::View view = window.getDefaultView();
     std::vector<std::vector<Tile>> tiles;
 
@@ -32,11 +36,33 @@ int main() {
     sf::Texture tileDark;
     tileDark.loadFromFile("assets/yard.jpeg");
 
+    sf::Texture foodTexture;
+    foodTexture.loadFromFile("assets/food.png");
+    sf::Texture linemateTexture;
+    linemateTexture.loadFromFile("assets/food.png");
+    sf::Texture deraumereTexture;
+    deraumereTexture.loadFromFile("assets/food.png");
+    sf::Texture siburTexture;
+    siburTexture.loadFromFile("assets/food.png");
+    sf::Texture mendianeTexture;
+    mendianeTexture.loadFromFile("assets/food.png");
+    sf::Texture phirasTexture;
+    phirasTexture.loadFromFile("assets/food.png");
+    sf::Texture thystameTexture;
+    thystameTexture.loadFromFile("assets/food.png");
+
     for (int row = 0; row < boardHeight; ++row) {
         std::vector<Tile> rowTiles;
         for (int col = 0; col < boardWidth; ++col) {
             Tile tile(col, row, (row + col) % 2 ? tileLight : tileDark);
-            tile.getResources(1, 1, 1, 1, 1, 1 ,1);
+            tile.setResources(1, 1, 1, 1, 1, 1, 1);
+            tile.addResourceSprite(foodTexture, 1);
+            tile.addResourceSprite(linemateTexture, 1);
+            tile.addResourceSprite(deraumereTexture, 1);
+            tile.addResourceSprite(siburTexture, 1);
+            tile.addResourceSprite(mendianeTexture, 1);
+            tile.addResourceSprite(phirasTexture, 1);
+            tile.addResourceSprite(thystameTexture, 1);
             rowTiles.push_back(tile);
         }
         tiles.push_back(rowTiles);

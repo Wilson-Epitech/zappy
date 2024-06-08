@@ -9,6 +9,7 @@
 #define TILE_H_
 
 #include <SFML/Graphics.hpp>
+#include <vector>
 
 class Tile {
 public:
@@ -16,7 +17,8 @@ public:
     ~Tile();
 
     void drawTile(sf::RenderWindow &window) const;
-    void getResources(int food, int linemate, int deraumere, int sibur, int mendiane, int phiras, int thystame);
+    void setResources(int food, int linemate, int deraumere, int sibur, int mendiane, int phiras, int thystame);
+    void addResourceSprite(sf::Texture& resourceTexture, int count);
 
 private:
     sf::Sprite sprite;
@@ -28,6 +30,7 @@ private:
     int mendiane;
     int phiras;
     int thystame;
+    std::vector<sf::Sprite> resourceSprites;
 };
 
 #endif /* TILE_H_ */
