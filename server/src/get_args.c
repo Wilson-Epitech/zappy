@@ -67,6 +67,7 @@ static int get_teams_names(server_t *server, char *const *argv, int i)
         size += 1;
         i += 1;
     }
+    server->opt->names[count] = NULL;
     return SUCCESS;
 }
 
