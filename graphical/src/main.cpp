@@ -24,6 +24,14 @@ void drawBoard(sf::RenderWindow& window, const std::vector<std::vector<Tile>>& t
     }
 }
 
+void updateBoard(std::vector<std::vector<Tile>>& tiles) {
+    for (auto& row : tiles) {
+        for (auto& tile : row) {
+            tile.updateAnimation();
+        }
+    }
+}
+
 int main() {
     sf::RenderWindow window(sf::VideoMode(800, 800), "ZAPPY");
     std::srand(static_cast<unsigned>(std::time(0)));
@@ -37,19 +45,19 @@ int main() {
     tileDark.loadFromFile("assets/yard.jpeg");
 
     sf::Texture foodTexture;
-    foodTexture.loadFromFile("assets/food.png");
+    foodTexture.loadFromFile("assets/gold.png");
     sf::Texture linemateTexture;
-    linemateTexture.loadFromFile("assets/food.png");
+    linemateTexture.loadFromFile("assets/gold.png");
     sf::Texture deraumereTexture;
-    deraumereTexture.loadFromFile("assets/food.png");
+    deraumereTexture.loadFromFile("assets/gold.png");
     sf::Texture siburTexture;
-    siburTexture.loadFromFile("assets/food.png");
+    siburTexture.loadFromFile("assets/gold.png");
     sf::Texture mendianeTexture;
-    mendianeTexture.loadFromFile("assets/food.png");
+    mendianeTexture.loadFromFile("assets/gold.png");
     sf::Texture phirasTexture;
-    phirasTexture.loadFromFile("assets/food.png");
+    phirasTexture.loadFromFile("assets/gold.png");
     sf::Texture thystameTexture;
-    thystameTexture.loadFromFile("assets/food.png");
+    thystameTexture.loadFromFile("assets/gold.png");
 
     for (int row = 0; row < boardHeight; ++row) {
         std::vector<Tile> rowTiles;
@@ -93,6 +101,8 @@ int main() {
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
             view.move(moveSpeed, 0);
         }
+
+        updateBoard(tiles);
         window.clear();
         window.setView(view);
         drawBoard(window, tiles);
