@@ -39,10 +39,8 @@ int main() {
     sf::View view = window.getDefaultView();
     std::vector<std::vector<Tile>> tiles;
 
-    sf::Texture tileLight;
-    tileLight.loadFromFile("assets/tile.jpeg");
-    sf::Texture tileDark;
-    tileDark.loadFromFile("assets/yard.jpeg");
+    sf::Texture groundTexture;
+    groundTexture.loadFromFile("assets/tile.png");
 
     sf::Texture foodTexture;
     foodTexture.loadFromFile("assets/linemate.png");
@@ -59,10 +57,16 @@ int main() {
     sf::Texture thystameTexture;
     thystameTexture.loadFromFile("assets/thystame.png");
 
+    const int groundTileWidth = 32;
+    const int groundTileHeight = 32;
+    const int groundTileCount = 6;
+
     for (int row = 0; row < boardHeight; ++row) {
         std::vector<Tile> rowTiles;
         for (int col = 0; col < boardWidth; ++col) {
-            Tile tile(col, row, (row + col) % 2 ? tileLight : tileDark);
+            int tileIndex = std::rand() % groundTileCount;
+            sf::IntRect textureRect(tileIndex * groundTileWidth, 0, groundTileWidth, groundTileHeight);
+            Tile tile(col, row, groundTexture, textureRect);
             tile.setResources(1, 1, 1, 1, 1, 1, 1);
             tile.addResourceSprite(foodTexture, 1);
             tile.addResourceSprite(linemateTexture, 1);

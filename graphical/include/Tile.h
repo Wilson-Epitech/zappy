@@ -13,7 +13,7 @@
 
 class Tile {
 public:
-    Tile(int x, int y, sf::Texture& texture);
+    Tile(int x, int y, sf::Texture& texture, const sf::IntRect& textureRect);
     ~Tile();
 
     void drawTile(sf::RenderWindow &window) const;

@@ -13,10 +13,11 @@ const float squareSize = 100.0f;
 const float resourceSize = 15.0f;
 const float Tile::animationSpeed = 0.2f;
 
-Tile::Tile(int x, int y, sf::Texture& texture) : x(x), y(y) {
+Tile::Tile(int x, int y, sf::Texture& texture, const sf::IntRect& textureRect) : x(x), y(y) {
     sprite.setPosition(x * squareSize, y * squareSize);
-    sprite.setScale(squareSize / texture.getSize().x, squareSize / texture.getSize().y);
+    sprite.setScale(squareSize / textureRect.width, squareSize / textureRect.height);
     sprite.setTexture(texture);
+    sprite.setTextureRect(textureRect);
 }
 
 Tile::~Tile() {
@@ -46,7 +47,7 @@ void Tile::addResourceSprite(sf::Texture& resourceTexture, int count) {
         resourceSprite.setTexture(resourceTexture);
         resourceSprite.setScale(resourceSize / frameWidth, resourceSize / frameHeight);
         float offsetX = static_cast<float>(std::rand() % static_cast<int>(squareSize - resourceSize));
-        float offsetY = static_cast<float>(std::rand() % static_cast<int>(squareSize - resourceSize));
+        float offsetY = static_cast<float>(std::rand() % static_cast<int>(squareSize / 1.5 - resourceSize));
         resourceSprite.setPosition(x * squareSize + offsetX, y * squareSize + offsetY);
         resourceSprite.setTextureRect(sf::IntRect(0, 0, frameWidth, frameHeight));
         resourceSprites.push_back(resourceSprite);
