@@ -16,6 +16,12 @@ typedef struct options_s {
     char **names;
     size_t clients_number;
     size_t freq;
+    int p;
+    int x;
+    int y;
+    int n;
+    int c;
+    int f;
 } options_t;
 
 #endif /* !OPTIONS_H_ */
