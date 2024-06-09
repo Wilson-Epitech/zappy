@@ -10,7 +10,7 @@
 #include <ctime>
 
 const float squareSize = 100.0f;
-const float resourceSize = 25.0f;
+const float resourceSize = 15.0f;
 const float Tile::animationSpeed = 0.2f;
 
 Tile::Tile(int x, int y, sf::Texture& texture) : x(x), y(y) {
