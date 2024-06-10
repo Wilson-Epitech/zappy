@@ -26,8 +26,10 @@ static int error_handling(server_t *server, int ac, char *const *av)
 /**
  * @brief This is the main function for the server
  *
+ * @param argc
+ * @param argv
  * @return int
-*/
+ */
 int main(int argc, char *const *argv)
 {
     server_t *server = malloc(sizeof(server_t));

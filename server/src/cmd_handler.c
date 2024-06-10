@@ -17,15 +17,9 @@
  * and a function pointer to the handler for that command.
  */
 command_handler_t command_handlers[] = {
-    {"test", example_command_handler},
+    {"pnw", command_pnw},
     {NULL, NULL}
 };
-
-void example_command_handler(server_t *server,
-    player_t *player, const char *params)
-{
-    printf("Example command executed with params: %s\n", params);
-}
 
 /**
  * @brief Processes a command.
@@ -34,7 +28,7 @@ void example_command_handler(server_t *server,
  * @param player The player instance.
  * @param cmd The command to process.
  */
-void process_command(server_t *server, player_t *player, const char *cmd)
+void process_command(server_t *server, player_t *player, char *cmd)
 {
     char *params = {0};
     bool is_passed = false;
