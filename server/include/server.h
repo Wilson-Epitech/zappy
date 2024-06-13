@@ -54,6 +54,7 @@ void accept_client(server_t *server);
 void handle_client(server_t *server, int client_fd);
 void process_command(server_t *server, player_t *player, char *cmd);
 void cleanup_server(server_t *server);
+void init_inventory(player_t *player, int fd);
 void init_player(player_t *player, int fd);
 void command_pnw(server_t *server, int client_fd);
 
