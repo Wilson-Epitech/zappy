@@ -14,12 +14,9 @@
 
 static int error_handling(server_t *server, int ac, char *const *av)
 {
-    if (ac < 12) {
-        printf("bad option, run ./zappy_server -help\n");
+    if (get_args(server, av) == FAILURE) {
         return FAILURE;
     }
-    if (get_args(server, av) == FAILURE)
-        return FAILURE;
     return SUCCESS;
 }
 
