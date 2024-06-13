@@ -6,6 +6,7 @@
 */
 
 #include "server.h"
+#include "string.h"
 
 /**
  * @brief Init default value of the player
@@ -18,6 +19,7 @@ void init_player(player_t *player, int fd)
     player[fd].level = 0;
     player[fd].x = 0;
     player[fd].y = 0;
+    memset(player[fd].team_name, 0, 0);
     player[fd].orientation = 0;
     player[fd].fd = fd;
 }

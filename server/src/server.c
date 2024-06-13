@@ -63,9 +63,20 @@ static void read_client_data(server_t *server,
 */
 static void handle_team(server_t *server, int client_fd, char *buffer)
 {
+    if (strcmp("GRAPHICAL", buffer) == 0) {
+        server->players[client_fd].team_id = -2;
+    }
     for (int i = 0; i < get_array_size(server->opt->names); ++i) {
         if (strcmp(server->opt->names[i], buffer) == 0) {
             server->players[client_fd].team_id = i;
+            server->players[client_fd].team_name =
+                malloc(sizeof(char) * (strlen(server->opt->names[i]) + 1));
+            strcpy(server->players[client_fd].team_name,
+                server->opt->names[i]);
+            dprintf(client_fd, "%ld\n", server->opt->clients_number);
+            dprintf(client_fd, "%ld %ld\n",
+                server->opt->map_height, server->opt->map_width);
+            command_pnw(server, client_fd);
             break;
         }
     }
