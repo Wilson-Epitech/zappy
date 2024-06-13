@@ -19,7 +19,6 @@
  * and a function pointer to the handler for that command.
  */
 command_handler_t command_handlers[] = {
-    {"pnw", command_pnw},
     {"pin", command_pin},
     {"msz", command_msz},
     {"sgt", command_sgt},
