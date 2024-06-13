@@ -82,8 +82,6 @@ void handle_client(server_t *server, int client_fd)
     }
 }
 
-//test
-
 /**
  * @brief Cleans up the server.
  *
