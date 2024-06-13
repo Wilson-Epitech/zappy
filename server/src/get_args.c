@@ -123,7 +123,7 @@ static int init_default_values(server_t *server)
     if (server->opt->x == 0 && server->opt->y == 0) {
         server->opt->map_width = 10;
         server->opt->map_height = 10;
-        printf("\033[0;36m[MAP DIMENSIONS]\033[0m not set, default is 10x10\n");
+        printf("\033[0;36m[MAP DIMENSIONS]\033[0m not set,default is 10x10\n");
     }
     if (set_default_team_names(server) == FAILURE)
         return FAILURE;
@@ -164,10 +164,5 @@ int get_args(server_t *server, char *const *argv)
     server->opt->start_time = time(NULL);
     if (init_default_values(server) == FAILURE)
         return FAILURE;
-    printf("port: %d\n", server->opt->port);
-    printf("map_width: %zu\n", server->opt->map_width);
-    printf("map_height: %zu\n", server->opt->map_height);
-    printf("clients nb: %zu\n", server->opt->clients_number);
-    printf("freq: %zu\n", server->opt->freq);
     return SUCCESS;
 }
