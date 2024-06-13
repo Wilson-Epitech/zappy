@@ -56,6 +56,22 @@ static void read_client_data(server_t *server,
 }
 
 /**
+ * @brief Check player team and store it if correct
+ * @param server
+ * @param client_fd
+ * @param buffer Client input
+*/
+static void handle_team(server_t *server, int client_fd, char *buffer)
+{
+    for (int i = 0; i < get_array_size(server->opt->names); ++i) {
+        if (strcmp(server->opt->names[i], buffer) == 0) {
+            server->players[client_fd].team_id = i;
+            break;
+        }
+    }
+}
+
+/**
  * @brief Handles a client.
  *
  * Reads data from the client. If an error occurs or the client disconnects,
@@ -78,6 +94,10 @@ void handle_client(server_t *server, int client_fd)
         clear_client(server, client_fd);
     } else {
         buffer[bytes_read - 1] = '\0';
+        if (server->players[client_fd].team_id == -1) {
+            handle_team(server, client_fd, buffer);
+            return;
+        }
         read_client_data(server, client_fd, bytes_read, buffer);
     }
 }
