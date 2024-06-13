@@ -31,7 +31,8 @@ void command_pin(server_t *, player_t *player, const char *params)
     if (size != 1 && size != 0)
         dprintf(atoi(params), "sbp\n");
     fd = atoi(params);
-    dprintf(player[fd].fd, "pin %d %d %d %d %d %d %d %d %d %d\n", player[fd].fd, 
+    dprintf(player[fd].fd, "pin %d %d %d %d %d %d %d %d %d %d\n",
+    player[fd].fd,
     player[fd].x, player[fd].y, player[fd].inventory.food,
     player[fd].inventory.linemate, player[fd].inventory.deraumere,
     player[fd].inventory.sibur, player[fd].inventory.mendiane,
