@@ -18,6 +18,7 @@
  */
 command_handler_t command_handlers[] = {
     {"pnw", command_pnw},
+    {"pin", command_pin},
     {NULL, NULL}
 };
 
