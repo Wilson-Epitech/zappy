@@ -5,10 +5,12 @@
 ** cmd_handler
 */
 
-#include "cmd_handler.h"
 #include <string.h>
 #include <stdio.h>
 #include <stdbool.h>
+#include <unistd.h>
+
+#include "cmd_handler.h"
 
 /**
  * @brief Array of command handlers.
@@ -18,6 +20,10 @@
  */
 command_handler_t command_handlers[] = {
     {"pnw", command_pnw},
+    {"msz", command_msz},
+    {"sgt", command_sgt},
+    {"sst", command_sst},
+    {"tna", command_tna},
     {NULL, NULL}
 };
 
@@ -44,6 +50,8 @@ void process_command(server_t *server, player_t *player, char *cmd)
             break;
         }
     }
-    if (!is_passed)
+    if (!is_passed) {
         printf("Wrong command\n");
+        write(player->fd, "suc\n", strlen("suc\n"));
+    }
 }

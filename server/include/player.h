@@ -13,6 +13,8 @@
 
 typedef struct player_s {
     int fd;
+    int id;
+    int team_id;
     int x;
     int y;
     int level;
