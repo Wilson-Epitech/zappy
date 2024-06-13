@@ -41,7 +41,6 @@ static void clear_client(server_t *server, int client_fd)
  *
  * @param server The server instance.
  * @param client_fd The file descriptor of the client.
- * @param bytes_read The number of bytes read from the client.
  * @param buffer The buffer containing the data read from the client.
  */
 static void read_client_data(server_t *server,

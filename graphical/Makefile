@@ -1,40 +1,63 @@
 ##
 ## ZAPPY PROJECT, 2024
-## zappy
+## delivery
 ## File description:
 ## Makefile
 ##
 
-CC	=	g++
+PROJECT	=	Zappy_GUI
 
-CD	=	cd
+BINARY	=	zappy_gui
 
-MV	=	mv
+CXX	?=	g++
 
-SRC = $(shell find src -name '*.cpp')
+OBJS	=	$(SRCS:.cpp=.o)
 
-OBJ	=	$(SRC:.cpp=.o)
+SRCS	=	$(shell find ./ -name '*.cpp')
 
-NAME	=	zappy_gui
+CXXFLAGS	+=	-Wall
+CXXFLAGS	+=	-Wextra
+CXXFLAGS	+=	-Werror
+CXXFLAGS	+=	-O2
+CXXFLAGS	+=	-std=c++17
+CXXFLAGS	+=	-I ./include
 
-CXXFLAGS	=	-W -Wall -Wextra -std=c++20 -I ./include
+LDFLAGS += -lsfml-graphics -lsfml-window -lsfml-system
 
-all:	$(NAME)
+PRINTER	=	printf "$(BLUE)$(PROJECT) ▷ " ; printf
 
-$(NAME):	$(OBJ)
-	@printf "\033[33mCompiling GUI...\033[0m\n"
-	@$(CC) -o $(NAME) $(OBJ) > /dev/null 2>&1
-	@$(MV) $(NAME) ../ > /dev/null 2>&1
-	@printf "\033[32mGUI compiled and mooved succesfully !\033[0m\n"
+GREEN	=	\033[0;32m
+RED		=	\033[0;31m
+BLUE	=	\033[0;34m
+YELLOW	=	\033[0;35m
+CYAN	=	\033[1;36m
+
+all: $(BINARY)
+
+$(BINARY): prebuild $(OBJS)
+	@ $(PRINTER) "$(YELLOW)%-40b" "Building $(PROJECT)"
+	@ $(CXX) -o $(BINARY) $(OBJS) $(LDFLAGS) && \
+	  (printf "$(GREEN)Done\n" ; exit 0) || \
+	  (printf "$(RED)Fail\n" ; exit 1)
+
+prebuild:
+	@ $(PRINTER) "$(YELLOW)%b\n" "Compiling files"
 
 clean:
-	@printf "\033[33mCleaning object files for GUI...\033[0m\n"
-	@$(RM) $(OBJ)
+	@ $(PRINTER) "$(YELLOW)%-40b" "Clean files"
+	@ rm -f $(OBJS)
+	@ printf "$(GREEN)Done\n"
 
-fclean:	clean
-	@printf "\033[33mCleaning GUI binary...\033[0m\n"
-	@$(CD) ../ && $(RM) $(NAME) > /dev/null 2>&1
+fclean: clean
+	@ $(PRINTER) "$(YELLOW)%-40b" "Clean $(BINARY)"
+	@ rm -f $(BINARY)
+	@ printf "$(GREEN)Done\n"
 
-re:	fclean all
+re: fclean all
 
-.PHONY: all clean fclean re
+.cpp.o:
+	@ $(CXX) -c $< -o $@ $(CFLAGS) && \
+	  (printf "$(CYAN) %b $(GREEN)「✔」\n" $<) || \
+	  (printf "$(CYAN) %b $(RED)[XX]\n" $< ; exit 1)
+
+.PHONY: all $(BINARY) prebuild clean fclean re .cpp.o
