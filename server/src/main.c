@@ -42,6 +42,7 @@ int main(int argc, char *const *argv)
     if (error_handling(server, argc, argv) == FAILURE)
         return FAILURE;
     init_server(server, server->opt);
+    init_queue(server);
     run_server(server);
     cleanup_server(server);
     free(server->opt);

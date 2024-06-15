@@ -25,11 +25,8 @@
  */
 void command_pin(server_t *, player_t *player, const char *params)
 {
-    int size = strlen(params);
     int fd;
 
-    if (size != 1 && size != 0)
-        dprintf(atoi(params), "sbp\n");
     fd = atoi(params);
     dprintf(player[fd].fd, "pin %d %d %d %d %d %d %d %d %d %d\n",
     player[fd].fd,

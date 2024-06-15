@@ -10,6 +10,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+#include "cmd_handler.h"
 #include <arpa/inet.h>
 
 /**
@@ -49,11 +50,16 @@ static void read_client_data(server_t *server,
     printf("Received from %d: %s\n", client_fd, buffer);
     //for (int i = 0; i < MAX_CLIENTS; i++) {
         if (server->players[client_fd].id == -2) {
+            printf("%d\n", server->players[client_fd].id);
             process_command(server, &server->players[client_fd], buffer);
             return;
             //break;
+        } else if (server->players[client_fd].id > -1) {
+            process_command_ia(server, &server->players[client_fd], buffer, server->queue);
+            handle_command_queue(server->queue, server, &server->players[client_fd]);
         }
-        process_command_ia(server, &server->players[client_fd], buffer);
+        //process_command_ia(server, &server->players[client_fd], buffer, server->queue);
+        //handle_command_queue(server->queue, server, &server->players[client_fd]);
     //}
 }
 

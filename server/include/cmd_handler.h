@@ -12,6 +12,7 @@
 typedef struct command_handler_s {
     char *name;
     void(*func)(server_t *, player_t *, const char *);
+    int time;
 } command_handler_t;
 
 void command_pin(server_t *, player_t *, const char *);
@@ -25,6 +26,6 @@ void command_left(server_t *server, player_t *player, const char *params);
 void command_look(server_t *server, player_t *player, const char *params);
 void command_inventory(server_t *server, player_t *player, const char *params);
 void command_right(server_t *server, player_t *player, const char *params);
-
+void command_broadcast(server_t *server, player_t *player, const char *params);
 
 #endif /* !CMD_HANDLER_H_ */
