@@ -47,12 +47,14 @@ static void read_client_data(server_t *server,
     int client_fd, ssize_t, char *buffer)
 {
     printf("Received from %d: %s\n", client_fd, buffer);
-    for (int i = 0; i < MAX_CLIENTS; i++) {
-        if (server->players[i].fd == client_fd) {
-            process_command(server, &server->players[i], buffer);
-            break;
+    //for (int i = 0; i < MAX_CLIENTS; i++) {
+        if (server->players[client_fd].id == -2) {
+            process_command(server, &server->players[client_fd], buffer);
+            return;
+            //break;
         }
-    }
+        process_command_ia(server, &server->players[client_fd], buffer);
+    //}
 }
 
 /**
