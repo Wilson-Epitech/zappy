@@ -24,7 +24,7 @@ void command_tna(server_t *server, player_t *player, const char *params)
         strcpy(str, server->opt->names[i]);
         str[len] = '\n';
         str[len + 1] = '\0';
-        write(player->fd, str, strlen(str));
+        dprintf(player->fd, "tna %s", str);
         free(str);
     }
     return;
