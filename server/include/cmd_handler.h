@@ -20,4 +20,11 @@ void command_sgt(server_t *server, player_t *player, const char *params);
 void command_sst(server_t *server, player_t *player, const char *params);
 void command_tna(server_t *server, player_t *player, const char *params);
 
+void command_forward(server_t *server, player_t *player, const char *params);
+void command_left(server_t *server, player_t *player, const char *params);
+void command_look(server_t *server, player_t *player, const char *params);
+void command_inventory(server_t *server, player_t *player, const char *params);
+void command_right(server_t *server, player_t *player, const char *params);
+
+
 #endif /* !CMD_HANDLER_H_ */
