@@ -23,6 +23,7 @@ command_handler_t command_handlers[] = {
     {"tna", command_tna},
     {"plv", command_plv},
     {"ppo", command_ppo},
+    {"Eject", command_pex},
     {NULL, NULL}
 };
 
