@@ -21,6 +21,7 @@
 command_handler_t command_handlers[] = {
     {"pnw", command_pnw},
     {"tna", command_tna},
+    {"plv", command_plv},
     {NULL, NULL}
 };
 
