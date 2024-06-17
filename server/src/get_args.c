@@ -11,6 +11,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
+
 #include "server.h"
 
 /**
@@ -123,7 +124,7 @@ static int init_default_values(server_t *server)
     if (server->opt->x == 0 && server->opt->y == 0) {
         server->opt->map_width = 10;
         server->opt->map_height = 10;
-        printf("\033[0;36m[MAP DIMENSIONS]\033[0m not set,default is 10x10\n");
+        printf("\033[0;36m[MAP DIMENSIONS]\033[0m not set, default is 10x10\n");
     }
     if (set_default_team_names(server) == FAILURE)
         return FAILURE;
@@ -161,7 +162,6 @@ int get_args(server_t *server, char *const *argv)
         if (parse_advanced_options(server, argv, i) == FAILURE)
             return FAILURE;
     }
-    server->opt->start_time = time(NULL);
     if (init_default_values(server) == FAILURE)
         return FAILURE;
     return SUCCESS;

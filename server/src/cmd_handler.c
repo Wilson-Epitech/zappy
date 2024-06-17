@@ -11,6 +11,9 @@
 #include <unistd.h>
 
 #include "cmd_handler.h"
+#include <unistd.h>
+
+#include "cmd_handler.h"
 
 /**
  * @brief Array of command handlers.
@@ -24,6 +27,9 @@ command_handler_t command_handlers[] = {
     {"sgt", command_sgt},
     {"sst", command_sst},
     {"tna", command_tna},
+    {"plv", command_plv},
+    {"ppo", command_ppo},
+    {"Eject", command_pex},
     {NULL, NULL}
 };
 
