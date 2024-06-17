@@ -20,7 +20,7 @@
  *
  * Each element is a struct with a command name
  * and a function pointer to the handler for that command.
- */
+*/
 command_handler_t command_handlers[] = {
     {"pbc", command_pbc, 0},
     {"pin", command_pin, 0},
@@ -41,7 +41,7 @@ command_handler_t command_handlers[] = {
  *
  * Each element is a struct with a command name
  * and a function pointer to the handler for that command.
- */
+*/
 command_handler_t command_handlers_ia[] = {
     {"Forward", command_forward, 7},
     {"Right", command_right, 7},
@@ -58,7 +58,7 @@ command_handler_t command_handlers_ia[] = {
  * @param server The server instance.
  * @param player The player instance.
  * @param cmd The command to process.
- */
+*/
 void process_command(server_t *server, player_t *player, char *cmd)
 {
     char *params = {0};
@@ -97,7 +97,7 @@ void handle_command_queue(player_command_queue_t *queue, server_t *server,
     }
 }
 
-void enqueue_command(player_command_queue_t *queue, const char *cmd,
+static void enqueue_command(player_command_queue_t *queue, const char *cmd,
     int execution_time)
 {
     if (queue->count < 10) {
