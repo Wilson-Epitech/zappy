@@ -11,6 +11,9 @@
 #include <unistd.h>
 #include <time.h>
 #include "cmd_handler.h"
+#include <unistd.h>
+
+#include "cmd_handler.h"
 
 /**
  * @brief Array of command with GUI.
@@ -27,6 +30,10 @@ command_handler_t command_handlers[] = {
     {"tna", command_tna, 0},
     {"bct", command_bct, 0},
     {"mct", command_bct_all, 0},
+    {"pnw", command_pnw, 0},
+    {"plv", command_plv, 0},
+    {"ppo", command_ppo, 0},
+    {"pex", command_pex, 0},
     {NULL, NULL, 0}
 };
 
