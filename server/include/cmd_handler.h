@@ -19,5 +19,7 @@ void command_msz(server_t *server, player_t *player, const char *params);
 void command_sgt(server_t *server, player_t *player, const char *params);
 void command_sst(server_t *server, player_t *player, const char *params);
 void command_tna(server_t *server, player_t *player, const char *params);
+void command_bct(server_t *server, player_t *player, const char *params);
+void command_bct_all(server_t *server, int x, int y);
 
 #endif /* !CMD_HANDLER_H_ */
