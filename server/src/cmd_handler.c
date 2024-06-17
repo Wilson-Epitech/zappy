@@ -25,6 +25,8 @@ command_handler_t command_handlers[] = {
     {"sgt", command_sgt, 0},
     {"sst", command_sst, 0},
     {"tna", command_tna, 0},
+    {"bct", command_bct},
+    {"mct", command_bct_all},
     {NULL, NULL, 0}
 };
 
