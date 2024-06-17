@@ -9,12 +9,22 @@
 #include <stdio.h>
 
 /**
- * @brief Executes the pnw command
+ * @brief Executes the pnw command and send a message when a player connects
  *
  * @param params
 */
 
-void command_pnw(server_t *, player_t *, const char *params)
+void command_pnw(server_t *server, int client_fd)
 {
-    printf("Je suis la commande pnw et j'ai les paramètres: `%s,`\n", params);
+    for (int i = 0; i < MAX_CLIENTS; ++i) {
+        if (server->players[i].team_id == -2) {
+            dprintf(i, "pnw %d %d %d %d %d %s\n",
+            i,
+            server->players[client_fd].x,
+            server->players[client_fd].y,
+            server->players[client_fd].orientation,
+            server->players[client_fd].level,
+            server->players[client_fd].team_name);
+        }
+    }
 }
