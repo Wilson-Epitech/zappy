@@ -85,9 +85,9 @@ void init_server(server_t *server, options_t *opt)
 
 void init_queue(server_t *server)
 {
-    player_command_queue_t *queue = {0};
+    player_command_queue_t *queue = malloc(sizeof(player_command_queue_t));
 
-    for (int i = 0; i < 10; i++) {
+    for (int i = 0; i < 10; ++i) {
         queue->commands[i].cmd = NULL;
         queue->commands[i].execution_time = 0;
         queue->commands[i].id = 0;

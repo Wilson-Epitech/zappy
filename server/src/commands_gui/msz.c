@@ -5,10 +5,10 @@
 ** msz
 */
 
+#include "server.h"
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-#include "server.h"
 
 void command_msz(server_t *server, player_t *player, const char *)
 {

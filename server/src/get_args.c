@@ -162,10 +162,7 @@ int get_args(server_t *server, char *const *argv)
         if (parse_advanced_options(server, argv, i) == FAILURE)
             return FAILURE;
     }
-<<<<<<<<< Temporary merge branch 1
-=========
     server->opt->start_time = time(NULL);
->>>>>>>>> Temporary merge branch 2
     if (init_default_values(server) == FAILURE)
         return FAILURE;
     return SUCCESS;

@@ -22,7 +22,7 @@
  * and a function pointer to the handler for that command.
  */
 command_handler_t command_handlers[] = {
-    {"pbc", command_pin, 0},
+    {"pbc", command_pbc, 0},
     {"pin", command_pin, 0},
     {"msz", command_msz, 0},
     {"sgt", command_sgt, 0},
@@ -30,7 +30,6 @@ command_handler_t command_handlers[] = {
     {"tna", command_tna, 0},
     {"bct", command_bct, 0},
     {"mct", command_bct_all, 0},
-    {"pnw", command_pnw, 0},
     {"plv", command_plv, 0},
     {"ppo", command_ppo, 0},
     {"pex", command_pex, 0},
@@ -44,11 +43,11 @@ command_handler_t command_handlers[] = {
  * and a function pointer to the handler for that command.
  */
 command_handler_t command_handlers_ia[] = {
-    {"Forward", command_pin, 7},
-    {"Right", command_msz, 7},
-    {"Left", command_sgt, 7},
-    {"Look", command_sst, 7},
-    {"Inventory", command_tna, 1},
+    {"Forward", command_forward, 7},
+    {"Right", command_right, 7},
+    {"Left", command_left, 7},
+    {"Look", command_look, 7},
+    {"Inventory", command_inventory, 1},
     {"Broadcast", command_broadcast, 7},
     {NULL, NULL, 0}
 };
@@ -67,8 +66,7 @@ void process_command(server_t *server, player_t *player, char *cmd)
 
     printf("Processing command: `%s`\n", cmd);
     for (int i = 0; command_handlers[i].func != NULL; ++i) {
-        if (strncmp(command_handlers[i].name, cmd,
-        strlen(command_handlers[i].name)) == 0) {
+        if (strcmp(command_handlers[i].name, cmd) == 0) {
             is_passed = true;
             params = cmd + strlen(command_handlers[i].name) + 1;
             printf("Params: `%s`\n", params);
@@ -78,7 +76,7 @@ void process_command(server_t *server, player_t *player, char *cmd)
     }
     if (!is_passed) {
         printf("Wrong command\n");
-        write(player->fd, "suc\n", strlen("suc\n"));
+        dprintf(player->fd, "suc\n");
     }
 }
 
@@ -126,8 +124,7 @@ void process_command_ia(server_t *, player_t *player, char *cmd,
 
     printf("Processing command: `%s`\n", cmd);
     for (int i = 0; command_handlers_ia[i].func != NULL; ++i) {
-        if (strncmp(command_handlers_ia[i].name, cmd,
-        strlen(command_handlers_ia[i].name)) == 0) {
+        if (strcmp(command_handlers_ia[i].name, cmd) == 0) {
             is_passed = true;
             params = cmd + strlen(command_handlers_ia[i].name) + 1;
             printf("Params: `%s`\n", params);
@@ -137,6 +134,6 @@ void process_command_ia(server_t *, player_t *player, char *cmd,
     }
     if (!is_passed) {
         printf("Wrong command\n");
-        write(player->fd, "suc\n", strlen("suc\n"));
+        dprintf(player->fd, "ko\n");
     }
 }

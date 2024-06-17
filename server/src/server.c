@@ -47,12 +47,12 @@ static void clear_client(server_t *server, int client_fd)
 static void read_client_data(server_t *server,
     int client_fd, ssize_t, char *buffer)
 {
-    printf("Received from %d: %s\n", client_fd, buffer);
-    if (server->players[client_fd].id == -2) {
+    printf("Received from %d: `%s`\n", client_fd, buffer);
+    if (server->players[client_fd].team_id == -2) {
         printf("%d\n", server->players[client_fd].id);
         process_command(server, &server->players[client_fd], buffer);
         return;
-    } else if (server->players[client_fd].id > -1) {
+    } else if (server->players[client_fd].team_id > -1) {
         process_command_ia(server, &server->players[client_fd], buffer,
             server->queue);
         handle_command_queue(server->queue, server,
@@ -69,6 +69,7 @@ static void read_client_data(server_t *server,
 static void handle_team(server_t *server, int client_fd, char *buffer)
 {
     if (strcmp("GRAPHICAL", buffer) == 0) {
+        printf("GRAPHICAL\n");
         server->players[client_fd].team_id = -2;
     }
     for (int i = 0; i < get_array_size(server->opt->names); ++i) {

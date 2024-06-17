@@ -11,7 +11,7 @@
 #include <unistd.h>
 #include "server.h"
 
-void display_tile(server_t *server, int x, int y, char *answer)
+static void display_tile(server_t *server, int x, int y, char *answer)
 {
     sprintf(answer, "bct %d %d %d %d %d %d %d %d %d\n", x, y,
         server->map.tiles[y][x].food,
