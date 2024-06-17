@@ -5,6 +5,9 @@
 ** ppo
 */
 
+#include <stdio.h>
+#include <stdlib.h>
+
 #include "server.h"
 
 void command_ppo(server_t *server, player_t *player, const char *params)
