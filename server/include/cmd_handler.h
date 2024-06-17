@@ -15,6 +15,9 @@ typedef struct command_handler_s {
 } command_handler_t;
 
 void command_pnw(server_t *, player_t *, const char *);
+void command_msz(server_t *server, player_t *player, const char *params);
+void command_sgt(server_t *server, player_t *player, const char *params);
+void command_sst(server_t *server, player_t *player, const char *params);
 void command_tna(server_t *server, player_t *player, const char *params);
 void command_plv(server_t *server, player_t *player, const char *params);
 void command_ppo(server_t *server, player_t *player, const char *params);

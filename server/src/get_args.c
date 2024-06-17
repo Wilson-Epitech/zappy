@@ -10,6 +10,7 @@
 #include <stdbool.h>
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
 #include "server.h"
 
 /**
@@ -36,17 +37,20 @@ static int parse_basic_options(server_t *server, char *const *argv, int i)
             return FAILURE;
         server->opt->port = atoi(argv[i + 1]);
         server->opt->p = 1;
+        server->opt->p = 1;
     }
     if (strcmp(argv[i], "-x") == 0) {
         if (!is_number(argv[i + 1]))
             return FAILURE;
         server->opt->map_width = atoi(argv[i + 1]);
         server->opt->x = 1;
+        server->opt->x = 1;
     }
     if (strcmp(argv[i], "-y") == 0) {
         if (!is_number(argv[i + 1]))
             return FAILURE;
         server->opt->map_height = atoi(argv[i + 1]);
+        server->opt->y = 1;
         server->opt->y = 1;
     }
     return SUCCESS;
@@ -71,9 +75,11 @@ static int get_teams_names(server_t *server, char *const *argv, int i)
         i += 1;
     }
     server->opt->names[count] = NULL;
+    server->opt->names[count] = NULL;
     return SUCCESS;
 }
 
+static int parse_advanced_options(server_t *server, char *const *argv, int i)
 static int parse_advanced_options(server_t *server, char *const *argv, int i)
 {
     if (strcmp(argv[i], "-c") == 0) {
@@ -81,11 +87,13 @@ static int parse_advanced_options(server_t *server, char *const *argv, int i)
             return FAILURE;
         server->opt->clients_number = atoi(argv[i + 1]);
         server->opt->c = 1;
+        server->opt->c = 1;
     }
     if (strcmp(argv[i], "-f") == 0) {
         if (!is_number(argv[i + 1]))
             return FAILURE;
         server->opt->freq = atoi(argv[i + 1]);
+        server->opt->f = 1;
         server->opt->f = 1;
     }
     if (strcmp(argv[i], "-n") == 0) {
@@ -154,9 +162,17 @@ int get_args(server_t *server, char *const *argv)
     server->opt->n = 0;
     server->opt->c = 0;
     server->opt->f = 0;
+    server->opt->p = 0;
+    server->opt->x = 0;
+    server->opt->y = 0;
+    server->opt->n = 0;
+    server->opt->c = 0;
+    server->opt->f = 0;
     for (int i = 0; argv[i] != NULL; i += 1) {
         if (parse_basic_options(server, argv, i) == FAILURE)
+        if (parse_basic_options(server, argv, i) == FAILURE)
             return FAILURE;
+        if (parse_advanced_options(server, argv, i) == FAILURE)
         if (parse_advanced_options(server, argv, i) == FAILURE)
             return FAILURE;
     }

@@ -16,6 +16,7 @@ typedef struct options_s {
     char **names;
     size_t clients_number;
     size_t freq;
+    int start_time;
     int p;
     int x;
     int y;
