@@ -4,15 +4,13 @@
 ** File description:
 ** tna
 */
-
+#include "server.h"
 #include <stdio.h>
 #include <string.h>
 #include <unistd.h>
 #include <stdlib.h>
 
-#include "server.h"
-
-void command_tna(server_t *server, player_t *player, const char *params)
+void command_tna(server_t *server, player_t *player, const char *)
 {
     size_t len = 0;
     char *str = NULL;
@@ -25,7 +23,7 @@ void command_tna(server_t *server, player_t *player, const char *params)
         strcpy(str, server->opt->names[i]);
         str[len] = '\n';
         str[len + 1] = '\0';
-        write(player->fd, str, strlen(str));
+        dprintf(player->fd, "tna %s", str);
         free(str);
     }
     return;

@@ -13,7 +13,7 @@
 // attention a bien renvoyer pex avec
 // l'id du player ejecter de la tile au GRAPHIC
 // et renvoyer ko ou ok au player qui execute
-void command_pex(server_t *server, player_t *player, const char *params)
+void command_pex(server_t *, player_t *, const char *)
 {
     return;
 }

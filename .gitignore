@@ -6,4 +6,5 @@ documentation/docs/html
 documentation/doxygen-custom
 test
 .vscode
+vgcore.*
 coding-style-reports.log

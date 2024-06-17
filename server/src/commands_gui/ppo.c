@@ -10,7 +10,7 @@
 
 #include "server.h"
 
-void command_ppo(server_t *server, player_t *player, const char *params)
+void command_ppo(server_t *, player_t *player, const char *params)
 {
     char **array = word_array_delim(params, " ");
     int size = get_array_size(array);

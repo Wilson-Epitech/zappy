@@ -17,7 +17,7 @@ OBJ	=	$(SRC:.cpp=.o)
 
 NAME	=	zappy_ai
 
-CXXFLAGS	=	-W -Wall -Wextra -std=c++20 -I ./include
+CXXFLAGS	=	-W -Wall -Wextra -Werror -std=c++20 -I ./include
 
 all:	$(NAME)
 
