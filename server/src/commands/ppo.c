@@ -23,5 +23,5 @@ void command_ppo(server_t *server, player_t *player, const char *params)
         return;
     }
     dprintf(player->fd, "ppo %d %d %d %d\n",
-        player->fd , player->x, player->y, player->orientation);
+        player->fd, player->x, player->y, player->orientation);
 }

@@ -12,13 +12,9 @@
 #include "server.h"
 
 
+// ADD ERROR HANDLING HERE
 static int error_handling(server_t *server, int ac, char *const *av)
 {
-    // if (ac < 12) {
-    //     printf("bad option, run ./zappy_server -help\n");
-    //     return FAILURE;
-    // }
-    // ADD ERROR HANDLING HERE
     if (get_args(server, av) == FAILURE)
         return FAILURE;
     return SUCCESS;

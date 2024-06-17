@@ -25,5 +25,5 @@ void command_plv(server_t *server, player_t *player, const char *params)
         dprintf(player->fd, "spb\n");
         return;
     }
-    dprintf(player->fd, "plv %d %d\n", player->fd , player->level);
+    dprintf(player->fd, "plv %d %d\n", player->fd, player->level);
 }
