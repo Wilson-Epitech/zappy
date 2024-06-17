@@ -21,8 +21,7 @@
  * the file descriptor of the player.
  *
 */
-void command_connect_nbr(server_t *server, player_t *player, const char *params)
+void command_connect_nbr(server_t *, player_t *, const char *)
 {
-    
     printf("connect_nbr\n");
 }

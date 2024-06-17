@@ -21,7 +21,7 @@
  * the file descriptor of the player.
  *
 */
-void command_inventory(server_t *server, player_t *player, const char *params)
+void command_inventory(server_t *, player_t *player, const char *)
 {
     dprintf(player->fd, "[food %d, linemate %d, deraumere %d, sibur %d, "
     "mendiane %d, phiras %d, thystame %d]\n", player->inventory.food,

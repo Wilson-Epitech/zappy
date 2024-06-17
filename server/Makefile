@@ -17,7 +17,7 @@ OBJ	=	$(SRC:.c=.o)
 
 NAME	=	zappy_server
 
-CFLAGS	=	-W -Wall -Wextra -I ./include -g3
+CFLAGS	=	-W -Wall -Wextra -Werror -I ./include -g3
 
 all: $(NAME)
 

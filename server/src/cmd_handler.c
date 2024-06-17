@@ -25,8 +25,8 @@ command_handler_t command_handlers[] = {
     {"sgt", command_sgt, 0},
     {"sst", command_sst, 0},
     {"tna", command_tna, 0},
-    {"bct", command_bct},
-    {"mct", command_bct_all},
+    {"bct", command_bct, 0},
+    {"mct", command_bct_all, 0},
     {NULL, NULL, 0}
 };
 
@@ -75,23 +75,30 @@ void process_command(server_t *server, player_t *player, char *cmd)
     }
 }
 
-void handle_command_queue(player_command_queue_t *queue, server_t *server, player_t *player)
+void handle_command_queue(player_command_queue_t *queue, server_t *server,
+    player_t *player)
 {
     time_t current_time = time(NULL);
+    char *params = NULL;
 
-    if (queue->count > 0 && difftime(current_time, queue->commands[queue->front].execution_time) >= 0) {
-        char *params = queue->commands[queue->front].cmd + strlen(command_handlers_ia[queue->commands->id].name) + 1;
+    if (queue->count > 0 &&
+        difftime(current_time, queue->commands[queue->front].execution_time)
+        >= 0) {
+        params = queue->commands[queue->front].cmd +
+            strlen(command_handlers_ia[queue->commands->id].name) + 1;
         command_handlers_ia[queue->commands->id].func(server, player, params);
         queue->front = (queue->front + 1) % 10;
         queue->count--;
     }
 }
 
-void enqueue_command(player_command_queue_t *queue, const char *cmd, int execution_time)
+void enqueue_command(player_command_queue_t *queue, const char *cmd,
+    int execution_time)
 {
     if (queue->count < 10) {
         queue->commands[queue->rear].cmd = strdup(cmd);
-        queue->commands[queue->rear].execution_time = time(NULL) + execution_time;
+        queue->commands[queue->rear].execution_time =
+            time(NULL) + execution_time;
         queue->rear = (queue->rear + 1) % 10;
         queue->count++;
     }
@@ -104,12 +111,11 @@ void enqueue_command(player_command_queue_t *queue, const char *cmd, int executi
  * @param player The player instance.
  * @param cmd The command to process.
  */
-void process_command_ia(server_t *server, player_t *player, char *cmd,
-player_command_queue_t *queue)
+void process_command_ia(server_t *, player_t *player, char *cmd,
+    player_command_queue_t *queue)
 {
     char *params = {0};
     bool is_passed = false;
-    command_t command;
 
     printf("Processing command: `%s`\n", cmd);
     for (int i = 0; command_handlers_ia[i].func != NULL; ++i) {
@@ -127,4 +133,3 @@ player_command_queue_t *queue)
         write(player->fd, "suc\n", strlen("suc\n"));
     }
 }
-

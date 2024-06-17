@@ -19,7 +19,7 @@
  * @param player The array of players.
  * @param params The parameters sent with the command. This should be
  */
-void command_look(server_t *server, player_t *player, const char *params)
+void command_look(server_t *, player_t *, const char *)
 {
     printf("look\n");
 }

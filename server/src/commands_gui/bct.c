@@ -30,19 +30,17 @@ void command_bct(server_t *server, player_t *player, const char *params)
     int x = atoi(strtok(tmp, " "));
     int y = atoi(strtok(tmp, " "));
 
-    (void)player;
     display_tile(server, x, y, answer);
     send(player->fd, answer, strlen(answer), 0);
     free(answer);
 }
 
-void command_bct_all(server_t *server, player_t *player, const char *params)
+void command_bct_all(server_t *server, player_t *player, const char *)
 {
     char *answer = malloc(sizeof(char) * 222);
 
-    (void)params;
-    for (int i = 0; i < server->map.height; i++) {
-        for (int j = 0; j < server->map.width; j++) {
+    for (size_t i = 0; i < server->map.height; i++) {
+        for (size_t j = 0; j < server->map.width; j++) {
             display_tile(server, j, i, answer);
             send(player->fd, answer, strlen(answer), 0);
             free(answer);

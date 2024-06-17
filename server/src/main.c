@@ -12,7 +12,7 @@
 #include "server.h"
 
 
-static int error_handling(server_t *server, int ac, char *const *av)
+static int error_handling(server_t *server, char *const *av)
 {
     if (get_args(server, av) == FAILURE) {
         return FAILURE;
@@ -39,7 +39,7 @@ int main(int argc, char *const *argv)
         printf("%s", usage);
         return SUCCESS;
     }
-    if (error_handling(server, argc, argv) == FAILURE)
+    if (error_handling(server, argv) == FAILURE)
         return FAILURE;
     init_server(server, server->opt);
     init_queue(server);

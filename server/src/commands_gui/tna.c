@@ -11,7 +11,7 @@
 #include <unistd.h>
 #include <stdlib.h>
 
-void command_tna(server_t *server, player_t *player, const char *params)
+void command_tna(server_t *server, player_t *player, const char *)
 {
     size_t len = 0;
     char *str = NULL;

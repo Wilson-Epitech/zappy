@@ -12,19 +12,16 @@
 
 /**
  * @brief PLayer forward 1 tiles.
- * 
- * This function changes the player's direction to represent a 90 degree turn to the left.
- * 
- * @param server The server instance. Not used in this function but included for consistency with other command handlers.
+ * @param server The server instance.
+ * Not used in this function but included
+ * for consistency with other command handlers.
  * @param player The array of players.
- * @param params The parameters sent with the command. This should be the file descriptor of the player.
+ * @param params The parameters sent with the command.
+ * This should be the file descriptor of the player.
 */
-void command_forward(server_t *server, player_t *player, const char *params)
+
+static void move_forward(server_t *server, player_t *player)
 {
-    if (params != NULL) {
-        dprintf(player->fd, "ko\n");
-        return;
-    }
     switch (player->orientation) {
         case 0:
             player->y = (player->y - 1 + server->opt->map_height)
@@ -41,5 +38,14 @@ void command_forward(server_t *server, player_t *player, const char *params)
             % server->opt->map_width;
             break;
     }
+}
+
+void command_forward(server_t *server, player_t *player, const char *params)
+{
+    if (params != NULL) {
+        dprintf(player->fd, "ko\n");
+        return;
+    }
+    move_forward(server, player);
     dprintf(player->fd, "ok\n");
 }

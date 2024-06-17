@@ -12,9 +12,7 @@
 
 /**
  * @brief Sends a message to all GUI clients.
- * 
  * This function sends a message to all GUI clients.
- * 
  * @param server The server instance.
  * @param player The array of players.
  * @param params The parameters sent with the command. This should
