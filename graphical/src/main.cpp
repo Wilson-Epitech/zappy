@@ -99,6 +99,18 @@ int main() {
         while (window.pollEvent(event)) {
             if (event.type == sf::Event::Closed)
                 window.close();
+            else if (event.type == sf::Event::MouseMoved) {
+                sf::Vector2f worldPos = window.mapPixelToCoords(sf::Mouse::getPosition(window));
+                for (auto& row : tiles) {
+                    for (auto& tile : row) {
+                        if (tile.contains(worldPos)) {
+                            tile.setHovered(true);
+                        } else {
+                            tile.setHovered(false);
+                        }
+                    }
+                }
+            }
             else if (event.type == sf::Event::MouseWheelScrolled) {
                 if (event.mouseWheelScroll.delta > 0) {
                     view.zoom(1.0f / zoomCam);

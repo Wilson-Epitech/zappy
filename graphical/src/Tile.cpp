@@ -18,10 +18,27 @@ Tile::Tile(int x, int y, sf::Texture& texture, const sf::IntRect& textureRect) :
     sprite.setScale(squareSize / textureRect.width, squareSize / textureRect.height);
     sprite.setTexture(texture);
     sprite.setTextureRect(textureRect);
+    originalColor = sprite.getColor();
 }
 
 Tile::~Tile() {
 
+}
+
+void Tile::setHovered(bool hovered) {
+    if (hovered) {
+        sprite.setColor(sf::Color(
+            originalColor.r + 200,
+            originalColor.g + 200,
+            originalColor.b + 200,
+            originalColor.a));
+    } else {
+        sprite.setColor(originalColor);
+    }
+}
+
+bool Tile::contains(const sf::Vector2f& point) const {
+    return sprite.getGlobalBounds().contains(point);
 }
 
 void Tile::drawTile(sf::RenderWindow &window) const {

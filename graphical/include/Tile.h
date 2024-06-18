@@ -23,9 +23,14 @@ public:
     void updateAnimation();
     void updateCharacterAnimation();
 
+    void setHovered(bool hovered);
+    bool contains(const sf::Vector2f& point) const;
+
 private:
     int x;
     int y;
+    bool isHovered;
+    sf::Color originalColor;
     sf::Sprite sprite;
 
     std::unordered_map<int, int> resources;
@@ -45,6 +50,7 @@ private:
 
     void updateResourceSprites(const std::unordered_map<int, sf::Texture*>& textures);
     void updateCharacterSprites(const std::unordered_map<int, sf::Texture*>& textures);
+    void setOriginalColor();
 };
 
 #endif /* TILE_H_ */
