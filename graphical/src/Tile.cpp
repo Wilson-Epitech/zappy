@@ -31,27 +31,29 @@ void Tile::drawTile(sf::RenderWindow &window) const {
     }
 }
 
-void Tile::setResources(int food, int linemate, int deraumere, int sibur, int mendiane, int phiras, int thystame) {
-    this->food = food;
-    this->linemate = linemate;
-    this->deraumere = deraumere;
-    this->sibur = sibur;
-    this->mendiane = mendiane;
-    this->phiras = phiras;
-    this->thystame = thystame;
+void Tile::setResources(const std::unordered_map<int, int>& resources, const std::unordered_map<int, sf::Texture*>& textures) {
+    this->resources = resources;
+    updateResourceSprites(textures);
 }
 
-void Tile::addResourceSprite(sf::Texture& resourceTexture, int count) {
-    for (int i = 0; i < count; ++i) {
-        sf::Sprite resourceSprite;
-        resourceSprite.setTexture(resourceTexture);
-        resourceSprite.setScale(resourceSize / frameWidth, resourceSize / frameHeight);
-        float offsetX = static_cast<float>(std::rand() % static_cast<int>(squareSize - resourceSize));
-        float offsetY = static_cast<float>(std::rand() % static_cast<int>(squareSize / 1.5 - resourceSize));
-        resourceSprite.setPosition(x * squareSize + offsetX, y * squareSize + offsetY);
-        resourceSprite.setTextureRect(sf::IntRect(0, 0, frameWidth, frameHeight));
-        resourceSprites.push_back(resourceSprite);
-        currentFrames.push_back(0);
+void Tile::updateResourceSprites(const std::unordered_map<int, sf::Texture*>& textures) {
+    resourceSprites.clear();
+    currentFrames.clear();
+
+    for (const auto& pair : resources) {
+        int resourceType = pair.first;
+        int count = pair.second;
+        for (int i = 0; i < count; ++i) {
+            sf::Sprite resourceSprite;
+            resourceSprite.setTexture(*textures.at(resourceType));
+            resourceSprite.setScale(resourceSize / frameWidth, resourceSize / frameHeight);
+            float offsetX = static_cast<float>(std::rand() % static_cast<int>(squareSize - resourceSize));
+            float offsetY = static_cast<float>(std::rand() % static_cast<int>(squareSize / 1.5 - resourceSize));
+            resourceSprite.setPosition(x * squareSize + offsetX, y * squareSize + offsetY);
+            resourceSprite.setTextureRect(sf::IntRect(0, 0, frameWidth, frameHeight));
+            resourceSprites.push_back(resourceSprite);
+            currentFrames.push_back(0);
+        }
     }
 }
 

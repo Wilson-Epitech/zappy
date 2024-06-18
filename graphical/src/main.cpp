@@ -8,6 +8,7 @@
 #include <SFML/Graphics.hpp>
 #include "../include/Tile.h"
 #include <vector>
+#include <unordered_map>
 #include <cstdlib>
 #include <ctime>
 
@@ -43,7 +44,7 @@ int main() {
     groundTexture.loadFromFile("assets/tile.png");
 
     sf::Texture foodTexture;
-    foodTexture.loadFromFile("assets/linemate.png");
+    foodTexture.loadFromFile("assets/food.png");
     sf::Texture linemateTexture;
     linemateTexture.loadFromFile("assets/linemate.png");
     sf::Texture deraumereTexture;
@@ -57,6 +58,16 @@ int main() {
     sf::Texture thystameTexture;
     thystameTexture.loadFromFile("assets/thystame.png");
 
+    std::unordered_map<int, sf::Texture*> textures = {
+        {0, &foodTexture},
+        {1, &linemateTexture},
+        {2, &deraumereTexture},
+        {3, &siburTexture},
+        {4, &mendianeTexture},
+        {5, &phirasTexture},
+        {6, &thystameTexture}
+    };
+
     const int groundTileWidth = 32;
     const int groundTileHeight = 32;
     const int groundTileCount = 6;
@@ -67,14 +78,6 @@ int main() {
             int tileIndex = std::rand() % groundTileCount;
             sf::IntRect textureRect(tileIndex * groundTileWidth, 0, groundTileWidth, groundTileHeight);
             Tile tile(col, row, groundTexture, textureRect);
-            tile.setResources(1, 1, 1, 1, 1, 1, 1);
-            tile.addResourceSprite(foodTexture, 1);
-            tile.addResourceSprite(linemateTexture, 1);
-            tile.addResourceSprite(deraumereTexture, 1);
-            tile.addResourceSprite(siburTexture, 1);
-            tile.addResourceSprite(mendianeTexture, 1);
-            tile.addResourceSprite(phirasTexture, 1);
-            tile.addResourceSprite(thystameTexture, 1);
             rowTiles.push_back(tile);
         }
         tiles.push_back(rowTiles);
@@ -104,6 +107,15 @@ int main() {
         }
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
             view.move(moveSpeed, 0);
+        }
+
+        /* Press A to randomly change the tiles ressources (will be replaced) */
+
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
+            std::unordered_map<int, int> newResources = {{0, 1}, {1, 1}, {2, 1}, {3, 1}, {4, 1}, {5, 1}, {6, 1}};
+            for (int i = 0; i < boardWidth; i++)
+                for (int j = 0; j < boardHeight; j++)
+                    tiles[i][j].setResources(newResources, textures);
         }
 
         updateBoard(tiles);
