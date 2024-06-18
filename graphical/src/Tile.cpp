@@ -75,9 +75,17 @@ void Tile::updateCharacterSprites(const std::unordered_map<int, sf::Texture*>& t
             sf::Sprite characterSprite;
             characterSprite.setTexture(*textures.at(characterType));
             characterSprite.setScale(squareSize / 48.0f, squareSize / 32.0f);
-            sf::IntRect textureRect(0, 0, 16, 32);
-            characterSprite.setTextureRect(textureRect);
-            characterSprite.setPosition(x * squareSize + 35, y * squareSize);
+            float offsetX = static_cast<float>(std::rand() % static_cast<int>(squareSize - 40.0f));
+            float offsetY = static_cast<float>(std::rand() % static_cast<int>(squareSize / 1.5 - 48.0f));
+            characterSprite.setPosition(x * squareSize + offsetX, y * squareSize + offsetY);
+            characterSprite.setTextureRect(sf::IntRect(0, 0, 16, 32));
+            if (characterType == 10 && i == 0)
+                characterSprite.setColor(sf::Color::Blue);
+            else if (characterType == 11 && i == 0)
+                characterSprite.setColor(sf::Color::Red);
+            else if (characterType == 12 && i == 0) {
+                characterSprite.setColor(sf::Color::Green);
+            }
             characterSprites.push_back(characterSprite);
             characterFrames.push_back(0);
         }

@@ -64,7 +64,7 @@ int main() {
     sf::Texture character2Texture;
     character2Texture.loadFromFile("assets/mage.png");
     sf::Texture character3Texture;
-    character2Texture.loadFromFile("assets/mage.png");
+    character3Texture.loadFromFile("assets/mage.png");
 
     std::unordered_map<int, sf::Texture*> textures = {
         {0, &foodTexture},
@@ -76,7 +76,7 @@ int main() {
         {6, &thystameTexture},
         {10, &character1Texture},
         {11, &character2Texture},
-        {12, &character2Texture},
+        {12, &character3Texture},
     };
 
     const int groundTileWidth = 32;
@@ -132,7 +132,7 @@ int main() {
         /* Press C to add characters (will be replaced) */
 
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::C)) {
-            std::unordered_map<int, int> newCharacters = {{10, 1}, {11, 1}};
+            std::unordered_map<int, int> newCharacters = {{10, 1}, {11, 1}, {12, 1}};
             tiles[5][5].setCharacters(newCharacters, textures);
             tiles[0][3].setCharacters(newCharacters, textures);
         }
