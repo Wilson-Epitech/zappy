@@ -17,6 +17,8 @@ DOXYFILE = $(DOC_DIR)Doxyfile
 
 # ----------------------------------------------------------------------- #
 
+MAKEFLAGS += --no-print-directory
+
 all:
 	@$(CD) server && $(MAKE)
 	@$(CD) ia && $(MAKE)

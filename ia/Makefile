@@ -9,7 +9,7 @@ CC	=	g++
 
 CD	=	cd
 
-MV	=	mv
+MV 	=	mv
 
 SRC = $(shell find src -name '*.cpp')
 
@@ -19,23 +19,42 @@ NAME	=	zappy_ai
 
 CXXFLAGS	=	-W -Wall -Wextra -Werror -std=c++20 -I ./include
 
-all:	$(NAME)
+GREEN	=	\033[0;32m
+RED		=	\033[0;31m
+BLUE	=	\033[0;34m
+YELLOW	=	\033[0;35m
+CYAN	=	\033[1;36m
+RC 		= 	\033[0m
 
-$(NAME):	$(OBJ)
-	@printf "\033[33mCompiling IA...\033[0m\n"
-	@$(CC) -o $(NAME) $(OBJ) > /dev/null 2>&1
-	@$(MV) $(NAME) ../ > /dev/null 2>&1
-	@printf "\033[32mIA compiled and mooved succesfully !\033[0m\n"
+PRINTER	=	printf "$(BLUE)$(NAME) ▷ $(RC)" ; printf
+
+all: $(NAME)
+
+$(NAME): prebuild $(OBJ)
+	@ $(PRINTER) "$(YELLOW)%-40b" "Building $(NAME)"
+	@ $(CC) -o $(NAME) $(OBJ) && \
+	  (printf "$(GREEN)Done$(RC)\n") && $(MV) $(NAME) ../ || \
+	  (printf "$(RED)Fail\n")
+	@ printf "\033[32mIA compiled and mooved succesfully !\033[0m\n"
+
+prebuild:
+	@ $(PRINTER) "$(YELLOW)%b\n" "Compiling files"
+
+.cpp.o:
+	@ $(CC) -c $< -o $@ $(CXXFLAGS) && \
+	  (printf "$(CYAN) %b $(GREEN)「✔」$(RC)\n" $<) || \
+	  (printf "$(CYAN) %b $(RED)[XX] $(RC)\n" $< ; exit 1)
 
 clean:
-	@$(RM) $(OBJ) > /dev/null 2>&1
-	@printf "\033[33mCleaning object files for IA...\033[0m\n"
+	@ $(PRINTER) "$(YELLOW)%-40b" "Clean IA files"
+	@ $(RM) $(OBJ)
+	@ printf "$(GREEN)Done$(RC)\n"
 
-fclean:	clean
-	@$(CD) ../ && $(RM) $(NAME) > /dev/null 2>&1
-	@printf "\033[33mCleaning IA binary...\033[0m\n"
+fclean: clean
+	@ $(PRINTER) "$(YELLOW)%-40b" "Clean $(BINARY)$(RC)"
+	@ $(CD) ../ && $(RM) $(NAME)
+	@ printf "$(GREEN)Done$(RC)\n"
 
-
-re:	fclean all
+re: fclean all
 
 .PHONY: all clean fclean re

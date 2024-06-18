@@ -9,7 +9,7 @@ CC	=	gcc
 
 CD	=	cd
 
-MV	=	mv
+MV 	=	mv
 
 SRC = $(shell find src -name '*.c')
 
@@ -17,23 +17,43 @@ OBJ	=	$(SRC:.c=.o)
 
 NAME	=	zappy_server
 
-CFLAGS	=	-W -Wall -Wextra -Werror -I ./include -g3
+CFLAGS	=	-W -Wall -Wextra -Werror -I ./include
+
+GREEN	=	\033[0;32m
+RED		=	\033[0;31m
+BLUE	=	\033[0;34m
+YELLOW	=	\033[0;35m
+CYAN	=	\033[1;36m
+RC 		= 	\033[0m
+
+PRINTER	=	printf "$(BLUE)$(NAME) ▷ $(RC)" ; printf
 
 all: $(NAME)
 
-$(NAME): $(OBJ)
-	@printf "\033[33mCompiling Server...\033[0m\n"
-	@$(CC) -o $(NAME) $(OBJ)
-	@$(MV) $(NAME) ../
-	@printf "\033[32mServer compiled and mooved succesfully !\033[0m\n"
+$(NAME): prebuild $(OBJ)
+	@ $(PRINTER) "$(YELLOW)%-40b" "Building $(NAME)"
+	@ $(CC) -o $(NAME) $(OBJ) && \
+	  (printf "$(GREEN)Done$(RC)\n") && $(MV) $(NAME) ../ || \
+	  (printf "$(RED)Fail\n")
+	@ printf "\033[32mServer compiled and mooved succesfully !\033[0m\n"
+
+prebuild:
+	@ $(PRINTER) "$(YELLOW)%b\n" "Compiling files"
+
+.c.o:
+	@ $(CC) -c $< -o $@ $(CFLAGS) && \
+	  (printf "$(CYAN) %b $(GREEN)「✔」$(RC)\n" $<) || \
+	  (printf "$(CYAN) %b $(RED)[XX] $(RC)\n" $< ; exit 1)
 
 clean:
-	@printf "\033[33mCleaning object files for server...\033[0m\n"
-	@$(RM) $(OBJ)
+	@ $(PRINTER) "$(YELLOW)%-40b" "Clean server files"
+	@ $(RM) $(OBJ)
+	@ printf "$(GREEN)Done$(RC)\n"
 
 fclean: clean
-	@printf "\033[33mCleaning server binary...\033[0m\n"
-	@$(CD) ../ && $(RM) $(NAME)
+	@ $(PRINTER) "$(YELLOW)%-40b" "Clean $(BINARY)$(RC)"
+	@ $(CD) ../ && $(RM) $(NAME)
+	@ printf "$(GREEN)Done$(RC)\n"
 
 re: fclean all
 
