@@ -36,6 +36,7 @@ $(BINARY): prebuild $(OBJS)
 	@ $(CXX) -o $(BINARY) $(OBJS) $(LDFLAGS) && \
 	  (printf "$(GREEN)Done$(RC)\n") && mv $(BINARY) ../ || \
 	  (printf "$(RED)Fail\n")
+	@ printf "\033[32mGRAPHICAL compiled and mooved succesfully !\033[0m\n"
 
 prebuild:
 	@ $(PRINTER) "$(YELLOW)%b\n" "Compiling files"
