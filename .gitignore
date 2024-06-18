@@ -8,3 +8,4 @@ test
 .vscode
 vgcore.*
 coding-style-reports.log
+server_source
