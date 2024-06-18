@@ -79,5 +79,21 @@ void init_server(server_t *server, options_t *opt)
     FD_ZERO(&server->read_fd);
     FD_ZERO(&server->write_fd);
     FD_SET(server->fd, &server->read_fd);
+    init_map(server);
     printf("Server initialized on port %d\n", server->port);
+}
+
+void init_queue(server_t *server)
+{
+    player_command_queue_t *queue = malloc(sizeof(player_command_queue_t));
+
+    for (int i = 0; i < 10; ++i) {
+        queue->commands[i].cmd = NULL;
+        queue->commands[i].execution_time = 0;
+        queue->commands[i].id = 0;
+    }
+    queue->front = 0;
+    queue->rear = 0;
+    queue->count = 0;
+    server->queue = queue;
 }

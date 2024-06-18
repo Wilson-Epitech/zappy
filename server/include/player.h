@@ -13,6 +13,9 @@
 
 typedef struct player_s {
     int fd;
+    int id;
+    int team_id;
+    char *team_name;
     int x;
     int y;
     int level;

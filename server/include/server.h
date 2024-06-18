@@ -39,7 +39,11 @@ typedef struct server_s {
     team_t teams[MAX_TEAMS];
     map_t map;
     options_t *opt;
+    player_command_queue_t *queue;
 } server_t;
+
+//--------lib -------------------------------//
+int get_array_size(char **array);
 
 //--------main.c -------------------------------//
 int get_args(server_t *server, char *const *argv);
@@ -50,6 +54,21 @@ void run_server(server_t *server);
 void accept_client(server_t *server);
 void handle_client(server_t *server, int client_fd);
 void process_command(server_t *server, player_t *player, char *cmd);
+void process_command_ia(server_t *server, player_t *player, char *cmd,
+    player_command_queue_t *queue);
 void cleanup_server(server_t *server);
+void init_inventory(player_t *player, int fd);
+void init_player(player_t *player, int fd);
+void init_map(server_t *server);
+void command_pnw(server_t *server, int client_fd);
+void handle_command_queue(player_command_queue_t *queue, server_t *server,
+    player_t *player);
+void init_queue(server_t *server);
+
+//---------Lib ------------------------------------------//
+char **word_array_delim(char const *str, char *separators);
+int get_array_size(char **array);
+
+
 
 #endif /* !SERVER_H_ */
