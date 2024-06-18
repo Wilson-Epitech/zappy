@@ -29,6 +29,7 @@ void updateBoard(std::vector<std::vector<Tile>>& tiles) {
     for (auto& row : tiles) {
         for (auto& tile : row) {
             tile.updateAnimation();
+            tile.updateCharacterAnimation();
         }
     }
 }
@@ -58,6 +59,13 @@ int main() {
     sf::Texture thystameTexture;
     thystameTexture.loadFromFile("assets/thystame.png");
 
+    sf::Texture character1Texture;
+    character1Texture.loadFromFile("assets/mage.png");
+    sf::Texture character2Texture;
+    character2Texture.loadFromFile("assets/mage.png");
+    sf::Texture character3Texture;
+    character2Texture.loadFromFile("assets/mage.png");
+
     std::unordered_map<int, sf::Texture*> textures = {
         {0, &foodTexture},
         {1, &linemateTexture},
@@ -65,7 +73,10 @@ int main() {
         {3, &siburTexture},
         {4, &mendianeTexture},
         {5, &phirasTexture},
-        {6, &thystameTexture}
+        {6, &thystameTexture},
+        {10, &character1Texture},
+        {11, &character2Texture},
+        {12, &character2Texture},
     };
 
     const int groundTileWidth = 32;
@@ -116,6 +127,14 @@ int main() {
             for (int i = 0; i < boardWidth; i++)
                 for (int j = 0; j < boardHeight; j++)
                     tiles[i][j].setResources(newResources, textures);
+        }
+
+        /* Press C to add characters (will be replaced) */
+
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::C)) {
+            std::unordered_map<int, int> newCharacters = {{10, 1}, {11, 1}};
+            tiles[5][5].setCharacters(newCharacters, textures);
+            tiles[0][3].setCharacters(newCharacters, textures);
         }
 
         updateBoard(tiles);

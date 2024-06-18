@@ -29,11 +29,19 @@ void Tile::drawTile(sf::RenderWindow &window) const {
     for (const auto& resourceSprite : resourceSprites) {
         window.draw(resourceSprite);
     }
+    for (const auto& characterSprite : characterSprites) {
+        window.draw(characterSprite);
+    }
 }
 
 void Tile::setResources(const std::unordered_map<int, int>& resources, const std::unordered_map<int, sf::Texture*>& textures) {
     this->resources = resources;
     updateResourceSprites(textures);
+}
+
+void Tile::setCharacters(const std::unordered_map<int, int>& characters, const std::unordered_map<int, sf::Texture*>& textures) {
+    this->characters = characters;
+    updateCharacterSprites(textures);
 }
 
 void Tile::updateResourceSprites(const std::unordered_map<int, sf::Texture*>& textures) {
@@ -57,6 +65,25 @@ void Tile::updateResourceSprites(const std::unordered_map<int, sf::Texture*>& te
     }
 }
 
+void Tile::updateCharacterSprites(const std::unordered_map<int, sf::Texture*>& textures) {
+    characterSprites.clear();
+
+    for (const auto& pair : characters) {
+        int characterType = pair.first;
+        int count = pair.second;
+        for (int i = 0; i < count; ++i) {
+            sf::Sprite characterSprite;
+            characterSprite.setTexture(*textures.at(characterType));
+            characterSprite.setScale(squareSize / 48.0f, squareSize / 32.0f);
+            sf::IntRect textureRect(0, 0, 16, 32);
+            characterSprite.setTextureRect(textureRect);
+            characterSprite.setPosition(x * squareSize + 35, y * squareSize);
+            characterSprites.push_back(characterSprite);
+            characterFrames.push_back(0);
+        }
+    }
+}
+
 void Tile::updateAnimation() {
     if (animationClock.getElapsedTime().asSeconds() > animationSpeed) {
         for (size_t i = 0; i < resourceSprites.size(); ++i) {
@@ -64,5 +91,15 @@ void Tile::updateAnimation() {
             resourceSprites[i].setTextureRect(sf::IntRect(currentFrames[i] * frameWidth, 0, frameWidth, frameHeight));
         }
         animationClock.restart();
+    }
+}
+
+void Tile::updateCharacterAnimation() {
+    if (characterClock.getElapsedTime().asSeconds() > animationSpeed) {
+        for (size_t i = 0; i < characterSprites.size(); ++i) {
+            characterFrames[i] = (characterFrames[i] + 1) % 3;
+            characterSprites[i].setTextureRect(sf::IntRect(characterFrames[i] * 16, 0, 16, 32));
+        }
+        characterClock.restart();
     }
 }
