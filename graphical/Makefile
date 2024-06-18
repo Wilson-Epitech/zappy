@@ -24,21 +24,22 @@ CXXFLAGS	+=	-I ./include
 
 LDFLAGS += -lsfml-graphics -lsfml-window -lsfml-system
 
-PRINTER	=	printf "$(BLUE)$(PROJECT) ▷ " ; printf
+PRINTER	=	printf "$(BLUE)$(PROJECT) ▷ $(RC)" ; printf
 
 GREEN	=	\033[0;32m
 RED		=	\033[0;31m
 BLUE	=	\033[0;34m
 YELLOW	=	\033[0;35m
 CYAN	=	\033[1;36m
+RC 		= 	\033[0m
 
 all: $(BINARY)
 
 $(BINARY): prebuild $(OBJS)
 	@ $(PRINTER) "$(YELLOW)%-40b" "Building $(PROJECT)"
 	@ $(CXX) -o $(BINARY) $(OBJS) $(LDFLAGS) && \
-	  (printf "$(GREEN)Done\n" ; exit 0) || \
-	  (printf "$(RED)Fail\n" ; exit 1)
+	  (printf "$(GREEN)Done$(RC)\n") && mv $(BINARY) ../ || \
+	  (printf "$(RED)Fail\n")
 
 prebuild:
 	@ $(PRINTER) "$(YELLOW)%b\n" "Compiling files"
@@ -46,18 +47,18 @@ prebuild:
 clean:
 	@ $(PRINTER) "$(YELLOW)%-40b" "Clean files"
 	@ rm -f $(OBJS)
-	@ printf "$(GREEN)Done\n"
+	@ printf "$(GREEN)Done$(RC)\n"
 
 fclean: clean
-	@ $(PRINTER) "$(YELLOW)%-40b" "Clean $(BINARY)"
-	@ rm -f $(BINARY)
-	@ printf "$(GREEN)Done\n"
+	@ $(PRINTER) "$(YELLOW)%-40b" "Clean $(BINARY)$(RC)"
+	@ rm -f ../$(BINARY)
+	@ printf "$(GREEN)Done$(RC)\n"
 
 re: fclean all
 
 .cpp.o:
 	@ $(CXX) -c $< -o $@ $(CFLAGS) && \
-	  (printf "$(CYAN) %b $(GREEN)「✔」\n" $<) || \
-	  (printf "$(CYAN) %b $(RED)[XX]\n" $< ; exit 1)
+	  (printf "$(CYAN) %b $(GREEN)「✔」$(RC)\n" $<) || \
+	  (printf "$(CYAN) %b $(RED)[XX] $(RC)\n" $< ; exit 1)
 
 .PHONY: all $(BINARY) prebuild clean fclean re .cpp.o
