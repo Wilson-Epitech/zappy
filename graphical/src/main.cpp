@@ -34,6 +34,24 @@ void updateBoard(std::vector<std::vector<Tile>>& tiles) {
     }
 }
 
+void handleMouseClick(sf::RenderWindow& window, std::vector<std::vector<Tile>>& tiles, const sf::Vector2i& mousePos) {
+    for (auto& row : tiles) {
+        for (auto& tile : row) {
+            if (tile.contains(window.mapPixelToCoords(mousePos))) {
+                for (auto& otherRow : tiles) {
+                    for (auto& otherTile : otherRow) {
+                        if (&otherTile != &tile) {
+                            otherTile.setSelected(false);
+                        }
+                    }
+                }
+                tile.setSelected(true);
+                return;
+            }
+        }
+    }
+}
+
 int main() {
     sf::RenderWindow window(sf::VideoMode(1920, 1080), "ZAPPY");
     std::srand(static_cast<unsigned>(std::time(0)));
@@ -99,6 +117,13 @@ int main() {
         while (window.pollEvent(event)) {
             if (event.type == sf::Event::Closed)
                 window.close();
+            else if (event.type == sf::Event::MouseWheelScrolled) {
+                if (event.mouseWheelScroll.delta > 0) {
+                    view.zoom(1.0f / zoomCam);
+                } else if (event.mouseWheelScroll.delta < 0) {
+                    view.zoom(zoomCam);
+                }
+            }
             else if (event.type == sf::Event::MouseMoved) {
                 sf::Vector2f worldPos = window.mapPixelToCoords(sf::Mouse::getPosition(window));
                 for (auto& row : tiles) {
@@ -111,12 +136,10 @@ int main() {
                     }
                 }
             }
-            else if (event.type == sf::Event::MouseWheelScrolled) {
-                if (event.mouseWheelScroll.delta > 0) {
-                    view.zoom(1.0f / zoomCam);
-                } else if (event.mouseWheelScroll.delta < 0) {
-                    view.zoom(zoomCam);
-                }
+            else if (event.type = sf::Event::MouseButtonPressed){
+                if (event.mouseButton.button == sf::Mouse::Left) {
+                        handleMouseClick(window, tiles, sf::Mouse::getPosition(window));
+                    }
             }
         }
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Z)) {

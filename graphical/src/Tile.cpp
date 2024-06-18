@@ -25,6 +25,19 @@ Tile::~Tile() {
 
 }
 
+void Tile::setSelected(bool selected) {
+    this->selected = selected;
+    if (selected) {
+        sprite.setColor(sf::Color(
+        originalColor.r + 200,
+        originalColor.g + 200,
+        originalColor.b + 200,
+        originalColor.a));
+    } else {
+        sprite.setColor(originalColor);
+    }
+}
+
 void Tile::setHovered(bool hovered) {
     if (hovered) {
         sprite.setColor(sf::Color(
@@ -32,7 +45,7 @@ void Tile::setHovered(bool hovered) {
             originalColor.g + 200,
             originalColor.b + 200,
             originalColor.a));
-    } else {
+    } else if (!this->selected){
         sprite.setColor(originalColor);
     }
 }

@@ -25,11 +25,14 @@ public:
 
     void setHovered(bool hovered);
     bool contains(const sf::Vector2f& point) const;
+    void setSelected(bool selected);
+    bool isSelected() const;
 
 private:
     int x;
     int y;
     bool isHovered;
+    bool selected;
     sf::Color originalColor;
     sf::Sprite sprite;
 
