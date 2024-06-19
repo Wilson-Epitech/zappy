@@ -1,10 +1,3 @@
-/*
-** ZAPPY PROJECT, 2024
-** delivery
-** File description:
-** main
-*/
-
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
 #include "../include/Tile.h"
@@ -18,6 +11,16 @@ const int boardWidth = 10;
 const int boardHeight = 10;
 const float moveSpeed = 10.0f;
 const float zoomCam = 1.1f;
+
+void moveParallax(sf::Sprite& layer, float moveSpeed, sf::Vector2f direction) {
+    layer.move(direction * moveSpeed);
+    if (layer.getPosition().x < -layer.getGlobalBounds().width) {
+        layer.setPosition(layer.getPosition().x + layer.getGlobalBounds().width * 2, layer.getPosition().y);
+    }
+    if (layer.getPosition().x > layer.getGlobalBounds().width) {
+        layer.setPosition(layer.getPosition().x - layer.getGlobalBounds().width * 2, layer.getPosition().y);
+    }
+}
 
 void drawBoard(sf::RenderWindow& window, const std::vector<std::vector<Tile>>& tiles) {
     for (const auto& row : tiles) {
@@ -81,6 +84,29 @@ int main() {
     window.setFramerateLimit(30);
     sf::View view = window.getDefaultView();
     std::vector<std::vector<Tile>> tiles;
+
+    sf::Texture parallax1;
+    parallax1.loadFromFile("assets/parallax1.png");
+    sf::Texture parallax2;
+    parallax2.loadFromFile("assets/parallax2.png");
+    sf::Texture parallax3;
+    parallax3.loadFromFile("assets/parallax3.png");
+    sf::Texture parallax4;
+    parallax4.loadFromFile("assets/parallax4.png");
+
+    sf::Sprite backgroundLayer1(parallax1);
+    sf::Sprite backgroundLayer2(parallax2);
+    sf::Sprite backgroundLayer3(parallax3);
+    sf::Sprite backgroundLayer4(parallax4);
+
+    backgroundLayer1.setScale(10.0f, 10.0f);
+    backgroundLayer2.setScale(10.0f, 10.0f);
+    backgroundLayer3.setScale(10.0f, 10.0f);
+    backgroundLayer4.setScale(10.0f, 10.0f);
+    backgroundLayer1.setPosition(-1920, -1080);
+    backgroundLayer2.setPosition(-1920, -1080);
+    backgroundLayer3.setPosition(-1920, -1080);
+    backgroundLayer4.setPosition(-1920, -1080);
 
     sf::Texture groundTexture;
     groundTexture.loadFromFile("assets/tile.png");
@@ -181,15 +207,31 @@ int main() {
         }
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Z)) {
             view.move(0, -moveSpeed);
+            moveParallax(backgroundLayer1, 0.1f, sf::Vector2f(0, -moveSpeed));
+            moveParallax(backgroundLayer2, 0.2f, sf::Vector2f(0, -moveSpeed));
+            moveParallax(backgroundLayer3, 0.3f, sf::Vector2f(0, -moveSpeed));
+            moveParallax(backgroundLayer4, 0.4f, sf::Vector2f(0, -moveSpeed));
         }
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
             view.move(0, moveSpeed);
+            moveParallax(backgroundLayer1, 0.1f, sf::Vector2f(0, moveSpeed));
+            moveParallax(backgroundLayer2, 0.2f, sf::Vector2f(0, moveSpeed));
+            moveParallax(backgroundLayer3, 0.3f, sf::Vector2f(0, moveSpeed));
+            moveParallax(backgroundLayer4, 0.4f, sf::Vector2f(0, moveSpeed));
         }
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q)) {
             view.move(-moveSpeed, 0);
+            moveParallax(backgroundLayer1, 0.1f, sf::Vector2f(-moveSpeed, 0));
+            moveParallax(backgroundLayer2, 0.2f, sf::Vector2f(-moveSpeed, 0));
+            moveParallax(backgroundLayer3, 0.3f, sf::Vector2f(-moveSpeed, 0));
+            moveParallax(backgroundLayer4, 0.4f, sf::Vector2f(-moveSpeed, 0));
         }
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
             view.move(moveSpeed, 0);
+            moveParallax(backgroundLayer1, 0.1f, sf::Vector2f(moveSpeed, 0));
+            moveParallax(backgroundLayer2, 0.2f, sf::Vector2f(moveSpeed, 0));
+            moveParallax(backgroundLayer3, 0.3f, sf::Vector2f(moveSpeed, 0));
+            moveParallax(backgroundLayer4, 0.4f, sf::Vector2f(moveSpeed, 0));
         }
 
         /* Press A to randomly change the tiles ressources (will be replaced) */
@@ -212,6 +254,12 @@ int main() {
         updateBoard(tiles);
         window.clear();
         window.setView(view);
+
+        window.draw(backgroundLayer1);
+        window.draw(backgroundLayer2);
+        window.draw(backgroundLayer3);
+        window.draw(backgroundLayer4);
+
         drawBoard(window, tiles);
         window.setView(window.getDefaultView());
         if (tileSelected) {
