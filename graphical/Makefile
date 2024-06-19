@@ -18,7 +18,7 @@ SRCS	=	$(shell find ./ -name '*.cpp')
 CFLAGS	+=	-Wall -Wextra -Werror
 CPPFLAGS	+=	-I ./include -std=c++17
 
-LDFLAGS += -lsfml-graphics -lsfml-window -lsfml-system
+LDFLAGS += -lsfml-graphics -lsfml-audio -lsfml-window -lsfml-system
 
 GREEN	=	\033[0;32m
 RED		=	\033[0;31m
