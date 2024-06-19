@@ -9,6 +9,14 @@
 #include <stdlib.h>
 #include <string.h>
 
+/**
+ * @brief Increment all players connected and add players by team
+ *
+ * @param server
+ * @param name
+ * @param index
+*/
+
 void handle_teams(server_t *server, char *name, int index)
 {
     server->teams[index].name =
