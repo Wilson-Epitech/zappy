@@ -28,6 +28,20 @@ public:
     void setSelected(bool selected);
     bool isSelected() const;
 
+    const std::unordered_map<int, int>& getResources() const {
+        return resources;
+    }
+
+    const std::unordered_map<int, int>& getCharacters() const {
+        return characters;
+    }
+    int getX() const {
+        return x;
+    }
+    int getY() const {
+        return y;
+    }
+
 private:
     int x;
     int y;
