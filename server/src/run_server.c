@@ -63,14 +63,13 @@ static void handle_read_fds(server_t *server, fd_set *read_fds)
 void run_server(server_t *server)
 {
     fd_set read_fds = {0};
-    //int i = 0;
 
     printf("Server running on port %d\n", server->port);
     while (1) {
-        //printf("%d\n", i++);
         read_fds = server->read_fd;
         check_sockets(server, &read_fds);
         handle_read_fds(server, &read_fds);
-        //printf("%d\n", i++);
+        handle_command_queue(server->queue, server, &server->players
+            [server->queue->commands[server->queue->front].client_fd]);
     }
 }

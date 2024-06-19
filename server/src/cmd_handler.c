@@ -87,8 +87,6 @@ void handle_command_queue(player_command_queue_t *queue, server_t *server,
     time_t current_time = time(NULL);
     char *params = NULL;
 
-    printf("Queue count: %d\n", queue->count);
-    printf("Front: %d\n", queue->front);
     if (queue->count > 0 &&
         difftime(current_time, queue->commands[queue->front].execution_time)
         >= 0) {
@@ -101,12 +99,13 @@ void handle_command_queue(player_command_queue_t *queue, server_t *server,
 }
 
 static void enqueue_command(player_command_queue_t *queue, const char *cmd,
-    int execution_time)
+    int execution_time, int client_fd)
 {
     if (queue->count < 10) {
         queue->commands[queue->rear].cmd = strdup(cmd);
         queue->commands[queue->rear].execution_time =
             time(NULL) + execution_time;
+        queue->commands[queue->rear].client_fd = client_fd;
         queue->rear = (queue->rear + 1) % 10;
         queue->count++;
     }
@@ -131,7 +130,9 @@ void process_command_ia(server_t *, player_t *player, char *cmd,
             is_passed = true;
             params = cmd + strlen(command_handlers_ia[i].name) + 1;
             printf("Params: `%s`\n", params);
-            enqueue_command(queue, cmd, command_handlers_ia[i].time);
+            queue->commands->id = i;
+            enqueue_command(queue, cmd, command_handlers_ia[i].time,
+                player->fd);
             break;
         }
     }
