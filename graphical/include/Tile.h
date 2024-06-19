@@ -9,6 +9,7 @@
 #define TILE_H_
 
 #include <SFML/Graphics.hpp>
+#include <unordered_map>
 #include <vector>
 
 class Tile {
@@ -17,28 +18,56 @@ public:
     ~Tile();
 
     void drawTile(sf::RenderWindow &window) const;
-    void setResources(int food, int linemate, int deraumere, int sibur, int mendiane, int phiras, int thystame);
-    void addResourceSprite(sf::Texture& resourceTexture, int count);
+    void setResources(const std::unordered_map<int, int>& resources, const std::unordered_map<int, sf::Texture*>& textures);
+    void setCharacters(const std::unordered_map<int, int>& characters, const std::unordered_map<int, sf::Texture*>& textures);
     void updateAnimation();
+    void updateCharacterAnimation();
+
+    void setHovered(bool hovered);
+    bool contains(const sf::Vector2f& point) const;
+    void setSelected(bool selected);
+    bool isSelected() const;
+
+    const std::unordered_map<int, int>& getResources() const {
+        return resources;
+    }
+
+    const std::unordered_map<int, int>& getCharacters() const {
+        return characters;
+    }
+    int getX() const {
+        return x;
+    }
+    int getY() const {
+        return y;
+    }
 
 private:
+    int x;
+    int y;
+    bool isHovered;
+    bool selected;
+    sf::Color originalColor;
     sf::Sprite sprite;
-    int x, y;
-    int food;
-    int linemate;
-    int deraumere;
-    int sibur;
-    int mendiane;
-    int phiras;
-    int thystame;
+
+    std::unordered_map<int, int> resources;
     std::vector<sf::Sprite> resourceSprites;
 
-    std::vector<int> currentFrames;
-    static const int frameCount = 4;
-    static const int frameWidth = 16;
-    static const int frameHeight = 16;
+    std::unordered_map<int, int> characters;
+    std::vector<sf::Sprite> characterSprites;
+
     static const float animationSpeed;
     sf::Clock animationClock;
+    sf::Clock characterClock;
+    const float frameWidth = 16;
+    const float frameHeight = 16;
+    const int frameCount = 4;
+    std::vector<int> currentFrames;
+    std::vector<int> characterFrames;
+
+    void updateResourceSprites(const std::unordered_map<int, sf::Texture*>& textures);
+    void updateCharacterSprites(const std::unordered_map<int, sf::Texture*>& textures);
+    void setOriginalColor();
 };
 
 #endif /* TILE_H_ */
