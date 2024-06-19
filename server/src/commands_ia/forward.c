@@ -42,7 +42,7 @@ static void move_forward(server_t *server, player_t *player)
 
 void command_forward(server_t *server, player_t *player, const char *params)
 {
-    if (params != NULL) {
+    if (strcmp(params, "\0") == 1) {
         dprintf(player->fd, "ko\n");
         return;
     }

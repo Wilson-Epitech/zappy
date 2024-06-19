@@ -33,6 +33,7 @@ typedef struct server_s {
     int port;
     int fd;
     struct sockaddr_in addr;
+    struct timeval tv;
     fd_set read_fd;
     fd_set write_fd;
     player_t players[MAX_CLIENTS];

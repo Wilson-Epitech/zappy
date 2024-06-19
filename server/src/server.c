@@ -55,8 +55,7 @@ static void read_client_data(server_t *server,
     } else if (server->players[client_fd].team_id > -1) {
         process_command_ia(server, &server->players[client_fd], buffer,
             server->queue);
-        handle_command_queue(server->queue, server,
-            &server->players[client_fd]);
+        handle_command_queue(server->queue, server, &server->players[client_fd]);
     }
 }
 
