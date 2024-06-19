@@ -63,11 +63,14 @@ command_handler_t command_handlers_ia[] = {
 void process_command(server_t *server, player_t *player, char *cmd)
 {
     char *params = {0};
+    char **array = word_array_delim(cmd, " ");
     bool is_passed = false;
 
-    printf("Processing command: `%s`\n", cmd);
+    if (array == NULL)
+        return;
+    printf("Processing command: `%s`\n", array[0]);
     for (int i = 0; command_handlers[i].func != NULL; ++i) {
-        if (strcmp(command_handlers[i].name, cmd) == 0) {
+        if (strcmp(command_handlers[i].name, array[0]) == 0) {
             is_passed = true;
             params = cmd + strlen(command_handlers[i].name) + 1;
             printf("Params: `%s`\n", params);

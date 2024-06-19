@@ -25,7 +25,7 @@ void command_plv(server_t *server, player_t *player, const char *params);
 void command_pin(server_t *, player_t *player, const char *params);
 void command_pex(server_t *server, player_t *player, const char *params);
 void command_pbc(server_t *server, player_t *player, const char *params);
-void command_bct_all(server_t *server, player_t *player, const char *);
+void command_bct_all(server_t *server, player_t *player, const char *params);
 void command_bct(server_t *server, player_t *player, const char *params);
 
 /* Commands Ia */
