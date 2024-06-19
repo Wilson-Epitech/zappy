@@ -68,12 +68,12 @@ static void read_client_data(server_t *server,
 */
 static void handle_team(server_t *server, int client_fd, char *buffer)
 {
-    if (strcmp("GRAPHICAL", buffer) == 0) {
-        printf("GRAPHICAL\n");
+    if (strcmp("GRAPHIC", buffer) == 0)
         server->players[client_fd].team_id = -2;
-    }
     for (int i = 0; i < get_array_size(server->opt->names); ++i) {
-        if (strcmp(server->opt->names[i], buffer) == 0) {
+        if (strcmp(server->opt->names[i], buffer) == 0
+        && server->teams[i].player_count + 1 <= server->opt->clients_number) {
+            handle_teams(server, server->opt->names[i], i);
             server->players[client_fd].team_id = i;
             server->players[client_fd].team_name =
                 malloc(sizeof(char) * (strlen(server->opt->names[i]) + 1));

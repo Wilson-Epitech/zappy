@@ -49,6 +49,7 @@ command_handler_t command_handlers_ia[] = {
     {"Look", command_look, 7},
     {"Inventory", command_inventory, 1},
     {"Broadcast", command_broadcast, 7},
+    {"Connect_nbr", command_connect_nbr, 0},
     {NULL, NULL, 0}
 };
 
