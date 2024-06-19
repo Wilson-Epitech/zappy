@@ -9,6 +9,7 @@
     #define SERVER_H_
     #include <sys/select.h>
     #include <netinet/in.h>
+    #include <stdbool.h>
     #include "player.h"
     #include "team.h"
     #include "map.h"
@@ -42,6 +43,7 @@ typedef struct server_s {
     map_t map;
     options_t *opt;
     player_command_queue_t *queue;
+    bool is_end;
 } server_t;
 
 //--------lib -------------------------------//

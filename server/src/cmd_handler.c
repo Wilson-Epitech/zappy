@@ -33,6 +33,7 @@ command_handler_t command_handlers[] = {
     {"plv", command_plv, 0},
     {"ppo", command_ppo, 0},
     {"pex", command_pex, 0},
+    {"seg", command_seg, 0},
     {NULL, NULL, 0}
 };
 
