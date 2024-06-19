@@ -87,6 +87,8 @@ void handle_command_queue(player_command_queue_t *queue, server_t *server,
     time_t current_time = time(NULL);
     char *params = NULL;
 
+    printf("Queue count: %d\n", queue->count);
+    printf("Front: %d\n", queue->front);
     if (queue->count > 0 &&
         difftime(current_time, queue->commands[queue->front].execution_time)
         >= 0) {
