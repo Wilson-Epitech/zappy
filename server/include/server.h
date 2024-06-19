@@ -70,6 +70,7 @@ void init_queue(server_t *server);
 /* handle_teams.c */
 
 void handle_teams(server_t *server, char *name, int index);
+void handle_disconnect(server_t *server, int client_fd);
 
 //---------Lib ------------------------------------------//
 char **word_array_delim(char const *str, char *separators);
