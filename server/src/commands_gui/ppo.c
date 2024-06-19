@@ -10,7 +10,7 @@
 
 #include "server.h"
 
-void command_ppo(server_t *, player_t *player, const char *params)
+void command_ppo(server_t *server, player_t *player, const char *params)
 {
     char **array = word_array_delim(params, " ");
     int size = get_array_size(array);
@@ -21,10 +21,19 @@ void command_ppo(server_t *, player_t *player, const char *params)
         return;
     }
     player_nb = atoi(array[0]);
-    if (player_nb != player->fd) {
+    if (player_nb == player->fd) {
+        dprintf(player->fd, "spb\n");
+        return;
+    }
+    if (player_nb > MAX_CLIENTS) {
+        dprintf(player->fd, "spb\n");
+        return;
+    }
+    if (server->players[player_nb].fd == 0) {
         dprintf(player->fd, "spb\n");
         return;
     }
     dprintf(player->fd, "ppo %d %d %d %d\n",
-        player->fd, player->x, player->y, player->orientation);
+        server->players[player_nb].fd, server->players[player_nb].x,
+        server->players[player_nb].y, server->players[player_nb].orientation);
 }
