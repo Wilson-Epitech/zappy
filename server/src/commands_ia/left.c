@@ -23,6 +23,7 @@
 */
 void command_left(server_t *, player_t *player, const char *)
 {
+    printf("left\n");
     player->orientation = (player->orientation + 3) % 4;
     dprintf(player->fd, "ok\n");
 }

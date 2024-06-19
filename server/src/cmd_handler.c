@@ -94,6 +94,8 @@ void handle_command_queue(player_command_queue_t *queue, server_t *server,
         params = queue->commands[queue->front].cmd +
             strlen(command_handlers_ia[queue->commands->id].name) + 1;
         command_handlers_ia[queue->commands->id].func(server, player, params);
+        printf("Command id: %d\n", queue->commands->id);
+        //printf("Executed command: `%s`\n", queue->commands[queue->commands->id].cmd);
         queue->front = (queue->front + 1) % 10;
         queue->count--;
     }
@@ -130,6 +132,7 @@ void process_command_ia(server_t *, player_t *player, char *cmd,
             is_passed = true;
             params = cmd + strlen(command_handlers_ia[i].name) + 1;
             printf("Params: `%s`\n", params);
+            queue->commands->id = i;
             enqueue_command(queue, cmd, command_handlers_ia[i].time);
             break;
         }
