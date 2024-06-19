@@ -39,8 +39,8 @@ void updateBoard(std::vector<std::vector<Tile>>& tiles) {
     }
 }
 
-void handleMouseClick(sf::RenderWindow& window, std::vector<std::vector<Tile>>& tiles, const sf::Vector2i& mousePos, bool& tileSelected, sf::Text& infoText, const std::unordered_map<int, sf::Texture*>& textures) {
-    for (auto& row : tiles) {
+void handleMouseClick(sf::RenderWindow &window, std::vector<std::vector<Tile>> &tiles, const sf::Vector2i &mousePos, bool &tileSelected, sf::Text &infoText, const std::unordered_map<int, sf::Texture*> &) {
+    for (auto &row : tiles) {
         for (auto& tile : row) {
             if (tile.contains(window.mapPixelToCoords(mousePos))) {
                 for (auto& otherRow : tiles) {
