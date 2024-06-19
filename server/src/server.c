@@ -66,8 +66,8 @@ static void read_client_data(server_t *server,
 */
 static void handle_team(server_t *server, int client_fd, char *buffer)
 {
-    if (strcmp("GRAPHICAL", buffer) == 0) {
-        printf("GRAPHICAL\n");
+    if (strcmp("GRAPHIC", buffer) == 0) {
+        printf("GRAPHIC\n");
         server->players[client_fd].team_id = -2;
     }
     for (int i = 0; i < get_array_size(server->opt->names); ++i) {
