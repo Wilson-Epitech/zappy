@@ -13,6 +13,7 @@ typedef struct command_s {
     char *cmd;
     int execution_time;
     int id;
+    int client_fd;
 } command_t;
 
 typedef struct player_command_queue_s {

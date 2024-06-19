@@ -25,4 +25,5 @@ void command_right(server_t *, player_t *player, const char *)
 {
     player->orientation = (player->orientation + 1) % 4;
     dprintf(player->fd, "ok\n");
+    printf("right\n");
 }

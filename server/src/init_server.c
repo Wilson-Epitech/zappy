@@ -91,6 +91,7 @@ void init_queue(server_t *server)
         queue->commands[i].cmd = NULL;
         queue->commands[i].execution_time = 0;
         queue->commands[i].id = 0;
+        queue->commands[i].client_fd = 0;
     }
     queue->front = 0;
     queue->rear = 0;

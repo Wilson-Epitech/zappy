@@ -23,6 +23,7 @@
 */
 void command_inventory(server_t *, player_t *player, const char *)
 {
+    printf("inventory\n");
     dprintf(player->fd, "[food %d, linemate %d, deraumere %d, sibur %d, "
     "mendiane %d, phiras %d, thystame %d]\n", player->inventory.food,
     player->inventory.linemate, player->inventory.deraumere,

@@ -46,6 +46,7 @@ void command_forward(server_t *server, player_t *player, const char *params)
         dprintf(player->fd, "ko\n");
         return;
     }
+    printf("forward\n");
     move_forward(server, player);
     dprintf(player->fd, "ok\n");
 }
