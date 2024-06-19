@@ -61,14 +61,14 @@ command_handler_t command_handlers_ia[] = {
 */
 void process_command(server_t *server, player_t *player, char *cmd)
 {
-    char *params = {0};
+    char *command = strtok(cmd, " ");
+    char *params = strtok(NULL, "");
     bool is_passed = false;
 
     printf("Processing command: `%s`\n", cmd);
     for (int i = 0; command_handlers[i].func != NULL; ++i) {
-        if (strcmp(command_handlers[i].name, cmd) == 0) {
+        if (strcmp(command_handlers[i].name, command) == 0) {
             is_passed = true;
-            params = cmd + strlen(command_handlers[i].name) + 1;
             printf("Params: `%s`\n", params);
             command_handlers[i].func(server, player, params);
             break;
