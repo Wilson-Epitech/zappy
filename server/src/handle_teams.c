@@ -6,6 +6,7 @@
 */
 
 #include "server.h"
+#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
@@ -16,7 +17,6 @@
  * @param name
  * @param index
 */
-
 void handle_teams(server_t *server, char *name, int index)
 {
     server->teams[index].name =
@@ -24,4 +24,23 @@ void handle_teams(server_t *server, char *name, int index)
     strcpy(server->teams[index].name, name);
     ++server->teams[index].player_count;
     ++server->players_connected;
+}
+
+/**
+ * @brief Handle player disconnect
+ *
+ * @param server
+ * @param client_fd
+ */
+void handle_disconnect(server_t *server, int client_fd)
+{
+    printf("Client disconnected: %d\n", client_fd);
+    --server->players_connected;
+    for (int i = 0; i < server->players_connected; ++i) {
+        if (strcmp(server->teams[i].name, server->players[client_fd].team_name)
+            == 0) {
+            --server->teams[i].player_count;
+            break;
+        }
+    }
 }

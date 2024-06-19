@@ -103,7 +103,7 @@ void handle_client(server_t *server, int client_fd)
     bytes_read = read(client_fd, buffer, sizeof(buffer));
     if (bytes_read <= 0) {
         if (bytes_read == 0)
-            printf("Client disconnected: %d\n", client_fd);
+            handle_disconnect(server, client_fd);
         else
             perror("read");
         clear_client(server, client_fd);
