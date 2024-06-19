@@ -11,11 +11,14 @@
 #include <string.h>
 #include "server.h"
 
-void command_sgt(server_t *server, player_t *player, const char *)
+void command_sgt(server_t *server, player_t *player, const char *params)
 {
-    char *answer = malloc(sizeof(char) * 100);
+    char *answer;
 
-    sprintf(answer, "sgt %f\n", difftime(time(NULL), server->opt->start_time));
+    if (strcmp(params, "") != 0)
+        return;
+    answer = malloc(sizeof(char) * 100);
+    sprintf(answer, "sgt %ld\n", server->opt->freq);
     send(player->fd, answer, strlen(answer), 0);
     free(answer);
 }
