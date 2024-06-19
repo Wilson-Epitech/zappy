@@ -9,6 +9,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <stdio.h>
+#include <stdbool.h>
 
 /**
  * @brief Checks the sockets for any activity.
@@ -65,7 +66,7 @@ void run_server(server_t *server)
     fd_set read_fds = {0};
 
     printf("Server running on port %d\n", server->port);
-    while (1) {
+    while (server->is_end == false) {
         read_fds = server->read_fd;
         check_sockets(server, &read_fds);
         handle_read_fds(server, &read_fds);

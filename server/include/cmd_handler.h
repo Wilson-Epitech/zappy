@@ -27,6 +27,7 @@ void command_pex(server_t *server, player_t *player, const char *params);
 void command_pbc(server_t *server, player_t *player, const char *params);
 void command_bct_all(server_t *server, player_t *player, const char *);
 void command_bct(server_t *server, player_t *player, const char *params);
+void command_seg(server_t *server, player_t *player, const char *params);
 
 /* Commands Ia */
 void command_broadcast(server_t *server, player_t *player, const char *params);
