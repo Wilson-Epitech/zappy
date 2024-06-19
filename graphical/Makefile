@@ -22,7 +22,7 @@ CXXFLAGS	+=	-O2
 CXXFLAGS	+=	-std=c++17
 CXXFLAGS	+=	-I ./include
 
-LDFLAGS += -lsfml-graphics -lsfml-window -lsfml-system
+LDFLAGS += -lsfml-graphics -lsfml-audio -lsfml-window -lsfml-system
 
 PRINTER	=	printf "$(BLUE)$(PROJECT) ▷ $(RC)" ; printf
 

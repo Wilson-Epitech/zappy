@@ -6,6 +6,7 @@
 */
 
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 #include "../include/Tile.h"
 #include <vector>
 #include <unordered_map>
@@ -99,12 +100,8 @@ int main() {
     sf::Texture thystameTexture;
     thystameTexture.loadFromFile("assets/thystame.png");
 
-    sf::Texture character1Texture;
-    character1Texture.loadFromFile("assets/mage.png");
-    sf::Texture character2Texture;
-    character2Texture.loadFromFile("assets/mage.png");
-    sf::Texture character3Texture;
-    character3Texture.loadFromFile("assets/mage.png");
+    sf::Texture mageTexture;
+    mageTexture.loadFromFile("assets/mage.png");
 
     std::unordered_map<int, sf::Texture*> textures = {
         {0, &foodTexture},
@@ -114,10 +111,18 @@ int main() {
         {4, &mendianeTexture},
         {5, &phirasTexture},
         {6, &thystameTexture},
-        {10, &character1Texture},
-        {11, &character2Texture},
-        {12, &character3Texture},
+        {10, &mageTexture},
+        {11, &mageTexture},
+        {12, &mageTexture},
     };
+
+    sf::Music music;
+    if (!music.openFromFile("assets/music.ogg")) {
+        return -1;
+    }
+    music.setLoop(true);
+    music.setVolume(10);
+    music.play();
 
     const int groundTileWidth = 32;
     const int groundTileHeight = 32;
