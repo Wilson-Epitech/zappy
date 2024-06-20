@@ -20,7 +20,6 @@ static tile_type_t get_object_type(const char *params)
         return ITEM_COUNT;
     for (int i = 0; i < ITEM_COUNT; ++i) {
         if (strcmp(params, item_names[i]) == 0) {
-            printf("found %s\n", item_names[i]);
             return (tile_type_t)i;
         }
     }
