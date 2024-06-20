@@ -49,6 +49,8 @@ command_handler_t command_handlers_ia[] = {
     {"Look", command_look, 7},
     {"Inventory", command_inventory, 1},
     {"Broadcast", command_broadcast, 7},
+    {"Eject", command_eject, 7},
+    {"Fork", command_fork, 42},
     {NULL, NULL, 0}
 };
 
@@ -119,7 +121,7 @@ static void enqueue_command(player_command_queue_t *queue, const char *cmd,
  * @param player The player instance.
  * @param cmd The command to process.
  */
-void process_command_ia(server_t *, player_t *player, char *cmd,
+void process_command_ia(server_t *server, player_t *player, char *cmd,
     player_command_queue_t *queue)
 {
     char *params = {0};
@@ -132,8 +134,8 @@ void process_command_ia(server_t *, player_t *player, char *cmd,
             params = cmd + strlen(command_handlers_ia[i].name) + 1;
             printf("Params: `%s`\n", params);
             queue->commands->id = i;
-            enqueue_command(queue, cmd, command_handlers_ia[i].time,
-                player->fd);
+            enqueue_command(queue, cmd, (command_handlers_ia[i].time /
+            server->opt->freq), player->fd);
             break;
         }
     }

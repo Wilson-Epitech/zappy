@@ -23,8 +23,6 @@
 */
 void command_left(server_t *server, player_t *player, const char *)
 {
-    printf("left\n");
     player->orientation = (player->orientation + 3) % 4;
-    printf("Player fd: %d\n", player->fd);
     dprintf(server->queue->commands[server->queue->front].client_fd, "ok\n");
 }
