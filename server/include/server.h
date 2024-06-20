@@ -65,6 +65,7 @@ void command_pnw(server_t *server, int client_fd);
 void handle_command_queue(player_command_queue_t *queue, server_t *server,
     player_t *player);
 void init_queue(server_t *server);
+void death_player(server_t *server);
 
 //---------Lib ------------------------------------------//
 char **word_array_delim(char const *str, char *separators);
