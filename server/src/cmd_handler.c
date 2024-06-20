@@ -51,6 +51,7 @@ command_handler_t command_handlers_ia[] = {
     {"Inventory", command_inventory, 1},
     {"Broadcast", command_broadcast, 7},
     {"Connect_nbr", command_connect_nbr, 0},
+    {"Take", take_object, 7},
     {NULL, NULL, 0}
 };
 
@@ -71,7 +72,8 @@ void process_command(server_t *server, player_t *player, char *cmd)
         return;
     printf("Processing command: `%s`\n", array[0]);
     for (int i = 0; command_handlers[i].func != NULL; ++i) {
-        if (strcmp(command_handlers[i].name, array[0]) == 0) {
+        if (strncmp(command_handlers[i].name, array[0],
+            strlen(command_handlers[i].name)) == 0) {
             is_passed = true;
             params = cmd + strlen(command_handlers[i].name) + 1;
             printf("Params: `%s`\n", params);
@@ -80,7 +82,6 @@ void process_command(server_t *server, player_t *player, char *cmd)
         }
     }
     if (!is_passed) {
-        printf("Wrong command\n");
         dprintf(player->fd, "suc\n");
     }
 }
@@ -121,7 +122,7 @@ static void enqueue_command(player_command_queue_t *queue, const char *cmd,
  * @param server The server instance.
  * @param player The player instance.
  * @param cmd The command to process.
- */
+*/
 void process_command_ia(server_t *, player_t *player, char *cmd,
     player_command_queue_t *queue)
 {
@@ -130,7 +131,8 @@ void process_command_ia(server_t *, player_t *player, char *cmd,
 
     printf("Processing command: `%s`\n", cmd);
     for (int i = 0; command_handlers_ia[i].func != NULL; ++i) {
-        if (strcmp(command_handlers_ia[i].name, cmd) == 0) {
+        if (strncmp(command_handlers_ia[i].name, cmd,
+            strlen(command_handlers_ia[i].name)) == 0) {
             is_passed = true;
             params = cmd + strlen(command_handlers_ia[i].name) + 1;
             printf("Params: `%s`\n", params);
