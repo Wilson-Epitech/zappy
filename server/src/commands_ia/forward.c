@@ -9,7 +9,6 @@
 #include <string.h>
 #include <stdlib.h>
 #include "server.h"
-#include "cmd_handler.h"
 
 /**
  * @brief PLayer forward 1 tiles.
@@ -22,8 +21,6 @@
 */
 static void move_forward(server_t *server, player_t *player)
 {
-    char param[12];
-
     if (player->orientation == 0) {
         player->y = (player->y - 1 + server->opt->map_height)
         % server->opt->map_height;
@@ -31,17 +28,13 @@ static void move_forward(server_t *server, player_t *player)
     if (player->orientation == 1) {
         player->y = (player->y + 1) % server->opt->map_height;
     }
-    if (player->orientation == 2)
+    if (player->orientation == 2) {
         player->x = (player->x + 1) % server->opt->map_width;
+    }
     if (player->orientation == 3) {
         player->x = (player->x - 1 + server->opt->map_width)
         % server->opt->map_width;
     }
-    for (int i = 0; i < MAX_CLIENTS; i++)
-        if (server->players[i].team_id == -2) {
-            sprintf(param, "%d", player->fd);
-            command_ppo(server, &server->players[i], param);
-        }
 }
 
 void command_forward(server_t *server, player_t *player, const char *params)
