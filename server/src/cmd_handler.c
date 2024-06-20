@@ -75,7 +75,8 @@ void process_command(server_t *server, player_t *player, char *cmd)
         return;
     printf("Processing command: `%s`\n", array[0]);
     for (int i = 0; command_handlers[i].func != NULL; ++i) {
-        if (strcmp(command_handlers[i].name, array[0]) == 0) {
+        if (command_handlers[i].name != NULL && array[0] != NULL &&
+            strcmp(command_handlers[i].name, array[0]) == 0) {
             is_passed = true;
             printf("Params: `%s`\n", params);
             command_handlers[i].func(server, player, params);
@@ -148,7 +149,8 @@ void process_command_ia(server_t *server, player_t *player, char *cmd,
 
     printf("Processing command: `%s`\n", cmd);
     for (int i = 0; command_handlers_ia[i].func != NULL; ++i) {
-        if (strcmp(command_handlers_ia[i].name, array[0]) == 0) {
+        if (command_handlers_ia[i].name && array[0] != NULL &&
+            strcmp(command_handlers_ia[i].name, array[0]) == 0) {
             is_passed = true;
             params = cmd + strlen(command_handlers_ia[i].name) + 1;
             printf("Params: `%s`\n", params);
