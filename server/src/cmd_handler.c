@@ -124,7 +124,7 @@ static void enqueue_command(player_command_queue_t *queue, const char *cmd,
  * @param player The player instance.
  * @param cmd The command to process.
 */
-void process_command_ia(server_t *, player_t *player, char *cmd,
+void process_command_ia(server_t *server, player_t *player, char *cmd,
     player_command_queue_t *queue)
 {
     char *params = {0};
