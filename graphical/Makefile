@@ -15,16 +15,10 @@ OBJS	=	$(SRCS:.cpp=.o)
 
 SRCS	=	$(shell find ./ -name '*.cpp')
 
-CXXFLAGS	+=	-Wall
-CXXFLAGS	+=	-Wextra
-CXXFLAGS	+=	-Werror
-CXXFLAGS	+=	-O2
-CXXFLAGS	+=	-std=c++17
-CXXFLAGS	+=	-I ./include
+CFLAGS	+=	-Wall -Wextra -Werror
+CPPFLAGS	+=	-I ./include -std=c++17
 
 LDFLAGS += -lsfml-graphics -lsfml-audio -lsfml-window -lsfml-system
-
-PRINTER	=	printf "$(BLUE)$(PROJECT) ▷ $(RC)" ; printf
 
 GREEN	=	\033[0;32m
 RED		=	\033[0;31m
@@ -33,6 +27,8 @@ YELLOW	=	\033[0;35m
 CYAN	=	\033[1;36m
 RC 		= 	\033[0m
 
+PRINTER	=	printf "$(BLUE)$(PROJECT) ▷ $(RC)" ; printf
+
 all: $(BINARY)
 
 $(BINARY): prebuild $(OBJS)
@@ -40,12 +36,18 @@ $(BINARY): prebuild $(OBJS)
 	@ $(CXX) -o $(BINARY) $(OBJS) $(LDFLAGS) && \
 	  (printf "$(GREEN)Done$(RC)\n") && mv $(BINARY) ../ || \
 	  (printf "$(RED)Fail\n")
+	@ printf "\033[32mGRAPHICAL compiled and mooved succesfully !\033[0m\n"
 
 prebuild:
 	@ $(PRINTER) "$(YELLOW)%b\n" "Compiling files"
 
+.cpp.o:
+	@ $(CXX) -c $< -o $@ $(CFLAGS) $(CPPFLAGS) && \
+	  (printf "$(CYAN) %b $(GREEN)「✔」$(RC)\n" $<) || \
+	  (printf "$(CYAN) %b $(RED)[XX] $(RC)\n" $< ; exit 1)
+
 clean:
-	@ $(PRINTER) "$(YELLOW)%-40b" "Clean files"
+	@ $(PRINTER) "$(YELLOW)%-40b" "Clean graphical files"
 	@ rm -f $(OBJS)
 	@ printf "$(GREEN)Done$(RC)\n"
 
@@ -55,10 +57,5 @@ fclean: clean
 	@ printf "$(GREEN)Done$(RC)\n"
 
 re: fclean all
-
-.cpp.o:
-	@ $(CXX) -c $< -o $@ $(CFLAGS) && \
-	  (printf "$(CYAN) %b $(GREEN)「✔」$(RC)\n" $<) || \
-	  (printf "$(CYAN) %b $(RED)[XX] $(RC)\n" $< ; exit 1)
 
 .PHONY: all $(BINARY) prebuild clean fclean re .cpp.o
