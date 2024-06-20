@@ -32,7 +32,7 @@ void command_ppo(server_t *server, player_t *player, const char *params)
         return;
     }
     player_nb = atoi(array[0]);
-    if (check_params(server, player, player_nb) == 84) {
+    if (check_params(server, player, player_nb) == FAILURE) {
         dprintf(player->fd, "spb\n");
         return;
     }
