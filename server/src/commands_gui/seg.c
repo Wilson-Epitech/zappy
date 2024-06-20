@@ -13,5 +13,5 @@
 
 void command_seg(server_t *server, player_t *, const char *)
 {
-     server->is_end = true;
+    server->is_end = true;
 }
