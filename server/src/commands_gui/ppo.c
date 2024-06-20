@@ -10,6 +10,17 @@
 
 #include "server.h"
 
+static int check_params(server_t *server, player_t *player, int player_nb)
+{
+    if (player_nb == player->fd)
+        return FAILURE;
+    if (player_nb > MAX_CLIENTS)
+        return FAILURE;
+    if (server->players[player_nb].fd == 0)
+        return FAILURE;
+    return SUCCESS;
+}
+
 void command_ppo(server_t *server, player_t *player, const char *params)
 {
     char **array = word_array_delim(params, " ");
@@ -21,15 +32,7 @@ void command_ppo(server_t *server, player_t *player, const char *params)
         return;
     }
     player_nb = atoi(array[0]);
-    if (player_nb == player->fd) {
-        dprintf(player->fd, "spb\n");
-        return;
-    }
-    if (player_nb > MAX_CLIENTS) {
-        dprintf(player->fd, "spb\n");
-        return;
-    }
-    if (server->players[player_nb].fd == 0) {
+    if (check_params(server, player, player_nb) == 84) {
         dprintf(player->fd, "spb\n");
         return;
     }
