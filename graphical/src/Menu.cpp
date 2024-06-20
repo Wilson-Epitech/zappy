@@ -2,7 +2,7 @@
 #include <sstream>
 
 Menu::Menu(const sf::Vector2u& windowSize) {
-     if (!font.loadFromFile("assets/font.ttf")) {
+    if (!font.loadFromFile("assets/font.ttf")) {
         throw std::runtime_error("Failed to load font.ttf");
     }
 
@@ -28,12 +28,11 @@ void Menu::updateInfoText(const Tile* selectedTile, bool tileSelected) {
         }
         oss << "Total Characters: " << totalCharacters << "\n\n";
         oss << "Resources:\n";
-        for (size_t i = 0; i < 7; ++i) {
-            if (i < resources.size()) {
-                auto it = std::next(resources.begin(), i);
-                int resourceId = it->first;
-                int quantity = it->second;
-                oss << "Resource " << resourceId << ": " << quantity << "\t\t";
+        for (const auto& pair : resources) {
+            int resourceId = pair.first;
+            int quantity = pair.second;
+            if (textureNames.find(resourceId) != textureNames.end()) {
+                oss << textureNames[resourceId] << ": " << quantity << "\t\t";
             }
         }
         infoText.setString(oss.str());

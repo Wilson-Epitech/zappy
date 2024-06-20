@@ -2,8 +2,6 @@
 #define MENU_HPP
 
 #include <SFML/Graphics.hpp>
-#include <unordered_map>
-#include <vector>
 #include "Tile.h"
 
 class Menu {
@@ -17,6 +15,16 @@ private:
     sf::Font font;
     sf::Text infoText;
     sf::RectangleShape infoRect;
+
+    std::unordered_map<int, std::string> textureNames = {
+        {0, "Food"},
+        {1, "Linemate"},
+        {2, "Deraumere"},
+        {3, "Sibur"},
+        {4, "Mendiane"},
+        {5, "Phiras"},
+        {6, "Thystame"}
+    };
 };
 
 #endif // MENU_HPP
