@@ -28,6 +28,7 @@ clean:
 	@$(CD) server && $(MAKE) clean
 	@$(CD) ia && $(MAKE) clean
 	@$(CD) graphical && $(MAKE) clean
+	@$(RM) vgcore.*
 
 fclean:
 	@$(CD) server && $(MAKE) fclean
