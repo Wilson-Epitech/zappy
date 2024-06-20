@@ -87,6 +87,13 @@ void process_command(server_t *server, player_t *player, char *cmd)
     }
 }
 
+/**
+ * @brief Handles the command queue.
+ *
+ * @param queue The queue to handle.
+ * @param server The server instance.
+ * @param player The player instance.
+*/
 void handle_command_queue(player_command_queue_t *queue, server_t *server,
     player_t *player)
 {
@@ -104,6 +111,14 @@ void handle_command_queue(player_command_queue_t *queue, server_t *server,
     }
 }
 
+/**
+ * @brief Enqueues a command in the queue.
+ *
+ * @param queue The queue to enqueue the command in.
+ * @param cmd The command to enqueue.
+ * @param execution_time The time at which the command should be executed.
+ * @param client_fd The client file descriptor.
+*/
 static void enqueue_command(player_command_queue_t *queue, const char *cmd,
     int execution_time, int client_fd)
 {

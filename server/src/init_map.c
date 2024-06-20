@@ -8,6 +8,13 @@
 #include "server.h"
 #include <stdlib.h>
 
+/**
+ * @brief Initialize the tiles of the map
+ *
+ * @param server
+ * @param i
+ * @param j
+*/
 static void init_tiles(server_t *server, int i, int j)
 {
     server->map.tiles[i][j].resources[FOOD] =
@@ -30,6 +37,11 @@ static void init_tiles(server_t *server, int i, int j)
         &server->map.tiles[i][j].egg;
 }
 
+/**
+ * @brief Initialize the map
+ *
+ * @param server
+*/
 void init_map(server_t *server)
 {
     server->map.tiles = malloc(sizeof(tile_t *) * (server->opt->map_height));
