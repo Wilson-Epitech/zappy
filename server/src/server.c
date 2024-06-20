@@ -77,7 +77,8 @@ static void handle_team(server_t *server, int client_fd, char *buffer)
                 malloc(sizeof(char) * (strlen(server->opt->names[i]) + 1));
             strcpy(server->players[client_fd].team_name,
                 server->opt->names[i]);
-            dprintf(client_fd, "%ld\n", server->opt->clients_number);
+            dprintf(client_fd, "%d\n",
+                free_slots(server, &server->players[client_fd]));
             dprintf(client_fd, "%ld %ld\n",
                 server->opt->map_height, server->opt->map_width);
             command_pnw(server, client_fd);

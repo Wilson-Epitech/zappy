@@ -79,6 +79,7 @@ void handle_disconnect(server_t *server, int client_fd);
 char **word_array_delim(char const *str, char *separators);
 int get_array_size(char **array);
 void send_graphical(server_t *server, const char *message);
+int free_slots(server_t *server, player_t *player);
 
 
 
