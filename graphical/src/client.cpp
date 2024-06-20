@@ -6,71 +6,59 @@
 */
 
 #include "../include/client.hpp"
-#include <iostream>
-#include <boost/bind/bind.hpp>
 
-using boost::asio::ip::tcp;
-
-Client::Client(const std::string& host, short port)
-    : socket_(io_service_)
+Client::Client(const std::string &host, short port)
+    : io_context_(), socket_(io_context_), endpoint_(boost::asio::ip::address::from_string(host), port)
 {
-    tcp::resolver resolver(io_service_);
-    tcp::resolver::query query(host, std::to_string(port));
-    tcp::resolver::iterator endpoint_iterator = resolver.resolve(query);
-
-    boost::asio::connect(socket_, endpoint_iterator);
-    std::cout << "Connected to " << host << ":" << port << std::endl;
+    connect();
 }
 
-void Client::start()
+Client::~Client()
 {
-    do_read();
+    stop();
+}
 
-    std::string message;
-    while (true) {
-        if (std::getline(std::cin, message)) {
-            do_write(message);
-        } else {
-            break;
+void Client::start_cli()
+{
+    try {
+        std::thread t([this]() {io_context_.run();});
+        t.detach();
+
+        while (1) {
+            receive();
+
+            std::string message;
+            std::getline(std::cin, message);
+            send(message);
         }
-    }
-
-    io_service_.run();
-}
-
-void Client::do_read()
-{
-    boost::asio::async_read_until(socket_, response_buffer_, "\n",
-        boost::bind(&Client::handle_read, this,
-        boost::asio::placeholders::error,
-        boost::asio::placeholders::bytes_transferred));
-}
-
-void Client::handle_read(const boost::system::error_code& error, std::size_t /*bytes_transferred*/)
-{
-    if (!error) {
-        std::istream is(&response_buffer_);
-        std::string response;
-        std::getline(is, response);
-        std::cout << "Server response: " << response << std::endl;
-
-        do_read();
-    } else {
-        std::cerr << "Error reading from server: " << error.message() << std::endl;
+    } catch (std::exception &e) {
+        std::cerr << "Exception in start_cli: " << e.what() << "\n";
     }
 }
 
-void Client::do_write(const std::string& message)
+void Client::connect()
 {
-    boost::asio::async_write(socket_, boost::asio::buffer(message + "\n"),
-        boost::bind(&Client::handle_write, this,
-        boost::asio::placeholders::error,
-        boost::asio::placeholders::bytes_transferred));
+    socket_.connect(endpoint_);
+    std::cout << "Connected to the server." << std::endl;
 }
 
-void Client::handle_write(const boost::system::error_code& error, std::size_t /*bytes_transferred*/)
+void Client::stop()
 {
-    if (error) {
-        std::cerr << "Error writing to server: " << error.message() << std::endl;
-    }
+    socket_.close();
+}
+
+void Client::send(const std::string &message)
+{
+    boost::asio::write(socket_, boost::asio::buffer(message + "\n"));
+}
+
+
+void Client::receive()
+{
+    boost::asio::streambuf buf;
+    boost::asio::read_until(socket_, buf, "\n");
+    std::istream is(&buf);
+    std::string message;
+    std::getline(is, message);
+    std::cout << "Server: " << message << std::endl;
 }

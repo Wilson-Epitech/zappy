@@ -14,71 +14,71 @@ const int boardHeight = 10;
 const float moveSpeed = 10.0f;
 const float zoomCam = 1.1f;
 
-void moveParallax(sf::Sprite& layer, float moveSpeed, sf::Vector2f direction) {
-    layer.move(direction * moveSpeed);
-    if (layer.getPosition().x < -layer.getGlobalBounds().width) {
-        layer.setPosition(layer.getPosition().x + layer.getGlobalBounds().width * 2, layer.getPosition().y);
-    }
-    if (layer.getPosition().x > layer.getGlobalBounds().width) {
-        layer.setPosition(layer.getPosition().x - layer.getGlobalBounds().width * 2, layer.getPosition().y);
-    }
-}
+// void moveParallax(sf::Sprite& layer, float moveSpeed, sf::Vector2f direction) {
+//     layer.move(direction * moveSpeed);
+//     if (layer.getPosition().x < -layer.getGlobalBounds().width) {
+//         layer.setPosition(layer.getPosition().x + layer.getGlobalBounds().width * 2, layer.getPosition().y);
+//     }
+//     if (layer.getPosition().x > layer.getGlobalBounds().width) {
+//         layer.setPosition(layer.getPosition().x - layer.getGlobalBounds().width * 2, layer.getPosition().y);
+//     }
+// }
 
-void drawBoard(sf::RenderWindow& window, const std::vector<std::vector<Tile>>& tiles) {
-    for (const auto& row : tiles) {
-        for (const auto& tile : row) {
-            tile.drawTile(window);
-        }
-    }
-}
+// void drawBoard(sf::RenderWindow& window, const std::vector<std::vector<Tile>>& tiles) {
+//     for (const auto& row : tiles) {
+//         for (const auto& tile : row) {
+//             tile.drawTile(window);
+//         }
+//     }
+// }
 
-void updateBoard(std::vector<std::vector<Tile>>& tiles) {
-    for (auto& row : tiles) {
-        for (auto& tile : row) {
-            tile.updateAnimation();
-            tile.updateCharacterAnimation();
-        }
-    }
-}
+// void updateBoard(std::vector<std::vector<Tile>>& tiles) {
+//     for (auto& row : tiles) {
+//         for (auto& tile : row) {
+//             tile.updateAnimation();
+//             tile.updateCharacterAnimation();
+//         }
+//     }
+// }
 
-void handleMouseClick(sf::RenderWindow& window, std::vector<std::vector<Tile>>& tiles, const sf::Vector2i& mousePos, bool& tileSelected, sf::Text& infoText, const std::unordered_map<int, sf::Texture*>& textures) {
-    for (auto& row : tiles) {
-        for (auto& tile : row) {
-            if (tile.contains(window.mapPixelToCoords(mousePos))) {
-                for (auto& otherRow : tiles) {
-                    for (auto& otherTile : otherRow) {
-                        if (&otherTile != &tile) {
-                            otherTile.setSelected(false);
-                        }
-                    }
-                }
-                tile.setSelected(true);
-                tileSelected = true;
-                std::ostringstream oss;
-                oss << "Tile Position: (" << tile.getX() << ", " << tile.getY() << ")\t\t\t";
-                const std::unordered_map<int, int>& resources = tile.getResources();
-                const std::unordered_map<int, int>& characters = tile.getCharacters();
-                int totalCharacters = 0;
-                for (const auto& pair : characters) {
-                    totalCharacters += pair.second;
-                }
-                oss << "Total Characters: " << totalCharacters << "\n\n";
-                oss << "Resources:\n";
-                for (size_t i = 0; i < 7; ++i) {
-                    if (i < resources.size()) {
-                        auto it = std::next(resources.begin(), i);
-                        int resourceId = it->first;
-                        int quantity = it->second;
-                        oss << "Resource " << resourceId << ": " << quantity << "\t\t";
-                    }
-                }
-                infoText.setString(oss.str());
-                return;
-            }
-        }
-    }
-    tileSelected = false;
-}
+// void handleMouseClick(sf::RenderWindow& window, std::vector<std::vector<Tile>>& tiles, const sf::Vector2i& mousePos, bool& tileSelected, sf::Text& infoText, const std::unordered_map<int, sf::Texture*>& textures) {
+//     for (auto& row : tiles) {
+//         for (auto& tile : row) {
+//             if (tile.contains(window.mapPixelToCoords(mousePos))) {
+//                 for (auto& otherRow : tiles) {
+//                     for (auto& otherTile : otherRow) {
+//                         if (&otherTile != &tile) {
+//                             otherTile.setSelected(false);
+//                         }
+//                     }
+//                 }
+//                 tile.setSelected(true);
+//                 tileSelected = true;
+//                 std::ostringstream oss;
+//                 oss << "Tile Position: (" << tile.getX() << ", " << tile.getY() << ")\t\t\t";
+//                 const std::unordered_map<int, int>& resources = tile.getResources();
+//                 const std::unordered_map<int, int>& characters = tile.getCharacters();
+//                 int totalCharacters = 0;
+//                 for (const auto& pair : characters) {
+//                     totalCharacters += pair.second;
+//                 }
+//                 oss << "Total Characters: " << totalCharacters << "\n\n";
+//                 oss << "Resources:\n";
+//                 for (size_t i = 0; i < 7; ++i) {
+//                     if (i < resources.size()) {
+//                         auto it = std::next(resources.begin(), i);
+//                         int resourceId = it->first;
+//                         int quantity = it->second;
+//                         oss << "Resource " << resourceId << ": " << quantity << "\t\t";
+//                     }
+//                 }
+//                 infoText.setString(oss.str());
+//                 return;
+//             }
+//         }
+//     }
+//     tileSelected = false;
+// }
 
 void print_usage(const std::string& program_name) {
     std::cerr << "USAGE: " << program_name << " -p port -h machine" << std::endl;
@@ -116,7 +116,7 @@ int main(int argc, char *const *argv)
 
     try {
         Client client(host, port);
-        client.start();
+        client.start_cli();
     } catch (std::exception &e) {
         std::cerr << "Exception: " << e.what() << "\n";
     }

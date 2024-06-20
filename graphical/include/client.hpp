@@ -5,25 +5,28 @@
 ** server
 */
 
-#include <iostream>
-#include <netinet/ip.h>
-#include <boost/asio.hpp>
 
 #pragma once
 
+#include <iostream>
+#include <boost/asio.hpp>
+#include <thread>
+
 class Client
 {
-    public:
-        Client(const std::string &host, short port);
-        void start();
+public:
+    Client(const std::string &host, short port);
+    ~Client();
 
-    private:
-        void do_read();
-        void handle_read(const boost::system::error_code &error, std::size_t bytes_transferred);
-        void do_write(const std::string& message);
-        void handle_write(const boost::system::error_code &error, std::size_t bytes_transferred);
+    void start_cli();
 
-        boost::asio::io_service io_service_;
-        boost::asio::ip::tcp::socket socket_;
-        boost::asio::streambuf response_buffer_;
+private:
+    void connect();
+    void stop();
+    void send(const std::string &message);
+    void receive();
+
+    boost::asio::io_context io_context_;
+    boost::asio::ip::tcp::socket socket_;
+    boost::asio::ip::tcp::endpoint endpoint_;
 };
