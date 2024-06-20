@@ -26,7 +26,7 @@ static tile_type_t get_item(const char *params)
     return ITEM_COUNT;
 }
 
-void set_object(server_t *server, player_t *player, const char *params)
+void command_set(server_t *server, player_t *player, const char *params)
 {
     tile_type_t object_type = get_item(params);
     int *ressources = NULL;

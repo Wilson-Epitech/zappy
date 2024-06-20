@@ -19,24 +19,21 @@
  * @param params The parameters sent with the command.
  * This should be the file descriptor of the player.
 */
-
 static void move_forward(server_t *server, player_t *player)
 {
-    switch (player->orientation) {
-        case 0:
-            player->y = (player->y - 1 + server->opt->map_height)
-            % server->opt->map_height;
-            break;
-        case 1:
-            player->y = (player->y + 1) % server->opt->map_height;
-            break;
-        case 2:
-            player->x = (player->x + 1) % server->opt->map_width;
-            break;
-        case 3:
-            player->x = (player->x - 1 + server->opt->map_width)
-            % server->opt->map_width;
-            break;
+    if (player->orientation == 0) {
+        player->y = (player->y - 1 + server->opt->map_height)
+        % server->opt->map_height;
+    }
+    if (player->orientation == 1) {
+        player->y = (player->y + 1) % server->opt->map_height;
+    }
+    if (player->orientation == 2) {
+        player->x = (player->x + 1) % server->opt->map_width;
+    }
+    if (player->orientation == 3) {
+        player->x = (player->x - 1 + server->opt->map_width)
+        % server->opt->map_width;
     }
 }
 
@@ -46,7 +43,6 @@ void command_forward(server_t *server, player_t *player, const char *params)
         dprintf(player->fd, "ko\n");
         return;
     }
-    printf("forward\n");
     move_forward(server, player);
     dprintf(player->fd, "ok\n");
 }

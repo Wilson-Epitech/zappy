@@ -51,8 +51,10 @@ command_handler_t command_handlers_ia[] = {
     {"Inventory", command_inventory, 1},
     {"Broadcast", command_broadcast, 7},
     {"Connect_nbr", command_connect_nbr, 0},
-    {"Take", take_object, 7},
-    {"Set", set_object, 7},
+    {"Take", command_take, 7},
+    {"Set", command_set, 7},
+    {"Eject", command_eject, 7},
+    {"Fork", command_fork, 42},
     {NULL, NULL, 0}
 };
 
@@ -75,7 +77,6 @@ void process_command(server_t *server, player_t *player, char *cmd)
     for (int i = 0; command_handlers[i].func != NULL; ++i) {
         if (strcmp(command_handlers[i].name, array[0]) == 0) {
             is_passed = true;
-            params = cmd + strlen(command_handlers[i].name) + 1;
             printf("Params: `%s`\n", params);
             command_handlers[i].func(server, player, params);
             break;
@@ -137,8 +138,8 @@ void process_command_ia(server_t *, player_t *player, char *cmd,
             params = cmd + strlen(command_handlers_ia[i].name) + 1;
             printf("Params: `%s`\n", params);
             queue->commands->id = i;
-            enqueue_command(queue, cmd, command_handlers_ia[i].time,
-                player->fd);
+            enqueue_command(queue, cmd, (command_handlers_ia[i].time /
+            server->opt->freq), player->fd);
             break;
         }
     }
