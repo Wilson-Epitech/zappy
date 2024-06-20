@@ -37,5 +37,6 @@ void command_inventory(server_t *, player_t *player, const char *);
 void command_left(server_t *, player_t *player, const char *);
 void command_look(server_t *, player_t *, const char *);
 void command_right(server_t *, player_t *player, const char *);
+void take_object(server_t *server, player_t *player, const char *);
 
 #endif /* !CMD_HANDLER_H_ */
