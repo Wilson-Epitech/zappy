@@ -5,13 +5,9 @@
 ** main
 */
 
-#include "GameLoop.hpp"
-#include <vector>
-#include <cstdlib>
-#include <ctime>
-#include <sstream>
-#include <thread>
 #include "client.hpp"
+#include "GameLoop.hpp"
+#include <thread>
 
 void print_usage(const std::string& program_name) {
     std::cerr << "USAGE: " << program_name << " -p port -h machine" << std::endl;
@@ -20,8 +16,7 @@ void print_usage(const std::string& program_name) {
     std::cerr << "-h machine hostname of the server" << std::endl;
 }
 
-int client_start(int argc, char *const *argv)
-{
+int main(int argc, char *const *argv) {
     if (argc != 5) {
         print_usage(argv[0]);
         return 84;
@@ -47,21 +42,15 @@ int client_start(int argc, char *const *argv)
         return 84;
     }
 
-    try {
-        Client client(host, port);
+    Client client(host, port);
+
+    std::thread client_thread([&client]() {
         client.start_cli();
-    } catch (std::exception &e) {
-        std::cerr << "Exception: " << e.what() << "\n";
-    }
+    });
 
-    return 0;
-}
+    gameLoop(client);
 
-int main(int argc, char *const *argv)
-{
-    std::thread t1(client_start, argc, argv);
-    std::thread t2(gameLoop);
-    t1.join();
-    t2.join();
+    client_thread.join();
+
     return 0;
 }

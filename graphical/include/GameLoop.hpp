@@ -16,14 +16,20 @@
 #include "Menu.hpp"
 #include "Mouse.hpp"
 #include "Music.hpp"
+#include "Character.hpp"
+#include "client.hpp"
 #include <vector>
 #include <unordered_map>
 #include <cstdlib>
+#include <iostream>
 #include <ctime>
 
 const int boardWidth = 10;
 const int boardHeight = 10;
 
-void gameLoop();
+void drawBoard(sf::RenderWindow& window, const std::vector<std::vector<Tile>>& tiles);
+void updateBoard(std::vector<std::vector<Tile>>& tiles);
+void gameLoop(Client& client);
+void printCharacters(const std::vector<Character>& characters);
 
 #endif /* !GAMELOOP_HPP */

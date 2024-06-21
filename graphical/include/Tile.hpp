@@ -20,9 +20,7 @@ public:
 
     void drawTile(sf::RenderWindow &window) const;
     void setResources(const std::unordered_map<int, int>& resources, const std::unordered_map<int, sf::Texture*>& textures);
-    void setCharacters(const std::unordered_map<int, int>& characters, const std::unordered_map<int, sf::Texture*>& textures);
     void updateAnimation();
-    void updateCharacterAnimation();
 
     void setHovered(bool hovered);
     bool contains(const sf::Vector2f& point) const;
@@ -60,7 +58,6 @@ private:
     sf::Clock characterClock;
     std::vector<int> characterFrames;
 
-    void updateCharacterSprites(const std::unordered_map<int, sf::Texture*>& textures);
     void setOriginalColor();
 };
 

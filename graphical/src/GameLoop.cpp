@@ -6,6 +6,7 @@
 */
 
 #include "GameLoop.hpp"
+#include "Character.hpp"
 
 void drawBoard(sf::RenderWindow& window, const std::vector<std::vector<Tile>>& tiles) {
     for (const auto& row : tiles) {
@@ -19,17 +20,29 @@ void updateBoard(std::vector<std::vector<Tile>>& tiles) {
     for (auto& row : tiles) {
         for (auto& tile : row) {
             tile.updateAnimation();
-            tile.updateCharacterAnimation();
         }
     }
 }
 
-void gameLoop() {
+void drawCharacters(sf::RenderWindow& window, const std::vector<Character>& characters) {
+    for (const auto& character : characters) {
+        character.draw(window);
+    }
+}
+
+void updateCharacters(std::vector<Character>& characters) {
+    for (auto& character : characters) {
+        character.updateAnimation();
+    }
+}
+
+void gameLoop(Client& client) {
     sf::RenderWindow window(sf::VideoMode(1920, 1080), "ZAPPY");
     std::srand(static_cast<unsigned>(std::time(0)));
     window.setFramerateLimit(30);
     sf::View view = window.getDefaultView();
     std::vector<std::vector<Tile>> tiles;
+    sf::Clock updateClock;
 
     Music music;
     Camera camera;
@@ -55,8 +68,14 @@ void gameLoop() {
     sf::Texture thystameTexture;
     thystameTexture.loadFromFile("assets/thystame.png");
 
-    sf::Texture mageTexture;
-    mageTexture.loadFromFile("assets/mage.png");
+    sf::Texture upMage;
+    upMage.loadFromFile("assets/upMage.png");
+    sf::Texture rightMage;
+    rightMage.loadFromFile("assets/rightMage.png");
+    sf::Texture downMage;
+    downMage.loadFromFile("assets/downMage.png");
+    sf::Texture leftMage;
+    leftMage.loadFromFile("assets/leftMage.png");
 
     std::unordered_map<int, sf::Texture*> textures = {
         {0, &foodTexture},
@@ -66,9 +85,10 @@ void gameLoop() {
         {4, &mendianeTexture},
         {5, &phirasTexture},
         {6, &thystameTexture},
-        {10, &mageTexture},
-        {11, &mageTexture},
-        {12, &mageTexture},
+        {10, &upMage},
+        {11, &rightMage},
+        {12, &downMage},
+        {13, &leftMage},
     };
 
     music.play();
@@ -91,6 +111,8 @@ void gameLoop() {
     Tile* selectedTile = nullptr;
     bool tileSelected = false;
 
+    std::vector<Character> characters;
+
     while (window.isOpen()) {
         sf::Event event;
         while (window.pollEvent(event)) {
@@ -105,18 +127,21 @@ void gameLoop() {
                 for (int j = 0; j < boardHeight; j++)
                     tiles[i][j].setResources(newResources, textures);
         }
-
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::C)) {
-            std::unordered_map<int, int> newCharacters = {{10, 1}, {11, 1}, {12, 1}};
-            tiles[5][5].setCharacters(newCharacters, textures);
-            tiles[0][3].setCharacters(newCharacters, textures);
+        if (updateClock.getElapsedTime().asSeconds() >= 1.0) {
+            characters = client.getCharacters();
+            for (auto& character : characters) {
+                character.setTextures(textures);
+            }
+            updateClock.restart();
         }
 
+        updateCharacters(characters);
         updateBoard(tiles);
         window.clear();
         window.setView(view);
         parallax.draw(window);
         drawBoard(window, tiles);
+        drawCharacters(window, characters);
         window.setView(window.getDefaultView());
         menu.draw(window, tileSelected);
         window.display();

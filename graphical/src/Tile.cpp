@@ -56,57 +56,13 @@ bool Tile::contains(const sf::Vector2f& point) const {
 void Tile::drawTile(sf::RenderWindow &window) const {
     window.draw(sprite);
     resources.drawResources(window);
-    for (const auto& characterSprite : characterSprites) {
-        window.draw(characterSprite);
-    }
 }
 
 void Tile::setResources(const std::unordered_map<int, int>& resources, const std::unordered_map<int, sf::Texture*>& textures) {
     this->resources.setResources(resources, x, y, textures);
 }
 
-void Tile::setCharacters(const std::unordered_map<int, int>& characters, const std::unordered_map<int, sf::Texture*>& textures) {
-    this->characters = characters;
-    updateCharacterSprites(textures);
-}
-
-void Tile::updateCharacterSprites(const std::unordered_map<int, sf::Texture*>& textures) {
-    characterSprites.clear();
-
-    for (const auto& pair : characters) {
-        int characterType = pair.first;
-        int count = pair.second;
-        for (int i = 0; i < count; ++i) {
-            sf::Sprite characterSprite;
-            characterSprite.setTexture(*textures.at(characterType));
-            characterSprite.setScale(squareSize / 48.0f, squareSize / 32.0f);
-            float offsetX = static_cast<float>(std::rand() % static_cast<int>(squareSize - 40.0f));
-            float offsetY = static_cast<float>(std::rand() % static_cast<int>(squareSize / 1.5 - 48.0f));
-            characterSprite.setPosition(x * squareSize + offsetX, y * squareSize + offsetY);
-            characterSprite.setTextureRect(sf::IntRect(0, 0, 16, 32));
-            if (characterType == 10 && i == 0)
-                characterSprite.setColor(sf::Color::Blue);
-            else if (characterType == 11 && i == 0)
-                characterSprite.setColor(sf::Color::Red);
-            else if (characterType == 12 && i == 0) {
-                characterSprite.setColor(sf::Color::Green);
-            }
-            characterSprites.push_back(characterSprite);
-            characterFrames.push_back(0);
-        }
-    }
-}
-
 void Tile::updateAnimation() {
     resources.updateAnimation();
 }
 
-void Tile::updateCharacterAnimation() {
-    if (characterClock.getElapsedTime().asSeconds() > animationSpeed) {
-        for (size_t i = 0; i < characterSprites.size(); ++i) {
-            characterFrames[i] = (characterFrames[i] + 1) % 3;
-            characterSprites[i].setTextureRect(sf::IntRect(characterFrames[i] * 16, 0, 16, 32));
-        }
-        characterClock.restart();
-    }
-}

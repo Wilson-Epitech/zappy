@@ -9,10 +9,7 @@
 #include <sstream>
 
 Menu::Menu(const sf::Vector2u& windowSize) {
-    if (!font.loadFromFile("assets/font.ttf")) {
-        throw std::runtime_error("Failed to load font.ttf");
-    }
-
+    font.loadFromFile("assets/font.ttf");
     infoText.setFont(font);
     infoText.setCharacterSize(30);
     infoText.setFillColor(sf::Color::White);
