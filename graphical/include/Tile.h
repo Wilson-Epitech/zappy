@@ -11,6 +11,7 @@
 #include <SFML/Graphics.hpp>
 #include <unordered_map>
 #include <vector>
+#include "Resources.hpp"
 
 class Tile {
 public:
@@ -29,7 +30,7 @@ public:
     bool isSelected() const;
 
     const std::unordered_map<int, int>& getResources() const {
-        return resources;
+        return resources.getResources();
     }
 
     const std::unordered_map<int, int>& getCharacters() const {
@@ -50,22 +51,15 @@ private:
     sf::Color originalColor;
     sf::Sprite sprite;
 
-    std::unordered_map<int, int> resources;
-    std::vector<sf::Sprite> resourceSprites;
-
+    Resources resources;
     std::unordered_map<int, int> characters;
     std::vector<sf::Sprite> characterSprites;
 
     static const float animationSpeed;
     sf::Clock animationClock;
     sf::Clock characterClock;
-    const float frameWidth = 16;
-    const float frameHeight = 16;
-    const int frameCount = 4;
-    std::vector<int> currentFrames;
     std::vector<int> characterFrames;
 
-    void updateResourceSprites(const std::unordered_map<int, sf::Texture*>& textures);
     void updateCharacterSprites(const std::unordered_map<int, sf::Texture*>& textures);
     void setOriginalColor();
 };
