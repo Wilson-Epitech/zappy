@@ -1,3 +1,10 @@
+/*
+** ZAPPY PROJECT, 2024
+** delivery
+** File description:
+** Tile
+*/
+
 #ifndef TILE_H_
 #define TILE_H_
 

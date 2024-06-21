@@ -1,3 +1,10 @@
+/*
+** ZAPPY PROJECT, 2024
+** delivery
+** File description:
+** Music
+*/
+
 #include "../include/Music.hpp"
 
 Music::Music() {

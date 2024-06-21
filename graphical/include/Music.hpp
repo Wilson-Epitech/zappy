@@ -1,5 +1,12 @@
-#ifndef MUSIC_HPP
-#define MUSIC_HPP
+/*
+** ZAPPY PROJECT, 2024
+** delivery
+** File description:
+** Music
+*/
+
+#ifndef MUSIC_HPP_
+#define MUSIC_HPP_
 
 #include <SFML/Audio.hpp>
 
@@ -16,4 +23,4 @@ public:
     void stop();
 };
 
-#endif // MUSIC_HPP
+#endif /* !MUSIC_HPP_ */

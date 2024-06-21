@@ -1,3 +1,10 @@
+/*
+** ZAPPY PROJECT, 2024
+** delivery
+** File description:
+** Mouse
+*/
+
 #include "../include/Mouse.hpp"
 
 Mouse::Mouse() {}

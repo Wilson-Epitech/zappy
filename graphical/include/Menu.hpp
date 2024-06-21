@@ -1,5 +1,12 @@
-#ifndef MENU_HPP
-#define MENU_HPP
+/*
+** ZAPPY PROJECT, 2024
+** delivery
+** File description:
+** Menu
+*/
+
+#ifndef MENU_HPP_
+#define MENU_HPP_
 
 #include <SFML/Graphics.hpp>
 #include "Tile.h"
@@ -27,4 +34,4 @@ private:
     };
 };
 
-#endif // MENU_HPP
+#endif /* !MENU_HPP_ */

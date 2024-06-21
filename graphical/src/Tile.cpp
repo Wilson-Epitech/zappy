@@ -1,3 +1,10 @@
+/*
+** ZAPPY PROJECT, 2024
+** delivery
+** File description:
+** Tile
+*/
+
 #include "../include/Tile.h"
 #include <cstdlib>
 #include <ctime>

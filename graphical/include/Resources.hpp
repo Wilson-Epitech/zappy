@@ -1,3 +1,10 @@
+/*
+** ZAPPY PROJECT, 2024
+** delivery
+** File description:
+** Resources
+*/
+
 #ifndef RESOURCES_H_
 #define RESOURCES_H_
 

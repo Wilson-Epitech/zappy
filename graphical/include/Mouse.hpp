@@ -1,5 +1,12 @@
-#ifndef MOUSE_HPP
-#define MOUSE_HPP
+/*
+** ZAPPY PROJECT, 2024
+** delivery
+** File description:
+** Mouse
+*/
+
+#ifndef MOUSE_HPP_
+#define MOUSE_HPP_
 
 #include <SFML/Graphics.hpp>
 #include <unordered_map>
@@ -18,4 +25,4 @@ public:
     void handleAllMouseEvents(sf::RenderWindow& window, sf::View& view, const sf::Event& event, std::vector<std::vector<Tile>>& tiles, Tile*& selectedTile, Menu& menu, bool& tileSelected, Camera& camera);
 };
 
-#endif // MOUSE_HPP
+#endif /* !MOUSE_HPP_ */

@@ -1,3 +1,10 @@
+/*
+** ZAPPY PROJECT, 2024
+** delivery
+** File description:
+** Resources
+*/
+
 #include "../include/Resources.hpp"
 #include <cstdlib>
 #include <ctime>
