@@ -55,6 +55,7 @@ command_handler_t command_handlers_ia[] = {
     {"Set", command_set, 7},
     {"Eject", command_eject, 7},
     {"Fork", command_fork, 42},
+    {"Incantation", command_incantation, 0},
     {NULL, NULL, 0}
 };
 
@@ -75,7 +76,8 @@ void process_command(server_t *server, player_t *player, char *cmd)
         return;
     printf("Processing command: `%s`\n", array[0]);
     for (int i = 0; command_handlers[i].func != NULL; ++i) {
-        if (strcmp(command_handlers[i].name, array[0]) == 0) {
+        if (command_handlers[i].name && array[0] &&
+            strcmp(command_handlers[i].name, array[0]) == 0) {
             is_passed = true;
             params = cmd + strlen(command_handlers[i].name) + 1;
             printf("Params: `%s`\n", params);
