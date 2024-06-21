@@ -14,13 +14,13 @@
 static void display_tile(server_t *server, int x, int y, char *answer)
 {
     sprintf(answer, "bct %d %d %d %d %d %d %d %d %d\n", x, y,
-        server->map.tiles[x][y].food,
-        server->map.tiles[x][y].linemate,
-        server->map.tiles[x][y].deraumere,
-        server->map.tiles[x][y].sibur,
-        server->map.tiles[x][y].mendiane,
-        server->map.tiles[x][y].phiras,
-        server->map.tiles[x][y].thystame);
+        server->map.tiles[y][x].food,
+        server->map.tiles[y][x].linemate,
+        server->map.tiles[y][x].deraumere,
+        server->map.tiles[y][x].sibur,
+        server->map.tiles[y][x].mendiane,
+        server->map.tiles[y][x].phiras,
+        server->map.tiles[y][x].thystame);
 }
 
 int digit_check(char *arg1, char *arg2)
