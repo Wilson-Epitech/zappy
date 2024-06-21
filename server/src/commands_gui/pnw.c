@@ -19,7 +19,7 @@ void command_pnw(server_t *server, int client_fd)
     for (int i = 0; i < MAX_CLIENTS; ++i) {
         if (server->players[i].team_id == -2) {
             dprintf(i, "pnw %d %d %d %d %d %s\n",
-            i,
+            client_fd,
             server->players[client_fd].x,
             server->players[client_fd].y,
             server->players[client_fd].orientation,
