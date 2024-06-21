@@ -5,7 +5,7 @@
 ** client
 */
 
-#include "client.hpp"
+#include "Client.hpp"
 
 Client::Client(const std::string &host, short port)
     : io_context_(), socket_(io_context_), endpoint_(boost::asio::ip::address::from_string(host), port)
@@ -60,20 +60,20 @@ void Client::send(const std::string &message)
     boost::asio::write(socket_, boost::asio::buffer(message + "\n"));
 }
 
-static std::vector<std::string> split(const std::string &str, char delimiter)
+std::vector<std::string> Client::split(const std::string &str, char delim)
 {
     std::vector<std::string> tokens;
     std::istringstream iss(str);
     std::string token;
 
-    while (std::getline(iss, token, delimiter)) {
+    while (std::getline(iss, token, delim)) {
         tokens.push_back(token);
     }
 
     return tokens;
 }
 
-void get_pnw(std::vector<std::string> tokens)
+void Client::get_pnw(std::vector<std::string> tokens)
 {
     int player_id = std::stoi(tokens[1]);
     std::cout << "player id : " << player_id << std::endl;
@@ -89,7 +89,7 @@ void get_pnw(std::vector<std::string> tokens)
     std::cout << "Team name : " << team_name << std::endl;
 }
 
-void get_ppo(std::vector<std::string> tokens)
+void Client::get_ppo(std::vector<std::string> tokens)
 {
     int player_id = std::stoi(tokens[1]);
     std::cout << "player id : " << player_id << std::endl;

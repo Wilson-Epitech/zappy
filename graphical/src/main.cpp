@@ -11,7 +11,7 @@
 #include <ctime>
 #include <sstream>
 #include <thread>
-#include "client.hpp"
+#include "Client.hpp"
 
 void print_usage(const std::string& program_name) {
     std::cerr << "USAGE: " << program_name << " -p port -h machine" << std::endl;
