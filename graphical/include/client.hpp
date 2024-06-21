@@ -29,4 +29,5 @@ private:
     boost::asio::io_context io_context_;
     boost::asio::ip::tcp::socket socket_;
     boost::asio::ip::tcp::endpoint endpoint_;
+    boost::asio::streambuf buffer_;
 };
