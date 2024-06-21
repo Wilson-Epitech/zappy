@@ -89,6 +89,18 @@ void get_pnw(std::vector<std::string> tokens)
     std::cout << "Team name : " << team_name << std::endl;
 }
 
+void get_ppo(std::vector<std::string> tokens)
+{
+    int player_id = std::stoi(tokens[1]);
+    std::cout << "player id : " << player_id << std::endl;
+    int player_pos_x = std::stoi(tokens[2]);
+    std::cout << "x : " << player_pos_x << std::endl;
+    int player_pos_y = std::stoi(tokens[3]);
+    std::cout << "y : " << player_pos_y << std::endl;
+    int player_orientation = std::stoi(tokens[4]);
+    std::cout << "orientation : " << player_orientation << std::endl;
+}
+
 void Client::receive()
 {
     try {
@@ -100,10 +112,10 @@ void Client::receive()
         std::cout << "Server: " << message << std::endl;
 
         std::vector<std::string> tokens = split(message, ' ');
-        if (tokens.size() > 0 && tokens[0] == "pnw") {
+        if (tokens.size() > 0 && tokens[0] == "pnw")
             get_pnw(tokens);
-        }
-
+        if (tokens.size() > 0 && tokens[0] == "ppo")
+            get_ppo(tokens);
         // if (message.substr(0, 3) == "ppo")
         //     std::cout << "New pos" << std::endl;
         // if (message.substr(0, 3) == "plv")
