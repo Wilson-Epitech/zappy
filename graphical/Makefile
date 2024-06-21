@@ -58,9 +58,4 @@ fclean: clean
 
 re: fclean all
 
-.cpp.o:
-	@ $(CXX) -c $< -o $@ $(CFLAGS) && \
-	  (printf "$(CYAN) %b $(GREEN)「✔」$(RC)\n" $<) || \
-	  (printf "$(CYAN) %b $(RED)[XX] $(RC)\n" $< ; exit 1)
-
 .PHONY: all $(BINARY) prebuild clean fclean re .cpp.o
