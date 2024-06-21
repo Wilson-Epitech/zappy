@@ -5,7 +5,7 @@
 ** client
 */
 
-#include "../include/client.hpp"
+#include "client.hpp"
 
 Client::Client(const std::string &host, short port)
     : io_context_(), socket_(io_context_), endpoint_(boost::asio::ip::address::from_string(host), port)
