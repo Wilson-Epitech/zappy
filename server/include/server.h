@@ -9,6 +9,7 @@
     #define SERVER_H_
     #include <sys/select.h>
     #include <netinet/in.h>
+    #include <stdbool.h>
     #include "player.h"
     #include "team.h"
     #include "map.h"
@@ -66,6 +67,7 @@ void handle_command_queue(player_command_queue_t *queue, server_t *server,
     player_t *player);
 void init_queue(server_t *server);
 void death_player(server_t *server);
+void clear_client(server_t *server, int client_fd);
 
 //---------Lib ------------------------------------------//
 char **word_array_delim(char const *str, char *separators);
