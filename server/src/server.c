@@ -55,8 +55,6 @@ static void read_client_data(server_t *server,
     } else if (server->players[client_fd].team_id > -1) {
         process_command_ia(server, &server->players[client_fd], buffer,
             server->queue);
-        handle_command_queue(server->queue, server,
-            &server->players[client_fd]);
     }
 }
 
@@ -68,18 +66,19 @@ static void read_client_data(server_t *server,
 */
 static void handle_team(server_t *server, int client_fd, char *buffer)
 {
-    if (strcmp("GRAPHIC", buffer) == 0) {
-        printf("GRAPHIC\n");
+    if (strcmp("GRAPHIC", buffer) == 0)
         server->players[client_fd].team_id = -2;
-    }
     for (int i = 0; i < get_array_size(server->opt->names); ++i) {
-        if (strcmp(server->opt->names[i], buffer) == 0) {
+        if (strcmp(server->opt->names[i], buffer) == 0
+        && server->teams[i].player_count + 1 <= server->opt->clients_number) {
+            handle_teams(server, server->opt->names[i], i);
             server->players[client_fd].team_id = i;
             server->players[client_fd].team_name =
                 malloc(sizeof(char) * (strlen(server->opt->names[i]) + 1));
             strcpy(server->players[client_fd].team_name,
                 server->opt->names[i]);
-            dprintf(client_fd, "%ld\n", server->opt->clients_number);
+            dprintf(client_fd, "%d\n",
+                free_slots(server, &server->players[client_fd]));
             dprintf(client_fd, "%ld %ld\n",
                 server->opt->map_height, server->opt->map_width);
             command_pnw(server, client_fd);
@@ -105,7 +104,7 @@ void handle_client(server_t *server, int client_fd)
     bytes_read = read(client_fd, buffer, sizeof(buffer));
     if (bytes_read <= 0) {
         if (bytes_read == 0)
-            printf("Client disconnected: %d\n", client_fd);
+            handle_disconnect(server, client_fd);
         else
             perror("read");
         clear_client(server, client_fd);

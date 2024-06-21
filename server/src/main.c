@@ -12,6 +12,13 @@
 #include "server.h"
 
 
+/**
+ * @brief This function is used to get the arguments from the command line
+ *
+ * @param server
+ * @param av
+ * @return int
+*/
 static int error_handling(server_t *server, char *const *av)
 {
     if (get_args(server, av) == FAILURE) {

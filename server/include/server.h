@@ -9,6 +9,7 @@
     #define SERVER_H_
     #include <sys/select.h>
     #include <netinet/in.h>
+    #include <stdbool.h>
     #include "player.h"
     #include "team.h"
     #include "map.h"
@@ -32,7 +33,9 @@ static const int FAILURE = 84;
 typedef struct server_s {
     int port;
     int fd;
+    int players_connected;
     struct sockaddr_in addr;
+    struct timeval tv;
     fd_set read_fd;
     fd_set write_fd;
     player_t players[MAX_CLIENTS];
@@ -40,6 +43,7 @@ typedef struct server_s {
     map_t map;
     options_t *opt;
     player_command_queue_t *queue;
+    bool is_end;
 } server_t;
 
 //--------lib -------------------------------//
@@ -64,10 +68,18 @@ void command_pnw(server_t *server, int client_fd);
 void handle_command_queue(player_command_queue_t *queue, server_t *server,
     player_t *player);
 void init_queue(server_t *server);
+void death_player(server_t *server);
+
+/* handle_teams.c */
+
+void handle_teams(server_t *server, char *name, int index);
+void handle_disconnect(server_t *server, int client_fd);
 
 //---------Lib ------------------------------------------//
 char **word_array_delim(char const *str, char *separators);
 int get_array_size(char **array);
+void send_graphical(server_t *server, const char *message);
+int free_slots(server_t *server, player_t *player);
 
 
 

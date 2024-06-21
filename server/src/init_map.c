@@ -8,6 +8,40 @@
 #include "server.h"
 #include <stdlib.h>
 
+/**
+ * @brief Initialize the tiles of the map
+ *
+ * @param server
+ * @param i
+ * @param j
+*/
+static void init_tiles(server_t *server, int i, int j)
+{
+    server->map.tiles[i][j].resources[FOOD] =
+        &server->map.tiles[i][j].food;
+    server->map.tiles[i][j].resources[LINEMATE] =
+        &server->map.tiles[i][j].linemate;
+    server->map.tiles[i][j].resources[DERAUMERE] =
+        &server->map.tiles[i][j].deraumere;
+    server->map.tiles[i][j].resources[SIBUR] =
+        &server->map.tiles[i][j].sibur;
+    server->map.tiles[i][j].resources[MENDIANE] =
+        &server->map.tiles[i][j].mendiane;
+    server->map.tiles[i][j].resources[PHIRAS] =
+        &server->map.tiles[i][j].phiras;
+    server->map.tiles[i][j].resources[THYSTAME] =
+        &server->map.tiles[i][j].thystame;
+    server->map.tiles[i][j].resources[PLAYER] =
+        &server->map.tiles[i][j].player;
+    server->map.tiles[i][j].resources[EGG] =
+        &server->map.tiles[i][j].egg;
+}
+
+/**
+ * @brief Initialize the map
+ *
+ * @param server
+*/
 void init_map(server_t *server)
 {
     server->map.tiles = malloc(sizeof(tile_t *) * (server->opt->map_height));
@@ -23,6 +57,7 @@ void init_map(server_t *server)
             server->map.tiles[i][j].thystame = 0;
             server->map.tiles[i][j].player = 0;
             server->map.tiles[i][j].egg = 0;
+            init_tiles(server, i, j);
         }
     }
     server->map.width = server->opt->map_width;

@@ -16,15 +16,14 @@
 
 void command_pnw(server_t *server, int client_fd)
 {
-    for (int i = 0; i < MAX_CLIENTS; ++i) {
-        if (server->players[i].team_id == -2) {
-            dprintf(i, "pnw %d %d %d %d %d %s\n",
-            client_fd,
-            server->players[client_fd].x,
-            server->players[client_fd].y,
-            server->players[client_fd].orientation,
-            server->players[client_fd].level,
-            server->players[client_fd].team_name);
-        }
-    }
+    char message[1024];
+
+    snprintf(message, 1024, "pnw %d %d %d %d %d %s\n",
+        client_fd,
+        server->players[client_fd].x,
+        server->players[client_fd].y,
+        server->players[client_fd].orientation,
+        server->players[client_fd].level,
+        server->players[client_fd].team_name);
+    send_graphical(server, message);
 }

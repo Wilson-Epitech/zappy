@@ -11,7 +11,7 @@
 
 typedef struct team_s {
     char *name;
-    int player_count;
+    size_t player_count;
     int egg_count;
     egg_t *eggs;
 } team_t;

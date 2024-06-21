@@ -14,7 +14,7 @@
  * @brief Sets up the server socket.
  *
  * @param server The server instance.
- */
+*/
 static void setup_socket(server_t *server)
 {
     int opt = 1;
@@ -38,7 +38,7 @@ static void setup_socket(server_t *server)
  * @brief Binds the server socket to an address.
  *
  * @param server The server instance.
- */
+*/
 static void bind_socket(server_t *server)
 {
     if (bind(server->fd, (struct sockaddr*)&server->addr,
@@ -53,7 +53,7 @@ static void bind_socket(server_t *server)
  * @brief Starts listening on the server socket.
  *
  * @param server The server instance.
- */
+*/
 static void listen_socket(server_t *server)
 {
     if (listen(server->fd, MAX_CLIENTS) == -1) {
@@ -68,7 +68,7 @@ static void listen_socket(server_t *server)
  *
  * @param server The server instance.
  * @param opt The server options.
- */
+*/
 void init_server(server_t *server, options_t *opt)
 {
     server->port = opt->port;
@@ -83,6 +83,12 @@ void init_server(server_t *server, options_t *opt)
     printf("Server initialized on port %d\n", server->port);
 }
 
+/**
+ * @brief Initializes the player inventory.
+ *
+ * @param player The player instance.
+ * @param fd The client file descriptor.
+*/
 void init_queue(server_t *server)
 {
     player_command_queue_t *queue = malloc(sizeof(player_command_queue_t));
@@ -91,6 +97,7 @@ void init_queue(server_t *server)
         queue->commands[i].cmd = NULL;
         queue->commands[i].execution_time = 0;
         queue->commands[i].id = 0;
+        queue->commands[i].client_fd = 0;
     }
     queue->front = 0;
     queue->rear = 0;

@@ -23,22 +23,71 @@ static void display_tile(server_t *server, int x, int y, char *answer)
         server->map.tiles[y][x].thystame);
 }
 
+int digit_check(char *arg1, char *arg2)
+{
+    for (size_t i = 0; i < strlen(arg1); i++) {
+        if (arg1[i] < '0' || arg1[i] > '9')
+            return 1;
+    }
+    for (size_t i = 0; i < strlen(arg2); i++) {
+        if (arg2[i] < '0' || arg2[i] > '9')
+            return 1;
+    }
+    return 0;
+}
+
+int error_handling_bct(server_t *server, const char *params)
+{
+    char *tmp = strdup(params);
+    char *arg1 = strtok(tmp, " ");
+    char *arg2 = strtok(NULL, " ");
+    int x;
+    int y;
+
+    if (arg1 == NULL || arg2 == NULL || strtok(NULL, " ") != NULL
+    || digit_check(arg1, arg2) == 1) {
+        free(tmp);
+        return 1;
+    }
+    x = atoi(arg1);
+    y = atoi(arg2);
+    if (x < 0 || x >= (int) server->map.width || y < 0
+    || y >= (int) server->map.height) {
+        free(tmp);
+        return 1;
+    }
+    free(tmp);
+    return 0;
+}
+
 void command_bct(server_t *server, player_t *player, const char *params)
 {
-    char *answer = malloc(sizeof(char) * 222);
-    char *tmp = strdup(params);
-    int x = atoi(strtok(tmp, " "));
-    int y = atoi(strtok(tmp, " "));
+    char *answer;
+    char *tmp;
+    int x;
+    int y;
 
+    if (strcmp(params, "\0") == 0 || error_handling_bct(server, params) == 1) {
+        dprintf(player->fd, "sbp\n");
+        return;
+    }
+    answer = malloc(sizeof(char) * 222);
+    tmp = strdup(params);
+    x = atoi(strtok(tmp, " "));
+    y = atoi(strtok(tmp, " "));
     display_tile(server, x, y, answer);
     send(player->fd, answer, strlen(answer), 0);
     free(answer);
 }
 
-void command_bct_all(server_t *server, player_t *player, const char *)
+void command_bct_all(server_t *server, player_t *player, const char *params)
 {
     char *answer = malloc(sizeof(char) * 222);
 
+    if (strcmp(params, "\0") != 0) {
+        dprintf(player->fd, "sbp\n");
+        return;
+    }
     for (size_t i = 0; i < server->map.height; i++) {
         for (size_t j = 0; j < server->map.width; j++) {
             display_tile(server, j, i, answer);

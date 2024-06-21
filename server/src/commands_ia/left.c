@@ -21,8 +21,11 @@
  * @param params The parameters sent with the command.
  * This should be the file descriptor of the player.
 */
-void command_left(server_t *, player_t *player, const char *)
+void command_left(server_t *server, player_t *player, const char *)
 {
-    player->orientation = (player->orientation + 3) % 4;
-    dprintf(player->fd, "ok\n");
+    if (player->is_elevating == false) {
+        player->orientation = (player->orientation + 3) % 4;
+        dprintf(server->queue->commands[server->queue->front].client_fd,
+            "ok\n");
+    }
 }
