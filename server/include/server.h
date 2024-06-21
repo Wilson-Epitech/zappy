@@ -33,6 +33,7 @@ static const int FAILURE = 84;
 typedef struct server_s {
     int port;
     int fd;
+    int players_connected;
     struct sockaddr_in addr;
     struct timeval tv;
     fd_set read_fd;
@@ -42,6 +43,7 @@ typedef struct server_s {
     map_t map;
     options_t *opt;
     player_command_queue_t *queue;
+    bool is_end;
 } server_t;
 
 //--------lib -------------------------------//
@@ -68,10 +70,18 @@ void handle_command_queue(player_command_queue_t *queue, server_t *server,
 void init_queue(server_t *server);
 void death_player(server_t *server);
 void clear_client(server_t *server, int client_fd);
+void decrement_food(server_t *server);
+
+/* handle_teams.c */
+
+void handle_teams(server_t *server, char *name, int index);
+void handle_disconnect(server_t *server, int client_fd);
 
 //---------Lib ------------------------------------------//
 char **word_array_delim(char const *str, char *separators);
 int get_array_size(char **array);
+void send_graphical(server_t *server, const char *message);
+int free_slots(server_t *server, player_t *player);
 
 
 

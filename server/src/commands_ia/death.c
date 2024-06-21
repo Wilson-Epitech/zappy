@@ -11,11 +11,15 @@
 #include <unistd.h>
 #include "server.h"
 
+/**
+ * @brief Check if a player is dead.
+ * @param server The server instance.
+*/
 void death_player(server_t *server)
 {
     for (int i = 0; i < MAX_CLIENTS; i++) {
-        if (server->players[i].inventory.food <= 0 &&
-            server->players[i].id != -2 && server->players[i].fd != 0) {
+        if (server->players[i].inventory.food <= 0
+            && server->players[i].id != -2 && server->players[i].fd != 0) {
             dprintf(server->players[i].fd, "dead\n");
             clear_client(server, i);
         }

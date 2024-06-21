@@ -37,12 +37,30 @@ static void move_forward(server_t *server, player_t *player)
     }
 }
 
+/**
+ * @brief Executes the forward command.
+ * @param server The server instance.
+ * @param player The array of players.
+ * @param params The parameters sent with the command.
+ * This should be the file descriptor of the player.
+*/
 void command_forward(server_t *server, player_t *player, const char *params)
 {
+    char message[1024] = {0};
+
     if (strcmp(params, "\0") == 1) {
         dprintf(player->fd, "ko\n");
         return;
     }
-    move_forward(server, player);
-    dprintf(player->fd, "ok\n");
+    if (player->is_elevating == false) {
+        move_forward(server, player);
+        dprintf(player->fd, "ok\n");
+        snprintf(message, 1024,
+        "ppo %d %d %d %d\n",
+        player->fd,
+        player->x,
+        player->y,
+        player->orientation);
+        send_graphical(server, message);
+    }
 }

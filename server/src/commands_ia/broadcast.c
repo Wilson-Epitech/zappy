@@ -25,7 +25,8 @@ void command_broadcast(server_t *server, player_t *player, const char *params)
 {
     for (int i = 0; i < MAX_CLIENTS; i++) {
         if (server->players[i].id > -1 &&
-            server->players[i].fd != player->fd) {
+            server->players[i].fd != player->fd
+            && player->is_elevating == false) {
             dprintf(server->players[i].fd, "message %d, %s\n",
             player->fd, params);
         }

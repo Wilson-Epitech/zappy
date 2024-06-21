@@ -21,9 +21,18 @@
  * @param params The parameters sent with the command.
  * This should be the file descriptor of the player.
 */
-void command_right(server_t *, player_t *player, const char *)
+void command_right(server_t *server, player_t *player, const char *)
 {
-    player->orientation = (player->orientation + 1) % 4;
-    dprintf(player->fd, "ok\n");
-    printf("right\n");
+    char message[1024] = {0};
+
+    if (player->is_elevating == false) {
+        player->orientation = (player->orientation + 1) % 4;
+        dprintf(player->fd, "ok\n");
+        snprintf(message, 1024, "ppo %d %d %d %d\n",
+        player->fd,
+        player->x,
+        player->y,
+        player->orientation);
+        send_graphical(server, message);
+    }
 }

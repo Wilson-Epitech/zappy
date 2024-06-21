@@ -17,7 +17,7 @@
 void init_player(player_t *player, int fd)
 {
     player[fd].team_id = -1;
-    player[fd].level = 0;
+    player[fd].level = 1;
     player[fd].x = 0;
     player[fd].y = 0;
     memset(player[fd].team_name, 0, 0);

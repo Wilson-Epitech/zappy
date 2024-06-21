@@ -42,11 +42,11 @@ static void eject_forward(server_t *server, player_t *player)
 void command_eject(server_t *server, player_t *player, const char *)
 {
     player_t other_player;
-    int i;
 
-    for (i = 0; i < MAX_CLIENTS; i++) {
+    for (int i = 0; i < MAX_CLIENTS; i++) {
         other_player = server->players[i];
-        if (other_player.x == player->x && other_player.y == player->y) {
+        if (other_player.x == player->x && other_player.y == player->y
+            && player->is_elevating == false) {
             eject_forward(server, player);
         }
     }

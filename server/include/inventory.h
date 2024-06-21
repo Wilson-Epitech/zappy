@@ -16,6 +16,7 @@ typedef struct inventory_s {
     int mendiane;
     int phiras;
     int thystame;
+    int *resources[7];
 } inventory_t;
 
 #endif /* !INVENTORY_H_ */

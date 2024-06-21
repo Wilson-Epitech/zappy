@@ -21,7 +21,19 @@
  * the file descriptor of the player.
  *
 */
-void command_connect_nbr(server_t *, player_t *, const char *)
+void command_connect_nbr(server_t *server, player_t *player, const char *)
 {
-    printf("connect_nbr\n");
+    int index = 0;
+    int slots = 0;
+
+    for (int i = 0; i < server->players_connected; ++i) {
+        if (strcmp(server->teams[i].name, player->team_name) == 0) {
+            index = i;
+            break;
+        }
+    }
+    slots = server->opt->clients_number - server->teams[index].player_count;
+    if (player->is_elevating == false) {
+        dprintf(player->fd, "%d\n", slots);
+    }
 }

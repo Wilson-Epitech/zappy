@@ -25,8 +25,9 @@ void command_plv(server_t *server, player_t *player, const char *params);
 void command_pin(server_t *, player_t *player, const char *params);
 void command_pex(server_t *server, player_t *player, const char *params);
 void command_pbc(server_t *server, player_t *player, const char *params);
-void command_bct_all(server_t *server, player_t *player, const char *);
+void command_bct_all(server_t *server, player_t *player, const char *params);
 void command_bct(server_t *server, player_t *player, const char *params);
+void command_seg(server_t *server, player_t *player, const char *params);
 
 /* Commands Ia */
 void command_broadcast(server_t *server, player_t *player, const char *params);
@@ -36,7 +37,11 @@ void command_inventory(server_t *, player_t *player, const char *);
 void command_left(server_t *, player_t *player, const char *);
 void command_look(server_t *, player_t *, const char *);
 void command_right(server_t *, player_t *player, const char *);
+void command_take(server_t *server, player_t *player, const char *);
+void command_set(server_t *server, player_t *player, const char *params);
 void command_eject(server_t *server, player_t *player, const char *);
 void command_fork(server_t *, player_t *, const char *);
+void command_incantation(server_t *server,
+    player_t *player, const char *params);
 
 #endif /* !CMD_HANDLER_H_ */

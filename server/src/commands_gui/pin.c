@@ -10,6 +10,18 @@
 #include <string.h>
 #include <stdlib.h>
 
+
+static int check_params(server_t *server, player_t *player, int player_nb)
+{
+    if (player_nb == player->fd)
+        return FAILURE;
+    if (player_nb > MAX_CLIENTS)
+        return FAILURE;
+    if (server->players[player_nb].fd == 0)
+        return FAILURE;
+    return SUCCESS;
+}
+
 /**
  * @brief Handles the 'pin' command from a client.
  *
@@ -23,15 +35,23 @@
  * @param player The array of players.
  * @param params The parameters sent with the command.
  */
-void command_pin(server_t *, player_t *player, const char *params)
+void command_pin(server_t *server, player_t *player, const char *params)
 {
-    int fd;
+    int fd = atoi(params);
 
-    fd = atoi(params);
-    dprintf(player[fd].fd, "pin %d %d %d %d %d %d %d %d %d %d\n",
-    player[fd].fd,
-    player[fd].x, player[fd].y, player[fd].inventory.food,
-    player[fd].inventory.linemate, player[fd].inventory.deraumere,
-    player[fd].inventory.sibur, player[fd].inventory.mendiane,
-    player[fd].inventory.phiras, player[fd].inventory.thystame);
+    if (check_params(server, player, fd) == FAILURE) {
+        dprintf(player->fd, "spb\n");
+        return;
+    }
+    dprintf(player->fd, "pin %d %d %d %d %d %d %d %d %d %d\n",
+        fd,
+        server->players[fd].x,
+        server->players[fd].y,
+        server->players[fd].inventory.food,
+        server->players[fd].inventory.linemate,
+        server->players[fd].inventory.deraumere,
+        server->players[fd].inventory.sibur,
+        server->players[fd].inventory.mendiane,
+        server->players[fd].inventory.phiras,
+        server->players[fd].inventory.thystame);
 }

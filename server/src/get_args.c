@@ -31,6 +31,14 @@ static bool is_number(char const *str)
     return true;
 }
 
+/**
+ * @brief This function parse the basic options
+ *
+ * @param server
+ * @param argv
+ * @param i
+ * @return int
+*/
 static int parse_basic_options(server_t *server, char *const *argv, int i)
 {
     if (strcmp(argv[i], "-p") == 0) {
@@ -54,6 +62,14 @@ static int parse_basic_options(server_t *server, char *const *argv, int i)
     return SUCCESS;
 }
 
+/**
+ * @brief This function get the teams names
+ *
+ * @param server
+ * @param argv
+ * @param i
+ * @return int
+*/
 static int get_teams_names(server_t *server, char *const *argv, int i)
 {
     int count = 0;
@@ -76,6 +92,14 @@ static int get_teams_names(server_t *server, char *const *argv, int i)
     return SUCCESS;
 }
 
+/**
+ * @brief This function parse the advanced options
+ *
+ * @param server
+ * @param argv
+ * @param i
+ * @return int
+*/
 static int parse_advanced_options(server_t *server, char *const *argv, int i)
 {
     if (strcmp(argv[i], "-c") == 0) {
@@ -98,6 +122,12 @@ static int parse_advanced_options(server_t *server, char *const *argv, int i)
     return SUCCESS;
 }
 
+/**
+ * @brief This function set the default team names
+ *
+ * @param server
+ * @return int
+*/
 static int set_default_team_names(server_t *server)
 {
     if (server->opt->n == 0) {
@@ -115,6 +145,12 @@ static int set_default_team_names(server_t *server)
     return SUCCESS;
 }
 
+/**
+ * @brief This function set the default values for the server
+ *
+ * @param server
+ * @return int
+*/
 static int init_default_values(server_t *server)
 {
     if (server->opt->p == 0) {
@@ -162,7 +198,6 @@ int get_args(server_t *server, char *const *argv)
         if (parse_advanced_options(server, argv, i) == FAILURE)
             return FAILURE;
     }
-    server->opt->start_time = time(NULL);
     if (init_default_values(server) == FAILURE)
         return FAILURE;
     return SUCCESS;

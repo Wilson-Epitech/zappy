@@ -13,11 +13,18 @@
 
 void command_sst(server_t *server, player_t *player, const char *params)
 {
-    int time_change = atoi(params);
-    char *answer = malloc(sizeof(char) * 100);
+    int time_change;
+    char *answer;
 
-    server->opt->start_time = server->opt->start_time + difftime(time(NULL),
-        server->opt->start_time) - time_change;
+    if (strcmp(params, "") == 0)
+        return;
+    if (strtok(strtok(NULL, " "), " ") != NULL)
+        return;
+    if (atoi(params) < 0)
+        return;
+    time_change = atoi(params);
+    answer = malloc(sizeof(char) * 100);
+    server->opt->freq = time_change;
     sprintf(answer, "sst %d\n", time_change);
     send(player->fd, answer, strlen(answer), 0);
     free(answer);

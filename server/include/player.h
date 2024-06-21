@@ -21,6 +21,7 @@ typedef struct player_s {
     int level;
     int orientation;
     time_t time;
+    bool is_elevating;
     inventory_t inventory;
     player_command_queue_t cmd_queue;
 } player_t;
