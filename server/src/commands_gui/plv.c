@@ -6,11 +6,10 @@
 */
 
 #include "server.h"
-
 #include <stdio.h>
 #include <stdlib.h>
 
-void command_plv(server_t *, player_t *player, const char *params)
+void command_plv(server_t *server, player_t *player, const char *params)
 {
     char **array = word_array_delim(params, " ");
     int size = get_array_size(array);
@@ -25,5 +24,6 @@ void command_plv(server_t *, player_t *player, const char *params)
         dprintf(player->fd, "spb\n");
         return;
     }
-    dprintf(player->fd, "plv %d %d\n", player->fd, player->level);
+    dprintf(player->fd, "plv %d %d\n",
+        player_nb, server->players[player_nb].level);
 }
