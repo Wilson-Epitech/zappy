@@ -8,6 +8,15 @@
 #include <stdbool.h>
 #include <stdlib.h>
 
+
+/**
+ * @brief Check if the character is a delimiter
+ *
+ * @param c
+ * @param separators
+ * @return true
+ * @return false
+*/
 static bool is_delim(char c, char *separators)
 {
     for (int i = 0; separators[i] != '\0'; i++) {
@@ -18,6 +27,14 @@ static bool is_delim(char c, char *separators)
     return false;
 }
 
+/**
+ * @brief Count the number of words object
+ *
+ * @param str
+ * @param i
+ * @param separators
+ * @return int
+*/
 static int count_i_nb_words(char const *str, int i, char *separators)
 {
     while (is_delim(str[i], separators)) {
@@ -26,6 +43,13 @@ static int count_i_nb_words(char const *str, int i, char *separators)
     return i;
 }
 
+/**
+ * @brief Get the number of words object
+ *
+ * @param str
+ * @param separators
+ * @return int
+*/
 static int get_nb_words(char const *str, char *separators)
 {
     int i = 0;
@@ -42,6 +66,14 @@ static int get_nb_words(char const *str, char *separators)
     return nb + 1;
 }
 
+/**
+ * @brief Get the word length object
+ *
+ * @param str
+ * @param i
+ * @param separators
+ * @return int
+ */
 static int get_word_length(char const *str, int i, char *separators)
 {
     int count = 0;
@@ -53,6 +85,13 @@ static int get_word_length(char const *str, int i, char *separators)
     return count;
 }
 
+/**
+ * @brief This function take a string in first argument and another
+ * @param str
+ * @param i
+ * @param separators
+ * @return char*
+*/
 static char *parse_word(char const *str, int *i, char *separators)
 {
     int y = 0;

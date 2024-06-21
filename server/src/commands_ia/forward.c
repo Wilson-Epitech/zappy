@@ -37,6 +37,13 @@ static void move_forward(server_t *server, player_t *player)
     }
 }
 
+/**
+ * @brief Executes the forward command.
+ * @param server The server instance.
+ * @param player The array of players.
+ * @param params The parameters sent with the command.
+ * This should be the file descriptor of the player.
+*/
 void command_forward(server_t *server, player_t *player, const char *params)
 {
     if (strcmp(params, "\0") == 1) {

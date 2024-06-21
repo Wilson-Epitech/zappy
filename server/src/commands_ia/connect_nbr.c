@@ -23,14 +23,15 @@
 */
 void command_connect_nbr(server_t *server, player_t *player, const char *)
 {
-    int players = 0;
+    int index = 0;
     int slots = 0;
 
     for (int i = 0; i < server->players_connected; ++i) {
         if (strcmp(server->teams[i].name, player->team_name) == 0) {
-            ++players;
+            index = i;
+            break;
         }
     }
-    slots = server->opt->clients_number - players;
+    slots = server->opt->clients_number - server->teams[index].player_count;
     dprintf(player->fd, "%d\n", slots);
 }

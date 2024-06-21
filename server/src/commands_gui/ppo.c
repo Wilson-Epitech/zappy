@@ -5,10 +5,9 @@
 ** ppo
 */
 
+#include "server.h"
 #include <stdio.h>
 #include <stdlib.h>
-
-#include "server.h"
 
 static int check_params(server_t *server, player_t *player, int player_nb)
 {
