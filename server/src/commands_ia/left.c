@@ -23,9 +23,17 @@
 */
 void command_left(server_t *server, player_t *player, const char *)
 {
+    char message[1024] = {0};
+
     if (player->is_elevating == false) {
         player->orientation = (player->orientation + 3) % 4;
-        dprintf(server->queue->commands[server->queue->front].client_fd,
+        dprintf(player->fd,
             "ok\n");
+        snprintf(message, 1024, "ppo %d %d %d %d\n",
+        player->fd,
+        player->x,
+        player->y,
+        player->orientation);
+        send_graphical(server, message);
     }
 }

@@ -46,6 +46,8 @@ static void move_forward(server_t *server, player_t *player)
 */
 void command_forward(server_t *server, player_t *player, const char *params)
 {
+    char message[1024] = {0};
+
     if (strcmp(params, "\0") == 1) {
         dprintf(player->fd, "ko\n");
         return;
@@ -53,5 +55,12 @@ void command_forward(server_t *server, player_t *player, const char *params)
     if (player->is_elevating == false) {
         move_forward(server, player);
         dprintf(player->fd, "ok\n");
+        snprintf(message, 1024,
+        "ppo %d %d %d %d\n",
+        player->fd,
+        player->x,
+        player->y,
+        player->orientation);
+        send_graphical(server, message);
     }
 }
