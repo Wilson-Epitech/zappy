@@ -5,7 +5,7 @@
 ** Tile
 */
 
-#include "../include/Tile.h"
+#include "Tile.hpp"
 #include <cstdlib>
 #include <ctime>
 

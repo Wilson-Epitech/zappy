@@ -9,7 +9,7 @@
 #define MENU_HPP_
 
 #include <SFML/Graphics.hpp>
-#include "Tile.h"
+#include "Tile.hpp"
 
 class Menu {
 public:

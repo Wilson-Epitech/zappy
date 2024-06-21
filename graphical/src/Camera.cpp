@@ -5,7 +5,7 @@
 ** Camera
 */
 
-#include "../include/Camera.hpp"
+#include "Camera.hpp"
 
 Camera::Camera() : camSpeed(10.0f), camZoom(1.1f) {}
 

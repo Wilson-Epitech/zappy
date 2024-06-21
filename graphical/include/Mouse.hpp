@@ -11,7 +11,7 @@
 #include <SFML/Graphics.hpp>
 #include <unordered_map>
 #include <vector>
-#include "Tile.h"
+#include "Tile.hpp"
 #include "Menu.hpp"
 #include "Camera.hpp"
 

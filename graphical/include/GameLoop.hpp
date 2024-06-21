@@ -10,12 +10,12 @@
 
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
-#include "../include/Tile.h"
-#include "../include/Camera.hpp"
-#include "../include/Parallax.hpp"
-#include "../include/Menu.hpp"
-#include "../include/Mouse.hpp"
-#include "../include/Music.hpp"
+#include "Tile.hpp"
+#include "Camera.hpp"
+#include "Parallax.hpp"
+#include "Menu.hpp"
+#include "Mouse.hpp"
+#include "Music.hpp"
 #include <vector>
 #include <unordered_map>
 #include <cstdlib>

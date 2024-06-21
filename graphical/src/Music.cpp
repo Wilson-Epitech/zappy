@@ -5,7 +5,7 @@
 ** Music
 */
 
-#include "../include/Music.hpp"
+#include "Music.hpp"
 
 Music::Music() {
     if (!music.openFromFile("assets/music.ogg")) {

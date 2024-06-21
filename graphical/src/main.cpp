@@ -5,7 +5,7 @@
 ** main
 */
 
-#include "../include/GameLoop.hpp"
+#include "GameLoop.hpp"
 
 int main() {
     gameLoop();

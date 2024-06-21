@@ -19,8 +19,8 @@ CXXFLAGS	+=	-Wall
 CXXFLAGS	+=	-Wextra
 CXXFLAGS	+=	-Werror
 CXXFLAGS	+=	-O2
-CXXFLAGS	+=	-std=c++17
-CXXFLAGS	+=	-I ./include
+CXXFLAGS	+=	-std=c++20
+CPPFLAGS	+=	-I ./include
 
 LDFLAGS += -lsfml-graphics -lsfml-audio -lsfml-window -lsfml-system
 
@@ -31,15 +31,15 @@ RED		=	\033[0;31m
 BLUE	=	\033[0;34m
 YELLOW	=	\033[0;35m
 CYAN	=	\033[1;36m
-RC 		= 	\033[0m
+RC	 	=	 \033[0m
 
 all: $(BINARY)
 
 $(BINARY): prebuild $(OBJS)
 	@ $(PRINTER) "$(YELLOW)%-40b" "Building $(PROJECT)"
-	@ $(CXX) -o $(BINARY) $(OBJS) $(LDFLAGS) && \
-	  (printf "$(GREEN)Done$(RC)\n") && mv $(BINARY) ../ || \
-	  (printf "$(RED)Fail\n")
+	@ $(CXX) -o $(BINARY) $(OBJS) $(LDFLAGS) $(CPPFLAGS) && \
+	(printf "$(GREEN)Done$(RC)\n") && mv $(BINARY) ../ || \
+	(printf "$(RED)Fail\n")
 
 prebuild:
 	@ $(PRINTER) "$(YELLOW)%b\n" "Compiling files"
@@ -57,8 +57,8 @@ fclean: clean
 re: fclean all
 
 .cpp.o:
-	@ $(CXX) -c $< -o $@ $(CFLAGS) && \
-	  (printf "$(CYAN) %b $(GREEN)「✔」$(RC)\n" $<) || \
-	  (printf "$(CYAN) %b $(RED)[XX] $(RC)\n" $< ; exit 1)
+	@ $(CXX) -c $< -o $@ $(CFLAGS) $(CPPFLAGS) && \
+	(printf "$(CYAN) %b $(GREEN)「✔」$(RC)\n" $<) || \
+	(printf "$(CYAN) %b $(RED)[XX] $(RC)\n" $< ; exit 1)
 
 .PHONY: all $(BINARY) prebuild clean fclean re .cpp.o

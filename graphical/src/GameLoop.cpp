@@ -5,7 +5,7 @@
 ** GameLoop
 */
 
-#include "../include/GameLoop.hpp"
+#include "GameLoop.hpp"
 
 void drawBoard(sf::RenderWindow& window, const std::vector<std::vector<Tile>>& tiles) {
     for (const auto& row : tiles) {

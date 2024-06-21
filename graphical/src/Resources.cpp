@@ -5,7 +5,7 @@
 ** Resources
 */
 
-#include "../include/Resources.hpp"
+#include "Resources.hpp"
 #include <cstdlib>
 #include <ctime>
 

@@ -5,7 +5,7 @@
 ** Menu
 */
 
-#include "../include/Menu.hpp"
+#include "Menu.hpp"
 #include <sstream>
 
 Menu::Menu(const sf::Vector2u& windowSize) {

@@ -5,7 +5,7 @@
 ** Mouse
 */
 
-#include "../include/Mouse.hpp"
+#include "Mouse.hpp"
 
 Mouse::Mouse() {}
 

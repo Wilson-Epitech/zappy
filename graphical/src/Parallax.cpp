@@ -5,7 +5,7 @@
 ** Parallax
 */
 
-#include "../include/Parallax.hpp"
+#include "Parallax.hpp"
 
 Parallax::Parallax() {
     parallaxTextures[0].loadFromFile("assets/parallax1.png");
