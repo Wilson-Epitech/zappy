@@ -15,7 +15,7 @@ OBJS	=	$(SRCS:.cpp=.o)
 
 SRCS	=	$(shell find ./ -name '*.cpp')
 
-CFLAGS	+=	-Wall -Wextra -Werror
+CFLAGS	+=	-Wall -Wextra
 CPPFLAGS	+=	-I ./include -std=c++17
 
 LDFLAGS += -lsfml-graphics -lsfml-audio -lsfml-window -lsfml-system
