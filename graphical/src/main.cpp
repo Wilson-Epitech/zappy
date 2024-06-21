@@ -91,7 +91,7 @@ int main(int argc, char *const *argv)
 {
     if (argc != 5) {
         print_usage(argv[0]);
-        return 1;
+        return 84;
     }
 
     std::string host;
@@ -105,7 +105,7 @@ int main(int argc, char *const *argv)
             host = argv[i + 1];
         } else {
             print_usage(argv[0]);
-            return 1;
+            return 84;
         }
     }
 
