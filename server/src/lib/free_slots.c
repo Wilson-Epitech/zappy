@@ -8,6 +8,13 @@
 #include "server.h"
 #include <string.h>
 
+/**
+ * @brief return the number of slots available in a team
+ *
+ * @param server
+ * @param player
+ * @return int
+*/
 int free_slots(server_t *server, player_t *player)
 {
     int index = 0;
