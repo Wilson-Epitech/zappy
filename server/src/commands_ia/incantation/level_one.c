@@ -20,7 +20,7 @@ void level_one(server_t *server, player_t *player)
     if (server->players_connected >= 1 && player->inventory.linemate >= 1) {
         player->level += 1;
         player->inventory.linemate -= 1;
-        dprintf(player->fd, "Current level: %d\nCurrent level: %d\n",
+        dprintf(player->fd, "Elevation underway\nCurrent level: %d\n",
             player->level);
     } else {
         dprintf(player->fd, "ko\n");

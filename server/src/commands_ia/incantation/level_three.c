@@ -23,7 +23,7 @@ void level_three(server_t *server, player_t *player)
         player->inventory.linemate -= 2;
         player->inventory.phiras -= 2;
         player->inventory.sibur -= 1;
-        dprintf(player->fd, "Current level: %d\nCurrent level: %d\n",
+        dprintf(player->fd, "Elevation underway\nCurrent level: %d\n",
             player->level);
     } else {
         dprintf(player->fd, "ko\n");

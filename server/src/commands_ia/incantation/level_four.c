@@ -25,7 +25,7 @@ void level_four(server_t *server, player_t *player)
         player->inventory.deraumere -= 1;
         player->inventory.sibur -= 2;
         player->inventory.phiras -= 1;
-        dprintf(player->fd, "Current level: %d\nCurrent level: %d\n",
+        dprintf(player->fd, "Elevation underway\nCurrent level: %d\n",
             player->level);
     } else {
         dprintf(player->fd, "ko\n");

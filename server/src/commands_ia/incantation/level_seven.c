@@ -29,7 +29,7 @@ void level_seven(server_t *server, player_t *player)
         player->inventory.mendiane -= 2;
         player->inventory.phiras -= 2;
         player->inventory.thystame -= 1;
-        dprintf(player->fd, "Current level: %d\nCurrent level: %d\n",
+        dprintf(player->fd, "Elevation underway\nCurrent level: %d\n",
             player->level);
     } else {
         dprintf(player->fd, "ko\n");
