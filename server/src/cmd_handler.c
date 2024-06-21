@@ -13,8 +13,6 @@
 #include "cmd_handler.h"
 #include <unistd.h>
 
-#include "cmd_handler.h"
-
 /**
  * @brief Array of command with GUI.
  *
