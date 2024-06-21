@@ -54,9 +54,11 @@ void command_set(server_t *server, player_t *player, const char *params)
         dprintf(player->fd, "ko\n");
         return;
     }
-    player->inventory.resources[object_type][0] -= 1;
-    server->map.tiles[player->y][player->x].resources[object_type][0] += 1;
-    snprintf(message, 1024, "pdr %d %d\n", player->fd, object_type);
-    send_graphical(server, message);
-    dprintf(player->fd, "ok\n");
+    if (player->is_elevating == false) {
+        player->inventory.resources[object_type][0] -= 1;
+        server->map.tiles[player->y][player->x].resources[object_type][0] += 1;
+        snprintf(message, 1024, "pdr %d %d\n", player->fd, object_type);
+        send_graphical(server, message);
+        dprintf(player->fd, "ok\n");
+    }
 }

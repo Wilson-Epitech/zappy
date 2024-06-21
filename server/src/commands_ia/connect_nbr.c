@@ -33,5 +33,7 @@ void command_connect_nbr(server_t *server, player_t *player, const char *)
         }
     }
     slots = server->opt->clients_number - server->teams[index].player_count;
-    dprintf(player->fd, "%d\n", slots);
+    if (player->is_elevating == false) {
+        dprintf(player->fd, "%d\n", slots);
+    }
 }

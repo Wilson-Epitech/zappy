@@ -23,9 +23,11 @@
 */
 void command_inventory(server_t *, player_t *player, const char *)
 {
-    dprintf(player->fd, "[food %d, linemate %d, deraumere %d, sibur %d, "
-    "mendiane %d, phiras %d, thystame %d]\n", player->inventory.food,
-    player->inventory.linemate, player->inventory.deraumere,
-    player->inventory.sibur, player->inventory.mendiane,
-    player->inventory.phiras, player->inventory.thystame);
+    if (player->is_elevating == false) {
+        dprintf(player->fd, "[food %d, linemate %d, deraumere %d, sibur %d, "
+        "mendiane %d, phiras %d, thystame %d]\n", player->inventory.food,
+        player->inventory.linemate, player->inventory.deraumere,
+        player->inventory.sibur, player->inventory.mendiane,
+        player->inventory.phiras, player->inventory.thystame);
+    }
 }
