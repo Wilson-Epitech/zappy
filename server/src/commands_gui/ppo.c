@@ -25,7 +25,7 @@ void command_ppo(server_t *server, player_t *player, const char *params)
 {
     char **array = word_array_delim(params, " ");
     int size = get_array_size(array);
-    player_t target = server->players[atoi(params)];
+    int player_nb = 0;
 
     if (size != 1) {
         dprintf(player->fd, "spb\n");
