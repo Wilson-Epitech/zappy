@@ -1,26 +1,25 @@
+/*
+** ZAPPY PROJECT, 2024
+** delivery
+** File description:
+** main
+*/
+
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
 #include "../include/Tile.h"
+#include "../include/Camera.hpp"
+#include "../include/Parallax.hpp"
+#include "../include/Menu.hpp"
+#include "../include/Mouse.hpp"
+#include "../include/Music.hpp"
 #include <vector>
 #include <unordered_map>
 #include <cstdlib>
 #include <ctime>
-#include <sstream>
 
 const int boardWidth = 10;
 const int boardHeight = 10;
-const float moveSpeed = 10.0f;
-const float zoomCam = 1.1f;
-
-void moveParallax(sf::Sprite& layer, float moveSpeed, sf::Vector2f direction) {
-    layer.move(direction * moveSpeed);
-    if (layer.getPosition().x < -layer.getGlobalBounds().width) {
-        layer.setPosition(layer.getPosition().x + layer.getGlobalBounds().width * 2, layer.getPosition().y);
-    }
-    if (layer.getPosition().x > layer.getGlobalBounds().width) {
-        layer.setPosition(layer.getPosition().x - layer.getGlobalBounds().width * 2, layer.getPosition().y);
-    }
-}
 
 void drawBoard(sf::RenderWindow& window, const std::vector<std::vector<Tile>>& tiles) {
     for (const auto& row : tiles) {
@@ -85,28 +84,11 @@ int main() {
     sf::View view = window.getDefaultView();
     std::vector<std::vector<Tile>> tiles;
 
-    sf::Texture parallax1;
-    parallax1.loadFromFile("assets/parallax1.png");
-    sf::Texture parallax2;
-    parallax2.loadFromFile("assets/parallax2.png");
-    sf::Texture parallax3;
-    parallax3.loadFromFile("assets/parallax3.png");
-    sf::Texture parallax4;
-    parallax4.loadFromFile("assets/parallax4.png");
-
-    sf::Sprite backgroundLayer1(parallax1);
-    sf::Sprite backgroundLayer2(parallax2);
-    sf::Sprite backgroundLayer3(parallax3);
-    sf::Sprite backgroundLayer4(parallax4);
-
-    backgroundLayer1.setScale(10.0f, 10.0f);
-    backgroundLayer2.setScale(10.0f, 10.0f);
-    backgroundLayer3.setScale(10.0f, 10.0f);
-    backgroundLayer4.setScale(10.0f, 10.0f);
-    backgroundLayer1.setPosition(-1920, -1080);
-    backgroundLayer2.setPosition(-1920, -1080);
-    backgroundLayer3.setPosition(-1920, -1080);
-    backgroundLayer4.setPosition(-1920, -1080);
+    Music music;
+    Camera camera;
+    Parallax parallax;
+    Menu menu(window.getSize());
+    Mouse mouse;
 
     sf::Texture groundTexture;
     groundTexture.loadFromFile("assets/tile.png");
@@ -142,12 +124,6 @@ int main() {
         {12, &mageTexture},
     };
 
-    sf::Music music;
-    if (!music.openFromFile("assets/music.ogg")) {
-        return -1;
-    }
-    music.setLoop(true);
-    music.setVolume(10);
     music.play();
 
     const int groundTileWidth = 32;
@@ -165,85 +141,23 @@ int main() {
         tiles.push_back(rowTiles);
     }
 
-    sf::RectangleShape infoRect(sf::Vector2f(window.getSize().x, 150));
-    infoRect.setFillColor(sf::Color(0, 0, 0, 150));
-    infoRect.setPosition(0, window.getSize().y - 150);
-    sf::Font font;
-    if (!font.loadFromFile("assets/font.ttf")) {
-        return -1;
-    }
-    sf::Text infoText("", font, 30);
-    infoText.setFillColor(sf::Color::White);
-    infoText.setPosition(10, window.getSize().y - 150);
+    Tile* selectedTile = nullptr;
     bool tileSelected = false;
 
     while (window.isOpen()) {
         sf::Event event;
         while (window.pollEvent(event)) {
-            sf::Vector2f worldPos = window.mapPixelToCoords(sf::Mouse::getPosition(window), view);
             if (event.type == sf::Event::Closed)
                 window.close();
-            else if (event.type == sf::Event::MouseWheelScrolled) {
-                if (event.mouseWheelScroll.delta > 0) {
-                    view.zoom(1.0f / zoomCam);
-                } else if (event.mouseWheelScroll.delta < 0) {
-                    view.zoom(zoomCam);
-                }
-            }
-            else if (event.type == sf::Event::MouseMoved) {
-                for (auto& row : tiles) {
-                    for (auto& tile : row) {
-                        if (tile.contains(worldPos)) {
-                            tile.setHovered(true);
-                        } else {
-                            tile.setHovered(false);
-                        }
-                    }
-                }
-            }
-            else if (event.type == sf::Event::MouseButtonPressed){
-                handleMouseClick(window, tiles, sf::Vector2i(worldPos), tileSelected, infoText, textures);
-            }
+            mouse.handleAllMouseEvents(window, view, event, tiles, selectedTile, menu, tileSelected, camera);
         }
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Z)) {
-            view.move(0, -moveSpeed);
-            moveParallax(backgroundLayer1, 0.1f, sf::Vector2f(0, -moveSpeed));
-            moveParallax(backgroundLayer2, 0.2f, sf::Vector2f(0, -moveSpeed));
-            moveParallax(backgroundLayer3, 0.3f, sf::Vector2f(0, -moveSpeed));
-            moveParallax(backgroundLayer4, 0.4f, sf::Vector2f(0, -moveSpeed));
-        }
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
-            view.move(0, moveSpeed);
-            moveParallax(backgroundLayer1, 0.1f, sf::Vector2f(0, moveSpeed));
-            moveParallax(backgroundLayer2, 0.2f, sf::Vector2f(0, moveSpeed));
-            moveParallax(backgroundLayer3, 0.3f, sf::Vector2f(0, moveSpeed));
-            moveParallax(backgroundLayer4, 0.4f, sf::Vector2f(0, moveSpeed));
-        }
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q)) {
-            view.move(-moveSpeed, 0);
-            moveParallax(backgroundLayer1, 0.1f, sf::Vector2f(-moveSpeed, 0));
-            moveParallax(backgroundLayer2, 0.2f, sf::Vector2f(-moveSpeed, 0));
-            moveParallax(backgroundLayer3, 0.3f, sf::Vector2f(-moveSpeed, 0));
-            moveParallax(backgroundLayer4, 0.4f, sf::Vector2f(-moveSpeed, 0));
-        }
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
-            view.move(moveSpeed, 0);
-            moveParallax(backgroundLayer1, 0.1f, sf::Vector2f(moveSpeed, 0));
-            moveParallax(backgroundLayer2, 0.2f, sf::Vector2f(moveSpeed, 0));
-            moveParallax(backgroundLayer3, 0.3f, sf::Vector2f(moveSpeed, 0));
-            moveParallax(backgroundLayer4, 0.4f, sf::Vector2f(moveSpeed, 0));
-        }
-
-        /* Press A to randomly change the tiles ressources (will be replaced) */
-
+        camera.handleMovement(view, parallax);
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
             std::unordered_map<int, int> newResources = {{0, 1}, {1, 1}, {2, 1}, {3, 1}, {4, 1}, {5, 1}, {6, 1}};
             for (int i = 0; i < boardWidth; i++)
                 for (int j = 0; j < boardHeight; j++)
                     tiles[i][j].setResources(newResources, textures);
         }
-
-        /* Press C to add characters (will be replaced) */
 
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::C)) {
             std::unordered_map<int, int> newCharacters = {{10, 1}, {11, 1}, {12, 1}};
@@ -254,18 +168,10 @@ int main() {
         updateBoard(tiles);
         window.clear();
         window.setView(view);
-
-        window.draw(backgroundLayer1);
-        window.draw(backgroundLayer2);
-        window.draw(backgroundLayer3);
-        window.draw(backgroundLayer4);
-
+        parallax.draw(window);
         drawBoard(window, tiles);
         window.setView(window.getDefaultView());
-        if (tileSelected) {
-            window.draw(infoRect);
-            window.draw(infoText);
-        }
+        menu.draw(window, tileSelected);
         window.display();
     }
     return 0;
