@@ -35,7 +35,6 @@ void handle_teams(server_t *server, char *name, int index)
 void handle_disconnect(server_t *server, int client_fd)
 {
     printf("Client disconnected: %d\n", client_fd);
-    --server->players_connected;
     for (int i = 0; i < server->players_connected; ++i) {
         if (strcmp(server->teams[i].name, server->players[client_fd].team_name)
             == 0) {
@@ -43,4 +42,5 @@ void handle_disconnect(server_t *server, int client_fd)
             break;
         }
     }
+    --server->players_connected;
 }
