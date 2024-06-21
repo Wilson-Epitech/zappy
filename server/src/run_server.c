@@ -18,7 +18,7 @@
  */
 static void check_sockets(server_t *server, fd_set *read_fds)
 {
-    if (select(FD_SETSIZE, read_fds, NULL, NULL, NULL) == -1) {
+    if (select(FD_SETSIZE, read_fds, NULL, NULL, &server->tv) == -1) {
         perror("select");
         close(server->fd);
         exit(FAILURE);
@@ -69,5 +69,8 @@ void run_server(server_t *server)
         read_fds = server->read_fd;
         check_sockets(server, &read_fds);
         handle_read_fds(server, &read_fds);
+        handle_command_queue(server->queue, server, &server->players
+            [server->queue->commands[server->queue->front].client_fd]);
+        death_player(server);
     }
 }

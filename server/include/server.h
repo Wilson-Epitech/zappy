@@ -34,6 +34,7 @@ typedef struct server_s {
     int fd;
     int players_connected;
     struct sockaddr_in addr;
+    struct timeval tv;
     fd_set read_fd;
     fd_set write_fd;
     player_t players[MAX_CLIENTS];
@@ -65,6 +66,7 @@ void command_pnw(server_t *server, int client_fd);
 void handle_command_queue(player_command_queue_t *queue, server_t *server,
     player_t *player);
 void init_queue(server_t *server);
+void death_player(server_t *server);
 
 /* handle_teams.c */
 

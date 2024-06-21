@@ -49,7 +49,8 @@ command_handler_t command_handlers_ia[] = {
     {"Look", command_look, 7},
     {"Inventory", command_inventory, 1},
     {"Broadcast", command_broadcast, 7},
-    {"Connect_nbr", command_connect_nbr, 0},
+    {"Eject", command_eject, 7},
+    {"Fork", command_fork, 42},
     {NULL, NULL, 0}
 };
 
@@ -72,7 +73,6 @@ void process_command(server_t *server, player_t *player, char *cmd)
     for (int i = 0; command_handlers[i].func != NULL; ++i) {
         if (strcmp(command_handlers[i].name, array[0]) == 0) {
             is_passed = true;
-            params = cmd + strlen(command_handlers[i].name) + 1;
             printf("Params: `%s`\n", params);
             command_handlers[i].func(server, player, params);
             break;
@@ -102,12 +102,13 @@ void handle_command_queue(player_command_queue_t *queue, server_t *server,
 }
 
 static void enqueue_command(player_command_queue_t *queue, const char *cmd,
-    int execution_time)
+    int execution_time, int client_fd)
 {
     if (queue->count < 10) {
         queue->commands[queue->rear].cmd = strdup(cmd);
         queue->commands[queue->rear].execution_time =
             time(NULL) + execution_time;
+        queue->commands[queue->rear].client_fd = client_fd;
         queue->rear = (queue->rear + 1) % 10;
         queue->count++;
     }
@@ -120,7 +121,7 @@ static void enqueue_command(player_command_queue_t *queue, const char *cmd,
  * @param player The player instance.
  * @param cmd The command to process.
  */
-void process_command_ia(server_t *, player_t *player, char *cmd,
+void process_command_ia(server_t *server, player_t *player, char *cmd,
     player_command_queue_t *queue)
 {
     char *params = {0};
@@ -132,7 +133,9 @@ void process_command_ia(server_t *, player_t *player, char *cmd,
             is_passed = true;
             params = cmd + strlen(command_handlers_ia[i].name) + 1;
             printf("Params: `%s`\n", params);
-            enqueue_command(queue, cmd, command_handlers_ia[i].time);
+            queue->commands->id = i;
+            enqueue_command(queue, cmd, (command_handlers_ia[i].time /
+            server->opt->freq), player->fd);
             break;
         }
     }
