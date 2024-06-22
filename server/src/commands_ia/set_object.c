@@ -10,29 +10,6 @@
 #include <string.h>
 
 /**
- * @brief Get the item object
- *
- * @param params
- * @return tile_type_t
-*/
-static tile_type_t get_item(const char *params)
-{
-    const char *item_names[ITEM_COUNT] = {
-    "food", "linemate", "deraumere", "sibur",
-    "mendiane", "phiras", "thystame"
-    };
-
-    if (strcmp(params, "\0") == 0)
-        return ITEM_COUNT;
-    for (int i = 0; i < ITEM_COUNT - 2; ++i) {
-        if (strcmp(params, item_names[i]) == 0) {
-            return (tile_type_t)i;
-        }
-    }
-    return ITEM_COUNT;
-}
-
-/**
  * @brief Set an object on the map.
  *
  * @param server
@@ -41,7 +18,7 @@ static tile_type_t get_item(const char *params)
 */
 void command_set(server_t *server, player_t *player, const char *params)
 {
-    tile_type_t object_type = get_item(params);
+    tile_type_t object_type = get_object(params);
     int *ressources = NULL;
     char message[1024];
 
