@@ -51,7 +51,7 @@ int get_args(server_t *server, char *const *argv);
 
 //--------server.c -------------------------------//
 void init_server(server_t *server, options_t *opt);
-void run_server(server_t *server);
+void run_server(server_t *server, tile_density_t *tile_density);
 void accept_client(server_t *server);
 void handle_client(server_t *server, int client_fd);
 void process_command(server_t *server, player_t *player, char *cmd);
@@ -69,6 +69,9 @@ void death_player(server_t *server);
 void clear_client(server_t *server, int client_fd);
 void set_player_team(server_t *server, int client_fd, int i);
 void decrement_food(server_t *server);
+void init_tiles_quantity(tile_density_t *tile_density);
+// void refill_map(server_t *server, time_t *start_time,
+//     tile_density_t *density);
 
 /* handle_teams.c */
 
