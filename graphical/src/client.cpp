@@ -7,6 +7,10 @@
 
 #include "client.hpp"
 #include <iostream>
+#include <vector>
+#include <string>
+#include <sstream>
+#include <format>
 
 Client::Client(const std::string &host, short port)
     : io_context_(), socket_(io_context_), endpoint_(boost::asio::ip::address::from_string(host), port)
@@ -63,17 +67,40 @@ void Client::send(const std::string &message)
     boost::asio::write(socket_, boost::asio::buffer(message + "\n"));
 }
 
-static std::vector<std::string> split(const std::string &str, char delimiter)
-{
-    std::vector<std::string> tokens;
-    std::istringstream iss(str);
-    std::string token;
+static std::vector<std::vector<std::string>> split(const std::string &str, char lineDelimiter, char tokenDelimiter) {
+    std::vector<std::vector<std::string>> lines;
+    size_t lineStart = 0, lineEnd = 0, tokenStart = 0, tokenEnd = 0;
 
-    while (std::getline(iss, token, delimiter)) {
-        tokens.push_back(token);
+    while ((lineEnd = str.find(lineDelimiter, lineStart)) != std::string::npos) {
+        std::vector<std::string> tokens;
+        std::string line = str.substr(lineStart, lineEnd - lineStart);
+        tokenStart = 0;
+
+        while ((tokenEnd = line.find(tokenDelimiter, tokenStart)) != std::string::npos) {
+            tokens.push_back(line.substr(tokenStart, tokenEnd - tokenStart));
+            tokenStart = tokenEnd + 1;
+        }
+        tokens.push_back(line.substr(tokenStart));
+
+        lines.push_back(tokens);
+        lineStart = lineEnd + 1;
     }
 
-    return tokens;
+    if (lineStart < str.size()) {
+        std::vector<std::string> tokens;
+        std::string line = str.substr(lineStart);
+        tokenStart = 0;
+
+        while ((tokenEnd = line.find(tokenDelimiter, tokenStart)) != std::string::npos) {
+            tokens.push_back(line.substr(tokenStart, tokenEnd - tokenStart));
+            tokenStart = tokenEnd + 1;
+        }
+        tokens.push_back(line.substr(tokenStart));
+
+        lines.push_back(tokens);
+    }
+
+    return lines;
 }
 
 void Client::get_pnw(std::vector<std::string> tokens)
@@ -136,6 +163,9 @@ void Client::get_tna(std::vector<std::string> tokens)
 
 void Client::get_bct(std::vector<std::string> tokens)
 {
+    if (tokens.size() < 10) {
+        return;
+    }
     int x = std::stoi(tokens[1]);
     int y = std::stoi(tokens[2]);
     int food = std::stoi(tokens[3]);
@@ -181,29 +211,55 @@ void Client::get_pin(std::vector<std::string> tokens)
     int thystame = std::stoi(tokens[10]);
 }
 
+void Client::get_plv(std::vector<std::string> tokens)
+{
+    int player = std::stoi(tokens[1]);
+    std::cout << player << '\n';
+    int level = std::stoi(tokens[2]);
+    std::cout << level << '\n';
+}
+
 void Client::receive()
 {
     try {
         boost::asio::streambuf buf;
-        boost::asio::read_until(socket_, buf, "\n");
-        std::istream is(&buf);
-        std::string message;
-        std::getline(is, message);
-        std::cout << "Server: " << message << std::endl;
+        std::size_t bytes_transferred = boost::asio::read_until(socket_, buf, "\n");
+        if (bytes_transferred == 0) {
+            throw std::runtime_error("Server disconnected");
+        }
+        std::ostringstream sline;
 
-        std::vector<std::string> tokens = split(message, ' ');
-        if (tokens.size() > 0 && tokens[0] == "pnw")
-            get_pnw(tokens);
-        if (tokens.size() > 0 && tokens[0] == "ppo")
-            get_ppo(tokens);
-        if (tokens.size() > 0 && tokens[0] == "bct")
-            get_bct(tokens);
-        if (tokens.size() > 0 && tokens[0] == "pin")
-            get_pin(tokens);
-        if (tokens.size() > 0 && tokens[0] == "msz")
-            get_msz(tokens);
-        if (tokens.size() > 0 && tokens[0] == "tna")
-            get_tna(tokens);
+        sline << &buf;
+        std::string line = sline.str();
+        std::cout << line;
+        std::vector<std::vector<std::string>> tokens = split(line, '\n', ' ');
+
+        for (auto &line : tokens) {
+            if (line.size() == 0) {
+                continue;
+            }
+            if (line[0] == "pnw") {
+                get_pnw(line);
+            }
+            if (line[0] == "ppo") {
+                get_ppo(line);
+            }
+            if (line.size() >= 10 && line[0] == "bct") {
+                get_bct(line);
+            }
+            if (line[0] == "pin") {
+                get_pin(line);
+            }
+            if (line[0] == "msz") {
+                get_msz(line);
+            }
+            if (line[0] == "tna") {
+                get_tna(line);
+            }
+            if (line[0] == "plv") {
+                get_plv(line);
+            }
+        }
     } catch (std::exception &e) {
         std::cerr << "Exception in receive: " << e.what() << std::endl;
         return;
