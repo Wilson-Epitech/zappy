@@ -25,8 +25,12 @@ void command_left(server_t *server, player_t *player, const char *)
 {
     char message[1024] = {0};
 
-    if (player->is_elevating == false) {
-        player->orientation = (player->orientation + 3) % 4;
+   if (!player->is_elevating) {
+        if (player->orientation == 1) {
+            player->orientation = 4;
+        } else {
+            player->orientation = player->orientation - 1;
+        }
         dprintf(player->fd,
             "ok\n");
         snprintf(message, 1024, "ppo %d %d %d %d\n",

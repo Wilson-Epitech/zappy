@@ -21,19 +21,14 @@
 */
 static void move_forward(server_t *server, player_t *player)
 {
-    if (player->orientation == 0) {
-        player->y = (player->y - 1 + server->opt->map_height)
-        % server->opt->map_height;
-    }
     if (player->orientation == 1) {
-        player->y = (player->y + 1) % server->opt->map_height;
-    }
-    if (player->orientation == 2) {
-        player->x = (player->x + 1) % server->opt->map_width;
-    }
-    if (player->orientation == 3) {
-        player->x = (player->x - 1 + server->opt->map_width)
-        % server->opt->map_width;
+        player->y = (player->y - 1 + server->opt->map_width) % server->opt->map_width;
+    } else if (player->orientation == 2) {
+        player->x = (player->x + 1) % server->opt->map_height;
+    } else if (player->orientation == 3) {
+        player->y = (player->y + 1) % server->opt->map_width;
+    } else if (player->orientation == 4) {
+        player->x = (player->x - 1 + server->opt->map_height) % server->opt->map_height;
     }
 }
 

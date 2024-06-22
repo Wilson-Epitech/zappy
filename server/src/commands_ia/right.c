@@ -26,7 +26,7 @@ void command_right(server_t *server, player_t *player, const char *)
     char message[1024] = {0};
 
     if (player->is_elevating == false) {
-        player->orientation = (player->orientation + 1) % 4;
+        player->orientation = (player->orientation % 4) + 1;
         dprintf(player->fd, "ok\n");
         snprintf(message, 1024, "ppo %d %d %d %d\n",
         player->fd,

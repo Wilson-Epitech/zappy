@@ -20,7 +20,7 @@ void init_player(player_t *player, int fd)
     player[fd].x = 0;
     player[fd].y = 0;
     memset(player[fd].team_name, 0, 0);
-    player[fd].orientation = 0;
+    player[fd].orientation = 1;
     player[fd].fd = fd;
     init_inventory(player, fd);
 }
