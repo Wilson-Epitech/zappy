@@ -46,9 +46,6 @@ typedef struct server_s {
     bool is_end;
 } server_t;
 
-//--------lib -------------------------------//
-int get_array_size(char **array);
-
 //--------main.c -------------------------------//
 int get_args(server_t *server, char *const *argv);
 
@@ -69,6 +66,8 @@ void handle_command_queue(player_command_queue_t *queue, server_t *server,
     player_t *player);
 void init_queue(server_t *server);
 void death_player(server_t *server);
+void clear_client(server_t *server, int client_fd);
+void set_player_team(server_t *server, int client_fd, int i);
 
 /* handle_teams.c */
 
@@ -80,7 +79,11 @@ char **word_array_delim(char const *str, char *separators);
 int get_array_size(char **array);
 void send_graphical(server_t *server, const char *message);
 int free_slots(server_t *server, player_t *player);
+bool is_player_connect(server_t *server, int fd);
+tile_type_t get_object(const char *params);
 
+//---------command_server -------------------------------//
+void process_server_command(server_t *server, player_t *player, char *cmd);
 
 
 #endif /* !SERVER_H_ */

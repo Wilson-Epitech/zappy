@@ -79,6 +79,7 @@ void init_server(server_t *server, options_t *opt)
     FD_ZERO(&server->read_fd);
     FD_ZERO(&server->write_fd);
     FD_SET(server->fd, &server->read_fd);
+    FD_SET(0, &server->read_fd);
     init_map(server);
     printf("Server initialized on port %d\n", server->port);
 }

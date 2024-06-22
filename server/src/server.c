@@ -22,7 +22,7 @@
  * @param server The server instance.
  * @param client_fd The file descriptor of the client to clear.
  */
-static void clear_client(server_t *server, int client_fd)
+void clear_client(server_t *server, int client_fd)
 {
     close(client_fd);
     FD_CLR(client_fd, &server->read_fd);
@@ -48,13 +48,16 @@ static void read_client_data(server_t *server,
     int client_fd, ssize_t, char *buffer)
 {
     printf("Received from %d: `%s`\n", client_fd, buffer);
-    if (server->players[client_fd].team_id == -2) {
+    if (server->players[client_fd].team_id == -2 && client_fd != 0) {
         printf("%d\n", server->players[client_fd].id);
         process_command(server, &server->players[client_fd], buffer);
         return;
-    } else if (server->players[client_fd].team_id > -1) {
+    } else if (server->players[client_fd].team_id > -1 && client_fd != 0) {
         process_command_ia(server, &server->players[client_fd], buffer,
             server->queue);
+    }
+    if (client_fd == 0) {
+        process_server_command(server, &server->players[client_fd], buffer);
     }
 }
 
@@ -66,25 +69,20 @@ static void read_client_data(server_t *server,
 */
 static void handle_team(server_t *server, int client_fd, char *buffer)
 {
-    if (strcmp("GRAPHIC", buffer) == 0)
+    if (strcmp("GRAPHIC", buffer) == 0) {
         server->players[client_fd].team_id = -2;
+        return;
+    }
     for (int i = 0; i < get_array_size(server->opt->names); ++i) {
         if (strcmp(server->opt->names[i], buffer) == 0
         && server->teams[i].player_count + 1 <= server->opt->clients_number) {
             handle_teams(server, server->opt->names[i], i);
-            server->players[client_fd].team_id = i;
-            server->players[client_fd].team_name =
-                malloc(sizeof(char) * (strlen(server->opt->names[i]) + 1));
-            strcpy(server->players[client_fd].team_name,
-                server->opt->names[i]);
-            dprintf(client_fd, "%d\n",
-                free_slots(server, &server->players[client_fd]));
-            dprintf(client_fd, "%ld %ld\n",
-                server->opt->map_height, server->opt->map_width);
+            set_player_team(server, client_fd, i);
             command_pnw(server, client_fd);
-            break;
+            return;
         }
     }
+    dprintf(client_fd, "ko\n");
 }
 
 /**

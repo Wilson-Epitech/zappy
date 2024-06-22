@@ -25,7 +25,7 @@ void command_left(server_t *server, player_t *player, const char *)
 {
     char message[1024] = {0};
 
-   if (!player->is_elevating) {
+    if (!player->is_elevating) {
         if (player->orientation == 1) {
             player->orientation = 4;
         } else {

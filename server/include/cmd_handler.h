@@ -15,6 +15,11 @@ typedef struct command_handler_s {
     int time;
 } command_handler_t;
 
+typedef struct command_server_s {
+    char *name;
+    void(*func)(server_t *, player_t *, char **);
+} command_server_t;
+
 /* Commands GUI */
 void command_msz(server_t *server, player_t *player, const char *params);
 void command_sgt(server_t *server, player_t *player, const char *params);
@@ -43,5 +48,12 @@ void command_eject(server_t *server, player_t *player, const char *);
 void command_fork(server_t *, player_t *, const char *);
 void command_incantation(server_t *server,
     player_t *player, const char *params);
+
+/* Commands Server*/
+void command_give(server_t *, player_t *player, char **args);
+void command_teleport(server_t *server, player_t *player, char **args);
+void command_set_level(server_t *server, player_t *player, char **args);
+void command_immortal(server_t *server, player_t *player, char **args);
+void command_kill(server_t *server, player_t *player, char **args);
 
 #endif /* !CMD_HANDLER_H_ */
