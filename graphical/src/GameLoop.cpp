@@ -138,14 +138,14 @@ void gameLoop(Client& client) {
             updateClock.restart();
         }
 
-        updateCharacters(characters);
         updateResources(resources);
+        updateCharacters(characters);
         window.clear();
         window.setView(view);
         parallax.draw(window);
         drawBoard(window, tiles);
-        drawCharacters(window, characters);
         drawResources(window, resources);
+        drawCharacters(window, characters);
         window.setView(window.getDefaultView());
         menu.draw(window, tileSelected);
         window.display();

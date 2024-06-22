@@ -70,7 +70,7 @@ void Character::setTextures(const std::unordered_map<int, sf::Texture*>& texture
         case 2: sprite.setTexture(*textures.at(12)); break;
         case 3: sprite.setTexture(*textures.at(13)); break;
     }
-    sprite.setPosition(pos_x_ * 100.0f + 25.0f, pos_y_ * 100.0f + 5.0f);
+    sprite.setPosition(pos_x_ * 100.0f + 25.0f, pos_y_ * 100.0f - 25.0f);
 }
 
 void Character::updateAnimation() {
