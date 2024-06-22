@@ -10,7 +10,6 @@
 #include <vector>
 #include <string>
 #include <sstream>
-#include <format>
 
 Client::Client(const std::string &host, short port)
     : io_context_(), socket_(io_context_), endpoint_(boost::asio::ip::address::from_string(host), port)
@@ -219,6 +218,11 @@ void Client::get_plv(std::vector<std::string> tokens)
     std::cout << level << '\n';
 }
 
+void Client::get_pdi(std::vector<std::string> tokens)
+{
+    int player = std::stoi(tokens[1]);
+}
+
 void Client::receive()
 {
     try {
@@ -258,6 +262,9 @@ void Client::receive()
             }
             if (line[0] == "plv") {
                 get_plv(line);
+            }
+            if (line[0] == "pdi") {
+                get_pdi(line);
             }
         }
     } catch (std::exception &e) {

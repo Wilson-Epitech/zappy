@@ -41,6 +41,7 @@ private:
     void get_bct(std::vector<std::string> tokens);
     void get_pin(std::vector<std::string> tokens);
     void get_plv(std::vector<std::string> tokens);
+    void get_pdi(std::vector<std::string> tokens);
 
     boost::asio::io_context io_context_;
     boost::asio::ip::tcp::socket socket_;
