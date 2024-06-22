@@ -24,6 +24,10 @@
  */
 void clear_client(server_t *server, int client_fd)
 {
+    char message[1024] = {0};
+
+    snprintf(message, 1024, "pdi %d\n", client_fd);
+    send_graphical(server, message);
     close(client_fd);
     FD_CLR(client_fd, &server->read_fd);
     for (int i = 0; i < MAX_CLIENTS; i++) {
