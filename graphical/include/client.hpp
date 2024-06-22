@@ -14,6 +14,7 @@
 #include <mutex>
 #include "Character.hpp"
 #include "Resources.hpp"
+#include "Tile.hpp"
 
 class Client {
 public:
@@ -24,6 +25,9 @@ public:
 
     const std::vector<Character>& getCharacters() const;
     const std::vector<Resources>& getResources() const;
+    int getMapWidth() const;
+    int getMapHeight() const;
+    std::vector<std::string> getTeamNames() const;
 
 private:
     void connect();
@@ -45,6 +49,11 @@ private:
     mutable std::mutex charactersMutex_;
     std::vector<Resources> resources_;
     mutable std::mutex resourcesMutex_;
+    mutable std::mutex boardMutex_;
+
+    int mapWidth;
+    int mapHeight;
+    std::vector<std::string> teamNames;
 };
 
 #endif // CLIENT_HPP

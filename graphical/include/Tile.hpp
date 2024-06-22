@@ -33,8 +33,6 @@ public:
     }
 
 private:
-    int map_x;
-    int map_y;
     int x;
     int y;
     bool isHovered;

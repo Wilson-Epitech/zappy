@@ -36,6 +36,7 @@ void Client::start_cli()
 
         std::string initial_message = "GRAPHIC";
         send(initial_message);
+        send("msz");
         send("mct");
 
         while (1) {
@@ -109,14 +110,16 @@ void Client::get_ppo(std::vector<std::string> tokens)
 void Client::get_msz(std::vector<std::string> tokens)
 {
     int map_width = std::stoi(tokens[1]);
-    std::cout << "map width : " << map_width << std::endl;
     int map_height = std::stoi(tokens[2]);
-    std::cout << "map height : " << map_height << std::endl;
+    std::lock_guard<std::mutex> lock(boardMutex_);
+    mapWidth = map_width;
+    mapHeight = map_height;
 }
 
 void Client::get_tna(std::vector<std::string> tokens)
 {
-    for (int i = 1; i < tokens.size(); ++i) {
+    std::vector<std::string> teamNames;
+    for (size_t i = 1; i < tokens.size(); ++i) {
         std::string teamName = tokens[i];
         teamName.erase(std::remove(teamName.begin(), teamName.end(), '\n'), teamName.end());
         teamName.erase(std::remove(teamName.begin(), teamName.end(), '\r'), teamName.end());
@@ -124,8 +127,11 @@ void Client::get_tna(std::vector<std::string> tokens)
         if (tnaPos != std::string::npos) {
             teamName = teamName.substr(0, tnaPos);
         }
-        std::cout << "Team name : [" << teamName << ']' << std::endl;
+        teamNames.push_back(teamName);
     }
+
+    std::lock_guard<std::mutex> lock(boardMutex_);
+    this->teamNames = teamNames;
 }
 
 void Client::get_bct(std::vector<std::string> tokens)
@@ -193,11 +199,11 @@ void Client::receive()
         if (tokens.size() > 0 && tokens[0] == "bct")
             get_bct(tokens);
         if (tokens.size() > 0 && tokens[0] == "pin")
-            get_bct(tokens);
+            get_pin(tokens);
         if (tokens.size() > 0 && tokens[0] == "msz")
-            get_bct(tokens);
+            get_msz(tokens);
         if (tokens.size() > 0 && tokens[0] == "tna")
-            get_bct(tokens);
+            get_tna(tokens);
     } catch (std::exception &e) {
         std::cerr << "Exception in receive: " << e.what() << std::endl;
         return;
@@ -214,4 +220,19 @@ const std::vector<Character>& Client::getCharacters() const
 {
     std::lock_guard<std::mutex> lock(charactersMutex_);
     return characters_;
+}
+
+int Client::getMapWidth() const
+{
+    return mapWidth;
+}
+
+int Client::getMapHeight() const
+{
+    return mapHeight;
+}
+
+std::vector<std::string> Client::getTeamNames() const
+{
+    return teamNames;
 }

@@ -8,6 +8,7 @@
 #include "GameLoop.hpp"
 #include "Character.hpp"
 #include "Resources.hpp"
+#include "Tile.hpp"
 
 void drawBoard(sf::RenderWindow& window, const std::vector<std::vector<Tile>>& tiles) {
     for (const auto& row : tiles) {
@@ -97,16 +98,14 @@ void gameLoop(Client& client) {
     };
 
     music.play();
+    int width = client.getMapWidth();
+    int height = client.getMapHeight();
 
-    const int groundTileWidth = 32;
-    const int groundTileHeight = 32;
-    const int groundTileCount = 6;
-
-    for (int row = 0; row < boardHeight; ++row) {
+    for (int row = 0; row < width; ++row) {
         std::vector<Tile> rowTiles;
-        for (int col = 0; col < boardWidth; ++col) {
-            int tileIndex = std::rand() % groundTileCount;
-            sf::IntRect textureRect(tileIndex * groundTileWidth, 0, groundTileWidth, groundTileHeight);
+        for (int col = 0; col < height; ++col) {
+            int tileIndex = std::rand() % 6;
+            sf::IntRect textureRect(tileIndex * 32, 0, 32, 32);
             Tile tile(col, row, groundTexture, textureRect);
             rowTiles.push_back(tile);
         }

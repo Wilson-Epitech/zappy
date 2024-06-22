@@ -24,9 +24,6 @@
 #include <iostream>
 #include <ctime>
 
-const int boardWidth = 10;
-const int boardHeight = 10;
-
 void drawBoard(sf::RenderWindow& window, const std::vector<std::vector<Tile>>& tiles);
 void updateBoard(std::vector<std::vector<Tile>>& tiles);
 void gameLoop(Client& client);
