@@ -7,6 +7,7 @@
 
 #include "GameLoop.hpp"
 #include "Character.hpp"
+#include "Resources.hpp"
 
 void drawBoard(sf::RenderWindow& window, const std::vector<std::vector<Tile>>& tiles) {
     for (const auto& row : tiles) {
@@ -16,11 +17,15 @@ void drawBoard(sf::RenderWindow& window, const std::vector<std::vector<Tile>>& t
     }
 }
 
-void updateBoard(std::vector<std::vector<Tile>>& tiles) {
-    for (auto& row : tiles) {
-        for (auto& tile : row) {
-            tile.updateAnimation();
-        }
+void drawResources(sf::RenderWindow& window, const std::vector<Resources>& resources) {
+    for (const auto& resource : resources) {
+        resource.draw(window);
+    }
+}
+
+void updateResources(std::vector<Resources>& resources) {
+    for (auto& resource : resources) {
+        resource.updateAnimation();
     }
 }
 
@@ -112,6 +117,7 @@ void gameLoop(Client& client) {
     bool tileSelected = false;
 
     std::vector<Character> characters;
+    std::vector<Resources> resources;
 
     while (window.isOpen()) {
         sf::Event event;
@@ -121,27 +127,26 @@ void gameLoop(Client& client) {
             mouse.handleAllMouseEvents(window, view, event, tiles, selectedTile, menu, tileSelected, camera);
         }
         camera.handleMovement(view, parallax);
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
-            std::unordered_map<int, int> newResources = {{0, 1}, {1, 1}, {2, 1}, {3, 1}, {4, 1}, {5, 1}, {6, 1}};
-            for (int i = 0; i < boardWidth; i++)
-                for (int j = 0; j < boardHeight; j++)
-                    tiles[i][j].setResources(newResources, textures);
-        }
         if (updateClock.getElapsedTime().asSeconds() >= 1.0) {
             characters = client.getCharacters();
+            resources = client.getResources();
             for (auto& character : characters) {
                 character.setTextures(textures);
+            }
+            for (auto& resource : resources) {
+                resource.setTextures(textures);
             }
             updateClock.restart();
         }
 
         updateCharacters(characters);
-        updateBoard(tiles);
+        updateResources(resources);
         window.clear();
         window.setView(view);
         parallax.draw(window);
         drawBoard(window, tiles);
         drawCharacters(window, characters);
+        drawResources(window, resources);
         window.setView(window.getDefaultView());
         menu.draw(window, tileSelected);
         window.display();

@@ -24,7 +24,7 @@ void Menu::updateInfoText(const Tile* selectedTile, bool tileSelected) {
     if (tileSelected && selectedTile) {
         std::ostringstream oss;
         oss << "Tile Position: (" << selectedTile->getX() << ", " << selectedTile->getY() << ")\t\t\t";
-        const auto& resources = selectedTile->getResources();
+        /*const auto& resources = selectedTile->getResources();
         const auto& characters = selectedTile->getCharacters();
         int totalCharacters = 0;
         for (const auto& pair : characters) {
@@ -38,7 +38,7 @@ void Menu::updateInfoText(const Tile* selectedTile, bool tileSelected) {
             if (textureNames.find(resourceId) != textureNames.end()) {
                 oss << textureNames[resourceId] << ": " << quantity << "\t\t";
             }
-        }
+        }*/
         infoText.setString(oss.str());
     } else {
         infoText.setString("");

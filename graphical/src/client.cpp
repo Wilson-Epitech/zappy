@@ -36,6 +36,7 @@ void Client::start_cli()
 
         std::string initial_message = "GRAPHIC";
         send(initial_message);
+        send("mct");
 
         while (1) {
             receive();
@@ -105,6 +106,75 @@ void Client::get_ppo(std::vector<std::string> tokens)
     }
 }
 
+void Client::get_msz(std::vector<std::string> tokens)
+{
+    int map_width = std::stoi(tokens[1]);
+    std::cout << "map width : " << map_width << std::endl;
+    int map_height = std::stoi(tokens[2]);
+    std::cout << "map height : " << map_height << std::endl;
+}
+
+void Client::get_tna(std::vector<std::string> tokens)
+{
+    for (int i = 1; i < tokens.size(); ++i) {
+        std::string teamName = tokens[i];
+        teamName.erase(std::remove(teamName.begin(), teamName.end(), '\n'), teamName.end());
+        teamName.erase(std::remove(teamName.begin(), teamName.end(), '\r'), teamName.end());
+        size_t tnaPos = teamName.rfind("tna");
+        if (tnaPos != std::string::npos) {
+            teamName = teamName.substr(0, tnaPos);
+        }
+        std::cout << "Team name : [" << teamName << ']' << std::endl;
+    }
+}
+
+void Client::get_bct(std::vector<std::string> tokens)
+{
+    int x = std::stoi(tokens[1]);
+    int y = std::stoi(tokens[2]);
+    int food = std::stoi(tokens[3]);
+    int linemate = std::stoi(tokens[4]);
+    int deraumere = std::stoi(tokens[5]);
+    int sibur = std::stoi(tokens[6]);
+    int mendiane = std::stoi(tokens[7]);
+    int phiras = std::stoi(tokens[8]);
+    int thystame = std::stoi(tokens[9]);
+
+    std::lock_guard<std::mutex> lock(resourcesMutex_);
+
+    bool found = false;
+    for (auto& resources : resources_) {
+        if (resources.getX() == x && resources.getY() == y) {
+            resources.setFood(food);
+            resources.setLinemate(linemate);
+            resources.setDeraumere(deraumere);
+            resources.setSibur(sibur);
+            resources.setMendiane(mendiane);
+            resources.setPhiras(phiras);
+            resources.setThystame(thystame);
+            found = true;
+            break;
+        }
+    }
+    if (!found) {
+        resources_.emplace_back(x, y, food, linemate, deraumere, sibur, mendiane, phiras, thystame);
+    }
+}
+
+void Client::get_pin(std::vector<std::string> tokens)
+{
+    int player = std::stoi(tokens[1]);
+    int x = std::stoi(tokens[2]);
+    int y = std::stoi(tokens[3]);
+    int food = std::stoi(tokens[4]);
+    int linemate = std::stoi(tokens[5]);
+    int deraumere = std::stoi(tokens[6]);
+    int sibur = std::stoi(tokens[7]);
+    int mendiane = std::stoi(tokens[8]);
+    int phiras = std::stoi(tokens[9]);
+    int thystame = std::stoi(tokens[10]);
+}
+
 void Client::receive()
 {
     try {
@@ -120,10 +190,24 @@ void Client::receive()
             get_pnw(tokens);
         if (tokens.size() > 0 && tokens[0] == "ppo")
             get_ppo(tokens);
+        if (tokens.size() > 0 && tokens[0] == "bct")
+            get_bct(tokens);
+        if (tokens.size() > 0 && tokens[0] == "pin")
+            get_bct(tokens);
+        if (tokens.size() > 0 && tokens[0] == "msz")
+            get_bct(tokens);
+        if (tokens.size() > 0 && tokens[0] == "tna")
+            get_bct(tokens);
     } catch (std::exception &e) {
         std::cerr << "Exception in receive: " << e.what() << std::endl;
         return;
     }
+}
+
+const std::vector<Resources>& Client::getResources() const
+{
+    std::lock_guard<std::mutex> lock(resourcesMutex_);
+    return resources_;
 }
 
 const std::vector<Character>& Client::getCharacters() const

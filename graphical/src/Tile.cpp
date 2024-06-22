@@ -10,7 +10,6 @@
 #include <ctime>
 
 const float squareSize = 100.0f;
-const float Tile::animationSpeed = 0.2f;
 
 Tile::Tile(int x, int y, sf::Texture& texture, const sf::IntRect& textureRect) : x(x), y(y) {
     sprite.setPosition(x * squareSize, y * squareSize);
@@ -55,14 +54,4 @@ bool Tile::contains(const sf::Vector2f& point) const {
 
 void Tile::drawTile(sf::RenderWindow &window) const {
     window.draw(sprite);
-    resources.drawResources(window);
 }
-
-void Tile::setResources(const std::unordered_map<int, int>& resources, const std::unordered_map<int, sf::Texture*>& textures) {
-    this->resources.setResources(resources, x, y, textures);
-}
-
-void Tile::updateAnimation() {
-    resources.updateAnimation();
-}
-

@@ -13,6 +13,7 @@
 #include <vector>
 #include <mutex>
 #include "Character.hpp"
+#include "Resources.hpp"
 
 class Client {
 public:
@@ -22,6 +23,7 @@ public:
     void start_cli();
 
     const std::vector<Character>& getCharacters() const;
+    const std::vector<Resources>& getResources() const;
 
 private:
     void connect();
@@ -30,6 +32,10 @@ private:
     void receive();
     void get_pnw(std::vector<std::string> tokens);
     void get_ppo(std::vector<std::string> tokens);
+    void get_msz(std::vector<std::string> tokens);
+    void get_tna(std::vector<std::string> tokens);
+    void get_bct(std::vector<std::string> tokens);
+    void get_pin(std::vector<std::string> tokens);
 
     boost::asio::io_context io_context_;
     boost::asio::ip::tcp::socket socket_;
@@ -37,6 +43,8 @@ private:
 
     std::vector<Character> characters_;
     mutable std::mutex charactersMutex_;
+    std::vector<Resources> resources_;
+    mutable std::mutex resourcesMutex_;
 };
 
 #endif // CLIENT_HPP
