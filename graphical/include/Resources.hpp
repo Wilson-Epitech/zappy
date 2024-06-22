@@ -10,6 +10,7 @@
 
 #include <string>
 #include <SFML/Graphics.hpp>
+#include <unordered_map>
 
 class Resources {
 public:
