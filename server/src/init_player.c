@@ -9,6 +9,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <time.h>
 
 /**
  * @brief Set the player's team
@@ -44,6 +45,7 @@ void init_player(player_t *player, int fd)
     player[fd].fd = fd;
     player[fd].is_elevating = false;
     player[fd].is_immortal = false;
+    player[fd].time = time(NULL);
     player[fd].is_dead = false;
     init_inventory(player, fd);
 }

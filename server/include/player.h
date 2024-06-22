@@ -20,6 +20,7 @@ typedef struct player_s {
     int y;
     int level;
     int orientation;
+    time_t time;
     bool is_elevating;
     bool is_immortal;
     bool is_dead;

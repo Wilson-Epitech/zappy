@@ -96,6 +96,7 @@ void run_server(server_t *server)
         handle_read_fds(server, &read_fds);
         handle_command_queue(server->queue, server, &server->players
             [server->queue->commands[server->queue->front].client_fd]);
+        decrement_food(server);
         death_player(server);
         refill_map(server, &start_time);
     }

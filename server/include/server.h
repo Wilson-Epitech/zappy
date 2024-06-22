@@ -68,6 +68,7 @@ void init_queue(server_t *server);
 void death_player(server_t *server);
 void clear_client(server_t *server, int client_fd);
 void set_player_team(server_t *server, int client_fd, int i);
+void decrement_food(server_t *server);
 
 /* handle_teams.c */
 
