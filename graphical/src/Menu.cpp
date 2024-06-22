@@ -20,30 +20,39 @@ Menu::Menu(const sf::Vector2u& windowSize) {
     infoRect.setPosition(0, windowSize.y - 150);
 }
 
-void Menu::updateInfoText(const Tile* selectedTile, bool tileSelected) {
+void Menu::updateInfoText(const Tile* selectedTile, bool tileSelected, const std::vector<Resources>& resources, const std::vector<Character>& characters) {
     if (tileSelected && selectedTile) {
         std::ostringstream oss;
-        oss << "Tile Position: (" << selectedTile->getX() << ", " << selectedTile->getY() << ")\t\t\t";
-        /*const auto& resources = selectedTile->getResources();
-        const auto& characters = selectedTile->getCharacters();
-        int totalCharacters = 0;
-        for (const auto& pair : characters) {
-            totalCharacters += pair.second;
-        }
-        oss << "Total Characters: " << totalCharacters << "\n\n";
-        oss << "Resources:\n";
-        for (const auto& pair : resources) {
-            int resourceId = pair.first;
-            int quantity = pair.second;
-            if (textureNames.find(resourceId) != textureNames.end()) {
-                oss << textureNames[resourceId] << ": " << quantity << "\t\t";
+
+        int characterCount = 0;
+        for (const auto& character : characters) {
+            if (character.getPosX() == selectedTile->getX() && character.getPosY() == selectedTile->getY()) {
+                ++characterCount;
             }
-        }*/
+        }
+
+        oss << "Tile Position : [ " << selectedTile->getX() << " ,  " << selectedTile->getY() << " ]\tCharacters : " << characterCount << "\n";
+
+        for (const auto& resource : resources) {
+            if (resource.getX() == selectedTile->getX() && resource.getY() == selectedTile->getY()) {
+                oss << "Resources :\n";
+                oss << "Food : " << resource.getFood() << "\t";
+                oss << "Linemate : " << resource.getLinemate() << "\t";
+                oss << "Deraumere : " << resource.getDeraumere() << "\t";
+                oss << "Sibur : " << resource.getSibur() << "\t";
+                oss << "Mendiane : " << resource.getMendiane() << "\t";
+                oss << "Phiras : " << resource.getPhiras() << "\t";
+                oss << "Thystame : " << resource.getThystame() << "\t";
+                break;
+            }
+        }
+
         infoText.setString(oss.str());
     } else {
         infoText.setString("");
     }
 }
+
 
 void Menu::draw(sf::RenderWindow& window, bool tileSelected) const {
     if (tileSelected) {

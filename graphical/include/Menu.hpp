@@ -10,12 +10,13 @@
 
 #include <SFML/Graphics.hpp>
 #include "Tile.hpp"
+#include "Character.hpp"
 
 class Menu {
 public:
     Menu(const sf::Vector2u& windowSize);
 
-    void updateInfoText(const Tile* selectedTile, bool tileSelected);
+    void updateInfoText(const Tile* selectedTile, bool tileSelected, const std::vector<Resources>& resources, const std::vector<Character>& characters);
     void draw(sf::RenderWindow& window, bool tileSelected) const;
 
 private:

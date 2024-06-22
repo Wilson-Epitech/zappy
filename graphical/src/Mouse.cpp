@@ -27,7 +27,7 @@ void Mouse::handleMouseMove(const sf::Vector2f& worldPos, std::vector<std::vecto
     }
 }
 
-void Mouse::handleMouseClick(sf::RenderWindow& window, const sf::Vector2f& worldPos, std::vector<std::vector<Tile>>& tiles, Tile*& selectedTile, Menu& menu, bool& tileSelected) {
+void Mouse::handleMouseClick(sf::RenderWindow& window, const sf::Vector2f& worldPos, std::vector<std::vector<Tile>>& tiles, Tile*& selectedTile, Menu& menu, bool& tileSelected, const std::vector<Resources>& resources, const std::vector<Character>& characters) {
     Tile* newSelectedTile = nullptr;
 
     for (auto& row : tiles) {
@@ -53,10 +53,10 @@ void Mouse::handleMouseClick(sf::RenderWindow& window, const sf::Vector2f& world
         tileSelected = false;
     }
 
-    menu.updateInfoText(selectedTile, tileSelected);
+    menu.updateInfoText(selectedTile, tileSelected, resources, characters);
 }
 
-void Mouse::handleAllMouseEvents(sf::RenderWindow& window, sf::View& view, const sf::Event& event, std::vector<std::vector<Tile>>& tiles, Tile*& selectedTile, Menu& menu, bool& tileSelected, Camera& camera) {
+void Mouse::handleAllMouseEvents(sf::RenderWindow& window, sf::View& view, const sf::Event& event, std::vector<std::vector<Tile>>& tiles, Tile*& selectedTile, Menu& menu, bool& tileSelected, Camera& camera, const std::vector<Resources>& resources, const std::vector<Character>& characters) {
     sf::Vector2f worldPos = window.mapPixelToCoords(sf::Mouse::getPosition(window), view);
 
     if (event.type == sf::Event::MouseWheelScrolled) {
@@ -64,6 +64,6 @@ void Mouse::handleAllMouseEvents(sf::RenderWindow& window, sf::View& view, const
     } else if (event.type == sf::Event::MouseMoved) {
         handleMouseMove(worldPos, tiles);
     } else if (event.type == sf::Event::MouseButtonPressed) {
-        handleMouseClick(window, worldPos, tiles, selectedTile, menu, tileSelected);
+        handleMouseClick(window, worldPos, tiles, selectedTile, menu, tileSelected, resources, characters);
     }
 }

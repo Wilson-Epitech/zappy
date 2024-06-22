@@ -123,7 +123,7 @@ void gameLoop(Client& client) {
         while (window.pollEvent(event)) {
             if (event.type == sf::Event::Closed)
                 window.close();
-            mouse.handleAllMouseEvents(window, view, event, tiles, selectedTile, menu, tileSelected, camera);
+            mouse.handleAllMouseEvents(window, view, event, tiles, selectedTile, menu, tileSelected, camera, resources, characters);
         }
         camera.handleMovement(view, parallax);
         if (updateClock.getElapsedTime().asSeconds() >= 1.0) {
