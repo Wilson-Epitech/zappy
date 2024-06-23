@@ -33,7 +33,7 @@ void accept_client(server_t *server)
     }
     for (int i = 0; i < MAX_CLIENTS; i++) {
         if (server->players[i].fd == 0) {
-            init_player(server->players, client_fd);
+            init_player(server, server->players, client_fd);
             FD_SET(client_fd, &server->read_fd);
             printf("Client connected: %d\n", client_fd);
             dprintf(client_fd, "WELCOME\n");

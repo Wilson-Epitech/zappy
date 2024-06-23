@@ -59,7 +59,7 @@ void process_command_ia(server_t *server, player_t *player, char *cmd,
     player_command_queue_t *queue);
 void cleanup_server(server_t *server);
 void init_inventory(player_t *player, int fd);
-void init_player(player_t *player, int fd);
+void init_player(server_t *server, player_t *player, int fd);
 void init_map(server_t *server);
 void command_pnw(server_t *server, int client_fd);
 void handle_command_queue(player_command_queue_t *queue, server_t *server,
@@ -93,6 +93,7 @@ void send_graphical(server_t *server, const char *message);
 int free_slots(server_t *server, player_t *player);
 bool is_player_connect(server_t *server, int fd);
 tile_type_t get_object(const char *params);
+int retreive_player(server_t *server, int x, int y);
 
 //---------command_server -------------------------------//
 void process_server_command(server_t *server, player_t *player, char *cmd);

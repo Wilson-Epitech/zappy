@@ -143,7 +143,7 @@ static void enqueue_command(player_command_queue_t *queue, const char *cmd,
 void process_command_ia(server_t *server, player_t *player, char *cmd,
     player_command_queue_t *queue)
 {
-    char *params = {0};
+    char *params = NULL;
     char **array = word_array_delim(cmd, " ");
     bool is_passed = false;
 
@@ -153,6 +153,7 @@ void process_command_ia(server_t *server, player_t *player, char *cmd,
             strcmp(command_handlers_ia[i].name, array[0]) == 0) {
             is_passed = true;
             params = cmd + strlen(command_handlers_ia[i].name) + 1;
+            params = params[0] == '\0' ? NULL : params;
             printf("Params: `%s`\n", params);
             queue->commands->id = i;
             enqueue_command(queue, cmd, (command_handlers_ia[i].time /

@@ -17,12 +17,19 @@
 */
 void level_two(server_t *server, player_t *player)
 {
-    if (server->players_connected >= 2 && player->inventory.linemate >= 1
-        && player->inventory.deraumere >= 1 && player->inventory.sibur >= 1) {
+    int player_fd = retreive_player(server, player->x, player->y);
+
+    if (server->players_connected >= 2
+        && server->map.tiles[player->y][player->x].player >= 2
+        && server->players[player_fd].level == player->level
+        && server->map.tiles[player->y][player->x].linemate >= 1
+        && server->map.tiles[player->y][player->x].deraumere >= 1
+        && server->map.tiles[player->y][player->x].sibur >= 1) {
         player->level += 1;
-        player->inventory.linemate -= 1;
-        player->inventory.deraumere -= 1;
-        player->inventory.sibur -= 1;
+        server->players[player_fd].level += 1;
+        server->map.tiles[player->y][player->x].resources[LINEMATE][0] -= 1;
+        server->map.tiles[player->y][player->x].resources[DERAUMERE][0] -= 1;
+        server->map.tiles[player->y][player->x].resources[SIBUR][0] -= 1;
         dprintf(player->fd, "Elevation underway\nCurrent level: %d\n",
             player->level);
     } else {

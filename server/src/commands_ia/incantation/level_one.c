@@ -17,11 +17,10 @@
 */
 void level_one(server_t *server, player_t *player)
 {
-    printf("Player %d is trying to level up to level 1\n", player->fd);
-    printf("Players connected: %d\n", server->players_connected);
-    if (server->players_connected >= 1 && player->inventory.linemate >= 1) {
+    if (server->players_connected >= 1
+        && server->map.tiles[player->y][player->x].linemate >= 1) {
         player->level += 1;
-        player->inventory.linemate -= 1;
+        server->map.tiles[player->y][player->x].resources[LINEMATE][0] -= 1;
         dprintf(player->fd, "Elevation underway\nCurrent level: %d\n",
             player->level);
     } else {
