@@ -14,7 +14,7 @@
 #include "Client.hpp"
 
 /**
- * @brief
+ * @brief Class representing the Menu
  *
  */
 class Menu {
@@ -26,7 +26,7 @@ public:
      */
     Menu(const sf::Vector2u& windowSize);
     /**
-     * @brief
+     * @brief Update the info text
      *
      * @param selectedTile
      * @param tileSelected
@@ -35,7 +35,7 @@ public:
      */
     void updateInfoText(const Tile* selectedTile, bool tileSelected, const std::vector<Resources>& resources, const std::vector<Character>& characters);
     /**
-     * @brief
+     * @brief Update the character text
      *
      * @param selectedCharacter
      * @param characterSelected
@@ -44,7 +44,7 @@ public:
      */
     void updateCharacterText(const Character* selectedCharacter, bool characterSelected, const std::vector<Character>& characters, Client& client);
     /**
-     * @brief 
+     * @brief Draw the menu
      * 
      * @param window 
      * @param tileSelected 

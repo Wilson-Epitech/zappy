@@ -23,21 +23,21 @@ public:
     Parallax();
 
     /**
-     * @brief
+     * @brief Move the parallax
      *
      * @param layer
      * @param direction
      */
     void move(sf::Sprite& layer, sf::Vector2f direction);
     /**
-     * @brief
+     * @brief Update the parallax
      *
      * @param offsetX
      * @param offsetY
      */
     void update(float offsetX, float offsetY);
     /**
-     * @brief
+     * @brief Draw the parallax
      *
      * @param window
      */

@@ -16,7 +16,7 @@
 class Client;
 
 /**
- * @brief
+ * @brief Class representing the Character
  *
  */
 class Character {
@@ -118,7 +118,7 @@ public:
      */
     void setIsDead(bool isDead);
     /**
-     * @brief
+     * @brief Set the Textures object
      *
      * @param point
      * @return true
@@ -134,12 +134,12 @@ public:
      */
     void setTextures(const std::unordered_map<int, sf::Texture*>& textures, Client& client);
     /**
-     * @brief
+     * @brief Set the Textures object
      *
      */
     void updateAnimation();
     /**
-     * @brief
+     * @brief Update the animation of the character.
      *
      * @param window
      */

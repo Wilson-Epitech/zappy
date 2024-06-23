@@ -18,7 +18,7 @@
 #include "Client.hpp"
 
 /**
- * @brief
+ * @brief Class representing the Mouse
  *
  */
 class Mouse {
@@ -30,7 +30,7 @@ public:
     Mouse();
 
     /**
-     * @brief
+     * @brief Handle the mouse scroll
      *
      * @param view
      * @param event
@@ -38,14 +38,14 @@ public:
      */
     void handleMouseScroll(sf::View& view, const sf::Event& event, Camera& camera);
     /**
-     * @brief
+     * @brief Handle the mouse move
      *
      * @param worldPos
      * @param tiles
      */
     void handleMouseMove(const sf::Vector2f& worldPos, std::vector<std::vector<Tile>>& tiles);
     /**
-     * @brief
+     * @brief Handle the mouse click
      *
      * @param window
      * @param worldPos
@@ -61,7 +61,7 @@ public:
      */
     void handleMouseClick(sf::RenderWindow& window, const sf::Vector2f& worldPos, std::vector<std::vector<Tile>>& tiles, Tile*& selectedTile, const Character*& selectedCharacter, Menu& menu, bool& tileSelected, bool& chracterSelected,const std::vector<Resources>& resources, const std::vector<Character>& characters, Client& client);
     /**
-     * @brief
+     * @brief Handle all mouse events
      *
      * @param window
      * @param view

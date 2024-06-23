@@ -11,7 +11,7 @@
 #include <SFML/Audio.hpp>
 
 /**
- * @brief
+ * @brief CLass representing the Music
  *
  */
 class Music {

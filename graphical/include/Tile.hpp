@@ -31,7 +31,7 @@ public:
     ~Tile();
 
     /**
-     * @brief
+     * @brief Draw the tile
      *
      * @param window
      */
@@ -44,26 +44,26 @@ public:
      */
     void setHovered(bool hovered);
     /**
-     * @brief
+     * @brief Contains the point
      *
      * @return bool
      */
     bool contains(const sf::Vector2f& point) const;
     /**
-     * @brief
+     * @brief Set the Selected object
      *
      * @return bool
      */
     void setSelected(bool selected);
     /**
-     * @brief
+     * @brief Is the tile selected
      *
      * @return bool
      */
     bool isSelected() const;
 
     /**
-     * @brief
+     * @brief Get the X object
      *
      * @param resources
      */
@@ -71,7 +71,7 @@ public:
         return x;
     }
     /**
-     * @brief
+     * @brief Get the Y object
      *
      * @return int
      */

@@ -19,7 +19,7 @@
 class Character;
 
 /**
- * @brief
+ * @brief Class that handles the client
  *
  */
 class Client {
@@ -34,7 +34,7 @@ public:
     ~Client();
 
     /**
-     * @brief
+     * @brief Start the client
      *
      */
     void start_cli();
@@ -119,7 +119,7 @@ public:
      */
     std::vector<std::string> getTeamNames() const;
     /**
-     * @brief
+     * @brief Send a message to the server
      *
      * @param message
      */

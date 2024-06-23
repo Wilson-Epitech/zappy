@@ -34,128 +34,128 @@ public:
     Resources(int x, int y, int food, int linemate, int deraumere, int sibur, int mendiane, int phiras, int thystame);
 
     /**
-     * @brief
+     * @brief Get the X object
      *
      * @return int
      */
     int getX() const;
     /**
-     * @brief
+     * @brief Get the Y object
      *
      * @return int
      */
     int getY() const;
     /**
-     * @brief
+     * @brief Get the Food object
      *
      * @return int
      */
     int getFood() const;
     /**
-     * @brief
+     * @brief Get the Linemate object
      *
      * @return int
      */
     int getLinemate() const;
     /**
-     * @brief
+     * @brief Get the Deraumere object
      *
      * @return int
      */
     int getDeraumere() const;
     /**
-     * @brief
+     * @brief Get the Sibur object
      *
      * @return int
      */
     int getSibur() const;
     /**
-     * @brief
+     * @brief Get the Mendiane object
      *
      * @return int
      */
     int getMendiane() const;
     /**
-     * @brief
+     * @brief Get the Phiras object
      *
      * @return int
      */
     int getPhiras() const;
     /**
-     * @brief
+     * @brief Get the Thystame object
      *
      * @return int
      */
     int getThystame() const;
 
     /**
-     * @brief
+     * @brief Set the X object
      *
      * @param x
      */
     void setX(int x);
     /**
-     * @brief
+     * @brief Set the Y object
      *
      * @param y
      */
     void setY(int y);
     /**
-     * @brief
+     * @brief Set the Food object
      *
      * @param food
      */
     void setFood(int food);
     /**
-     * @brief
+     * @brief Set the Linemate object
      *
      * @param linemate
      */
     void setLinemate(int linemate);
     /**
-     * @brief
+     * @brief Set the Deraumere object
      *
      * @param deraumere
      */
     void setDeraumere(int deraumere);
     /**
-     * @brief
+     * @brief Set the Sibur object
      *
      * @param sibur
      */
     void setSibur(int sibur);
     /**
-     * @brief
+     * @brief Set the Mendiane object
      *
      * @param mendiane
      */
     void setMendiane(int mendiane);
     /**
-     * @brief
+     * @brief Set the Phiras object
      *
      * @param phiras
      */
     void setPhiras(int phiras);
     /**
-     * @brief
+     * @brief Set the Thystame object
      *
      * @param thystame
      */
     void setThystame(int thystame);
 
     /**
-     * @brief
+     * @brief Get the Textures object
      *
      * @param textures
      */
     void setTextures(const std::unordered_map<int, sf::Texture*>& textures);
     /**
-     * @brief
+     * @brief Update the Animation object
      *
      */
     void updateAnimation();
     /**
-     * @brief
+     * @brief Draw the Resources
      *
      * @param window
      */
