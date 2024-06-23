@@ -7,7 +7,7 @@
 
 #include "Mouse.hpp"
 #include <iostream>
-#include "client.hpp"
+#include "Client.hpp"
 
 Mouse::Mouse() {}
 

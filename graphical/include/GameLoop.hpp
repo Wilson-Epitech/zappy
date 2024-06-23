@@ -17,7 +17,7 @@
 #include "Mouse.hpp"
 #include "Music.hpp"
 #include "Character.hpp"
-#include "client.hpp"
+#include "Client.hpp"
 #include <vector>
 #include <unordered_map>
 #include <cstdlib>

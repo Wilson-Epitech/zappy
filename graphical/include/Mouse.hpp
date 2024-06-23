@@ -15,7 +15,7 @@
 #include "Menu.hpp"
 #include "Camera.hpp"
 #include "Character.hpp"
-#include "client.hpp"
+#include "Client.hpp"
 
 class Mouse {
 public:

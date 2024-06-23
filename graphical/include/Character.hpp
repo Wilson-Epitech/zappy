@@ -11,7 +11,7 @@
 #include <string>
 #include <SFML/Graphics.hpp>
 #include <unordered_map>
-#include "client.hpp"
+#include "Client.hpp"
 
 class Client;
 

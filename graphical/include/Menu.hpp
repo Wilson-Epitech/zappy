@@ -11,7 +11,7 @@
 #include <SFML/Graphics.hpp>
 #include "Tile.hpp"
 #include "Character.hpp"
-#include "client.hpp"
+#include "Client.hpp"
 
 class Menu {
 public:

@@ -7,7 +7,7 @@
 
 #include "Menu.hpp"
 #include <sstream>
-#include "client.hpp"
+#include "Client.hpp"
 
 Menu::Menu(const sf::Vector2u& windowSize) {
     if (!font.loadFromFile("graphical/assets/font.ttf"))
