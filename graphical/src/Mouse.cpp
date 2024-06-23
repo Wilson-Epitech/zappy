@@ -10,7 +10,7 @@
 #include "Client.hpp"
 
 /**
-    * @brief Constructor for the Mouse class.
+* @brief Constructor for the Mouse class.
 */
 Mouse::Mouse() {}
 

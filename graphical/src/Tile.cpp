@@ -9,7 +9,7 @@
 #include <cstdlib>
 #include <ctime>
 
-///< The size of the square.
+/// The size of the square.
 const float squareSize = 100.0f;
 
 /**
