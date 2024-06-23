@@ -28,7 +28,7 @@ static const int SUCCESS = 0;
 static const int FAILURE = 84;
 
     #define MAX_CLIENTS 100
-    #define MAX_TEAMS 10
+    #define MAX_TEAMS 6
 
 typedef struct server_s {
     int port;
@@ -71,6 +71,7 @@ void set_player_team(server_t *server, int client_fd, int i);
 void decrement_food(server_t *server);
 void init_tiles_quantity(tile_density_t *tile_density);
 void refill_map(server_t *server);
+void init_teams(server_t *server);
 
 /* handle_teams.c */
 

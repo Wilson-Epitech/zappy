@@ -21,7 +21,8 @@ int free_slots(server_t *server, player_t *player)
     int slots = 0;
 
     for (int i = 0; i < server->players_connected; ++i) {
-        if (strcmp(server->teams[i].name, player->team_name) == 0) {
+        if (server->teams[i].name &&
+            strcmp(server->teams[i].name, player->team_name) == 0) {
             index = i;
             break;
         }
