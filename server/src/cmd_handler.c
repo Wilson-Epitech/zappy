@@ -157,7 +157,6 @@ void process_command_ia(server_t *server, player_t *player, char *cmd,
             break;
         }
     }
-    if (!is_passed) {
+    if (!is_passed)
         dprintf(player->fd, "ko\n");
-    }
 }
