@@ -26,7 +26,6 @@ void process_server_command(server_t *server, player_t *player, char *cmd)
 
     if (array == NULL)
         return;
-    printf("Processing command: `%s`\n", array[0]);
     for (int i = 0; command_server[i].func != NULL; ++i) {
         if (command_server[i].name && array[0] &&
             strcmp(command_server[i].name, array[0]) == 0) {

@@ -72,13 +72,11 @@ void process_command(server_t *server, player_t *player, char *cmd)
 
     if (array == NULL)
         return;
-    printf("Processing command: `%s`\n", array[0]);
     for (int i = 0; command_handlers[i].func != NULL; ++i) {
         if (command_handlers[i].name && array[0] &&
             strcmp(command_handlers[i].name, array[0]) == 0) {
             is_passed = true;
             params = cmd + strlen(command_handlers[i].name) + 1;
-            printf("Params: `%s`\n", params);
             command_handlers[i].func(server, player, params);
             break;
         }
@@ -147,14 +145,12 @@ void process_command_ia(server_t *server, player_t *player, char *cmd,
     char **array = word_array_delim(cmd, " ");
     bool is_passed = false;
 
-    printf("Processing command: `%s`\n", cmd);
     for (int i = 0; command_handlers_ia[i].func != NULL; ++i) {
         if (command_handlers_ia[i].name && array[0] != NULL &&
             strcmp(command_handlers_ia[i].name, array[0]) == 0) {
             is_passed = true;
             params = cmd + strlen(command_handlers_ia[i].name) + 1;
             params = params[0] == '\0' ? NULL : params;
-            printf("Params: `%s`\n", params);
             queue->commands->id = i;
             enqueue_command(queue, cmd, (command_handlers_ia[i].time /
             server->opt->freq), player->fd);

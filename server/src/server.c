@@ -52,9 +52,7 @@ void clear_client(server_t *server, int client_fd)
 static void read_client_data(server_t *server,
     int client_fd, ssize_t, char *buffer)
 {
-    printf("Received from %d: `%s`\n", client_fd, buffer);
     if (server->players[client_fd].team_id == -2 && client_fd != 0) {
-        printf("%d\n", server->players[client_fd].id);
         process_command(server, &server->players[client_fd], buffer);
         return;
     } else if (server->players[client_fd].team_id > -1 && client_fd != 0) {
