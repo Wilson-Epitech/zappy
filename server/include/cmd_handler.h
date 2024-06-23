@@ -9,12 +9,27 @@
     #define CMD_HANDLER_H_
     #include "server.h"
 
+/**
+ * @brief Structure to handle commands
+ * 
+ * @param name Name of the command
+ * @param func Function to call when the command is called
+ * @param time Time to wait before calling the function
+ * @return command_handler_t
+ */
 typedef struct command_handler_s {
     char *name;
     void(*func)(server_t *, player_t *, const char *);
     int time;
 } command_handler_t;
 
+/**
+ * @brief Structure to handle commands
+ * 
+ * @param name Name of the command
+ * @param func Function to call when the command is called
+ * @return command_ia_t
+ */
 typedef struct command_server_s {
     char *name;
     void(*func)(server_t *, player_t *, char **);

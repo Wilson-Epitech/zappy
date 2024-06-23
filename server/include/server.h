@@ -30,6 +30,24 @@ static const int FAILURE = 84;
     #define MAX_CLIENTS 100
     #define MAX_TEAMS 6
 
+/**
+ * @brief Structure to handle server
+ * 
+ * @param port Port of the server
+ * @param fd File descriptor
+ * @param players_connected Number of players connected
+ * @param addr Address of the server
+ * @param tv Timeval
+ * @param read_fd Read file descriptor
+ * @param write_fd Write file descriptor
+ * @param players Array of players
+ * @param teams Array of teams
+ * @param map Map of the server
+ * @param opt Options of the server
+ * @param queue Command queue
+ * @param is_end Is the server ended
+ * @return server_t
+ */
 typedef struct server_s {
     int port;
     int fd;
