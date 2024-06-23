@@ -9,6 +9,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+/**
+ * @brief Set the coordinates of a player.
+ *
+ * @param server
+ * @param fd
+ * @param x
+ * @param y
+*/
 static void set_coords(server_t *server, int fd, int x, int y)
 {
     char message[1024] = {0};

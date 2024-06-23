@@ -10,6 +10,16 @@
 #include <unistd.h>
 #include <stdlib.h>
 
+/**
+ * @brief Handles the 'tna' command from a client.
+ *
+ * This function is called when a client sends the 'tna' command.
+ * It prints the name of all the teams to the client.
+ *
+ * @param server The server instance.
+ * @param player The array of players.
+ * @param cmd The command sent by the player.
+ */
 void command_tna(server_t *server, player_t *player, const char *)
 {
     size_t len = 0;

@@ -11,6 +11,13 @@
 #include <string.h>
 #include "server.h"
 
+/**
+ * @brief Send the time unit to the player.
+ * 
+ * @param server The server instance.
+ * @param player The player instance.
+ * @param params The command.
+ */
 void command_sgt(server_t *server, player_t *player, const char *params)
 {
     char *answer;

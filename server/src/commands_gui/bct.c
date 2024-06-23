@@ -11,6 +11,14 @@
 #include <unistd.h>
 #include "server.h"
 
+/**
+ * @brief Display the tile information.
+ * 
+ * @param server The server instance.
+ * @param x The x position of the tile.
+ * @param y The y position of the tile.
+ * @param answer The answer to send.
+ */
 static void display_tile(server_t *server, int x, int y, char *answer)
 {
     sprintf(answer, "bct %d %d %d %d %d %d %d %d %d\n", x, y,
@@ -23,6 +31,13 @@ static void display_tile(server_t *server, int x, int y, char *answer)
         server->map.tiles[y][x].thystame);
 }
 
+/**
+ * @brief Check if the arguments are digits.
+ * 
+ * @param arg1 The first argument.
+ * @param arg2 The second argument.
+ * @return int 0 if the arguments are digits, 1 otherwise.
+ */
 int digit_check(char *arg1, char *arg2)
 {
     for (size_t i = 0; i < strlen(arg1); i++) {
@@ -36,6 +51,13 @@ int digit_check(char *arg1, char *arg2)
     return 0;
 }
 
+/**
+ * @brief Check if the arguments are correct.
+ * 
+ * @param server The server instance.
+ * @param params The parameters.
+ * @return int 0 if the arguments are correct, 1 otherwise.
+ */
 int error_handling_bct(server_t *server, const char *params)
 {
     char *tmp = strdup(params);
@@ -60,6 +82,13 @@ int error_handling_bct(server_t *server, const char *params)
     return 0;
 }
 
+/**
+ * @brief Send the tile information to the player.
+ * 
+ * @param server The server instance.
+ * @param player The player instance.
+ * @param params The parameters.
+ */
 void command_bct(server_t *server, player_t *player, const char *params)
 {
     char *answer;
@@ -80,6 +109,13 @@ void command_bct(server_t *server, player_t *player, const char *params)
     free(answer);
 }
 
+/**
+ * @brief Send all the tile information to the player.
+ * 
+ * @param server The server instance.
+ * @param player The player instance.
+ * @param params The parameters.
+ */
 void command_bct_all(server_t *server, player_t *player, const char *params)
 {
     size_t max_size = server->map.height * server->map.width * 200;
