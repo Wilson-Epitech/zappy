@@ -15,7 +15,6 @@
  * @return true
  * @return false
 */
-
 bool is_player_connect(server_t *server, int fd)
 {
     for (int i = 0; i < MAX_CLIENTS; i++) {

@@ -9,6 +9,14 @@
 #include <string.h>
 #include <stdio.h>
 
+/**
+ * @brief Checks if the player has the required items to level up
+ * 
+ * @param server
+ * @param player
+ * @return true
+ * @return false
+*/
 static void detect_level(server_t *server, player_t *player)
 {
     if (player->level == 4) {
