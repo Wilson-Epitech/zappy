@@ -13,12 +13,43 @@
 #include "Character.hpp"
 #include "Client.hpp"
 
+/**
+ * @brief 
+ * 
+ */
 class Menu {
 public:
+    /**
+     * @brief Construct a new Menu object
+     * 
+     * @param windowSize 
+     */
     Menu(const sf::Vector2u& windowSize);
-
+    /**
+     * @brief 
+     * 
+     * @param selectedTile 
+     * @param tileSelected 
+     * @param resources 
+     * @param characters 
+     */
     void updateInfoText(const Tile* selectedTile, bool tileSelected, const std::vector<Resources>& resources, const std::vector<Character>& characters);
+    /**
+     * @brief 
+     * 
+     * @param selectedCharacter 
+     * @param characterSelected 
+     * @param characters 
+     * @param client 
+     */
     void updateCharacterText(const Character* selectedCharacter, bool characterSelected, const std::vector<Character>& characters, Client& client);
+    /**
+     * @brief 
+     * 
+     * @param window 
+     * @param tileSelected 
+     * @param characterSelected 
+     */
     void draw(sf::RenderWindow& window, bool tileSelected, bool characterSelected) const;
 
 private:

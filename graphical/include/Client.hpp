@@ -18,27 +18,111 @@
 
 class Character;
 
+/**
+ * @brief
+ * 
+ */
 class Client {
 public:
+    /**
+     * @brief Construct a new Client object
+     * 
+     * @param host 
+     * @param port 
+     */
     Client(const std::string& host, short port);
     ~Client();
 
+    /**
+     * @brief 
+     * 
+     */
     void start_cli();
 
+    /**
+     * @brief Get the Characters object
+     * 
+     * @return const std::vector<Character>& 
+     */
     const std::vector<Character>& getCharacters() const;
+    /**
+     * @brief Get the Resources object
+     * 
+     * @return const std::vector<Resources>& 
+     */
     const std::vector<Resources>& getResources() const;
+    /**
+     * @brief Get the Map Width object
+     * 
+     * @return int 
+     */
     int getMapWidth() const;
+    /**
+     * @brief Get the Map Height object
+     * 
+     * @return int 
+     */
     int getMapHeight() const;
+    /**
+     * @brief Get the Pin Lv object
+     * 
+     * @return int 
+     */
     int getPinLv() const;
+    /**
+     * @brief Get the Pin Food object
+     * 
+     * @return int 
+     */
     int getPinFood() const;
+    /**
+     * @brief Get the Pin Linemate object
+     * 
+     * @return int 
+     */
     int getPinLinemate() const;
+    /**
+     * @brief Get the Pin Deraumere object
+     * 
+     * @return int 
+     */
     int getPinDeraumere() const;
+    /**
+     * @brief Get the Pin Sibur object
+     * 
+     * @return int 
+     */
     int getPinSibur() const;
+    /**
+     * @brief Get the Pin Mendiane object
+     * 
+     * @return int 
+     */
     int getPinMendiane() const;
+    /**
+     * @brief Get the Pin Phiras object
+     * 
+     * @return int 
+     */
     int getPinPhiras() const;
+    /**
+     * @brief Get the Pin Thystame object
+     * 
+     * @return int 
+     */
     int getPinThystame() const;
 
+    /**
+     * @brief Get the Team Names object
+     * 
+     * @return std::vector<std::string> 
+     */
     std::vector<std::string> getTeamNames() const;
+    /**
+     * @brief 
+     * 
+     * @param message 
+     */
     void send(const std::string& message);
 
 private:

@@ -10,17 +10,38 @@
 
 #include <SFML/Audio.hpp>
 
+/**
+ * @brief 
+ * 
+ */
 class Music {
-private:
-    sf::Music music;
-
 public:
+    /**
+     * @brief Construct a new Music object
+     * 
+     */
     Music();
     ~Music();
 
+    /**
+     * @brief Play the music
+     * 
+     */
     void play();
+
+    /**
+     * @brief Pause the music
+     * 
+     */
     void pause();
+
+    /**
+     * @brief Stop the music
+     * 
+     */
     void stop();
+private:
+    sf::Music music;
 };
 
 #endif /* !MUSIC_HPP_ */

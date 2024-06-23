@@ -24,9 +24,31 @@
 #include <iostream>
 #include <ctime>
 
+/**
+ * @brief 
+ * 
+ * @param window 
+ * @param tiles 
+ */
 void drawBoard(sf::RenderWindow& window, const std::vector<std::vector<Tile>>& tiles);
+/**
+ * @brief 
+ * 
+ * @param tiles 
+ */
 void updateBoard(std::vector<std::vector<Tile>>& tiles);
+/**
+ * @brief 
+ * 
+ * @param client 
+ */
 void gameLoop(Client& client);
+/**
+ * @brief 
+ * 
+ * @param window 
+ * @param resources 
+ */
 void printCharacters(const std::vector<Character>& characters);
 
 #endif /* !GAMELOOP_HPP */

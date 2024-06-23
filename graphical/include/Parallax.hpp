@@ -10,12 +10,37 @@
 
 #include <SFML/Graphics.hpp>
 
+/**
+ * @brief Class representing the Parallax
+ * 
+ */
 class Parallax {
 public:
+    /**
+     * @brief Construct a new Parallax object
+     * 
+     */
     Parallax();
 
+    /**
+     * @brief 
+     * 
+     * @param layer 
+     * @param direction 
+     */
     void move(sf::Sprite& layer, sf::Vector2f direction);
+    /**
+     * @brief 
+     * 
+     * @param offsetX 
+     * @param offsetY 
+     */
     void update(float offsetX, float offsetY);
+    /**
+     * @brief 
+     * 
+     * @param window 
+     */
     void draw(sf::RenderWindow& window);
 
 private:
