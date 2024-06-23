@@ -8,7 +8,10 @@
 #include "Music.hpp"
 
 Music::Music() {
-    music.openFromFile("assets/music.ogg");
+    if (!music.openFromFile("graphical/assets/music.ogg")) {
+        return;
+    }
+    music.openFromFile("graphical/assets/music.ogg");
     music.setLoop(true);
     music.setVolume(10);
 }

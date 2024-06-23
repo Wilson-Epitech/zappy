@@ -57,31 +57,44 @@ void gameLoop(Client& client) {
     Mouse mouse;
 
     sf::Texture groundTexture;
-    groundTexture.loadFromFile("assets/tile.png");
+    if (!groundTexture.loadFromFile("graphical/assets/tile.png"))
+        return;
 
     sf::Texture foodTexture;
-    foodTexture.loadFromFile("assets/food.png");
+    if (!foodTexture.loadFromFile("graphical/assets/food.png"))
+        return;
+
     sf::Texture linemateTexture;
-    linemateTexture.loadFromFile("assets/linemate.png");
+    if (!linemateTexture.loadFromFile("graphical/assets/linemate.png"))
+        return;
     sf::Texture deraumereTexture;
-    deraumereTexture.loadFromFile("assets/deraumere.png");
+    if (!deraumereTexture.loadFromFile("graphical/assets/deraumere.png"))
+        return;
     sf::Texture siburTexture;
-    siburTexture.loadFromFile("assets/sibur.png");
+    if (!siburTexture.loadFromFile("graphical/assets/sibur.png"))
+        return;
     sf::Texture mendianeTexture;
-    mendianeTexture.loadFromFile("assets/mendiane.png");
+    if (!mendianeTexture.loadFromFile("graphical/assets/mendiane.png"))
+        return;
     sf::Texture phirasTexture;
-    phirasTexture.loadFromFile("assets/phiras.png");
+    if (!phirasTexture.loadFromFile("graphical/assets/phiras.png"))
+        return;
     sf::Texture thystameTexture;
-    thystameTexture.loadFromFile("assets/thystame.png");
+    if (!thystameTexture.loadFromFile("graphical/assets/thystame.png"))
+        return;
 
     sf::Texture upMage;
-    upMage.loadFromFile("assets/upMage.png");
+    if (!upMage.loadFromFile("graphical/assets/upMage.png"))
+        return;
     sf::Texture rightMage;
-    rightMage.loadFromFile("assets/rightMage.png");
+    if (!rightMage.loadFromFile("graphical/assets/rightMage.png"))
+        return;
     sf::Texture downMage;
-    downMage.loadFromFile("assets/downMage.png");
+    if (!downMage.loadFromFile("graphical/assets/downMage.png"))
+        return;
     sf::Texture leftMage;
-    leftMage.loadFromFile("assets/leftMage.png");
+    if (!leftMage.loadFromFile("graphical/assets/leftMage.png"))
+        return;
 
     std::unordered_map<int, sf::Texture*> textures = {
         {0, &foodTexture},

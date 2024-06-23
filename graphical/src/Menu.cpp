@@ -10,7 +10,8 @@
 #include "client.hpp"
 
 Menu::Menu(const sf::Vector2u& windowSize) {
-    font.loadFromFile("assets/font.ttf");
+    if (!font.loadFromFile("graphical/assets/font.ttf"))
+        return;
     infoText.setFont(font);
     infoText.setCharacterSize(30);
     infoText.setFillColor(sf::Color::White);
