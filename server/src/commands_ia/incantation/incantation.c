@@ -48,6 +48,7 @@ static void start_incantation(server_t *server, player_t *player)
         level_three(server, player);
         return;
     }
+    detect_level(server, player);
 }
 
 /**
