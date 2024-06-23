@@ -10,7 +10,14 @@
 #include <string.h>
 #include <stdlib.h>
 
-
+/**
+ * @brief Check if the parameters are correct.
+ *
+ * @param server The server instance.
+ * @param player The player instance.
+ * @param player_nb The player number.
+ * @return int SUCCESS or FAILURE.
+ */
 static int check_params(server_t *server, player_t *player, int player_nb)
 {
     if (player_nb == player->fd)

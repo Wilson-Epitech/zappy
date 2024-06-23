@@ -10,6 +10,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+/**
+ * @brief Give an item to a player.
+ *
+ * @param server
+ * @param item
+ * @param quantity
+ * @param fd
+*/
 static void give_item(server_t *server, char *item, int quantity, int fd)
 {
     tile_type_t object_type = get_object(item);

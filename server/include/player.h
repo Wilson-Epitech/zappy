@@ -11,6 +11,25 @@
     #include "tile.h"
     #include "command.h"
 
+/**
+ * @brief Structure to handle players
+ *
+ * @param fd File descriptor
+ * @param id Id of the player
+ * @param team_id Id of the team
+ * @param team_name Name of the team
+ * @param x X position of the player
+ * @param y Y position of the player
+ * @param level Level of the player
+ * @param orientation Orientation of the player
+ * @param time Time of the player
+ * @param is_elevating Is the player elevating
+ * @param is_immortal Is the player immortal
+ * @param is_dead Is the player dead
+ * @param inventory Inventory of the player
+ * @param cmd_queue Command queue of the player
+ * @return player_t
+ */
 typedef struct player_s {
     int fd;
     int id;

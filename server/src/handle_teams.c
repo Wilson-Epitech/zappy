@@ -10,7 +10,11 @@
 #include <stdlib.h>
 #include <string.h>
 
-
+/**
+ * @brief Initialize teams
+ *
+ * @param server
+ */
 void init_teams(server_t *server)
 {
     for (int i = 0; i < MAX_TEAMS; ++i) {

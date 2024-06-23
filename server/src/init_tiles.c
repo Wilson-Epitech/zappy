@@ -12,6 +12,14 @@
 #include <stdbool.h>
 #include <time.h>
 
+/**
+ * @brief Switch case for the resources
+ *
+ * @param server
+ * @param i
+ * @param j
+ * @param resource_index
+ */
 void ressources_switch(server_t *server,
     int i, int j, int resource_index)
 {
@@ -36,6 +44,13 @@ void ressources_switch(server_t *server,
     }
 }
 
+/**
+ * @brief Distributes the remaining resources
+ *
+ * @param server
+ * @param remaining
+ * @param resource_index
+ */
 static void distribute_remaining_resources(server_t *server,
     int remaining, int resource_index)
 {
@@ -61,6 +76,11 @@ static void distribute_remaining_resources(server_t *server,
     }
 }
 
+/**
+ * @brief Refills the distribution of resources
+ *
+ * @param server
+ */
 void refill_distribution(server_t *server)
 {
     int total_tiles = server->opt->map_width * server->opt->map_height;
@@ -82,6 +102,11 @@ void refill_distribution(server_t *server)
     distribute_remaining_resources(server, thystame_quantity % total_tiles, 6);
 }
 
+/**
+ * @brief Refills the map
+ *
+ * @param server
+ */
 void refill_map(server_t *server)
 {
     int total_t = server->opt->map_width * server->opt->map_height;

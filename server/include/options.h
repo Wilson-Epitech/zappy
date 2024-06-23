@@ -9,6 +9,23 @@
     #define OPTIONS_H_
     #include <stddef.h>
 
+/**
+ * @brief Structure to handle options
+ *
+ * @param port Port of the server
+ * @param map_width Width of the map
+ * @param map_height Height of the map
+ * @param names Array of names
+ * @param clients_number Number of clients
+ * @param freq Frequency of the server
+ * @param p Flag for port
+ * @param x Flag for width
+ * @param y Flag for height
+ * @param n Flag for names
+ * @param c Flag for clients
+ * @param f Flag for frequency
+ * @return options_t
+ */
 typedef struct options_s {
     int port;
     size_t map_width;

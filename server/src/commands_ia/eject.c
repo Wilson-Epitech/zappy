@@ -10,6 +10,12 @@
 #include <stdlib.h>
 #include "server.h"
 
+/**
+ * @brief Ejects the player in the direction they are facing.
+ * This function ejects the player in the direction they are facing.
+ * @param server The server instance.
+ * @param player The array of players.
+*/
 static void eject_forward(server_t *server, player_t *player)
 {
     if (player->orientation == 0) {

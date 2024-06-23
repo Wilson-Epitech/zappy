@@ -11,6 +11,12 @@
 #include <time.h>
 #include "server.h"
 
+/**
+ * @brief Decrements the food of a player.
+ *
+ * @param server The server instance.
+ * @param i The index of the player.
+ */
 static void decrement_player_food(server_t *server, int i)
 {
     if (server->players[i].inventory.food > 0 && server->players[i].fd != 0

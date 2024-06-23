@@ -10,10 +10,10 @@
 
 /**
  * @brief Executes the pnw command and send a message when a player connects
+ *
  * @param server
  * @param client_fd
 */
-
 void command_pnw(server_t *server, int client_fd)
 {
     char message[1024];

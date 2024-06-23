@@ -10,6 +10,9 @@
 #include <stdio.h>
 #include <string.h>
 
+/**
+ * @brief Process the server command
+ */
 command_server_t command_server[] = {
     {"give", command_give},
     {"teleport", command_teleport},
@@ -19,6 +22,13 @@ command_server_t command_server[] = {
     {NULL, NULL},
 };
 
+/**
+ * @brief Process the server command
+ *
+ * @param server The server instance.
+ * @param player The player instance.
+ * @param cmd The command to process.
+ */
 void process_server_command(server_t *server, player_t *player, char *cmd)
 {
     char **array = word_array_delim(cmd, " ");

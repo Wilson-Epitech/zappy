@@ -16,7 +16,6 @@
  * @param player
  * @param args
 */
-
 void command_immortal(server_t *server, player_t *player, char **args)
 {
     int fd = 0;
