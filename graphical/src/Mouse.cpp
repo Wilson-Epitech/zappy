@@ -46,13 +46,16 @@ void Mouse::handleMouseMove(const sf::Vector2f& worldPos, std::vector<std::vecto
 /**
  * @brief Handles the mouse click event.
  * @param window The window to draw on.
- * @param worldPos The position of the mouse in the world.
+ * @param worldPos The position of the mouse in
+ * the world.
  * @param tiles The tiles to update.
  * @param selectedTile The selected tile.
- * @param selectedCharacter The selected character.
+ * @param selectedCharacter The selected
+ * character.
  * @param menu The menu to update.
  * @param tileSelected The tile selected.
- * @param characterSelected The character selected.
+ * @param characterSelected The character
+ * selected.
  * @param resources The resources to update.
  * @param characters The characters to update.
  * @param client The client to send commands.

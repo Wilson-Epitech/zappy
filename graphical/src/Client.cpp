@@ -23,7 +23,7 @@ Client::Client(const std::string &host, short port)
 }
 
 /**
- * @brief Destructor for the Client class.   
+ * @brief Destructor for the Client class.
 */
 Client::~Client()
 {
@@ -97,7 +97,8 @@ void Client::send(const std::string &message)
 }
 
 /**
- * @brief Splits a string into a vector of vectors of strings.
+ * @brief Splits a string into a vector of vectors
+ * of strings.
  * @param str The string to split.
  * @param lineDelimiter The delimiter for the lines.
  * @param tokenDelimiter The delimiter for the tokens.

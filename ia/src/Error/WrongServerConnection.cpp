@@ -8,7 +8,9 @@
 #include "Error.hpp"
 
 /**
- * @brief This function override the "what" function in case the server connection fail
+ * @brief This function override the "what"
+ * function in case the server connection
+ * fail
  *
  * @return char *
 */

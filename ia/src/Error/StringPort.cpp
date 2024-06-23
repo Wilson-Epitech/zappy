@@ -8,7 +8,8 @@
 #include "Error.hpp"
 
 /**
- * @brief This function override the "what" function in case the atoi of the port fail
+ * @brief This function override the "what"
+ * function in case the atoi of the port fail
  *
  * @return char *
 */

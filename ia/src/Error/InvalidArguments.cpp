@@ -8,7 +8,8 @@
 #include "Error.hpp"
 
 /**
- * @brief This function override the "what" function in case their is an invalid argument
+ * @brief This function override the "what" function
+ * in case their is an invalid argument
  *
  * @return char *
 */
