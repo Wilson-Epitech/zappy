@@ -6,6 +6,7 @@
 */
 
 #include "Character.hpp"
+#include <iostream>
 
 Character::Character(int id, int pos_x, int pos_y, int orientation, int level, const std::string& team)
     : id_(id), pos_x_(pos_x), pos_y_(pos_y), orientation_(orientation), level_(level), team_(team) {}
@@ -70,7 +71,12 @@ bool Character::contains(const sf::Vector2f& point) const {
     return sprite.getGlobalBounds().contains(point);
 }
 
-void Character::setTextures(const std::unordered_map<int, sf::Texture*>& textures) {
+void Character::setTextures(const std::unordered_map<int, sf::Texture*>& textures, Client& client) {
+    static std::vector<sf::Color> colors = {
+        sf::Color::Blue, sf::Color::Red, sf::Color::Green, sf::Color::Yellow,
+        sf::Color::Magenta, sf::Color::Cyan
+    };
+    int colorIndex = 0;
     if (!textureLoaded_) {
         sprite.setScale(100.0f / 36.0f, 100.0f / 24.0f);
         characterFrames.push_back(0);
@@ -81,6 +87,13 @@ void Character::setTextures(const std::unordered_map<int, sf::Texture*>& texture
         case 2: sprite.setTexture(*textures.at(11)); break;
         case 3: sprite.setTexture(*textures.at(12)); break;
         case 4: sprite.setTexture(*textures.at(13)); break;
+    }
+    for (auto &team : client.getTeamNames()) {
+        ++colorIndex;
+        if (team_.compare(team) == 0) {
+            std::cout << "team: " << team << std::endl;
+            sprite.setColor(colors[colorIndex]);
+        }
     }
     sprite.setPosition(pos_x_ * 100.0f + 25.0f, pos_y_ * 100.0f - 25.0f);
 }

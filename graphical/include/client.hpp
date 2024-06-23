@@ -16,6 +16,8 @@
 #include "Resources.hpp"
 #include "Tile.hpp"
 
+class Character;
+
 class Client {
 public:
     Client(const std::string& host, short port);
