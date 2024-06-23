@@ -27,6 +27,15 @@ public:
     const std::vector<Resources>& getResources() const;
     int getMapWidth() const;
     int getMapHeight() const;
+    int getPinLv() const;
+    int getPinFood() const;
+    int getPinLinemate() const;
+    int getPinDeraumere() const;
+    int getPinSibur() const;
+    int getPinMendiane() const;
+    int getPinPhiras() const;
+    int getPinThystame() const;
+
     std::vector<std::string> getTeamNames() const;
 
 private:

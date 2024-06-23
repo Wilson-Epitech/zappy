@@ -7,6 +7,7 @@
 
 #include "Menu.hpp"
 #include <sstream>
+#include "client.hpp"
 
 Menu::Menu(const sf::Vector2u& windowSize) {
     font.loadFromFile("assets/font.ttf");
@@ -53,16 +54,23 @@ void Menu::updateInfoText(const Tile* selectedTile, bool tileSelected, const std
     }
 }
 
-void Menu::updateCharacterText(const Character* selectedCharacter, bool characterSelected, const std::vector<Character>& characters) {
+void Menu::updateCharacterText(const Character* selectedCharacter, bool characterSelected, const std::vector<Character>& characters, Client& client) {
     if (characterSelected && selectedCharacter) {
         std::ostringstream oss;
 
         oss << "Character ID : " << selectedCharacter->getId() << "\t";
         oss << "Position : ( " << selectedCharacter->getPosX() << " ,  " << selectedCharacter->getPosY() << " )\t";
-        //oss << "Level : " << selectedCharacter->getLv() << "\n";
+        oss << "Level : " << client.getPinLv() << "\t";
         oss << "Team : " << selectedCharacter->getTeam() << "\n";
 
         oss << "Inventory :\n";
+        oss << "Food : " << client.getPinFood() << "\t";
+        oss << "Linemate : " << client.getPinLinemate() << "\t";
+        oss << "Deraumere : " << client.getPinDeraumere() << "\t";
+        oss << "Sibur : " << client.getPinSibur() << "\t";
+        oss << "Mendiane : " << client.getPinMendiane() << "\t";
+        oss << "Phiras : " << client.getPinPhiras() << "\t";
+        oss << "Thystame : " << client.getPinThystame() << "\n";
 
         infoText.setString(oss.str());
     } else {

@@ -215,14 +215,20 @@ void Client::get_pin(std::vector<std::string> tokens)
     int mendiane = std::stoi(tokens[8]);
     int phiras = std::stoi(tokens[9]);
     int thystame = std::stoi(tokens[10]);
+    pinFood = food;
+    pinLinemate = linemate;
+    pinDeraumere = deraumere;
+    pinSibur = sibur;
+    pinMendiane = mendiane;
+    pinPhiras = phiras;
+    pinThystame = thystame;
 }
 
 void Client::get_plv(std::vector<std::string> tokens)
 {
     int player = std::stoi(tokens[1]);
-    std::cout << player << '\n';
     int level = std::stoi(tokens[2]);
-    std::cout << level << '\n';
+    pinLv = level;
 }
 
 void Client::get_pdi(std::vector<std::string> tokens)
@@ -309,6 +315,46 @@ int Client::getMapHeight() const
 {
     return mapHeight;
 }
+
+int Client::getPinLv() const
+{
+    return pinLv;
+}
+
+int Client::getPinFood() const
+{
+    return pinFood;
+}
+int Client::getPinLinemate() const
+{
+    return pinLinemate;
+}
+
+int Client::getPinDeraumere() const
+{
+    return pinDeraumere;
+}
+
+int Client::getPinSibur() const
+{
+    return pinSibur;
+}
+
+int Client::getPinMendiane() const
+{
+    return pinMendiane;
+}
+
+int Client::getPinPhiras() const
+{
+    return pinPhiras;
+}
+
+int Client::getPinThystame() const
+{
+    return pinThystame;
+}
+
 
 std::vector<std::string> Client::getTeamNames() const
 {

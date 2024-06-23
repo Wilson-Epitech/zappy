@@ -31,7 +31,8 @@ void Mouse::handleMouseMove(const sf::Vector2f& worldPos, std::vector<std::vecto
 void Mouse::handleMouseClick(sf::RenderWindow& window, const sf::Vector2f& worldPos,
 std::vector<std::vector<Tile>>& tiles, Tile*& selectedTile, const Character*& selectedCharacter,
 Menu& menu, bool& tileSelected, bool& characterSelected, const std::vector<Resources>& resources,
-const std::vector<Character>& characters) {
+const std::vector<Character>& characters, Client& client)
+{
     Tile* newSelectedTile = nullptr;
     const Character* newSelectedCharacter = nullptr;
 
@@ -74,15 +75,16 @@ const std::vector<Character>& characters) {
     }
 
     if (characterSelected && selectedCharacter) {
-        menu.updateCharacterText(selectedCharacter, characterSelected, characters);
+        menu.updateCharacterText(selectedCharacter, characterSelected, characters, client);
     } else if (tileSelected && selectedTile) {
         menu.updateInfoText(selectedTile, tileSelected, resources, characters);
     }
 }
 
 void Mouse::handleAllMouseEvents(sf::RenderWindow& window, sf::View& view, const sf::Event& event,
-std::vector<std::vector<Tile>>& tiles, Tile*& selectedTile, const Character*& selectedCharacter, Menu& menu, bool& tileSelected, bool& characterSelected,Camera& camera,
-const std::vector<Resources>& resources, const std::vector<Character>& characters)
+std::vector<std::vector<Tile>>& tiles, Tile*& selectedTile, const Character*& selectedCharacter,
+Menu& menu, bool& tileSelected, bool& characterSelected, Camera& camera, const std::vector<Resources>& resources,
+const std::vector<Character>& characters, Client& client)
 {
     sf::Vector2f worldPos = window.mapPixelToCoords(sf::Mouse::getPosition(window), view);
 
@@ -91,6 +93,6 @@ const std::vector<Resources>& resources, const std::vector<Character>& character
     } else if (event.type == sf::Event::MouseMoved) {
         handleMouseMove(worldPos, tiles);
     } else if (event.type == sf::Event::MouseButtonPressed) {
-        handleMouseClick(window, worldPos, tiles, selectedTile, selectedCharacter, menu, tileSelected, characterSelected, resources, characters);
+        handleMouseClick(window, worldPos, tiles, selectedTile, selectedCharacter, menu, tileSelected, characterSelected, resources, characters, client);
     }
 }

@@ -11,13 +11,14 @@
 #include <SFML/Graphics.hpp>
 #include "Tile.hpp"
 #include "Character.hpp"
+#include "client.hpp"
 
 class Menu {
 public:
     Menu(const sf::Vector2u& windowSize);
 
     void updateInfoText(const Tile* selectedTile, bool tileSelected, const std::vector<Resources>& resources, const std::vector<Character>& characters);
-    void updateCharacterText(const Character* selectedCharacter, bool characterSelected, const std::vector<Character>& characters);
+    void updateCharacterText(const Character* selectedCharacter, bool characterSelected, const std::vector<Character>& characters, Client& client);
     void draw(sf::RenderWindow& window, bool tileSelected, bool characterSelected) const;
 
 private:
