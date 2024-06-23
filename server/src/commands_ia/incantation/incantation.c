@@ -9,25 +9,8 @@
 #include <string.h>
 #include <stdio.h>
 
-/**
- * @brief Starts the incantation
- * @param server
- * @param player
-*/
-static void start_incantation(server_t *server, player_t *player)
+static void detect_level(server_t *server, player_t *player)
 {
-    if (player->level == 1) {
-        level_one(server, player);
-        return;
-    }
-    if (player->level == 2) {
-        level_two(server, player);
-        return;
-    }
-    if (player->level == 3) {
-        level_three(server, player);
-        return;
-    }
     if (player->level == 4) {
         level_four(server, player);
         return;
@@ -47,6 +30,27 @@ static void start_incantation(server_t *server, player_t *player)
 }
 
 /**
+ * @brief Starts the incantation
+ * @param server
+ * @param player
+*/
+static void start_incantation(server_t *server, player_t *player)
+{
+    if (player->level == 1) {
+        level_one(server, player);
+        return;
+    }
+    if (player->level == 2) {
+        level_two(server, player);
+        return;
+    }
+    if (player->level == 3) {
+        level_three(server, player);
+        return;
+    }
+}
+
+/**
  * @brief Executes the incantation command
  * @param server
  * @param player
@@ -55,11 +59,6 @@ static void start_incantation(server_t *server, player_t *player)
 void command_incantation(server_t *server, player_t *player,
     const char *)
 {
-    // if (strcmp(params, "\0") != 0) {
-    //     printf("Incantation: invalid params\n");
-    //     dprintf(player->fd, "ko\n");
-    //     return;
-    // }
     if (player->is_elevating == false) {
         start_incantation(server, player);
     }
