@@ -12,34 +12,34 @@
 
 /**
  * @brief Class representing the Parallax
- * 
+ *
  */
 class Parallax {
 public:
     /**
      * @brief Construct a new Parallax object
-     * 
+     *
      */
     Parallax();
 
     /**
-     * @brief 
-     * 
-     * @param layer 
-     * @param direction 
+     * @brief
+     *
+     * @param layer
+     * @param direction
      */
     void move(sf::Sprite& layer, sf::Vector2f direction);
     /**
-     * @brief 
-     * 
-     * @param offsetX 
-     * @param offsetY 
+     * @brief
+     *
+     * @param offsetX
+     * @param offsetY
      */
     void update(float offsetX, float offsetY);
     /**
-     * @brief 
-     * 
-     * @param window 
+     * @brief
+     *
+     * @param window
      */
     void draw(sf::RenderWindow& window);
 

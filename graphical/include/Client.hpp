@@ -20,108 +20,108 @@ class Character;
 
 /**
  * @brief
- * 
+ *
  */
 class Client {
 public:
     /**
      * @brief Construct a new Client object
-     * 
-     * @param host 
-     * @param port 
+     *
+     * @param host
+     * @param port
      */
     Client(const std::string& host, short port);
     ~Client();
 
     /**
-     * @brief 
-     * 
+     * @brief
+     *
      */
     void start_cli();
 
     /**
      * @brief Get the Characters object
-     * 
-     * @return const std::vector<Character>& 
+     *
+     * @return const std::vector<Character>&
      */
     const std::vector<Character>& getCharacters() const;
     /**
      * @brief Get the Resources object
-     * 
-     * @return const std::vector<Resources>& 
+     *
+     * @return const std::vector<Resources>&
      */
     const std::vector<Resources>& getResources() const;
     /**
      * @brief Get the Map Width object
-     * 
-     * @return int 
+     *
+     * @return int
      */
     int getMapWidth() const;
     /**
      * @brief Get the Map Height object
-     * 
-     * @return int 
+     *
+     * @return int
      */
     int getMapHeight() const;
     /**
      * @brief Get the Pin Lv object
-     * 
-     * @return int 
+     *
+     * @return int
      */
     int getPinLv() const;
     /**
      * @brief Get the Pin Food object
-     * 
-     * @return int 
+     *
+     * @return int
      */
     int getPinFood() const;
     /**
      * @brief Get the Pin Linemate object
-     * 
-     * @return int 
+     *
+     * @return int
      */
     int getPinLinemate() const;
     /**
      * @brief Get the Pin Deraumere object
-     * 
-     * @return int 
+     *
+     * @return int
      */
     int getPinDeraumere() const;
     /**
      * @brief Get the Pin Sibur object
-     * 
-     * @return int 
+     *
+     * @return int
      */
     int getPinSibur() const;
     /**
      * @brief Get the Pin Mendiane object
-     * 
-     * @return int 
+     *
+     * @return int
      */
     int getPinMendiane() const;
     /**
      * @brief Get the Pin Phiras object
-     * 
-     * @return int 
+     *
+     * @return int
      */
     int getPinPhiras() const;
     /**
      * @brief Get the Pin Thystame object
-     * 
-     * @return int 
+     *
+     * @return int
      */
     int getPinThystame() const;
 
     /**
      * @brief Get the Team Names object
-     * 
-     * @return std::vector<std::string> 
+     *
+     * @return std::vector<std::string>
      */
     std::vector<std::string> getTeamNames() const;
     /**
-     * @brief 
-     * 
-     * @param message 
+     * @brief
+     *
+     * @param message
      */
     void send(const std::string& message);
 

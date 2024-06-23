@@ -25,29 +25,29 @@
 #include <ctime>
 
 /**
- * @brief 
- * 
- * @param window 
- * @param tiles 
+ * @brief
+ *
+ * @param window
+ * @param tiles
  */
 void drawBoard(sf::RenderWindow& window, const std::vector<std::vector<Tile>>& tiles);
 /**
- * @brief 
- * 
- * @param tiles 
+ * @brief
+ *
+ * @param tiles
  */
 void updateBoard(std::vector<std::vector<Tile>>& tiles);
 /**
- * @brief 
- * 
- * @param client 
+ * @brief
+ *
+ * @param client
  */
 void gameLoop(Client& client);
 /**
- * @brief 
- * 
- * @param window 
- * @param resources 
+ * @brief
+ *
+ * @param window
+ * @param resources
  */
 void printCharacters(const std::vector<Character>& characters);
 
