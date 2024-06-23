@@ -45,7 +45,6 @@ static int error_handling(server_t *server, char *const *argv, int argc)
 int main(int argc, char *const *argv)
 {
     server_t *server = malloc(sizeof(server_t));
-    tile_density_t *tile_density = malloc(sizeof(tile_density_t));
 
     memset(server, 0, sizeof(server_t));
     server->opt = malloc(sizeof(options_t));
@@ -53,8 +52,7 @@ int main(int argc, char *const *argv)
         return FAILURE;
     init_server(server, server->opt);
     init_queue(server);
-    init_tiles_quantity(tile_density);
-    run_server(server, tile_density);
+    run_server(server);
     cleanup_server(server);
     free(server->opt);
     free(server);

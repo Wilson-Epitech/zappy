@@ -20,7 +20,6 @@
  * and a function pointer to the handler for that command.
 */
 command_handler_t command_handlers[] = {
-    {"pbc", command_pbc, 0},
     {"pin", command_pin, 0},
     {"msz", command_msz, 0},
     {"sgt", command_sgt, 0},
@@ -30,8 +29,6 @@ command_handler_t command_handlers[] = {
     {"mct", command_bct_all, 0},
     {"plv", command_plv, 0},
     {"ppo", command_ppo, 0},
-    {"pex", command_pex, 0},
-    {"seg", command_seg, 0},
     {NULL, NULL, 0}
 };
 
