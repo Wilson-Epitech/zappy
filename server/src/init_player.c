@@ -34,14 +34,15 @@ void set_player_team(server_t *server, int client_fd, int i)
  * @param player
  * @param fd The client's fd
 */
-void init_player(player_t *player, int fd)
+void init_player(server_t *server, player_t *player, int fd)
 {
+    srand(time(NULL));
     player[fd].team_id = -1;
     player[fd].level = 1;
-    player[fd].x = 0;
-    player[fd].y = 0;
+    player[fd].x = rand() % (int)server->opt->map_width;
+    player[fd].y = rand() % (int)server->opt->map_height;
     memset(player[fd].team_name, 0, 0);
-    player[fd].orientation = 1;
+    player[fd].orientation = (rand() % 4) + 1;
     player[fd].fd = fd;
     player[fd].is_elevating = false;
     player[fd].is_immortal = false;
