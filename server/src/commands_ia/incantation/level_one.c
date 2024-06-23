@@ -17,6 +17,8 @@
 */
 void level_one(server_t *server, player_t *player)
 {
+    printf("Player %d is trying to level up to level 1\n", player->fd);
+    printf("Players connected: %d\n", server->players_connected);
     if (server->players_connected >= 1 && player->inventory.linemate >= 1) {
         player->level += 1;
         player->inventory.linemate -= 1;

@@ -100,6 +100,5 @@ void command_bct_all(server_t *server, player_t *player, const char *params)
         }
     }
     send(player->fd, answer, strlen(answer), 0);
-    printf("%s", answer);
     free(answer);
 }

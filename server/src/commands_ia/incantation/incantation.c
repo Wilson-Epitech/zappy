@@ -16,6 +16,7 @@
 */
 static void start_incantation(server_t *server, player_t *player)
 {
+    printf("Player %d\n", player->fd);
     if (player->level == 1)
         level_one(server, player);
     if (player->level == 2)
@@ -42,10 +43,12 @@ void command_incantation(server_t *server, player_t *player,
     const char *params)
 {
     if (strcmp(params, "\0") != 0) {
+        printf("Parameters are not correct\n");
         dprintf(player->fd, "ko\n");
         return;
     }
     if (player->is_elevating == false) {
+        printf("Player %d is trying to start incantation\n", player->fd);
         start_incantation(server, player);
     }
 }
