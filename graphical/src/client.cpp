@@ -41,11 +41,9 @@ void Client::start_cli()
         send(initial_message);
         usleep(500);
         send("msz");
-        usleep(500);
-        send("mct");
         std::thread periodic_send_thread([this]() {
             while (1) {
-                std::this_thread::sleep_for(std::chrono::seconds(5));
+                std::this_thread::sleep_for(std::chrono::seconds(1));
                 send("mct");
             }
         });

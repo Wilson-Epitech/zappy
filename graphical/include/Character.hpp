@@ -31,6 +31,7 @@ public:
     void setLevel(int level);
     void setTeam(const std::string& team);
     void setIsDead(bool isDead);
+    bool contains(const sf::Vector2f& point) const;
 
     void setTextures(const std::unordered_map<int, sf::Texture*>& textures);
     void updateAnimation();

@@ -6,6 +6,7 @@
 */
 
 #include "Mouse.hpp"
+#include <iostream>
 
 Mouse::Mouse() {}
 
@@ -27,8 +28,12 @@ void Mouse::handleMouseMove(const sf::Vector2f& worldPos, std::vector<std::vecto
     }
 }
 
-void Mouse::handleMouseClick(sf::RenderWindow& window, const sf::Vector2f& worldPos, std::vector<std::vector<Tile>>& tiles, Tile*& selectedTile, Menu& menu, bool& tileSelected, const std::vector<Resources>& resources, const std::vector<Character>& characters) {
+void Mouse::handleMouseClick(sf::RenderWindow& window, const sf::Vector2f& worldPos,
+std::vector<std::vector<Tile>>& tiles, Tile*& selectedTile, const Character*& selectedCharacter,
+Menu& menu, bool& tileSelected, bool& characterSelected, const std::vector<Resources>& resources,
+const std::vector<Character>& characters) {
     Tile* newSelectedTile = nullptr;
+    const Character* newSelectedCharacter = nullptr;
 
     for (auto& row : tiles) {
         for (auto& tile : row) {
@@ -38,6 +43,13 @@ void Mouse::handleMouseClick(sf::RenderWindow& window, const sf::Vector2f& world
             }
         }
         if (newSelectedTile) break;
+    }
+
+    for (auto& character : characters) {
+        if (character.contains(worldPos)) {
+            newSelectedCharacter = &character;
+            break;
+        }
     }
 
     if (newSelectedTile && newSelectedTile != selectedTile) {
@@ -53,10 +65,25 @@ void Mouse::handleMouseClick(sf::RenderWindow& window, const sf::Vector2f& world
         tileSelected = false;
     }
 
-    menu.updateInfoText(selectedTile, tileSelected, resources, characters);
+    if (newSelectedCharacter && newSelectedCharacter != selectedCharacter) {
+        selectedCharacter = newSelectedCharacter;
+        characterSelected = true;
+    } else if (!newSelectedCharacter) {
+        selectedCharacter = nullptr;
+        characterSelected = false;
+    }
+
+    if (characterSelected && selectedCharacter) {
+        menu.updateCharacterText(selectedCharacter, characterSelected, characters);
+    } else if (tileSelected && selectedTile) {
+        menu.updateInfoText(selectedTile, tileSelected, resources, characters);
+    }
 }
 
-void Mouse::handleAllMouseEvents(sf::RenderWindow& window, sf::View& view, const sf::Event& event, std::vector<std::vector<Tile>>& tiles, Tile*& selectedTile, Menu& menu, bool& tileSelected, Camera& camera, const std::vector<Resources>& resources, const std::vector<Character>& characters) {
+void Mouse::handleAllMouseEvents(sf::RenderWindow& window, sf::View& view, const sf::Event& event,
+std::vector<std::vector<Tile>>& tiles, Tile*& selectedTile, const Character*& selectedCharacter, Menu& menu, bool& tileSelected, bool& characterSelected,Camera& camera,
+const std::vector<Resources>& resources, const std::vector<Character>& characters)
+{
     sf::Vector2f worldPos = window.mapPixelToCoords(sf::Mouse::getPosition(window), view);
 
     if (event.type == sf::Event::MouseWheelScrolled) {
@@ -64,6 +91,6 @@ void Mouse::handleAllMouseEvents(sf::RenderWindow& window, sf::View& view, const
     } else if (event.type == sf::Event::MouseMoved) {
         handleMouseMove(worldPos, tiles);
     } else if (event.type == sf::Event::MouseButtonPressed) {
-        handleMouseClick(window, worldPos, tiles, selectedTile, menu, tileSelected, resources, characters);
+        handleMouseClick(window, worldPos, tiles, selectedTile, selectedCharacter, menu, tileSelected, characterSelected, resources, characters);
     }
 }

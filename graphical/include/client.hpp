@@ -56,6 +56,15 @@ private:
     int mapWidth;
     int mapHeight;
     std::vector<std::string> teamNames;
+
+    int pinLv;
+    int pinFood;
+    int pinLinemate;
+    int pinDeraumere;
+    int pinSibur;
+    int pinMendiane;
+    int pinPhiras;
+    int pinThystame;
 };
 
 #endif // CLIENT_HPP

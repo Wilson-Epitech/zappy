@@ -31,7 +31,7 @@ void Menu::updateInfoText(const Tile* selectedTile, bool tileSelected, const std
             }
         }
 
-        oss << "Tile Position : [ " << selectedTile->getX() << " ,  " << selectedTile->getY() << " ]\tCharacters : " << characterCount << "\n";
+        oss << "Tile Position : ( " << selectedTile->getX() << " ,  " << selectedTile->getY() << " )\tCharacters : " << characterCount << "\n";
 
         for (const auto& resource : resources) {
             if (resource.getX() == selectedTile->getX() && resource.getY() == selectedTile->getY()) {
@@ -53,9 +53,26 @@ void Menu::updateInfoText(const Tile* selectedTile, bool tileSelected, const std
     }
 }
 
+void Menu::updateCharacterText(const Character* selectedCharacter, bool characterSelected, const std::vector<Character>& characters) {
+    if (characterSelected && selectedCharacter) {
+        std::ostringstream oss;
 
-void Menu::draw(sf::RenderWindow& window, bool tileSelected) const {
-    if (tileSelected) {
+        oss << "Character ID : " << selectedCharacter->getId() << "\t";
+        oss << "Position : ( " << selectedCharacter->getPosX() << " ,  " << selectedCharacter->getPosY() << " )\t";
+        //oss << "Level : " << selectedCharacter->getLv() << "\n";
+        oss << "Team : " << selectedCharacter->getTeam() << "\n";
+
+        oss << "Inventory :\n";
+
+        infoText.setString(oss.str());
+    } else {
+        infoText.setString("");
+    }
+}
+
+
+void Menu::draw(sf::RenderWindow& window, bool tileSelected, bool characterSelected) const {
+    if (tileSelected || characterSelected) {
         window.draw(infoRect);
         window.draw(infoText);
     }

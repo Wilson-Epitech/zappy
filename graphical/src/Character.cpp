@@ -66,6 +66,10 @@ void Character::setIsDead(bool isDead) {
     isDead_ = isDead;
 }
 
+bool Character::contains(const sf::Vector2f& point) const {
+    return sprite.getGlobalBounds().contains(point);
+}
+
 void Character::setTextures(const std::unordered_map<int, sf::Texture*>& textures) {
     if (!textureLoaded_) {
         sprite.setScale(100.0f / 36.0f, 100.0f / 24.0f);

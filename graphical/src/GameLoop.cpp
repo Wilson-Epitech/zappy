@@ -114,6 +114,8 @@ void gameLoop(Client& client) {
 
     Tile* selectedTile = nullptr;
     bool tileSelected = false;
+    const Character* selectedCharacter = nullptr;
+    bool characterSelected = false;
 
     std::vector<Character> characters;
     std::vector<Resources> resources;
@@ -123,7 +125,8 @@ void gameLoop(Client& client) {
         while (window.pollEvent(event)) {
             if (event.type == sf::Event::Closed)
                 window.close();
-            mouse.handleAllMouseEvents(window, view, event, tiles, selectedTile, menu, tileSelected, camera, resources, characters);
+            mouse.handleAllMouseEvents(window, view, event, tiles, selectedTile, selectedCharacter,
+            menu, tileSelected, characterSelected, camera, resources, characters);
         }
         camera.handleMovement(view, parallax);
         if (updateClock.getElapsedTime().asSeconds() >= 1.0) {
@@ -147,7 +150,7 @@ void gameLoop(Client& client) {
         drawResources(window, resources);
         drawCharacters(window, characters);
         window.setView(window.getDefaultView());
-        menu.draw(window, tileSelected);
+        menu.draw(window, tileSelected, characterSelected);
         window.display();
     }
 }
