@@ -49,8 +49,10 @@ const std::vector<Character>& characters, Client& client)
 
     for (auto& character : characters) {
         if (character.contains(worldPos)) {
-            std::string command = "pin " + std::to_string(character.getId());
-            client.send(command);
+            std::string command_pin = "pin " + std::to_string(character.getId());
+            std::string command_plv = "plv " + std::to_string(character.getId());
+            client.send(command_pin);
+            client.send(command_plv);
             newSelectedCharacter = &character;
             break;
         }
