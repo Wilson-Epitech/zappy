@@ -8,10 +8,10 @@
 #include "Parallax.hpp"
 
 Parallax::Parallax() {
-    parallaxTextures[0].loadFromFile("assets/parallax1.png");
-    parallaxTextures[1].loadFromFile("assets/parallax2.png");
-    parallaxTextures[2].loadFromFile("assets/parallax3.png");
-    parallaxTextures[3].loadFromFile("assets/parallax4.png");
+    parallaxTextures[0].loadFromFile("graphical/assets/parallax1.png");
+    parallaxTextures[1].loadFromFile("graphical/assets/parallax2.png");
+    parallaxTextures[2].loadFromFile("graphical/assets/parallax3.png");
+    parallaxTextures[3].loadFromFile("graphical/assets/parallax4.png");
 
     for (int i = 0; i < 4; ++i) {
         parallaxSprites[i].setTexture(parallaxTextures[i]);

@@ -57,31 +57,31 @@ void gameLoop(Client& client) {
     Mouse mouse;
 
     sf::Texture groundTexture;
-    groundTexture.loadFromFile("assets/tile.png");
+    groundTexture.loadFromFile("graphical/assets/tile.png");
 
     sf::Texture foodTexture;
-    foodTexture.loadFromFile("assets/food.png");
+    foodTexture.loadFromFile("graphical/assets/food.png");
     sf::Texture linemateTexture;
-    linemateTexture.loadFromFile("assets/linemate.png");
+    linemateTexture.loadFromFile("graphical/assets/linemate.png");
     sf::Texture deraumereTexture;
-    deraumereTexture.loadFromFile("assets/deraumere.png");
+    deraumereTexture.loadFromFile("graphical/assets/deraumere.png");
     sf::Texture siburTexture;
-    siburTexture.loadFromFile("assets/sibur.png");
+    siburTexture.loadFromFile("graphical/assets/sibur.png");
     sf::Texture mendianeTexture;
-    mendianeTexture.loadFromFile("assets/mendiane.png");
+    mendianeTexture.loadFromFile("graphical/assets/mendiane.png");
     sf::Texture phirasTexture;
-    phirasTexture.loadFromFile("assets/phiras.png");
+    phirasTexture.loadFromFile("graphical/assets/phiras.png");
     sf::Texture thystameTexture;
-    thystameTexture.loadFromFile("assets/thystame.png");
+    thystameTexture.loadFromFile("graphical/assets/thystame.png");
 
     sf::Texture upMage;
-    upMage.loadFromFile("assets/upMage.png");
+    upMage.loadFromFile("graphical/assets/upMage.png");
     sf::Texture rightMage;
-    rightMage.loadFromFile("assets/rightMage.png");
+    rightMage.loadFromFile("graphical/assets/rightMage.png");
     sf::Texture downMage;
-    downMage.loadFromFile("assets/downMage.png");
+    downMage.loadFromFile("graphical/assets/downMage.png");
     sf::Texture leftMage;
-    leftMage.loadFromFile("assets/leftMage.png");
+    leftMage.loadFromFile("graphical/assets/leftMage.png");
 
     std::unordered_map<int, sf::Texture*> textures = {
         {0, &foodTexture},
