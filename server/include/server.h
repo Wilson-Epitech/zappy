@@ -28,7 +28,7 @@ static const int SUCCESS = 0;
 static const int FAILURE = 84;
 
     #define MAX_CLIENTS 100
-    #define MAX_TEAMS 10
+    #define MAX_TEAMS 6
 
 typedef struct server_s {
     int port;
@@ -46,9 +46,6 @@ typedef struct server_s {
     bool is_end;
 } server_t;
 
-//--------lib -------------------------------//
-int get_array_size(char **array);
-
 //--------main.c -------------------------------//
 int get_args(server_t *server, char *const *argv);
 
@@ -62,25 +59,44 @@ void process_command_ia(server_t *server, player_t *player, char *cmd,
     player_command_queue_t *queue);
 void cleanup_server(server_t *server);
 void init_inventory(player_t *player, int fd);
-void init_player(player_t *player, int fd);
+void init_player(server_t *server, player_t *player, int fd);
 void init_map(server_t *server);
 void command_pnw(server_t *server, int client_fd);
 void handle_command_queue(player_command_queue_t *queue, server_t *server,
     player_t *player);
 void init_queue(server_t *server);
 void death_player(server_t *server);
+void clear_client(server_t *server, int client_fd);
+void set_player_team(server_t *server, int client_fd, int i);
+void decrement_food(server_t *server);
+void refill_map(server_t *server);
+void init_teams(server_t *server);
 
 /* handle_teams.c */
 
 void handle_teams(server_t *server, char *name, int index);
 void handle_disconnect(server_t *server, int client_fd);
 
+//--------Incantation--------------------------------//
+void level_one(server_t *server, player_t *player);
+void level_two(server_t *server, player_t *player);
+void level_three(server_t *server, player_t *player);
+void level_four(server_t *server, player_t *player);
+void level_five(server_t *server, player_t *player);
+void level_six(server_t *server, player_t *player);
+void level_seven(server_t *server, player_t *player);
+
 //---------Lib ------------------------------------------//
 char **word_array_delim(char const *str, char *separators);
 int get_array_size(char **array);
 void send_graphical(server_t *server, const char *message);
 int free_slots(server_t *server, player_t *player);
+bool is_player_connect(server_t *server, int fd);
+tile_type_t get_object(const char *params);
+int retreive_player(server_t *server, int x, int y);
 
+//---------command_server -------------------------------//
+void process_server_command(server_t *server, player_t *player, char *cmd);
 
 
 #endif /* !SERVER_H_ */

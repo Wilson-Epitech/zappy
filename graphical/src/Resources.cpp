@@ -6,59 +6,131 @@
 */
 
 #include "Resources.hpp"
-#include <cstdlib>
-#include <ctime>
+#include <iostream>
 
-const float Resources::animationSpeed = 0.2f;
+Resources::Resources(int x, int y, int food, int linemate, int deraumere, int sibur, int mendiane, int phiras, int thystame)
+    : x_(x), y_(y), food_(food), linemate_(linemate), deraumere_(deraumere), sibur_(sibur), mendiane_(mendiane), phiras_(phiras), thystame_(thystame) {}
 
-Resources::Resources() {
-    std::srand(static_cast<unsigned>(std::time(0)));
+int Resources::getX() const {
+    return x_;
 }
 
-Resources::~Resources() {}
-
-void Resources::setResources(const std::unordered_map<int, int>& resources, int x, int y, const std::unordered_map<int, sf::Texture*>& textures) {
-    this->resources = resources;
-    updateResourceSprites(x, y, textures);
+int Resources::getY() const {
+    return y_;
 }
 
-void Resources::updateResourceSprites(int x, int y, const std::unordered_map<int, sf::Texture*>& textures) {
-    resourceSprites.clear();
-    currentFrames.clear();
+int Resources::getFood() const {
+    return food_;
+}
 
-    for (const auto& pair : resources) {
-        int resourceType = pair.first;
-        int count = pair.second;
-        for (int i = 0; i < count; ++i) {
-            sf::Sprite resourceSprite;
-            resourceSprite.setTexture(*textures.at(resourceType));
-            resourceSprite.setScale(resourceSize / frameWidth, resourceSize / frameHeight);
-            float offsetX = static_cast<float>(std::rand() % static_cast<int>(squareSize - resourceSize));
-            float offsetY = static_cast<float>(std::rand() % static_cast<int>(squareSize / 1.5 - resourceSize));
-            resourceSprite.setPosition(x * squareSize + offsetX, y * squareSize + offsetY);
-            resourceSprite.setTextureRect(sf::IntRect(0, 0, frameWidth, frameHeight));
-            resourceSprites.push_back(resourceSprite);
-            currentFrames.push_back(0);
-        }
+int Resources::getLinemate() const {
+    return linemate_;
+}
+
+int Resources::getDeraumere() const {
+    return deraumere_;
+}
+
+int Resources::getSibur() const {
+    return sibur_;
+}
+
+int Resources::getMendiane() const {
+    return mendiane_;
+}
+
+int Resources::getPhiras() const {
+    return phiras_;
+}
+
+int Resources::getThystame() const {
+    return thystame_;
+}
+
+void Resources::setX(int x) {
+    x_ = x;
+}
+
+void Resources::setY(int y) {
+    y_ = y;
+}
+
+void Resources::setFood(int food) {
+    food_ = food;
+}
+
+void Resources::setLinemate(int linemate) {
+    linemate_ = linemate;
+}
+
+void Resources::setDeraumere(int deraumere) {
+    deraumere_ = deraumere;
+}
+
+void Resources::setSibur(int sibur) {
+    sibur_ = sibur;
+}
+
+void Resources::setMendiane(int mendiane) {
+    mendiane_ = mendiane;
+}
+
+void Resources::setPhiras(int phiras) {
+    phiras_ = phiras;
+}
+
+void Resources::setThystame(int thystame) {
+    thystame_ = thystame;
+}
+
+void Resources::setTextures(const std::unordered_map<int, sf::Texture*>& textures) {
+    sprites.clear();
+    resourceFrames.clear();
+
+    for (int i = 0; i < 7; i++) {
+        sf::Sprite sprite;
+        sprite.setTexture(*textures.at(i));
+        sprite.setScale(36.0f / 16.0f, 36.0f / 16.0f);
+        float offsetX = static_cast<float>(std::rand() % static_cast<int>(100.0f - 36.0f));
+        float offsetY = static_cast<float>(std::rand() % static_cast<int>(100.0f / 1.5f - 36.0f));
+        sprite.setPosition(x_ * 100.0f + offsetX, y_ * 100.0f + offsetY);
+        sprite.setTextureRect(sf::IntRect(0, 0, 16.0f, 16.0f));
+        sprites.push_back(sprite);
+        resourceFrames.push_back(0);
     }
 }
 
-void Resources::drawResources(sf::RenderWindow &window) const {
-    for (const auto& resourceSprite : resourceSprites) {
-        window.draw(resourceSprite);
-    }
-}
-
-void Resources::updateAnimation() {
-    if (animationClock.getElapsedTime().asSeconds() > animationSpeed) {
-        for (size_t i = 0; i < resourceSprites.size(); ++i) {
-            currentFrames[i] = (currentFrames[i] + 1) % frameCount;
-            resourceSprites[i].setTextureRect(sf::IntRect(currentFrames[i] * frameWidth, 0, frameWidth, frameHeight));
+void Resources::updateAnimation()
+{
+    if (animationClock.getElapsedTime().asSeconds() > 0.2f) {
+        for (size_t i = 0; i < resourceFrames.size(); ++i) {
+            resourceFrames[i] = (resourceFrames[i] + 1) % 4;
+            sprites[i].setTextureRect(sf::IntRect(resourceFrames[i] * 16.0f, 0, 16.0f, 16.0f));
         }
         animationClock.restart();
     }
 }
 
-const std::unordered_map<int, int>& Resources::getResources() const {
-    return resources;
+void Resources::draw(sf::RenderWindow &window) const {
+    if (getFood() > 0) {
+        window.draw(sprites[0]);
+    }
+    if (getLinemate() > 0) {
+        window.draw(sprites[1]);
+    }
+    if (getDeraumere() > 0) {
+        window.draw(sprites[2]);
+    }
+    if (getSibur() > 0) {
+        window.draw(sprites[3]);
+    }
+    if (getMendiane() > 0) {
+        window.draw(sprites[4]);
+    }
+    if (getPhiras() > 0) {
+        window.draw(sprites[5]);
+    }
+    if (getThystame() > 0) {
+        window.draw(sprites[6]);
+    }
 }

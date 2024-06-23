@@ -14,6 +14,8 @@
 #include "Tile.hpp"
 #include "Menu.hpp"
 #include "Camera.hpp"
+#include "Character.hpp"
+#include "Client.hpp"
 
 class Mouse {
 public:
@@ -21,8 +23,8 @@ public:
 
     void handleMouseScroll(sf::View& view, const sf::Event& event, Camera& camera);
     void handleMouseMove(const sf::Vector2f& worldPos, std::vector<std::vector<Tile>>& tiles);
-    void handleMouseClick(sf::RenderWindow& window, const sf::Vector2f& worldPos, std::vector<std::vector<Tile>>& tiles, Tile*& selectedTile, Menu& menu, bool& tileSelected);
-    void handleAllMouseEvents(sf::RenderWindow& window, sf::View& view, const sf::Event& event, std::vector<std::vector<Tile>>& tiles, Tile*& selectedTile, Menu& menu, bool& tileSelected, Camera& camera);
+    void handleMouseClick(sf::RenderWindow& window, const sf::Vector2f& worldPos, std::vector<std::vector<Tile>>& tiles, Tile*& selectedTile, const Character*& selectedCharacter, Menu& menu, bool& tileSelected, bool& chracterSelected,const std::vector<Resources>& resources, const std::vector<Character>& characters, Client& client);
+    void handleAllMouseEvents(sf::RenderWindow& window, sf::View& view, const sf::Event& event, std::vector<std::vector<Tile>>& tiles, Tile*& selectedTile, const Character*& selectedCharacter, Menu& menu, bool& tileSelected, bool& chracterSelected, Camera& camera, const std::vector<Resources>& resources, const std::vector<Character>& characters, Client& client);
 };
 
 #endif /* !MOUSE_HPP_ */

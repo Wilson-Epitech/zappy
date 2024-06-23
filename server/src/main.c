@@ -16,13 +16,21 @@
  * @brief This function is used to get the arguments from the command line
  *
  * @param server
- * @param av
+ * @param argv
+ * @param argc
  * @return int
 */
-static int error_handling(server_t *server, char *const *av)
+static int error_handling(server_t *server, char *const *argv, int argc)
 {
-    if (get_args(server, av) == FAILURE) {
+    const char *usage = "USAGE: ./zappy_server -p port "
+        "-x width -y height -n name1 name2 ... -c clientsNb -f freq\n";
+
+    if (get_args(server, argv) == FAILURE) {
         return FAILURE;
+    }
+    if (argc == 2 && strcmp(argv[1], "-help") == SUCCESS) {
+        printf("%s", usage);
+        return SUCCESS;
     }
     return SUCCESS;
 }
@@ -37,16 +45,10 @@ static int error_handling(server_t *server, char *const *av)
 int main(int argc, char *const *argv)
 {
     server_t *server = malloc(sizeof(server_t));
-    const char *usage = "USAGE: ./zappy_server -p port "
-        "-x width -y height -n name1 name2 ... -c clientsNb -f freq\n";
 
     memset(server, 0, sizeof(server_t));
     server->opt = malloc(sizeof(options_t));
-    if (argc == 2 && strcmp(argv[1], "-help") == SUCCESS) {
-        printf("%s", usage);
-        return SUCCESS;
-    }
-    if (error_handling(server, argv) == FAILURE)
+    if (error_handling(server, argv, argc) == FAILURE)
         return FAILURE;
     init_server(server, server->opt);
     init_queue(server);

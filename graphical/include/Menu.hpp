@@ -10,17 +10,21 @@
 
 #include <SFML/Graphics.hpp>
 #include "Tile.hpp"
+#include "Character.hpp"
+#include "Client.hpp"
 
 class Menu {
 public:
     Menu(const sf::Vector2u& windowSize);
 
-    void updateInfoText(const Tile* selectedTile, bool tileSelected);
-    void draw(sf::RenderWindow& window, bool tileSelected) const;
+    void updateInfoText(const Tile* selectedTile, bool tileSelected, const std::vector<Resources>& resources, const std::vector<Character>& characters);
+    void updateCharacterText(const Character* selectedCharacter, bool characterSelected, const std::vector<Character>& characters, Client& client);
+    void draw(sf::RenderWindow& window, bool tileSelected, bool characterSelected) const;
 
 private:
     sf::Font font;
     sf::Text infoText;
+    sf::Text characterText;
     sf::RectangleShape infoRect;
 
     std::unordered_map<int, std::string> textureNames = {

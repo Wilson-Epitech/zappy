@@ -41,8 +41,8 @@ int error_handling_bct(server_t *server, const char *params)
     char *tmp = strdup(params);
     char *arg1 = strtok(tmp, " ");
     char *arg2 = strtok(NULL, " ");
-    int x;
-    int y;
+    int x = 0;
+    int y = 0;
 
     if (arg1 == NULL || arg2 == NULL || strtok(NULL, " ") != NULL
     || digit_check(arg1, arg2) == 1) {
@@ -74,7 +74,7 @@ void command_bct(server_t *server, player_t *player, const char *params)
     answer = malloc(sizeof(char) * 222);
     tmp = strdup(params);
     x = atoi(strtok(tmp, " "));
-    y = atoi(strtok(tmp, " "));
+    y = atoi(strtok(NULL, " "));
     display_tile(server, x, y, answer);
     send(player->fd, answer, strlen(answer), 0);
     free(answer);
@@ -82,19 +82,23 @@ void command_bct(server_t *server, player_t *player, const char *params)
 
 void command_bct_all(server_t *server, player_t *player, const char *params)
 {
-    char *answer = malloc(sizeof(char) * 222);
+    size_t max_size = server->map.height * server->map.width * 200;
+    char *answer = malloc(sizeof(char) * max_size);
+    char *tile_info = NULL;
 
     if (strcmp(params, "\0") != 0) {
         dprintf(player->fd, "sbp\n");
         return;
     }
+    answer[0] = '\0';
     for (size_t i = 0; i < server->map.height; i++) {
         for (size_t j = 0; j < server->map.width; j++) {
-            display_tile(server, j, i, answer);
-            send(player->fd, answer, strlen(answer), 0);
-            free(answer);
-            answer = malloc(sizeof(char) * 222);
+            tile_info = malloc(sizeof(char) * 200);
+            display_tile(server, j, i, tile_info);
+            strcat(answer, tile_info);
+            free(tile_info);
         }
     }
+    send(player->fd, answer, strlen(answer), 0);
     free(answer);
 }

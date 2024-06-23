@@ -7,12 +7,11 @@
 
 #include "Menu.hpp"
 #include <sstream>
+#include "Client.hpp"
 
 Menu::Menu(const sf::Vector2u& windowSize) {
-    if (!font.loadFromFile("assets/font.ttf")) {
-        throw std::runtime_error("Failed to load font.ttf");
-    }
-
+    if (!font.loadFromFile("graphical/assets/font.ttf"))
+        return;
     infoText.setFont(font);
     infoText.setCharacterSize(30);
     infoText.setFillColor(sf::Color::White);
@@ -23,33 +22,66 @@ Menu::Menu(const sf::Vector2u& windowSize) {
     infoRect.setPosition(0, windowSize.y - 150);
 }
 
-void Menu::updateInfoText(const Tile* selectedTile, bool tileSelected) {
+void Menu::updateInfoText(const Tile* selectedTile, bool tileSelected, const std::vector<Resources>& resources, const std::vector<Character>& characters) {
     if (tileSelected && selectedTile) {
         std::ostringstream oss;
-        oss << "Tile Position: (" << selectedTile->getX() << ", " << selectedTile->getY() << ")\t\t\t";
-        const auto& resources = selectedTile->getResources();
-        const auto& characters = selectedTile->getCharacters();
-        int totalCharacters = 0;
-        for (const auto& pair : characters) {
-            totalCharacters += pair.second;
-        }
-        oss << "Total Characters: " << totalCharacters << "\n\n";
-        oss << "Resources:\n";
-        for (const auto& pair : resources) {
-            int resourceId = pair.first;
-            int quantity = pair.second;
-            if (textureNames.find(resourceId) != textureNames.end()) {
-                oss << textureNames[resourceId] << ": " << quantity << "\t\t";
+
+        int characterCount = 0;
+        for (const auto& character : characters) {
+            if (character.getPosX() == selectedTile->getX() && character.getPosY() == selectedTile->getY()) {
+                ++characterCount;
             }
         }
+
+        oss << "Tile Position : ( " << selectedTile->getX() << " ,  " << selectedTile->getY() << " )\tCharacters : " << characterCount << "\n";
+
+        for (const auto& resource : resources) {
+            if (resource.getX() == selectedTile->getX() && resource.getY() == selectedTile->getY()) {
+                oss << "Resources :\n";
+                oss << "Food : " << resource.getFood() << "\t";
+                oss << "Linemate : " << resource.getLinemate() << "\t";
+                oss << "Deraumere : " << resource.getDeraumere() << "\t";
+                oss << "Sibur : " << resource.getSibur() << "\t";
+                oss << "Mendiane : " << resource.getMendiane() << "\t";
+                oss << "Phiras : " << resource.getPhiras() << "\t";
+                oss << "Thystame : " << resource.getThystame() << "\t";
+                break;
+            }
+        }
+
         infoText.setString(oss.str());
     } else {
         infoText.setString("");
     }
 }
 
-void Menu::draw(sf::RenderWindow& window, bool tileSelected) const {
-    if (tileSelected) {
+void Menu::updateCharacterText(const Character* selectedCharacter, bool characterSelected, const std::vector<Character>& characters, Client& client) {
+    if (characterSelected && selectedCharacter) {
+        std::ostringstream oss;
+
+        oss << "Character ID : " << selectedCharacter->getId() << "\t";
+        oss << "Position : ( " << selectedCharacter->getPosX() << " ,  " << selectedCharacter->getPosY() << " )\t";
+        oss << "Level : " << client.getPinLv() << "\t";
+        oss << "Team : " << selectedCharacter->getTeam() << "\n";
+
+        oss << "Inventory :\n";
+        oss << "Food : " << client.getPinFood() << "\t";
+        oss << "Linemate : " << client.getPinLinemate() << "\t";
+        oss << "Deraumere : " << client.getPinDeraumere() << "\t";
+        oss << "Sibur : " << client.getPinSibur() << "\t";
+        oss << "Mendiane : " << client.getPinMendiane() << "\t";
+        oss << "Phiras : " << client.getPinPhiras() << "\t";
+        oss << "Thystame : " << client.getPinThystame() << "\n";
+
+        infoText.setString(oss.str());
+    } else {
+        infoText.setString("");
+    }
+}
+
+
+void Menu::draw(sf::RenderWindow& window, bool tileSelected, bool characterSelected) const {
+    if (tileSelected || characterSelected) {
         window.draw(infoRect);
         window.draw(infoText);
     }

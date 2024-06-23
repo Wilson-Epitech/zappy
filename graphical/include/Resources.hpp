@@ -5,37 +5,57 @@
 ** Resources
 */
 
-#ifndef RESOURCES_H_
-#define RESOURCES_H_
+#ifndef RESOURCES_HPP_
+#define RESOURCES_HPP_
 
+#include <string>
 #include <SFML/Graphics.hpp>
 #include <unordered_map>
-#include <vector>
 
 class Resources {
 public:
-    Resources();
-    ~Resources();
+    Resources(int x, int y, int food, int linemate, int deraumere, int sibur, int mendiane, int phiras, int thystame);
 
-    void setResources(const std::unordered_map<int, int>& resources, int x, int y, const std::unordered_map<int, sf::Texture*>& textures);
-    void drawResources(sf::RenderWindow &window) const;
+    int getX() const;
+    int getY() const;
+    int getFood() const;
+    int getLinemate() const;
+    int getDeraumere() const;
+    int getSibur() const;
+    int getMendiane() const;
+    int getPhiras() const;
+    int getThystame() const;
+
+    void setX(int x);
+    void setY(int y);
+    void setFood(int food);
+    void setLinemate(int linemate);
+    void setDeraumere(int deraumere);
+    void setSibur(int sibur);
+    void setMendiane(int mendiane);
+    void setPhiras(int phiras);
+    void setThystame(int thystame);
+
+    void setTextures(const std::unordered_map<int, sf::Texture*>& textures);
     void updateAnimation();
-    const std::unordered_map<int, int>& getResources() const;
+    void draw(sf::RenderWindow &window) const;
 
 private:
-    std::unordered_map<int, int> resources;
-    std::vector<sf::Sprite> resourceSprites;
-    std::vector<int> currentFrames;
+    int x_;
+    int y_;
+    int food_;
+    int linemate_;
+    int deraumere_;
+    int sibur_;
+    int mendiane_;
+    int phiras_;
+    int thystame_;
 
-    static const float animationSpeed;
+    int spriteHeight_;
+    std::vector<sf::Sprite> sprites;
+    std::vector<int> resourceFrames;
     sf::Clock animationClock;
-    const float squareSize = 100.0f;
-    const float resourceSize = 20.0f;
-    const float frameWidth = 16;
-    const float frameHeight = 16;
-    const int frameCount = 4;
 
-    void updateResourceSprites(int x, int y, const std::unordered_map<int, sf::Texture*>& textures);
 };
 
-#endif /* RESOURCES_H_ */
+#endif /* !RESOURCES_HPP */
