@@ -12,7 +12,7 @@
 
 /**
  * @brief Kills a player.
- * 
+ *
  * @param server The server instance.
  * @param fd The file descriptor of the player to kill.
 */
@@ -34,7 +34,7 @@ static void kill_player(server_t *server, int fd)
 
 /**
  * @brief Kills a player.
- * 
+ *
  * @param server The server instance.
  * @param server The server instance.
  * @param fd The file descriptor of the player to kill.

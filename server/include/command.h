@@ -11,7 +11,7 @@
 
 /**
  * @brief Structure to handle commands
- * 
+ *
  * @param cmd Name of the command
  * @param execution_time Time to wait before calling the function
  * @param id Id of the command
@@ -27,7 +27,7 @@ typedef struct command_s {
 
 /**
  * @brief Structure to handle commands
- * 
+ *
  * @param commands Array of commands
  * @param front Front of the queue
  * @param rear Rear of the queue

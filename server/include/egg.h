@@ -10,7 +10,7 @@
 
 /**
  * @brief Structure to handle eggs
- * 
+ *
  * @param x X position of the egg
  * @param y Y position of the egg
  * @param id Id of the egg

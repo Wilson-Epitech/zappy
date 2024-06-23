@@ -24,7 +24,7 @@ command_server_t command_server[] = {
 
 /**
  * @brief Process the server command
- * 
+ *
  * @param server The server instance.
  * @param player The player instance.
  * @param cmd The command to process.

@@ -13,7 +13,7 @@
 
 /**
  * @brief Send the time unit to the player.
- * 
+ *
  * @param server The server instance.
  * @param player The player instance.
  * @param params The command.

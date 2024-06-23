@@ -32,7 +32,7 @@ static const int FAILURE = 84;
 
 /**
  * @brief Structure to handle server
- * 
+ *
  * @param port Port of the server
  * @param fd File descriptor
  * @param players_connected Number of players connected

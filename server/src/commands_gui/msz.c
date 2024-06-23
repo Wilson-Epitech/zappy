@@ -12,7 +12,7 @@
 
 /**
  * @brief Send the map size to the player.
- * 
+ *
  * @param server The server instance.
  * @param player The player instance.
  * @param cmd The command.

@@ -13,7 +13,7 @@
 
 /**
  * @brief Display the tile information.
- * 
+ *
  * @param server The server instance.
  * @param x The x position of the tile.
  * @param y The y position of the tile.
@@ -33,7 +33,7 @@ static void display_tile(server_t *server, int x, int y, char *answer)
 
 /**
  * @brief Check if the arguments are digits.
- * 
+ *
  * @param arg1 The first argument.
  * @param arg2 The second argument.
  * @return int 0 if the arguments are digits, 1 otherwise.
@@ -53,7 +53,7 @@ int digit_check(char *arg1, char *arg2)
 
 /**
  * @brief Check if the arguments are correct.
- * 
+ *
  * @param server The server instance.
  * @param params The parameters.
  * @return int 0 if the arguments are correct, 1 otherwise.
@@ -84,7 +84,7 @@ int error_handling_bct(server_t *server, const char *params)
 
 /**
  * @brief Send the tile information to the player.
- * 
+ *
  * @param server The server instance.
  * @param player The player instance.
  * @param params The parameters.
@@ -111,7 +111,7 @@ void command_bct(server_t *server, player_t *player, const char *params)
 
 /**
  * @brief Send all the tile information to the player.
- * 
+ *
  * @param server The server instance.
  * @param player The player instance.
  * @param params The parameters.

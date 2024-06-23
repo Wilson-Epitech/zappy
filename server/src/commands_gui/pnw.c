@@ -10,7 +10,7 @@
 
 /**
  * @brief Executes the pnw command and send a message when a player connects
- * 
+ *
  * @param server
  * @param client_fd
 */

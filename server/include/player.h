@@ -13,7 +13,7 @@
 
 /**
  * @brief Structure to handle players
- * 
+ *
  * @param fd File descriptor
  * @param id Id of the player
  * @param team_id Id of the team

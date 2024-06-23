@@ -11,7 +11,7 @@
 
 /**
  * @brief Checks if the player has the required items to level up
- * 
+ *
  * @param server
  * @param player
  * @return true

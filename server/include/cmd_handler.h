@@ -11,7 +11,7 @@
 
 /**
  * @brief Structure to handle commands
- * 
+ *
  * @param name Name of the command
  * @param func Function to call when the command is called
  * @param time Time to wait before calling the function
@@ -25,7 +25,7 @@ typedef struct command_handler_s {
 
 /**
  * @brief Structure to handle commands
- * 
+ *
  * @param name Name of the command
  * @param func Function to call when the command is called
  * @return command_ia_t

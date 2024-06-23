@@ -11,7 +11,7 @@
 
 /**
  * @brief Structure to handle teams
- * 
+ *
  * @param name Name of the team
  * @param player_count Number of players
  * @param egg_count Number of eggs

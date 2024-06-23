@@ -11,7 +11,7 @@
 
 /**
  * @brief Structure to handle map
- * 
+ *
  * @param tiles Array of tiles
  * @param width Width of the map
  * @param height Height of the map

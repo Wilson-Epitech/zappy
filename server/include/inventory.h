@@ -10,7 +10,7 @@
 
 /**
  * @brief Structure to handle inventory
- * 
+ *
  * @param food Number of food
  * @param linemate Number of linemate
  * @param deraumere Number of deraumere

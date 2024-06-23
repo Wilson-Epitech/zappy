@@ -12,7 +12,7 @@
 
 /**
  * @brief Executes the seg command and end the game
- * 
+ *
  * @param server
  * @param player
  * @param cmd

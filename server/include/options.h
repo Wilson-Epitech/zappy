@@ -11,7 +11,7 @@
 
 /**
  * @brief Structure to handle options
- * 
+ *
  * @param port Port of the server
  * @param map_width Width of the map
  * @param map_height Height of the map

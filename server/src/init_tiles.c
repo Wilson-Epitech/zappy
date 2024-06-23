@@ -14,7 +14,7 @@
 
 /**
  * @brief Switch case for the resources
- * 
+ *
  * @param server
  * @param i
  * @param j
@@ -46,7 +46,7 @@ void ressources_switch(server_t *server,
 
 /**
  * @brief Distributes the remaining resources
- * 
+ *
  * @param server
  * @param remaining
  * @param resource_index
@@ -78,7 +78,7 @@ static void distribute_remaining_resources(server_t *server,
 
 /**
  * @brief Refills the distribution of resources
- * 
+ *
  * @param server
  */
 void refill_distribution(server_t *server)
@@ -104,7 +104,7 @@ void refill_distribution(server_t *server)
 
 /**
  * @brief Refills the map
- * 
+ *
  * @param server
  */
 void refill_map(server_t *server)

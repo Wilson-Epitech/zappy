@@ -26,7 +26,7 @@ typedef enum tile_type_e {
 
 /**
  * @brief Structure to handle tiles
- * 
+ *
  * @param food Number of food
  * @param linemate Number of linemate
  * @param deraumere Number of deraumere
