@@ -63,7 +63,7 @@ static void handle_read_fds(server_t *server, fd_set *read_fds)
  *
  * @param server The server instance.
  */
-void run_server(server_t *server, tile_density_t *)
+void run_server(server_t *server)
 {
     fd_set read_fds = {0};
 

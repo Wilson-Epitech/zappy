@@ -12,17 +12,6 @@
 #include <stdbool.h>
 #include <time.h>
 
-void init_tiles_quantity(tile_density_t *tile_density)
-{
-    tile_density->food = 0.5;
-    tile_density->linemate = 0.3;
-    tile_density->deraumere = 0.15;
-    tile_density->sibur = 0.1;
-    tile_density->mendiane = 0.1;
-    tile_density->phiras = 0.08;
-    tile_density->thystame = 0.05;
-}
-
 void ressources_switch(server_t *server,
     int i, int j, int resource_index)
 {

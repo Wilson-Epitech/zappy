@@ -34,14 +34,4 @@ typedef struct tile_s {
     int *resources[ITEM_COUNT];
 } tile_t;
 
-typedef struct tile_density_s {
-    int food;
-    int linemate;
-    int deraumere;
-    int sibur;
-    int mendiane;
-    int phiras;
-    int thystame;
-} tile_density_t;
-
 #endif /* !TILES_H_ */
