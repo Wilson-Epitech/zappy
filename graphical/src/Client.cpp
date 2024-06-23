@@ -5,7 +5,7 @@
 ** client
 */
 
-#include "client.hpp"
+#include "Client.hpp"
 #include <iostream>
 #include <vector>
 #include <string>

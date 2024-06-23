@@ -5,7 +5,7 @@
 ** main
 */
 
-#include "client.hpp"
+#include "Client.hpp"
 #include "GameLoop.hpp"
 #include <thread>
 
