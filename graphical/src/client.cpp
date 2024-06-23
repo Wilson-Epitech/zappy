@@ -39,8 +39,17 @@ void Client::start_cli()
 
         std::string initial_message = "GRAPHIC";
         send(initial_message);
+        usleep(500);
         send("msz");
+        usleep(500);
         send("mct");
+        std::thread periodic_send_thread([this]() {
+            while (1) {
+                std::this_thread::sleep_for(std::chrono::seconds(5));
+                send("mct");
+            }
+        });
+        periodic_send_thread.detach();
 
         while (1) {
             receive();
@@ -221,6 +230,14 @@ void Client::get_plv(std::vector<std::string> tokens)
 void Client::get_pdi(std::vector<std::string> tokens)
 {
     int player = std::stoi(tokens[1]);
+    for (auto& character : characters_) {
+        if (character.getId() == player) {
+            character.setIsDead(true);
+            character.setPosX(-1);
+            character.setPosY(-1);
+            break;
+        }
+    }
 }
 
 void Client::receive()
