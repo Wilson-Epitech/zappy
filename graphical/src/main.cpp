@@ -52,6 +52,9 @@ int main(int argc, char *const *argv) {
         return 84;
     }
 
+    if (host == "localhost")
+        host = "127.0.0.1";
+
     Client client(host, port);
 
     std::thread client_thread([&client]() {
