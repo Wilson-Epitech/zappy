@@ -14,7 +14,6 @@
  *
  * @return int
 */
-
 int Ia::Args::getPort() const
 {
     return this->_port;
@@ -24,7 +23,6 @@ int Ia::Args::getPort() const
  * @brief Sets the port
  * @param port The port to enter when compiling
 */
-
 void Ia::Args::setPort(std::string port)
 {
     int convertedPort = 0;
@@ -41,7 +39,6 @@ void Ia::Args::setPort(std::string port)
  *
  * @return std::string
 */
-
 std::string Ia::Args::getTeamName() const
 {
     return this->_teamName;
@@ -51,7 +48,6 @@ std::string Ia::Args::getTeamName() const
  * @brief Sets the team name
  * @param teamName The team name to enter when compiling
 */
-
 void Ia::Args::setTeamName(std::string teamName)
 {
     this->_teamName = teamName;
@@ -62,7 +58,6 @@ void Ia::Args::setTeamName(std::string teamName)
  *
  * @return std::string
 */
-
 std::string Ia::Args::getMachineName() const
 {
     return this->_machineName;
@@ -72,7 +67,6 @@ std::string Ia::Args::getMachineName() const
  * @brief Sets the machine name
  * @param machineName The machine name to enter when compiling
 */
-
 void Ia::Args::setMachineName(std::string machineName)
 {
     this->_machineName = machineName;
@@ -83,7 +77,6 @@ void Ia::Args::setMachineName(std::string machineName)
  * @param argc The number of arguments same as main
  * @param argv An array of those arguments same as main
 */
-
 void Ia::Args::store(int argc, const char *argv[])
 {
     if (argc != 7) {

@@ -12,7 +12,6 @@
  *
  * @return char *
 */
-
 const char *Ia::Error::StringPort::what() const noexcept
 {
     return "Stoi Failed. Maybe you have entered a wrong port?";

@@ -14,7 +14,6 @@
  * @param port
  * @param teamName
 */
-
 void Ia::Bot::ServerConnection(const std::string &ip, int port, const std::string &)
 {
     struct sockaddr_in serv_addr;

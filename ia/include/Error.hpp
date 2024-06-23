@@ -6,9 +6,13 @@
 */
 
 #ifndef ERROR_HPP_
-#define ERROR_HPP_
-#include <iostream>
+    #define ERROR_HPP_
+    #include <iostream>
 
+/**
+ * @brief Error handling for the IA
+ *
+*/
 namespace Ia {
     namespace Error {
         class InvalidArguments: public std::exception {

@@ -6,9 +6,13 @@
 */
 
 #ifndef IA_HPP_
-#define IA_HPP_
-#include <string>
+    #define IA_HPP_
+    #include <string>
 
+/**
+ * @brief Interface for the IA
+ *
+*/
 namespace Ia {
     class IA {
         public:

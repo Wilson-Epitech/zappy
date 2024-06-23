@@ -6,13 +6,17 @@
 */
 
 #ifndef BOT_HPP_
-#define BOT_HPP_
-#include "Ia.hpp"
-#include <iostream>
-#include <sys/socket.h>
-#include <arpa/inet.h>
-#include <unistd.h>
+    #define BOT_HPP_
+    #include "Ia.hpp"
+    #include <iostream>
+    #include <sys/socket.h>
+    #include <arpa/inet.h>
+    #include <unistd.h>
 
+/**
+ * @brief Bot class
+ *
+*/
 namespace Ia {
     class Bot : public IA {
         public:
