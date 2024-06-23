@@ -91,7 +91,6 @@ void Character::setTextures(const std::unordered_map<int, sf::Texture*>& texture
     for (auto &team : client.getTeamNames()) {
         ++colorIndex;
         if (team_.compare(team) == 0) {
-            std::cout << "team: " << team << std::endl;
             sprite.setColor(colors[colorIndex]);
         }
     }

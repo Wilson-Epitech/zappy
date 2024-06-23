@@ -7,6 +7,7 @@
 
 #include "Mouse.hpp"
 #include <iostream>
+#include "client.hpp"
 
 Mouse::Mouse() {}
 
@@ -48,6 +49,8 @@ const std::vector<Character>& characters, Client& client)
 
     for (auto& character : characters) {
         if (character.contains(worldPos)) {
+            std::string command = "pin " + std::to_string(character.getId());
+            client.send(command);
             newSelectedCharacter = &character;
             break;
         }

@@ -39,11 +39,11 @@ public:
     int getPinThystame() const;
 
     std::vector<std::string> getTeamNames() const;
+    void send(const std::string& message);
 
 private:
     void connect();
     void stop();
-    void send(const std::string& message);
     void receive();
     void get_pnw(std::vector<std::string> tokens);
     void get_ppo(std::vector<std::string> tokens);
