@@ -22,6 +22,7 @@ public:
     int getOrientation() const;
     int getLevel() const;
     std::string getTeam() const;
+    bool getIsDead() const;
 
     void setId(int id);
     void setPosX(int pos_x);
@@ -29,6 +30,7 @@ public:
     void setOrientation(int orientation);
     void setLevel(int level);
     void setTeam(const std::string& team);
+    void setIsDead(bool isDead);
 
     void setTextures(const std::unordered_map<int, sf::Texture*>& textures);
     void updateAnimation();
@@ -40,6 +42,7 @@ private:
     int pos_y_;
     int orientation_;
     int level_;
+    bool isDead_ = false;
     std::string team_;
 
     bool textureLoaded_ = false;

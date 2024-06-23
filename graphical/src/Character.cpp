@@ -34,6 +34,10 @@ std::string Character::getTeam() const {
     return team_;
 }
 
+bool Character::getIsDead() const {
+    return isDead_;
+}
+
 void Character::setId(int id) {
     id_ = id;
 }
@@ -56,6 +60,10 @@ void Character::setLevel(int level) {
 
 void Character::setTeam(const std::string& team) {
     team_ = team;
+}
+
+void Character::setIsDead(bool isDead) {
+    isDead_ = isDead;
 }
 
 void Character::setTextures(const std::unordered_map<int, sf::Texture*>& textures) {
@@ -84,5 +92,7 @@ void Character::updateAnimation() {
 }
 
 void Character::draw(sf::RenderWindow &window) const{
-    window.draw(sprite);
+    if (!this->isDead_) {
+        window.draw(sprite);
+    }
 }
