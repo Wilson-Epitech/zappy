@@ -12,7 +12,6 @@
  *
  * @return char *
 */
-
 const char *Ia::Error::InvalidArguments::what() const noexcept
 {
     return "./zappy_ai -p port -n name1 -h 127.0.0.1";

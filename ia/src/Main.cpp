@@ -16,7 +16,6 @@
  * @param argv char*[]: An array of those arguments
  * @return int
 */
-
 int main(int argc, const char *argv[])
 {
     try {

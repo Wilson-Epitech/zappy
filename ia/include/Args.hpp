@@ -6,9 +6,13 @@
 */
 
 #ifndef ARGS_HPP_
-#define ARGS_HPP_
+    #define ARGS_HPP_
     #include <iostream>
 
+/**
+ * @brief Args class for the IA
+ *
+*/
 namespace Ia {
     class Args {
         public:
