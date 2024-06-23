@@ -11,6 +11,9 @@
 #include <string>
 #include <SFML/Graphics.hpp>
 #include <unordered_map>
+#include "client.hpp"
+
+class Client;
 
 class Character {
 public:
@@ -33,7 +36,7 @@ public:
     void setIsDead(bool isDead);
     bool contains(const sf::Vector2f& point) const;
 
-    void setTextures(const std::unordered_map<int, sf::Texture*>& textures);
+    void setTextures(const std::unordered_map<int, sf::Texture*>& textures, Client& client);
     void updateAnimation();
     void draw(sf::RenderWindow &window) const;
 

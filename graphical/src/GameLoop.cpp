@@ -133,7 +133,7 @@ void gameLoop(Client& client) {
             characters = client.getCharacters();
             resources = client.getResources();
             for (auto& character : characters) {
-                character.setTextures(textures);
+                character.setTextures(textures, client);
             }
             for (auto& resource : resources) {
                 resource.setTextures(textures);

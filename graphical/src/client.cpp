@@ -41,6 +41,8 @@ void Client::start_cli()
         send(initial_message);
         usleep(500);
         send("msz");
+        usleep(500);
+        send("tna");
         std::thread periodic_send_thread([this]() {
             while (1) {
                 std::this_thread::sleep_for(std::chrono::seconds(1));
@@ -151,7 +153,7 @@ void Client::get_msz(std::vector<std::string> tokens)
 
 void Client::get_tna(std::vector<std::string> tokens)
 {
-    std::vector<std::string> teamNames;
+
     for (size_t i = 1; i < tokens.size(); ++i) {
         std::string teamName = tokens[i];
         teamName.erase(std::remove(teamName.begin(), teamName.end(), '\n'), teamName.end());
@@ -160,11 +162,8 @@ void Client::get_tna(std::vector<std::string> tokens)
         if (tnaPos != std::string::npos) {
             teamName = teamName.substr(0, tnaPos);
         }
-        teamNames.push_back(teamName);
+        this->teamNames.push_back(teamName);
     }
-
-    std::lock_guard<std::mutex> lock(boardMutex_);
-    this->teamNames = teamNames;
 }
 
 void Client::get_bct(std::vector<std::string> tokens)
