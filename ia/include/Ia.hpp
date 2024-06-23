@@ -16,7 +16,18 @@
 namespace Ia {
     class IA {
         public:
+            /**
+             * @brief Construct a new IA object
+             *
+            */
             virtual ~IA() = default;
+            /**
+             * @brief Server Connection
+             *
+             * @param ip 
+             * @param port 
+             * @param teamName 
+            */
             virtual void ServerConnection(const std::string &ip, int port, const std::string &teamName) = 0;
     };
 }

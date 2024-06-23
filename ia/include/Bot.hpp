@@ -20,8 +20,23 @@
 namespace Ia {
     class Bot : public IA {
         public:
+            /**
+             * @brief Construct a new Bot object
+             *
+            */
             Bot() = default;
+            /**
+             * @brief Destroy the Bot object
+             *
+            */
             ~Bot() = default;
+            /**
+             * @brief Server Connection
+             *
+             * @param ip 
+             * @param port 
+             * @param teamName 
+            */
             virtual void ServerConnection(const std::string &ip, int port, const std::string &teamName) override;
 
         protected:
