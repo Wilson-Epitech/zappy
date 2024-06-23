@@ -8,6 +8,7 @@
 #include "server.h"
 #include <stdlib.h>
 #include <unistd.h>
+#include <time.h>
 #include <stdio.h>
 #include <stdbool.h>
 #include <time.h>

@@ -32,7 +32,7 @@ void clear_client(server_t *server, int client_fd)
     FD_CLR(client_fd, &server->read_fd);
     for (int i = 0; i < MAX_CLIENTS; i++) {
         if (server->players[i].fd == client_fd) {
-            server->players[i].fd = 0;
+            memset(&server->players[i], 0, sizeof(player_t));
             break;
         }
     }

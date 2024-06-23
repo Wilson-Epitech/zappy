@@ -13,8 +13,6 @@
 #include "cmd_handler.h"
 #include <unistd.h>
 
-#include "cmd_handler.h"
-
 /**
  * @brief Array of command with GUI.
  *
@@ -55,7 +53,7 @@ command_handler_t command_handlers_ia[] = {
     {"Set", command_set, 7},
     {"Eject", command_eject, 7},
     {"Fork", command_fork, 42},
-    {"Incantation", command_incantation, 0},
+    {"Incantation", command_incantation, 300},
     {NULL, NULL, 0}
 };
 

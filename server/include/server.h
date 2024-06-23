@@ -78,6 +78,15 @@ void init_tiles_quantity(tile_density_t *tile_density);
 void handle_teams(server_t *server, char *name, int index);
 void handle_disconnect(server_t *server, int client_fd);
 
+//--------Incantation--------------------------------//
+void level_one(server_t *server, player_t *player);
+void level_two(server_t *server, player_t *player);
+void level_three(server_t *server, player_t *player);
+void level_four(server_t *server, player_t *player);
+void level_five(server_t *server, player_t *player);
+void level_six(server_t *server, player_t *player);
+void level_seven(server_t *server, player_t *player);
+
 //---------Lib ------------------------------------------//
 char **word_array_delim(char const *str, char *separators);
 int get_array_size(char **array);
