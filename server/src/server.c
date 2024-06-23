@@ -28,6 +28,7 @@ void clear_client(server_t *server, int client_fd)
 
     snprintf(message, 1024, "pdi %d\n", client_fd);
     send_graphical(server, message);
+    handle_disconnect(server, client_fd);
     close(client_fd);
     FD_CLR(client_fd, &server->read_fd);
     for (int i = 0; i < MAX_CLIENTS; i++) {

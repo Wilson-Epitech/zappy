@@ -70,8 +70,7 @@ void clear_client(server_t *server, int client_fd);
 void set_player_team(server_t *server, int client_fd, int i);
 void decrement_food(server_t *server);
 void init_tiles_quantity(tile_density_t *tile_density);
-// void refill_map(server_t *server, time_t *start_time,
-//     tile_density_t *density);
+void refill_map(server_t *server);
 
 /* handle_teams.c */
 
