@@ -8,8 +8,10 @@
 #include "Error.hpp"
 
 /**
- * @brief This function override the "what" function in case the user tries to connect with an existing team
- * 
+ * @brief This function override the "what" function
+ * in case the user tries to connect with an
+ * existing team
+ *
  * @return char*
 */
 const char *Ia::Error::TeamAlreadyConnected::what() const noexcept

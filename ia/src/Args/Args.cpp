@@ -46,7 +46,8 @@ std::string Ia::Args::getTeamName() const
 
 /**
  * @brief Sets the team name
- * @param teamName The team name to enter when compiling
+ * @param teamName The team name to enter when
+ * compiling
 */
 void Ia::Args::setTeamName(std::string teamName)
 {
@@ -65,7 +66,8 @@ std::string Ia::Args::getMachineName() const
 
 /**
  * @brief Sets the machine name
- * @param machineName The machine name to enter when compiling
+ * @param machineName The machine name to enter when
+ * compiling
 */
 void Ia::Args::setMachineName(std::string machineName)
 {
@@ -73,9 +75,11 @@ void Ia::Args::setMachineName(std::string machineName)
 }
 
 /**
- * @brief Stores arguments. Should be called in the first place in the main function
+ * @brief Stores arguments. Should be called in the
+ * first place in the main function
  * @param argc The number of arguments same as main
- * @param argv An array of those arguments same as main
+ * @param argv An array of those arguments same as
+ * main
 */
 void Ia::Args::store(int argc, const char *argv[])
 {

@@ -11,9 +11,11 @@
 
 
 /**
- * @brief This is the main function for the Artificial Intelligence
+ * @brief This is the main function for the
+ * Artificial Intelligence
  * @param argc int: The number of arguments
- * @param argv char*[]: An array of those arguments
+ * @param argv char*[]: An array of those
+ * arguments
  * @return int
 */
 int main(int argc, const char *argv[])

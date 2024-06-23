@@ -13,7 +13,8 @@
  * @param id The id of the character.
  * @param pos_x The x position of the character.
  * @param pos_y The y position of the character.
- * @param orientation The orientation of the character.
+ * @param orientation The orientation of the
+ * character.
  * @param level The level of the character.
  * @param team The team of the character.
 */
@@ -30,7 +31,7 @@ int Character::getId() const {
 
 /**
  * @brief Get the x position of the character.
- * @return The x position of the character. 
+ * @return The x position of the character.
 */
 int Character::getPosX() const {
     return pos_x_;
@@ -102,7 +103,8 @@ void Character::setPosY(int pos_y) {
 
 /**
  * @brief Set the orientation of the character.
- * @param orientation The orientation of the character.
+ * @param orientation The orientation of the
+ * character.
 */
 void Character::setOrientation(int orientation) {
     orientation_ = orientation;
@@ -135,7 +137,8 @@ void Character::setIsDead(bool isDead) {
 /**
  * @brief Check if the character contains a point.
  * @param point The point to check.
- * @return True if the character contains the point, false otherwise.
+ * @return True if the character contains the point,
+ * false otherwise.
 */
 bool Character::contains(const sf::Vector2f& point) const {
     return sprite.getGlobalBounds().contains(point);
