@@ -9,6 +9,10 @@
 #include "GameLoop.hpp"
 #include <thread>
 
+/**
+ * @brief Print the usage of the program.
+ * @param program_name The name of the program.
+ */
 void print_usage(const std::string& program_name) {
     std::cerr << "USAGE: " << program_name << " -p port -h machine" << std::endl;
     std::cerr << "option description" << std::endl;
@@ -16,6 +20,12 @@ void print_usage(const std::string& program_name) {
     std::cerr << "-h machine hostname of the server" << std::endl;
 }
 
+/**
+ * @brief Main function of the program.
+ * @param argc The number of arguments.
+ * @param argv The arguments.
+ * @return The exit status.
+ */
 int main(int argc, char *const *argv) {
     if (argc != 5) {
         print_usage(argv[0]);

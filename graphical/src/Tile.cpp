@@ -9,8 +9,12 @@
 #include <cstdlib>
 #include <ctime>
 
+///< The size of the square.
 const float squareSize = 100.0f;
 
+/**
+* @brief Constructor for the Tile class.
+*/
 Tile::Tile(int x, int y, sf::Texture& texture, const sf::IntRect& textureRect) : x(x), y(y) {
     sprite.setPosition(x * squareSize, y * squareSize);
     sprite.setScale(squareSize / textureRect.width, squareSize / textureRect.height);
@@ -19,10 +23,16 @@ Tile::Tile(int x, int y, sf::Texture& texture, const sf::IntRect& textureRect) :
     originalColor = sprite.getColor();
 }
 
+/**
+ * @brief Destructor for the Tile class.
+*/
 Tile::~Tile() {
 
 }
 
+/**
+ * @brief Set the selected state of the tile.
+*/
 void Tile::setSelected(bool selected) {
     this->selected = selected;
     if (selected) {
@@ -36,6 +46,9 @@ void Tile::setSelected(bool selected) {
     }
 }
 
+/**
+ * @brief Get the selected state of the tile.
+*/
 void Tile::setHovered(bool hovered) {
     if (hovered) {
         sprite.setColor(sf::Color(
@@ -48,10 +61,17 @@ void Tile::setHovered(bool hovered) {
     }
 }
 
+/**
+ * @brief Get the selected state of the tile.
+*/
 bool Tile::contains(const sf::Vector2f& point) const {
     return sprite.getGlobalBounds().contains(point);
 }
 
+/**
+ * @brief Draw the tile.
+ * @param window The window to draw the tile on.
+*/
 void Tile::drawTile(sf::RenderWindow &window) const {
     window.draw(sprite);
 }

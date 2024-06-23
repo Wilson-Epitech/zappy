@@ -11,17 +11,28 @@
 #include <string>
 #include <sstream>
 
+/**
+ * @brief Constructor for the Client class.
+ * @param host The host to connect to.
+ * @param port The port to connect to.
+*/
 Client::Client(const std::string &host, short port)
     : io_context_(), socket_(io_context_), endpoint_(boost::asio::ip::address::from_string(host), port)
 {
     connect();
 }
 
+/**
+ * @brief Destructor for the Client class.   
+*/
 Client::~Client()
 {
     stop();
 }
 
+/**
+ * @brief Starts the client.
+*/
 void Client::start_cli()
 {
     try {
@@ -59,22 +70,39 @@ void Client::start_cli()
     }
 }
 
+/**
+ * @brief Connects the client to the server.
+*/
 void Client::connect()
 {
     socket_.connect(endpoint_);
     std::cout << "Connected to the server." << std::endl;
 }
 
+/**
+ * @brief Stops the client.
+*/
 void Client::stop()
 {
     socket_.close();
 }
 
+/**
+ * @brief Sends a message to the server.
+ * @param message The message to send.
+*/
 void Client::send(const std::string &message)
 {
     boost::asio::write(socket_, boost::asio::buffer(message + "\n"));
 }
 
+/**
+ * @brief Splits a string into a vector of vectors of strings.
+ * @param str The string to split.
+ * @param lineDelimiter The delimiter for the lines.
+ * @param tokenDelimiter The delimiter for the tokens.
+ * @return The vector of vectors of strings.
+*/
 static std::vector<std::vector<std::string>> split(const std::string &str, char lineDelimiter, char tokenDelimiter) {
     std::vector<std::vector<std::string>> lines;
     size_t lineStart = 0, lineEnd = 0, tokenStart = 0, tokenEnd = 0;
@@ -111,6 +139,10 @@ static std::vector<std::vector<std::string>> split(const std::string &str, char 
     return lines;
 }
 
+/**
+ * @brief Gets the pnw command.
+ * @param tokens The tokens of the command.
+*/
 void Client::get_pnw(std::vector<std::string> tokens)
 {
     int player_id = std::stoi(tokens[1]);
@@ -124,6 +156,10 @@ void Client::get_pnw(std::vector<std::string> tokens)
     characters_.emplace_back(player_id, player_pos_x, player_pos_y, player_orientation, player_level, team_name);
 }
 
+/**
+ * @brief Gets the ppo command.
+ * @param tokens The tokens of the command.
+*/
 void Client::get_ppo(std::vector<std::string> tokens)
 {
     int player_id = std::stoi(tokens[1]);
@@ -142,6 +178,10 @@ void Client::get_ppo(std::vector<std::string> tokens)
     }
 }
 
+/**
+ * @brief Gets the msz command.
+ * @param tokens The tokens of the command.
+*/
 void Client::get_msz(std::vector<std::string> tokens)
 {
     int map_width = std::stoi(tokens[1]);
@@ -151,6 +191,10 @@ void Client::get_msz(std::vector<std::string> tokens)
     mapHeight = map_height;
 }
 
+/**
+ * @brief Gets the tna command.
+ * @param tokens The tokens of the command.
+*/
 void Client::get_tna(std::vector<std::string> tokens)
 {
 
@@ -166,6 +210,10 @@ void Client::get_tna(std::vector<std::string> tokens)
     }
 }
 
+/**
+ * @brief Gets the bct command.
+ * @param tokens The tokens of the command.
+*/
 void Client::get_bct(std::vector<std::string> tokens)
 {
     if (tokens.size() < 10) {
@@ -202,6 +250,10 @@ void Client::get_bct(std::vector<std::string> tokens)
     }
 }
 
+/**
+ * @brief Gets the pin command.
+ * @param tokens The tokens of the command.
+*/
 void Client::get_pin(std::vector<std::string> tokens)
 {
     int player = std::stoi(tokens[1]);
@@ -223,6 +275,10 @@ void Client::get_pin(std::vector<std::string> tokens)
     pinThystame = thystame;
 }
 
+/**
+ * @brief Gets the plv command.
+ * @param tokens The tokens of the command.
+*/
 void Client::get_plv(std::vector<std::string> tokens)
 {
     int player = std::stoi(tokens[1]);
@@ -230,6 +286,10 @@ void Client::get_plv(std::vector<std::string> tokens)
     pinLv = level;
 }
 
+/**
+ * @brief Gets the pdi command.
+ * @param tokens The tokens of the command.
+*/
 void Client::get_pdi(std::vector<std::string> tokens)
 {
     int player = std::stoi(tokens[1]);
@@ -243,6 +303,9 @@ void Client::get_pdi(std::vector<std::string> tokens)
     }
 }
 
+/**
+ * @brief Receives a message from the server.
+*/
 void Client::receive()
 {
     try {
@@ -293,68 +356,120 @@ void Client::receive()
     }
 }
 
+/**
+ * @brief Gets the resources.
+ * @return The resources.
+*/
 const std::vector<Resources>& Client::getResources() const
 {
     std::lock_guard<std::mutex> lock(resourcesMutex_);
     return resources_;
 }
 
+/**
+ * @brief Gets the characters.
+ * @return The characters.
+*/
 const std::vector<Character>& Client::getCharacters() const
 {
     std::lock_guard<std::mutex> lock(charactersMutex_);
     return characters_;
 }
 
+/**
+ * @brief Gets the map width.
+ * @return The map width.
+*/
 int Client::getMapWidth() const
 {
     return mapWidth;
 }
 
+/**
+ * @brief Gets the map height.
+ * @return The map height.
+*/
 int Client::getMapHeight() const
 {
     return mapHeight;
 }
 
+/**
+ * @brief Gets the level.
+ * @return The level.
+*/
 int Client::getPinLv() const
 {
     return pinLv;
 }
 
+/**
+ * @brief Gets the food.
+ * @return The food.
+*/
 int Client::getPinFood() const
 {
     return pinFood;
 }
+
+/**
+ * @brief Gets the linemate.
+ * @return The linemate.
+*/
 int Client::getPinLinemate() const
 {
     return pinLinemate;
 }
 
+/**
+ * @brief Gets the deraumere.
+ * @return The deraumere.
+*/
 int Client::getPinDeraumere() const
 {
     return pinDeraumere;
 }
 
+/**
+ * @brief Gets the sibur.
+ * @return The sibur.
+*/
 int Client::getPinSibur() const
 {
     return pinSibur;
 }
 
+/**
+ * @brief Gets the mendiane.
+ * @return The mendiane.
+*/
 int Client::getPinMendiane() const
 {
     return pinMendiane;
 }
 
+/**
+ * @brief Gets the phiras.
+ * @return The phiras.
+*/
 int Client::getPinPhiras() const
 {
     return pinPhiras;
 }
 
+/**
+ * @brief Gets the thystame.
+ * @return The thystame.
+*/
 int Client::getPinThystame() const
 {
     return pinThystame;
 }
 
-
+/**
+ * @brief Gets the team names.
+ * @return The team names.
+*/
 std::vector<std::string> Client::getTeamNames() const
 {
     return teamNames;

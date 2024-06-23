@@ -9,6 +9,10 @@
 #include <sstream>
 #include "Client.hpp"
 
+/**
+ * @brief Constructor for the Menu class.
+ * @param windowSize The size of the window.
+ */
 Menu::Menu(const sf::Vector2u& windowSize) {
     if (!font.loadFromFile("graphical/assets/font.ttf"))
         return;
@@ -22,6 +26,9 @@ Menu::Menu(const sf::Vector2u& windowSize) {
     infoRect.setPosition(0, windowSize.y - 150);
 }
 
+/**
+ * @brief Destructor for the Menu class.
+ */
 void Menu::updateInfoText(const Tile* selectedTile, bool tileSelected, const std::vector<Resources>& resources, const std::vector<Character>& characters) {
     if (tileSelected && selectedTile) {
         std::ostringstream oss;
@@ -55,6 +62,13 @@ void Menu::updateInfoText(const Tile* selectedTile, bool tileSelected, const std
     }
 }
 
+/**
+ * @brief Updates the character text.
+ * @param selectedCharacter The selected character.
+ * @param characterSelected If a character is selected.
+ * @param characters The characters.
+ * @param client The client.
+ */
 void Menu::updateCharacterText(const Character* selectedCharacter, bool characterSelected, const std::vector<Character>& characters, Client& client) {
     if (characterSelected && selectedCharacter) {
         std::ostringstream oss;
@@ -79,7 +93,12 @@ void Menu::updateCharacterText(const Character* selectedCharacter, bool characte
     }
 }
 
-
+/**
+ * @brief Draws the menu.
+ * @param window The window to draw on.
+ * @param tileSelected If a tile is selected.
+ * @param characterSelected If a character is selected.
+ */
 void Menu::draw(sf::RenderWindow& window, bool tileSelected, bool characterSelected) const {
     if (tileSelected || characterSelected) {
         window.draw(infoRect);

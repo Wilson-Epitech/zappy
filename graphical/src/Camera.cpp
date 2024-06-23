@@ -7,8 +7,16 @@
 
 #include "Camera.hpp"
 
+/**
+ * @brief Constructor for the Camera class.
+*/
 Camera::Camera() : camSpeed(10.0f), camZoom(1.1f) {}
 
+/**
+ * @brief Handles the movement of the camera.
+ * @param view The view to move.
+ * @param parallax The parallax to update.
+*/
 void Camera::handleMovement(sf::View& view, Parallax& parallax) {
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Z)) {
         view.move(0, -camSpeed);
@@ -28,6 +36,11 @@ void Camera::handleMovement(sf::View& view, Parallax& parallax) {
     }
 }
 
+/**
+ * @brief Handles the zoom of the camera.
+ * @param view The view to zoom.
+ * @param event The event to handle.
+*/
 void Camera::handleZoom(sf::View& view, const sf::Event& event) {
     if (event.type == sf::Event::MouseWheelScrolled) {
         if (event.mouseWheelScroll.delta > 0) {

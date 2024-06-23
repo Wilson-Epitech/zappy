@@ -10,6 +10,11 @@
 #include "Resources.hpp"
 #include "Tile.hpp"
 
+/**
+ * @brief Draws the board.
+ * @param window The window to draw on.
+ * @param tiles The tiles to draw.
+*/
 void drawBoard(sf::RenderWindow& window, const std::vector<std::vector<Tile>>& tiles) {
     for (const auto& row : tiles) {
         for (const auto& tile : row) {
@@ -18,30 +23,51 @@ void drawBoard(sf::RenderWindow& window, const std::vector<std::vector<Tile>>& t
     }
 }
 
+/**
+ * @brief Updates the board.
+ * @param tiles The tiles to update.
+*/
 void drawResources(sf::RenderWindow& window, const std::vector<Resources>& resources) {
     for (const auto& resource : resources) {
         resource.draw(window);
     }
 }
 
+/**
+ * @brief Updates the board.
+ * @param tiles The tiles to update.
+*/
 void updateResources(std::vector<Resources>& resources) {
     for (auto& resource : resources) {
         resource.updateAnimation();
     }
 }
 
+/**
+ * @brief Draws the characters.
+ * @param window The window to draw on.
+ * @param characters The characters to draw.
+*/
 void drawCharacters(sf::RenderWindow& window, const std::vector<Character>& characters) {
     for (const auto& character : characters) {
         character.draw(window);
     }
 }
 
+/**
+ * @brief Updates the characters.
+ * @param characters The characters to update.
+*/
 void updateCharacters(std::vector<Character>& characters) {
     for (auto& character : characters) {
         character.updateAnimation();
     }
 }
 
+/**
+ * @brief The game loop.
+ * @param client The client to use.
+*/
 void gameLoop(Client& client) {
     sf::RenderWindow window(sf::VideoMode(1920, 1080), "ZAPPY");
     std::srand(static_cast<unsigned>(std::time(0)));
