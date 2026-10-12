@@ -1,112 +1,56 @@
+<div align="center">
 
----
+# Zappy
 
-# ZAPPY: A Tribute to Zaphod Beeblebrox
+**Un jeu en réseau où des IA s'affrontent sur une planète torique.**
 
-ZAPPY est un jeu en réseau où plusieurs équipes s'affrontent sur une carte à tuiles contenant des ressources. L'objectif est d'atteindre le niveau d'élévation maximum avec au moins 6 joueurs de la même équipe.
+<img alt="C" src="https://img.shields.io/badge/C-00599C?style=for-the-badge&logo=c&logoColor=white"/> <img alt="C++" src="https://img.shields.io/badge/C%2B%2B-00599C?style=for-the-badge&logo=cplusplus&logoColor=white"/> <img alt="SFML" src="https://img.shields.io/badge/SFML-8CC445?style=for-the-badge&logo=sfml&logoColor=white"/> <img alt="Boost.Asio" src="https://img.shields.io/badge/Boost.Asio-4B4B4B?style=for-the-badge"/> <img alt="GitHub Actions" src="https://img.shields.io/badge/GitHub%20Actions-2088FF?style=for-the-badge&logo=githubactions&logoColor=white"/>
 
-## Préliminaires
+<sub>Projet à 6 · 2024</sub>
 
-- **Noms des binaires**: `zappy_server`, `zappy_gui`, `zappy_ai`
-- **Langages utilisés**: 
-  - Serveur: C
-  - Interface graphique: C++
-  - IA: C++
+</div>
 
-## Compilation
+## En deux mots
 
-Le Makefile doit contenir des règles pour compiler les binaires nommés ci-dessus (`zappy_server`, `zappy_gui`, `zappy_ai`).
+Le plus gros projet de l'année, à six. Trois programmes qui se parlent par TCP : un **serveur** en C qui fait tourner le monde, une **interface graphique** en C++ pour le regarder, et des **IA** qui jouent toutes seules. Les équipes ramassent des ressources sur une carte torique et réalisent des rituels pour monter de niveau.
 
-## Usage
+## Ce que ça fait
 
-### Serveur
+- **Serveur (C)** : carte torique, ressources qui réapparaissent, gestion du temps, plusieurs équipes et plusieurs clients en même temps
+- **Protocole texte** avec deux types de clients : les IA (joueurs) et les interfaces graphiques (spectateurs)
+- **Interface graphique (C++ / SFML)** : caméra déplaçable, fond en parallaxe, tuiles, ressources et personnages animés, panneau d'infos
+- **IA (C++)** : client autonome qui se connecte au serveur dans une équipe
+- Doc technique générée avec Doxygen, CI GitHub Actions
 
-```sh
-./zappy_server -p port -x width -y height -n name1 name2 ... -c clientsNb -f freq
+## Sous le capot
+
+Le serveur multiplexe tous les sockets dans une seule boucle et exécute les commandes des joueurs selon une fréquence de jeu (`-f`). Une interface graphique s'annonce avec `GRAPHIC`, puis interroge le monde (`msz`, `mct`, `pnw`, `ppo`…) et reçoit les événements au fil de la partie.
+
+```mermaid
+flowchart LR
+    AI1[IA équipe rouge] -- TCP --> S
+    AI2[IA équipe bleue] -- TCP --> S
+    S[zappy_server<br/>C] -- état du monde --> GUI[zappy_gui<br/>C++ / SFML]
+    GUI -- msz · mct · ppo --> S
 ```
 
-- **Options**:
-  - `-p`: Numéro de port
-  - `-x`: Largeur du monde
-  - `-y`: Hauteur du monde
-  - `-n`: Noms des équipes
-  - `-c`: Nombre de clients autorisés par équipe
-  - `-f`: Inverse de l'unité de temps pour l'exécution des actions
+## Lancer le projet
 
-### Interface Graphique
-
-```sh
-./zappy_gui -p port -h machine
+```bash
+make
+./zappy_server -p 4242 -x 15 -y 10 -n red blue -c 6 -f 60
+./zappy_ai -p 4242 -n red -h 127.0.0.1
+sleep infinity | ./zappy_gui -p 4242 -h 127.0.0.1   # ZQSD pour déplacer la caméra
 ```
 
-- **Options**:
-  - `-p`: Numéro de port
-  - `-h`: Nom d'hôte de la machine (serveur)
+> Le dépôt contient un `demo.sh` qui lance un serveur, six IA et l'interface graphique d'un coup.
 
-### Client IA
+La documentation technique complète est dans [DOCUMENTATION.md](DOCUMENTATION.md).
 
-```sh
-./zappy_ai -p port -n name -h machine
-```
+## L'équipe
 
-- **Options**:
-  - `-p`: Numéro de port
-  - `-n`: Nom de l'équipe
-  - `-h`: Nom de la machine (localhost par défaut)
+<a href="https://github.com/Wilson-Epitech/zappy/graphs/contributors"><img src="https://contrib.rocks/image?repo=Wilson-Epitech/zappy" alt="Contributeurs"/></a>
 
-## Description du Jeu
+Jules Beauvais, Mathis Martinez, Aleksa Panic, Wilson Bordichon, Aziz Ennaifer, Alexandru Mosneagu
 
-### Géographie
-
-- Le jeu se déroule sur un monde plat sans reliefs.
-- Les bords de la carte sont connectés (sortir par la droite revient par la gauche, et vice-versa).
-
-### Ressources
-
-Le monde contient des ressources alimentaires et des pierres précieuses réparties selon des densités spécifiques:
-
-| Ressource | Densité |
-| --------- | ------- |
-| Nourriture | 0.5     |
-| Linemate  | 0.3     |
-| Deraumere | 0.15    |
-| Sibur     | 0.1     |
-| Mendiane  | 0.1     |
-| Phiras    | 0.08    |
-| Thystame  | 0.05    |
-
-### Activités des Joueurs
-
-Les joueurs doivent se nourrir et collecter des pierres pour s'élever dans la hiérarchie. L'élévation nécessite de réunir des joueurs et des pierres sur la même case et de lancer un rituel.
-
-### Commandes des Joueurs
-
-Les joueurs peuvent exécuter les actions suivantes:
-
-- **Se déplacer**: `Forward`
-- **Tourner à droite**: `Right`
-- **Tourner à gauche**: `Left`
-- **Regarder autour**: `Look`
-- **Inventaire**: `Inventory`
-- **Diffuser un message**: `Broadcast text`
-- **Nombre de connexions disponibles**: `Connect_nbr`
-- **Pondre un joueur**: `Fork`
-- **Éjecter les autres joueurs**: `Eject`
-- **Prendre un objet**: `Take object`
-- **Déposer un objet**: `Set object`
-- **Commencer une incantation**: `Incantation`
-
-## Interface Graphique
-
-- L'interface graphique doit permettre une visualisation du monde en 2D au minimum.
-- Utilisation recommandée de la bibliothèque SFML pour la réalisation graphique.
-
-## Communication Client/Serveur
-
-La communication se fait via des sockets TCP. Le client envoie ses requêtes sans attendre leur exécution immédiate. Le serveur envoie des confirmations d'exécution.
-
-## Protocole
-
-Les détails du protocole de communication entre le client IA et le serveur sont définis dans la documentation.
-
----
+**Ma part :** J'ai travaillé sur l'**interface graphique** (client réseau, boucle principale, parsing des commandes du serveur, ressources graphiques, caméra), sur le **parsing des arguments du serveur**, et j'ai harmonisé les Makefiles des trois binaires et le script de coding style de la CI.
