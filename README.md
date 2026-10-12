@@ -10,7 +10,7 @@
 
 </div>
 
-## En deux mots
+## Le projet en quelques mots
 
 Le plus gros projet de l'année, à six. Trois programmes qui se parlent par TCP : un **serveur** en C qui fait tourner le monde, une **interface graphique** en C++ pour le regarder, et des **IA** qui jouent toutes seules. Les équipes ramassent des ressources sur une carte torique et réalisent des rituels pour monter de niveau.
 
@@ -21,18 +21,6 @@ Le plus gros projet de l'année, à six. Trois programmes qui se parlent par TCP
 - **Interface graphique (C++ / SFML)** : caméra déplaçable, fond en parallaxe, tuiles, ressources et personnages animés, panneau d'infos
 - **IA (C++)** : client autonome qui se connecte au serveur dans une équipe
 - Doc technique générée avec Doxygen, CI GitHub Actions
-
-## Sous le capot
-
-Le serveur multiplexe tous les sockets dans une seule boucle et exécute les commandes des joueurs selon une fréquence de jeu (`-f`). Une interface graphique s'annonce avec `GRAPHIC`, puis interroge le monde (`msz`, `mct`, `pnw`, `ppo`…) et reçoit les événements au fil de la partie.
-
-```mermaid
-flowchart LR
-    AI1[IA équipe rouge] -- TCP --> S
-    AI2[IA équipe bleue] -- TCP --> S
-    S[zappy_server<br/>C] -- état du monde --> GUI[zappy_gui<br/>C++ / SFML]
-    GUI -- msz · mct · ppo --> S
-```
 
 ## Lancer le projet
 
@@ -53,4 +41,4 @@ La documentation technique complète est dans [DOCUMENTATION.md](DOCUMENTATION.m
 
 Jules Beauvais, Mathis Martinez, Aleksa Panic, Wilson Bordichon, Aziz Ennaifer, Alexandru Mosneagu
 
-**Ma part :** J'ai travaillé sur l'**interface graphique** (client réseau, boucle principale, parsing des commandes du serveur, ressources graphiques, caméra), sur le **parsing des arguments du serveur**, et j'ai harmonisé les Makefiles des trois binaires et le script de coding style de la CI.
+**Ma partition :** J'ai travaillé sur l'**interface graphique** (client réseau, boucle principale, parsing des commandes du serveur, ressources graphiques, caméra), sur le **parsing des arguments du serveur**, et j'ai harmonisé les Makefiles des trois binaires et le script de coding style de la CI.
