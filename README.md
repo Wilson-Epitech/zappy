@@ -39,4 +39,4 @@ La documentation technique complète est dans [DOCUMENTATION.md](DOCUMENTATION.m
 
 Jules Beauvais, Mathis Martinez, Aleksa Panic, Wilson Bordichon, Aziz Ennaifer, Alexandru Mosneagu
 
-**Ma partition :** J'ai travaillé sur l'**interface graphique** (client réseau, boucle principale, parsing des commandes du serveur, ressources graphiques, caméra), sur le **parsing des arguments du serveur**, et j'ai harmonisé les Makefiles des trois binaires et le script de coding style de la CI.
+**Ma partition :** J'ai travaillé sur l'**interface graphique** (client réseau, boucle principale, caméra, ressources graphiques), sur le **parsing des arguments du serveur** et quelques commandes (`plv`, `tna`), sur la documentation du serveur, et j'ai harmonisé les Makefiles des trois binaires et le script de coding style de la CI.
