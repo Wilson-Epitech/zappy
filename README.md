@@ -28,10 +28,8 @@ Le plus gros projet de l'année, à six. Trois programmes qui se parlent par TCP
 make
 ./zappy_server -p 4242 -x 15 -y 10 -n red blue -c 6 -f 60
 ./zappy_ai -p 4242 -n red -h 127.0.0.1
-sleep infinity | ./zappy_gui -p 4242 -h 127.0.0.1   # ZQSD pour déplacer la caméra
+sleep infinity | ./zappy_gui -p 4242 -h 127.0.0.1
 ```
-
-> Le dépôt contient un `demo.sh` qui lance un serveur, six IA et l'interface graphique d'un coup.
 
 La documentation technique complète est dans [DOCUMENTATION.md](DOCUMENTATION.md).
 
